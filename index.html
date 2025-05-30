@@ -131,15 +131,15 @@
     </div>
   </div>
 
-  <!-- Map -->
-  <div id="map"></div>
-
   <!-- Measurement Button -->
   <div class="measure-control">
     <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary btn-sm w-100">
       <i class="bi bi-rulers"></i> بدء القياس
     </button>
   </div>
+
+  <!-- Map -->
+  <div id="map"></div>
 
   <!-- Modal Form -->
   <div class="modal fade" id="contactFormModal" tabindex="-1">
@@ -187,7 +187,7 @@
     let latlngs = [];
     let map;
 
-    // دالة بدء/إنهاء القياس
+    // دالة قياس المسافات
     function toggleMeasuring() {
       measuring = !measuring;
       const measureBtn = document.getElementById('measureBtn');
@@ -198,10 +198,8 @@
         polygon = L.polygon([], { color: 'blue', fillOpacity: 0.2, stroke: false }).addTo(map);
         latlngs = [];
 
-        // إضافة نقطة جديدة
         map.on('click', addPoint);
 
-        // إنهاء القياس بالضغط المزدوج
         map.once('dblclick', () => {
           measuring = false;
           measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
@@ -228,7 +226,7 @@
       }
     }
 
-    // إضافة نقطة
+    // إضافة نقطة للقياس
     function addPoint(e) {
       latlngs.push(e.latlng);
       polyline.setLatLngs(latlngs);
@@ -239,40 +237,37 @@
       updateDistanceLabel();
     }
 
-    // عرض المساحة في المنتصف
-    function updateAreaLabel() {
-      if (areaLabel) map.removeLayer(areaLabel);
-      if (latlngs.length < 3) return;
-
-      const center = L.GeometryUtil.getCentroid(latlngs);
-      const area = Math.abs(L.GeometryUtil.geodesicArea(latlngs)) / 10000; // بالمتر المربع
-
-      areaLabel = L.marker(center, {
-        icon: L.divIcon({
-          className: 'distance-label',
-          html: `<div style="background:white; padding:5px 10px; border-radius:4px; box-shadow:0 0 3px #0006;">${area.toFixed(2)} م²</div>` 
-        }),
-        clickable: false
-      }).addTo(map);
-    }
-
-    // عرض المسافة بجانب الخط
+    // تحديث المسافة أثناء الرسم
     function updateDistanceLabel() {
       if (distanceLabel) map.removeLayer(distanceLabel);
       if (latlngs.length < 2) return;
-
-      const last = latlngs[latlngs.length - 1];
-      const prev = latlngs[latlngs.length - 2];
 
       let total = 0;
       for (let i = 1; i < latlngs.length; i++) {
         total += map.distance(latlngs[i - 1], latlngs[i]);
       }
 
-      distanceLabel = L.marker(last, {
+      distanceLabel = L.marker(latlngs[latlngs.length - 1], {
         icon: L.divIcon({
           className: 'distance-label',
-          html: `<div style="background:white; padding:5px 10px; border-radius:4px; box-shadow:0 0 3px #0006;">${total.toFixed(2)} متر</div>`
+          html: `<div style="background:white; padding:5px 10px; border-radius:4px; box-shadow:0 0 3px #0006;">${total.toFixed(2)} متر</div>` 
+        }),
+        clickable: false
+      }).addTo(map);
+    }
+
+    // تحديث المساحة داخل المضلع
+    function updateAreaLabel() {
+      if (areaLabel) map.removeLayer(areaLabel);
+      if (latlngs.length < 3) return;
+
+      const center = L.GeometryUtil.getCentroid(latlngs);
+      const area = Math.abs(L.GeometryUtil.geodesicArea(latlngs)) / 10000;
+
+      areaLabel = L.marker(center, {
+        icon: L.divIcon({
+          className: 'distance-label',
+          html: `<div style="background:white; padding:5px 10px; border-radius:4px; box-shadow:0 0 3px #0006;">${area.toFixed(2)} م²</div>`
         }),
         clickable: false
       }).addTo(map);
@@ -299,15 +294,16 @@
       });
 
     function initMap() {
-      map = L.map('map').setView([26.155, 32.716], 9);
+      map = L.map('map').setView([26.155, 32.716], 9); // قنا كموقع افتراضي
 
+      // استخدام خريطة MapTiler Satellite
       L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=awnYJdXnIeILF7JHkfly', {
-  attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
-  tileSize: 512,
-  zoomOffset: -1,
-  maxZoom: 20,
-  minZoom: 0
-}).addTo(map);
+        attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
+        tileSize: 512,
+        zoomOffset: -1,
+        maxZoom: 20,
+        minZoom: 0
+      }).addTo(map);
 
       opportunities.forEach(opportunity => {
         const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
