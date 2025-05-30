@@ -63,7 +63,12 @@
   </header>
 
   <!-- Filters -->
-  <div class="container mt-3">
+<div class="col-12 mt-2">
+  <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary w-100">
+    <i class="bi bi-rulers"></i> بدء القياس
+  </button>
+</div>  
+<div class="container mt-3">
     <div class="row g-2 mb-3">
       <div class="col-md-3">
         <select id="sectorFilter" class="form-select">
@@ -110,7 +115,9 @@
 
   <!-- Map -->
   <div id="map"></div>
-
+<div class="distance" id="distanceDisplay" style="position: absolute; top: 10px; left: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+  المسافة الكلية: 0 متر
+</div>
   <!-- Modal Form -->
   <div class="modal fade" id="contactFormModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -147,7 +154,51 @@
 
   <script>
     let markers = [];
+let measuring = false;
+let polyline = null;
+let totalDistance = 0;
 
+function toggleMeasuring() {
+  measuring = !measuring;
+  const measureBtn = document.getElementById('measureBtn');
+  const distanceDisplay = document.getElementById('distanceDisplay');
+
+  if (measuring) {
+    // بدء القياس
+    measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
+    polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+    distanceDisplay.style.display = 'block';
+    totalDistance = 0;
+    distanceDisplay.innerText = 'المسافة الكلية: 0 متر';
+
+    map.on('click', addPoint);
+
+  } else {
+    // إنهاء القياس
+    measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
+    map.off('click', addPoint);
+    if (polyline) {
+      map.removeLayer(polyline);
+      polyline = null;
+    }
+    distanceDisplay.style.display = 'none';
+    totalDistance = 0;
+  }
+}
+
+function addPoint(e) {
+  const latlngs = polyline.getLatLngs();
+  latlngs.push(e.latlng);
+  polyline.setLatLngs(latlngs);
+
+  if (latlngs.length > 1) {
+    const lastPoint = latlngs[latlngs.length - 2];
+    const distance = map.distance(lastPoint, e.latlng);
+    totalDistance += distance;
+    document.getElementById('distanceDisplay').innerText =
+      'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
+  }
+}
     // Load investment opportunities from JSON
     fetch('opportunities.json')
       .then(res => res.json())
