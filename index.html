@@ -57,22 +57,41 @@
       border-radius: 8px;
     }
 
-    /* مكان زر القياس أسفل أدوات التكبير */
-    .measure-control {
+    /* أداة القياس الجانبية */
+    .measure-panel {
       position: absolute;
       left: 10px;
-      top: 80px;
+      top: 10px;
       z-index: 1000;
       background: white;
-      border-radius: 6px;
-      padding: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      width: 120px;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .distance-label .leaflet-div-icon {
-      background-color: transparent !important;
-      border: none !important;
+    .measure-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .measure-btn:hover {
+      background: #0056b3;
+    }
+
+    .measure-result {
+      background: #f1f1f1;
+      padding: 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-align: center;
     }
   </style>
 </head>
@@ -80,13 +99,9 @@
 
   <!-- Header with logos -->
   <header class="text-white">
-    <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" 
-         alt="شعار المحافظة"
-         onerror="this.src='https://via.placeholder.com/60x60?text=Gov+Logo'">
+    <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg"  alt="شعار المحافظة" onerror="this.src='https://via.placeholder.com/60x60?text=Gov+Logo'">
     <h1>الفرص الاستثمارية في محافظة قنا</h1>
-    <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png"
-         alt="شعار الموقع"
-         onerror="this.src='https://via.placeholder.com/60x60?text=GIS+Logo'">
+    <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع" onerror="this.src='https://via.placeholder.com/60x60?text=GIS+Logo'">
   </header>
 
   <!-- Filters -->
@@ -131,15 +146,19 @@
     </div>
   </div>
 
-  <!-- Measurement Button -->
-  <div class="measure-control">
-    <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary btn-sm w-100">
-      <i class="bi bi-rulers"></i> بدء القياس
-    </button>
-  </div>
-
   <!-- Map -->
   <div id="map"></div>
+
+  <!-- Measurement Panel -->
+  <div class="measure-panel">
+    <button class="measure-btn" onclick="toggleMeasuring('distance')">
+      <i class="bi bi-rulers"></i> قياس مسافة
+    </button>
+    <button class="measure-btn" onclick="toggleMeasuring('area')">
+      <i class="bi bi-diagram-3"></i> قياس مساحة
+    </button>
+    <div class="measure-result" id="measureResult">0 متر</div>
+  </div>
 
   <!-- Modal Form -->
   <div class="modal fade" id="contactFormModal" tabindex="-1">
@@ -174,116 +193,16 @@
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/leaflet-geometryutil"></script> <!-- لحساب المساحة -->
 
   <script>
     // المتغيرات العالمية
     let markers = [];
     let measuring = false;
+    let measuringType = null; // 'distance' or 'area'
     let polyline = null;
     let polygon = null;
-    let areaLabel = null;
-    let distanceLabel = null;
     let latlngs = [];
-    let map;
-
-    // دالة قياس المسافات
-    function toggleMeasuring() {
-      measuring = !measuring;
-      const measureBtn = document.getElementById('measureBtn');
-
-      if (measuring) {
-        measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-        polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-        polygon = L.polygon([], { color: 'blue', fillOpacity: 0.2, stroke: false }).addTo(map);
-        latlngs = [];
-
-        map.on('click', addPoint);
-
-        map.once('dblclick', () => {
-          measuring = false;
-          measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-          map.off('click', addPoint);
-          if (polyline) map.removeLayer(polyline);
-          if (polygon) map.removeLayer(polygon);
-          if (areaLabel) map.removeLayer(areaLabel);
-          if (distanceLabel) map.removeLayer(distanceLabel);
-          polyline = null;
-          polygon = null;
-          latlngs = [];
-        });
-
-      } else {
-        measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-        map.off('click', addPoint);
-        if (polyline) map.removeLayer(polyline);
-        if (polygon) map.removeLayer(polygon);
-        if (areaLabel) map.removeLayer(areaLabel);
-        if (distanceLabel) map.removeLayer(distanceLabel);
-        polyline = null;
-        polygon = null;
-        latlngs = [];
-      }
-    }
-
-    // إضافة نقطة للقياس
-    function addPoint(e) {
-      latlngs.push(e.latlng);
-      polyline.setLatLngs(latlngs);
-      if (latlngs.length >= 3) {
-        polygon.setLatLngs(latlngs);
-        updateAreaLabel();
-      }
-      updateDistanceLabel();
-    }
-
-    // تحديث المسافة أثناء الرسم
-    function updateDistanceLabel() {
-      if (distanceLabel) map.removeLayer(distanceLabel);
-      if (latlngs.length < 2) return;
-
-      let total = 0;
-      for (let i = 1; i < latlngs.length; i++) {
-        total += map.distance(latlngs[i - 1], latlngs[i]);
-      }
-
-      distanceLabel = L.marker(latlngs[latlngs.length - 1], {
-        icon: L.divIcon({
-          className: 'distance-label',
-          html: `<div style="background:white; padding:5px 10px; border-radius:4px; box-shadow:0 0 3px #0006;">${total.toFixed(2)} متر</div>` 
-        }),
-        clickable: false
-      }).addTo(map);
-    }
-
-    // تحديث المساحة داخل المضلع
-    function updateAreaLabel() {
-      if (areaLabel) map.removeLayer(areaLabel);
-      if (latlngs.length < 3) return;
-
-      const center = L.GeometryUtil.getCentroid(latlngs);
-      const area = Math.abs(L.GeometryUtil.geodesicArea(latlngs)) / 10000;
-
-      areaLabel = L.marker(center, {
-        icon: L.divIcon({
-          className: 'distance-label',
-          html: `<div style="background:white; padding:5px 10px; border-radius:4px; box-shadow:0 0 3px #0006;">${area.toFixed(2)} م²</div>`
-        }),
-        clickable: false
-      }).addTo(map);
-    }
-
-    // تعقب تحرك المؤشر لإظهار خط مؤقت
-    map.on('mousemove', e => {
-      if (measuring && latlngs.length > 0) {
-        const tempLine = L.polyline([latlngs[latlngs.length - 1], e.latlng], {
-          color: 'red',
-          dashArray: '5,5'
-        }).addTo(map);
-        setTimeout(() => map.removeLayer(tempLine), 200);
-        updateDistanceLabel();
-      }
-    });
+    let totalDistance = 0;
 
     // تحميل الفرص والاستدعاء الأولي للخريطة
     fetch('opportunities.json')
@@ -294,15 +213,11 @@
       });
 
     function initMap() {
-      var map = L.map('map').setView([26.155, 32.716], 10); // قنا كموقع افتراضي
+      map = L.map('map').setView([26.155, 32.716], 9);
 
-      // استخدام خريطة MapTiler Satellite
-      L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=awnYJdXnIeILF7JHkfly', {
-        attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
-        tileSize: 512,
-        zoomOffset: -1,
-        maxZoom: 20,
-        minZoom: 0
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri & contributors',
+        maxZoom: 18
       }).addTo(map);
 
       opportunities.forEach(opportunity => {
@@ -313,7 +228,7 @@
           <b>${opportunity.name}</b><br>
           القطاع: ${opportunity.sector}<br>
           المساحة: ${opportunity.area}<br>
-          <img src="${opportunity.image}" width="250" style="margin-top: 8px; border-radius: 8px;" /><br>
+          <img src="${opportunity.image}" alt="صورة"><br>
           <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
             <i class="bi bi-envelope"></i>
           </button>
@@ -324,9 +239,74 @@
 
         markers.push(marker);
       });
+
+      // تعامل مع الماوس لعرض المسافة الحية
+      map.on('mousemove', e => {
+        if (measuring && latlngs.length > 0) {
+          const lastPoint = latlngs[latlngs.length - 1];
+          const currentLine = L.polyline([lastPoint, e.latlng], { color: 'red', dashArray: '5,5' }).addTo(map);
+          setTimeout(() => map.removeLayer(currentLine), 200); // إزالة الخط المؤقت
+        }
+      });
     }
 
-    // فلاتر البحث
+    // دالة تبديل القياس
+    function toggleMeasuring(type) {
+      measuring = !measuring;
+      measuringType = type;
+      const resultDiv = document.getElementById('measureResult');
+      resultDiv.innerText = '0 متر';
+
+      if (measuring) {
+        latlngs = [];
+        polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+        if (type === 'area') {
+          polygon = L.polygon([], { color: 'blue', fillOpacity: 0.3 }).addTo(map);
+        }
+        map.on('click', addMeasurementPoint);
+      } else {
+        if (polyline) map.removeLayer(polyline);
+        if (polygon) map.removeLayer(polygon);
+        polyline = null;
+        polygon = null;
+        latlngs = [];
+        measuringType = null;
+        resultDiv.innerText = '0 متر';
+        map.off('click', addMeasurementPoint);
+      }
+    }
+
+    // دالة إضافة نقطة قياس
+    function addMeasurementPoint(e) {
+      latlngs.push(e.latlng);
+      polyline.setLatLngs(latlngs);
+
+      if (measuringType === 'area' && latlngs.length >= 2) {
+        polygon.setLatLngs(latlngs);
+      }
+
+      calculateMeasurement();
+    }
+
+    // حساب المسافة أو المساحة
+    function calculateMeasurement() {
+      const resultDiv = document.getElementById('measureResult');
+
+      if (measuringType === 'distance' && latlngs.length >= 2) {
+        totalDistance = 0;
+        for (let i = 1; i < latlngs.length; i++) {
+          totalDistance += map.distance(latlngs[i - 1], latlngs[i]);
+        }
+        resultDiv.innerText = `${totalDistance.toFixed(2)} متر`;
+      }
+
+      if (measuringType === 'area' && latlngs.length >= 3) {
+        const area = L.GeometryUtil.geodesicArea(latlngs);
+        resultDiv.innerText = `${(Math.abs(area) / 1000).toFixed(2)} كم²`;
+      }
+    }
+
+    // وظائف الفلاتر
     function filterMarkers() {
       const sector = document.getElementById('sectorFilter').value;
       const region = document.getElementById('regionFilter').value;
