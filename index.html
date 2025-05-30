@@ -153,150 +153,148 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    // المتغيرات العالمية
-    let markers = [];
-    let measuring = false;
-    let polyline = null;
-    let totalDistance = 0;
-    let map;
-    let opportunities = [];
+<script>
+  // تعريف المتغيرات العالمية
+  let markers = [];
+  let measuring = false;
+  let polyline = null;
+  let totalDistance = 0;
+  let map;
+  let opportunities = [];
 
-    // تحميل الفرص والاستدعاء الأولي للخريطة
-    fetch('opportunities.json')
-      .then(res => res.json())
-      .then(data => {
-        window.opportunities = data;
-        initMap();
-      });
+  // وظيفة تبديل القياس
+  function toggleMeasuring() {
+    measuring = !measuring;
+    const measureBtn = document.getElementById('measureBtn');
+    const distanceDisplay = document.getElementById('distanceDisplay');
 
-    function initMap() {
-      map = L.map('map').setView([26.155, 32.716], 9);
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles © Esri & contributors',
-        maxZoom: 18
-      }).addTo(map);
-
-      opportunities.forEach(opportunity => {
-        const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
-        marker.options.data = opportunity;
-
-        marker.bindPopup(`
-          <b>${opportunity.name}</b><br>
-          القطاع: ${opportunity.sector}<br>
-          المساحة: ${opportunity.area}<br>
-          <img src="${opportunity.image}" alt="صورة"><br>
-          <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
-            <i class="bi bi-envelope"></i>
-          </button>
-          <button class="btn btn-outline-warning btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
-            <i class="bi bi-heart"></i>
-          </button>
-        `);
-
-        markers.push(marker);
-      });
-    }
-
-    // وظائف القياس
-    function toggleMeasuring() {
-      measuring = !measuring;
-      const measureBtn = document.getElementById('measureBtn');
-      const distanceDisplay = document.getElementById('distanceDisplay');
-
-      if (measuring) {
-        measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-        polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-        distanceDisplay.style.display = 'block';
-        totalDistance = 0;
-        distanceDisplay.innerText = 'المسافة الكلية: 0 متر';
-        map.on('click', addPoint);
-      } else {
-        measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-        map.off('click', addPoint);
-        if (polyline) {
-          map.removeLayer(polyline);
-          polyline = null;
-        }
-        distanceDisplay.style.display = 'none';
-        totalDistance = 0;
+    if (measuring) {
+      measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
+      polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+      totalDistance = 0;
+      distanceDisplay.style.display = 'block';
+      document.getElementById('distanceValue').innerText = '0';
+      map.on('click', addPoint);
+    } else {
+      measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
+      map.off('click', addPoint);
+      if (polyline) {
+        map.removeLayer(polyline);
+        polyline = L.polyline([], { color: 'red' });
       }
+      distanceDisplay.style.display = 'none';
+      totalDistance = 0;
     }
+  }
 
-    function addPoint(e) {
-      const latlngs = polyline.getLatLngs();
-      latlngs.push(e.latlng);
-      polyline.setLatLngs(latlngs);
+  // إضافة نقطة جديدة عند النقر على الخريطة
+  function addPoint(e) {
+    const latlngs = polyline.getLatLngs();
+    latlngs.push(e.latlng);
+    polyline.setLatLngs(latlngs);
 
-      if (latlngs.length > 1) {
-        const lastPoint = latlngs[latlngs.length - 2];
-        const distance = map.distance(lastPoint, e.latlng);
-        totalDistance += distance;
-        document.getElementById('distanceDisplay').innerText =
-          'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
-      }
+    if (latlngs.length > 1) {
+      const lastPoint = latlngs[latlngs.length - 2];
+      const distance = map.distance(lastPoint, e.latlng);
+      totalDistance += distance;
+      document.getElementById('distanceValue').innerText = totalDistance.toFixed(2);
     }
+  }
 
-    // فلاتر البحث
-    function filterMarkers() {
-      const sector = document.getElementById('sectorFilter').value;
-      const region = document.getElementById('regionFilter').value;
-      const status = document.getElementById('statusFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase();
-
-      markers.forEach(marker => {
-        const data = marker.options.data;
-        let show = true;
-
-        if (sector && data.sector !== sector) show = false;
-        if (region && data.region !== region) show = false;
-        if (status && data.status !== status) show = false;
-        if (search && !data.name.toLowerCase().includes(search)) show = false;
-
-        if (show) marker.addTo(map);
-        else map.removeLayer(marker);
-      });
-    }
-
-    function resetFilters() {
-      document.getElementById('sectorFilter').value = '';
-      document.getElementById('regionFilter').value = '';
-      document.getElementById('statusFilter').value = '';
-      document.getElementById('searchInput').value = '';
-      filterMarkers();
-    }
-
-    // المفضلة
-    function saveToFavorites(id) {
-      let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-      if (!favorites.includes(id)) {
-        favorites.push(id);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        alert("تم الحفظ في المفضلة");
-      } else {
-        alert("الفرصة موجودة بالفعل في المفضلة");
-      }
-    }
-
-    // نموذج الاتصال
-    function openForm(id) {
-      document.getElementById('opportunityId').value = id;
-      new bootstrap.Modal(document.getElementById('contactFormModal')).show();
-    }
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const id = document.getElementById('opportunityId').value;
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-
-      console.log(`الفرصة رقم ${id}: رسالة من ${name}`);
-      alert("تم إرسال الرسالة بنجاح!");
-      document.getElementById('contactForm').reset();
-      bootstrap.Modal.getInstance(document.getElementById('contactFormModal')).hide();
+  // تحميل الفرص والاستدعاء الأولي للخريطة
+  fetch('opportunities.json')
+    .then(res => res.json())
+    .then(data => {
+      window.opportunities = data;
+      initMap();
     });
-  </script>
+
+  function initMap() {
+    map = L.map('map').setView([26.155, 32.716], 9); // قنا كموقع افتراضي
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',  {
+      attribution: 'Tiles © Esri & contributors',
+      maxZoom: 18
+    }).addTo(map);
+
+    opportunities.forEach(opportunity => {
+      const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
+      marker.options.data = opportunity;
+
+      marker.bindPopup(`
+        <b>${opportunity.name}</b><br>
+        القطاع: ${opportunity.sector}<br>
+        المساحة: ${opportunity.area}<br>
+        <img src="${opportunity.image}" alt="صورة"><br>
+        <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
+          <i class="bi bi-envelope"></i>
+        </button>
+        <button class="btn btn-outline-warning btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
+          <i class="bi bi-heart"></i>
+        </button>
+      `);
+
+      markers.push(marker);
+    });
+  }
+
+  // وظائف الفلاتر
+  function filterMarkers() {
+    const sector = document.getElementById('sectorFilter').value;
+    const region = document.getElementById('regionFilter').value;
+    const status = document.getElementById('statusFilter').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    markers.forEach(marker => {
+      const data = marker.options.data;
+      let show = true;
+
+      if (sector && data.sector !== sector) show = false;
+      if (region && data.region !== region) show = false;
+      if (status && data.status !== status) show = false;
+      if (search && !data.name.toLowerCase().includes(search)) show = false;
+
+      if (show) marker.addTo(map);
+      else map.removeLayer(marker);
+    });
+  }
+
+  function resetFilters() {
+    document.getElementById('sectorFilter').value = '';
+    document.getElementById('regionFilter').value = '';
+    document.getElementById('statusFilter').value = '';
+    document.getElementById('searchInput').value = '';
+    filterMarkers();
+  }
+
+  function saveToFavorites(id) {
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    if (!favorites.includes(id)) {
+      favorites.push(id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      alert("تم الحفظ في المفضلة");
+    } else {
+      alert("الفرصة موجودة بالفعل في المفضلة");
+    }
+  }
+
+  function openForm(id) {
+    document.getElementById('opportunityId').value = id;
+    new bootstrap.Modal(document.getElementById('contactFormModal')).show();
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const id = document.getElementById('opportunityId').value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    console.log(`الفرصة رقم ${id}: رسالة من ${name}`);
+    alert("تم إرسال الرسالة بنجاح!");
+    document.getElementById('contactForm').reset();
+    bootstrap.Modal.getInstance(document.getElementById('contactFormModal')).hide();
+  });
+</script>
 
 </body>
 </html>
