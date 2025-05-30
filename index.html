@@ -154,52 +154,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // تعريف المتغيرات العالمية
-    let markers = [];
-    let measuring = false;
-    let polyline = null;
-    let totalDistance = 0;
-    let map;
-    let opportunities = [];
-
-    function toggleMeasuring() {
-      measuring = !measuring;
-      const measureBtn = document.getElementById('measureBtn');
-      const distanceDisplay = document.getElementById('distanceDisplay');
-
-      if (measuring) {
-        measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-        polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-        distanceDisplay.style.display = 'block';
-        totalDistance = 0;
-        distanceDisplay.innerText = 'المسافة الكلية: 0 متر';
-        map.on('click', addPoint);
-      } else {
-        measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-        map.off('click', addPoint);
-        if (polyline) {
-          map.removeLayer(polyline);
-          polyline = null;
-        }
-        distanceDisplay.style.display = 'none';
-        totalDistance = 0;
-      }
-    }
-
-    function addPoint(e) {
-      const latlngs = polyline.getLatLngs();
-      latlngs.push(e.latlng);
-      polyline.setLatLngs(latlngs);
-
-      if (latlngs.length > 1) {
-        const lastPoint = latlngs[latlngs.length - 2];
-        const distance = map.distance(lastPoint, e.latlng);
-        totalDistance += distance;
-        document.getElementById('distanceDisplay').innerText =
-          'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
-      }
-    }
-
     // تحميل الفرص والخريطة
     fetch('opportunities.json')
       .then(res => res.json())
