@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>فرص استثمارية - قنا</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"> 
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"> 
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+    header {
+      background: #004d40;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      flex-grow: 1;
+    }
+    header img {
+      height: 60px;
+      width: 60px;
+      object-fit: contain;
+      border-radius: 0; /* تعديل هنا: مربع وليس دائري */
+      background: white;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+    #map {
+      height: 75vh;
+      width: 100%;
+    }
+    .leaflet-popup-content img {
+      max-width: 250px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with logos -->
+  <header class="text-white">
+    <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg"  alt="شعار المحافظة" onerror="this.src='https://via.placeholder.com/60x60?text=Gov+Logo'">
+    <h1>الفرص الاستثمارية في محافظة قنا</h1>
+    <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع" onerror="this.src='https://via.placeholder.com/60x60?text=GIS+Logo'">
+  </header>
+
+  <!-- Filters -->
+  <div class="container mt-3">
+    <div class="row g-2 mb-3">
+      <div class="col-md-3">
+        <select id="sectorFilter" class="form-select">
+          <option value="">كل القطاعات</option>
+          <option value="صناعي">صناعي</option>
+          <option value="زراعي">زراعي</option>
+          <option value="خدماتي">خدماتي</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <select id="regionFilter" class="form-select">
+          <option value="">كل المناطق</option>
+          <option value="قفط">قفط</option>
+          <option value="نجع حمادي">نجع حمادي</option>
+          <option value="قنا">قنا</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <select id="statusFilter" class="form-select">
+          <option value="">كل الحالات</option>
+          <option value="متاحة">متاحة</option>
+          <option value="قيد الدراسة">قيد الدراسة</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
+      </div>
+
+      <div class="col-6">
+        <button onclick="filterMarkers()" class="btn btn-primary w-100">
+          <i class="bi bi-search"></i> بدء البحث
+        </button>
+      </div>
+      <div class="col-6">
+        <button onclick="resetFilters()" class="btn btn-outline-secondary w-100">
+          <i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Modal Form -->
+  <div class="modal fade" id="contactFormModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">طلب معلومات عن الفرصة</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="contactForm">
+            <input type="hidden" id="opportunityId">
+            <div class="mb-2">
+              <label class="form-label">اسمك</label>
+              <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">بريدك الإلكتروني</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">رسالتك</label>
+              <textarea id="message" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">إرسال</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let markers = [];
+
+    // Load investment opportunities from JSON
+    fetch('opportunities.json')
+      .then(res => res.json())
+      .then(data => {
+        window.opportunities = data;
+        initMap();
+      });
+
+    function initMap() {
+      var map = L.map('map').setView([26.155, 32.716], 9);
+
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri & contributors',
+        maxZoom: 18
+      }).addTo(map);
+
+      opportunities.forEach(opportunity => {
+        const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
+        marker.options.data = opportunity;
+
+        marker.bindPopup(`
+          <b>${opportunity.name}</b><br>
+          القطاع: ${opportunity.sector}<br>
+          المساحة: ${opportunity.area}<br>
+          <img src="${opportunity.image}" alt="صورة"><br>
+          <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
+            <i class="bi bi-envelope"></i>
+          </button>
+          <button class="btn btn-outline-warning btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
+            <i class="bi bi-heart"></i>
+          </button>
+        `);
+
+        markers.push(marker);
+      });
+    }
+
+    function filterMarkers() {
+      const sector = document.getElementById('sectorFilter').value;
+      const region = document.getElementById('regionFilter').value;
+      const status = document.getElementById('statusFilter').value;
+      const search = document.getElementById('searchInput').value.toLowerCase();
+
+      markers.forEach(marker => {
+        const data = marker.options.data;
+        let show = true;
+
+        if (sector && data.sector !== sector) show = false;
+        if (region && data.region !== region) show = false;
+        if (status && data.status !== status) show = false;
+        if (search && !data.name.toLowerCase().includes(search)) show = false;
+
+        if (show) marker.addTo(map);
+        else map.removeLayer(marker);
+      });
+    }
+
+    function resetFilters() {
+      document.getElementById('sectorFilter').value = '';
+      document.getElementById('regionFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      document.getElementById('searchInput').value = '';
+      filterMarkers();
+    }
+
+    function saveToFavorites(id) {
+      let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      if (!favorites.includes(id)) {
+        favorites.push(id);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert("تم الحفظ في المفضلة");
+      } else {
+        alert("الفرصة موجودة بالفعل في المفضلة");
+      }
+    }
+
+    function openForm(id) {
+      document.getElementById('opportunityId').value = id;
+      new bootstrap.Modal(document.getElementById('contactFormModal')).show();
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const id = document.getElementById('opportunityId').value;
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      console.log(`الفرصة رقم ${id}: رسالة من ${name}`);
+      alert("تم إرسال الرسالة بنجاح!");
+      document.getElementById('contactForm').reset();
+      bootstrap.Modal.getInstance(document.getElementById('contactFormModal')).hide();
+    });
+  </script>
+
+</body>
+</html>

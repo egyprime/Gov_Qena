@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "المنطقة الصناعية - قفط",
+    "lat": 26.155,
+    "lng": 32.716,
+    "sector": "صناعي",
+    "area": "150 فدان",
+    "region": "قفط",
+    "status": "متاحة",
+    "image": "https://i.ibb.co/HDXYwR7W/Firts-Photo.jpg" 
+  },
+  {
+    "id": 2,
+    "name": "مشروع زراعي - نجع حمادي",
+    "lat": 25.704,
+    "lng": 32.696,
+    "sector": "زراعي",
+    "area": "200 فدان",
+    "region": "نجع حمادي",
+    "status": "قيد الدراسة",
+    "image": "https://i.ibb.co/6FqV5zNQ/Second-Photo.jpg" 
+  },
+  {
+    "id": 3,
+    "name": "منطقة خدمات تعليمية - قنا",
+    "lat": 26.162,
+    "lng": 32.710,
+    "sector": "خدماتي",
+    "area": "50 فدان",
+    "region": "قنا",
+    "status": "متاحة",
+    "image": "https://i.ibb.co/QC24BwYQ/Third-Photo.jpg" 
+  }
+]
