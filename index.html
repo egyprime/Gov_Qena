@@ -302,11 +302,11 @@
       map = L.map('map').setView([26.155, 32.716], 9);
 
       L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=awnYJdXnIeILF7JHkfly', {
-  attribution: '&copy; MapTiler &copy; OpenStreetMap contributors',
-  tileSize: 512,
-  zoomOffset: -1,
-  maxZoom: 20
-}).addTo(map);
+        attribution: '&copy; MapTiler &copy; OpenStreetMap contributors',
+        tileSize: 512,
+        zoomOffset: -1,
+        maxZoom: 20
+      }).addTo(map);
 
       opportunities.forEach(opportunity => {
         const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
