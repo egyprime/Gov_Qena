@@ -301,10 +301,10 @@
     function initMap() {
       map = L.map('map').setView([26.155, 32.716], 9);
 
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles © Esri & contributors',
-  maxZoom: 18
-}).addTo(map);
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',  {
+        attribution: 'Tiles © Esri & contributors',
+        maxZoom: 18
+      }).addTo(map);
 
       opportunities.forEach(opportunity => {
         const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
