@@ -38,7 +38,7 @@
       height: 60px;
       width: 60px;
       object-fit: contain;
-      border-radius: 0; /* تعديل هنا: مربع وليس دائري */
+      border-radius: 0; /* شعار مربع */
       background: white;
       padding: 4px;
       box-sizing: border-box;
@@ -63,12 +63,7 @@
   </header>
 
   <!-- Filters -->
-<div class="col-12 mt-2">
-  <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary w-100">
-    <i class="bi bi-rulers"></i> بدء القياس
-  </button>
-</div>  
-<div class="container mt-3">
+  <div class="container mt-3">
     <div class="row g-2 mb-3">
       <div class="col-md-3">
         <select id="sectorFilter" class="form-select">
@@ -78,7 +73,6 @@
           <option value="خدماتي">خدماتي</option>
         </select>
       </div>
-
       <div class="col-md-3">
         <select id="regionFilter" class="form-select">
           <option value="">كل المناطق</option>
@@ -87,7 +81,6 @@
           <option value="قنا">قنا</option>
         </select>
       </div>
-
       <div class="col-md-3">
         <select id="statusFilter" class="form-select">
           <option value="">كل الحالات</option>
@@ -95,11 +88,9 @@
           <option value="قيد الدراسة">قيد الدراسة</option>
         </select>
       </div>
-
       <div class="col-md-3">
         <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
       </div>
-
       <div class="col-6">
         <button onclick="filterMarkers()" class="btn btn-primary w-100">
           <i class="bi bi-search"></i> بدء البحث
@@ -113,11 +104,21 @@
     </div>
   </div>
 
+  <!-- Button for Measuring -->
+  <div class="container mt-2">
+    <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary w-100">
+      <i class="bi bi-rulers"></i> بدء القياس
+    </button>
+  </div>
+
   <!-- Map -->
   <div id="map"></div>
-<div class="distance" id="distanceDisplay" style="position: absolute; top: 10px; left: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-  المسافة الكلية: 0 متر
-</div>
+
+  <!-- Distance Display -->
+  <div class="distance" id="distanceDisplay" style="position: absolute; top: 10px; left: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+    المسافة الكلية: 0 متر
+  </div>
+
   <!-- Modal Form -->
   <div class="modal fade" id="contactFormModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -153,53 +154,53 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // تعريف المتغيرات العالمية
     let markers = [];
-let measuring = false;
-let polyline = null;
-let totalDistance = 0;
+    let measuring = false;
+    let polyline = null;
+    let totalDistance = 0;
+    let map;
+    let opportunities = [];
 
-function toggleMeasuring() {
-  measuring = !measuring;
-  const measureBtn = document.getElementById('measureBtn');
-  const distanceDisplay = document.getElementById('distanceDisplay');
+    function toggleMeasuring() {
+      measuring = !measuring;
+      const measureBtn = document.getElementById('measureBtn');
+      const distanceDisplay = document.getElementById('distanceDisplay');
 
-  if (measuring) {
-    // بدء القياس
-    measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-    polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-    distanceDisplay.style.display = 'block';
-    totalDistance = 0;
-    distanceDisplay.innerText = 'المسافة الكلية: 0 متر';
-
-    map.on('click', addPoint);
-
-  } else {
-    // إنهاء القياس
-    measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-    map.off('click', addPoint);
-    if (polyline) {
-      map.removeLayer(polyline);
-      polyline = null;
+      if (measuring) {
+        measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
+        polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+        distanceDisplay.style.display = 'block';
+        totalDistance = 0;
+        distanceDisplay.innerText = 'المسافة الكلية: 0 متر';
+        map.on('click', addPoint);
+      } else {
+        measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
+        map.off('click', addPoint);
+        if (polyline) {
+          map.removeLayer(polyline);
+          polyline = null;
+        }
+        distanceDisplay.style.display = 'none';
+        totalDistance = 0;
+      }
     }
-    distanceDisplay.style.display = 'none';
-    totalDistance = 0;
-  }
-}
 
-function addPoint(e) {
-  const latlngs = polyline.getLatLngs();
-  latlngs.push(e.latlng);
-  polyline.setLatLngs(latlngs);
+    function addPoint(e) {
+      const latlngs = polyline.getLatLngs();
+      latlngs.push(e.latlng);
+      polyline.setLatLngs(latlngs);
 
-  if (latlngs.length > 1) {
-    const lastPoint = latlngs[latlngs.length - 2];
-    const distance = map.distance(lastPoint, e.latlng);
-    totalDistance += distance;
-    document.getElementById('distanceDisplay').innerText =
-      'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
-  }
-}
-    // Load investment opportunities from JSON
+      if (latlngs.length > 1) {
+        const lastPoint = latlngs[latlngs.length - 2];
+        const distance = map.distance(lastPoint, e.latlng);
+        totalDistance += distance;
+        document.getElementById('distanceDisplay').innerText =
+          'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
+      }
+    }
+
+    // تحميل الفرص والخريطة
     fetch('opportunities.json')
       .then(res => res.json())
       .then(data => {
@@ -208,8 +209,7 @@ function addPoint(e) {
       });
 
     function initMap() {
-      var map = L.map('map').setView([26.155, 32.716], 9);
-
+      map = L.map('map').setView([26.155, 32.716], 9);
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles © Esri & contributors',
         maxZoom: 18
