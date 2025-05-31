@@ -505,9 +505,46 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* Map Layer Controls */
+    .layer-control {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      padding: 15px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-glow);
+      color: white;
+      min-width: 150px;
+    }
+
+    .layer-btn {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border) !important;
+      color: white !important;
+      margin-bottom: 8px;
+      border-radius: 10px !important;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      transition: all 0.3s ease;
+    }
+
+    .layer-btn:hover {
+      background: var(--gradient-accent) !important;
+      transform: translateX(-3px);
+    }
+
+    .layer-btn.active {
+      background: var(--gradient-primary) !important;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
-      .measure-control, .stats-panel {
+      .measure-control, .stats-panel, .layer-control {
         position: relative;
         width: 100%;
         margin: 10px;
@@ -593,10 +630,10 @@
 <!-- Enhanced Header -->
 <header class="text-white">
   <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" alt="شعار المحافظة"
-       onerror="this.src='https://via.placeholder.com/70x70?text=Gov+Logo'">
+       onerror="this.src='https://via.placeholder.com/70x70/004d40/ffffff?text=GOV'">
   <h1 class="animate__animated animate__fadeInDown">🏛️ الفرص الاستثمارية في محافظة قنا ⭐</h1>
   <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع"
-       onerror="this.src='https://via.placeholder.com/70x70?text=GIS+Logo'">
+       onerror="this.src='https://via.placeholder.com/70x70/26a69a/ffffff?text=GIS'">
 </header>
 
 <!-- Enhanced Filters -->
@@ -664,6 +701,20 @@
   </button>
   <button id="clearBtn" onclick="clearAll()" class="btn tool-btn w-100" title="مسح الكل">
     <i class="bi bi-trash"></i> 🗑️ مسح الكل
+  </button>
+</div>
+
+<!-- Layer Control Panel -->
+<div class="layer-control">
+  <h6 class="text-white text-center mb-3">🗺️ طبقات الخريطة</h6>
+  <button id="satelliteBtn" onclick="changeTo('satellite')" class="btn layer-btn w-100 active">
+    🛰️ فضائية
+  </button>
+  <button id="streetBtn" onclick="changeTo('street')" class="btn layer-btn w-100">
+    🛣️ شوارع
+  </button>
+  <button id="hybridBtn" onclick="changeTo('hybrid')" class="btn layer-btn w-100">
+    🗺️ مختلطة
   </button>
 </div>
 
@@ -735,52 +786,8 @@
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/leaflet-geometryutil"></script>
 
 <script>
   let markers = [];
   let map;
-  
-  // المتغيرات الجديدة
-  let distancePoints = [];
-  let areaPoints = [];
-  let distanceLine = null;
-  let areaPolygon = null;
-  let manualMarker = null;
-
-  // بيانات وهمية للفرص الاستثمارية مع إضافات جديدة
-  const opportunities = [
-    {
-      id: 1,
-      name: "مجمع صناعي متكامل",
-      lat: 26.155,
-      lng: 32.716,
-      sector: "صناعي",
-      region: "قنا",
-      area: "15000 م²",
-      status: "متاحة",
-      investment: "50 مليون جنيه",
-      description: "مجمع صناعي حديث بمواصفات عالمية"
-    },
-    {
-      id: 2,
-      name: "مشروع زراعي عضوي",
-      lat: 26.200,
-      lng: 32.800,
-      sector: "زراعي",
-      region: "قفط",
-      area: "25000 م²",
-      status: "قيد الدراسة",
-      investment: "30 مليون جنيه",
-      description: "مزرعة عضوية متطورة للمحاصيل النقدية"
-    },
-    {
-      id: 3,
-      name: "مركز تجاري حديث",
-      lat: 26.100,
-      lng: 32.650,
-      sector: "خدماتي",
-      region: "نجع حمادي",
-      area: "8000 م²",
-      status: "متاحة",
-      investment: "25 ملي
+  let currentLayer = 'satellite';
