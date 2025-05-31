@@ -7,8 +7,7 @@
     "region": "قنا",
     "status": "متاحة",
     "lat": 26.1558,
-    "lng": 32.7164,
-    "image": "images/opportunity1.jpg"
+    "lng": 32.7164
   },
   {
     "id": 2,
@@ -18,7 +17,16 @@
     "region": "قفط",
     "status": "قيد الدراسة",
     "lat": 26.2158,
-    "lng": 32.8164,
-    "image": "images/opportunity2.jpg"
+    "lng": 32.8164
+  },
+  {
+    "id": 3,
+    "name": "فرصة استثمارية 3",
+    "sector": "خدماتي",
+    "area": "مبنى إداري",
+    "region": "نجع حمادي",
+    "status": "متاحة",
+    "lat": 26.0987,
+    "lng": 32.6543
   }
 ]
