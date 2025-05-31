@@ -70,6 +70,30 @@
     .leaflet-popup-content-wrapper {
       max-width: 300px;
     }
+    .measure-control {
+  position: absolute;
+  left: 10px;
+  top: 80px;
+  z-index: 1000;
+  background: white;
+  border-radius: 6px;
+  padding: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  width: 120px;
+}
+.coordinate-input-button {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 1000;
+}
+.distance-label .leaflet-div-icon {
+  background-color: transparent !important;
+  border: none !important;
+}
+    
+    <script src="https://unpkg.com/leaflet-geometryutil"></script> 
+    
   </style>
 </head>
 <body>
@@ -204,7 +228,32 @@
   let polyline = null;
   let totalDistance = 0;
   let map;
+// المتغيرات الجديدة
+let distancePoints = [];
+let areaPoints = [];
+let distanceLine = null;
+let areaPolygon = null;
+let manualMarker = null;
 
+// دالة التنبيه المؤقت
+function showTooltip(text) {
+  const tooltip = document.createElement('div');
+  tooltip.style.position = 'absolute';
+  tooltip.style.top = '10px';
+  tooltip.style.left = '10px';
+  tooltip.style.zIndex = '1001';
+  tooltip.style.background = '#fff9c4';
+  tooltip.style.padding = '8px';
+  tooltip.style.borderRadius = '5px';
+  tooltip.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+  tooltip.innerText = text;
+  document.body.appendChild(tooltip);
+
+  setTimeout(() => {
+    document.body.removeChild(tooltip);
+  }, 5000);
+}
+  
   // تحميل الفرص والاستدعاء الأولي للخريطة
   fetch('opportunities.json')
     .then(res => {
@@ -221,6 +270,161 @@
       alert("حدث خطأ في تحميل الفرص: " + err.message);
     });
 
+  function toggleDistance() {
+  clearOtherTools('distance');
+  if (!window.distanceMode) {
+    window.distanceMode = true;
+    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
+    distancePoints = [];
+    distanceLine = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+    showTooltip("اضغط على الخريطة لتحديد نقاط القياس");
+    map.on('click', addDistancePoint);
+  } else {
+    endDistance();
+  }
+}
+
+function addDistancePoint(e) {
+  const latlngs = distanceLine.getLatLngs();
+  latlngs.push(e.latlng);
+  distanceLine.setLatLngs(latlngs);
+
+  if (latlngs.length === 1) {
+    L.circleMarker(e.latlng, { color: 'green' }).addTo(map).bindPopup("نقطة بداية").openPopup();
+  } else {
+    L.circleMarker(e.latlng, { color: 'red' }).addTo(map);
+  }
+
+  if (latlngs.length > 1) {
+    let total = 0;
+    for (let i = 1; i < latlngs.length; i++) {
+      total += map.distance(latlngs[i - 1], latlngs[i]);
+    }
+    const display = document.getElementById('distanceDisplay');
+    if (total >= 1000) {
+      display.innerText = `المسافة الكلية: ${(total / 1000).toFixed(2)} كم`;
+    } else {
+      display.innerText = `المسافة الكلية: ${total.toFixed(2)} متر`;
+    }
+    display.style.display = 'block';
+  }
+}
+
+function endDistance() {
+  window.distanceMode = false;
+  document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
+  map.off('click', addDistancePoint);
+  if (distanceLine) map.removeLayer(distanceLine);
+  distanceLine = null;
+  distancePoints = [];
+  document.getElementById('distanceDisplay').style.display = 'none';
+}
+
+  function toggleArea() {
+  clearOtherTools('area');
+  if (!window.areaMode) {
+    window.areaMode = true;
+    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-check-circle"></i> إنهاء القياس';
+    areaPoints = [];
+    showTooltip("اضغط لرسم رؤوس المضلع، ثم اضغط مجدداً لإيقاف القياس");
+    map.on('click', addAreaPoint);
+  } else {
+    endArea();
+  }
+}
+
+function addAreaPoint(e) {
+  areaPoints.push(e.latlng);
+  L.circleMarker(e.latlng, { color: 'orange' }).addTo(map);
+
+  if (areaPoints.length >= 3) {
+    if (areaPolygon) map.removeLayer(areaPolygon);
+    areaPolygon = L.polygon(areaPoints, {
+      color: 'green',
+      fillColor: 'blue',
+      fillOpacity: 0.2
+    }).addTo(map);
+
+    const area = L.GeometryUtil.geodesicArea(areaPoints);
+    const display = document.getElementById('areaDisplay');
+    if (area >= 1e6) {
+      display.innerText = `المساحة: ${(area / 1e6).toFixed(2)} كم²`;
+    } else {
+      display.innerText = `المساحة: ${Math.round(area)} م²`;
+    }
+    display.style.display = 'block';
+  }
+}
+
+function endArea() {
+  window.areaMode = false;
+  document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
+  map.off('click', addAreaPoint);
+  if (areaPolygon) map.removeLayer(areaPolygon);
+  areaPolygon = null;
+  areaPoints = [];
+  document.getElementById('areaDisplay').style.display = 'none';
+}
+
+function openCoordinateModal() {
+  clearOtherTools();
+  document.getElementById('coordinateModal').classList.add('show');
+  document.body.classList.add('modal-open');
+  document.getElementById('latInput').value = '';
+  document.getElementById('lngInput').value = '';
+  document.getElementById('errorText').style.display = 'none';
+}
+
+function closeCoordinateModal() {
+  document.getElementById('coordinateModal').classList.remove('show');
+  document.body.classList.remove('modal-open');
+  document.getElementById('errorText').style.display = 'none';
+}
+
+function addManualMarker() {
+  const lat = parseFloat(document.getElementById('latInput').value.trim());
+  const lng = parseFloat(document.getElementById('lngInput').value.trim());
+  const error = document.getElementById('errorText');
+
+  if (isNaN(lat) || isNaN(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+    error.innerText = "قيمة إحداثيات غير صالحة. يرجى التأكد من المدخلات.";
+    error.style.display = 'block';
+    return;
+  }
+
+  if (manualMarker) map.removeLayer(manualMarker);
+
+  manualMarker = L.marker([lat, lng]).addTo(map)
+    .bindPopup(`نقطة مُدخلة يدويًا<br>Latitude: ${lat}<br>Longitude: ${lng}`);
+  map.setView([lat, lng], 15);
+  manualMarker.openPopup();
+  closeCoordinateModal();
+}
+
+function clearAll() {
+  if (distanceLine) map.removeLayer(distanceLine);
+  if (areaPolygon) map.removeLayer(areaPolygon);
+  if (manualMarker) map.removeLayer(manualMarker);
+
+  distancePoints = [];
+  areaPoints = [];
+  manualMarker = null;
+
+  document.getElementById('distanceDisplay').style.display = 'none';
+  document.getElementById('areaDisplay').style.display = 'none';
+
+  window.distanceMode = false;
+  window.areaMode = false;
+
+  document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
+  document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
+}
+
+function clearOtherTools(currentTool = '') {
+  if (currentTool !== 'distance') endDistance();
+  if (currentTool !== 'area') endArea();
+}
+  
   function initMap() {
     // إنشاء الخريطة
     map = L.map('map').setView([26.155, 32.716], 9); // موقع قنا
