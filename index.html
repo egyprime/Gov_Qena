@@ -28,6 +28,7 @@
       --accent: #e64a19;
       --light: #f8f9fa;
       --dark: #263238;
+      --sidebar-width: 280px;
     }
     
     * {
@@ -43,6 +44,8 @@
       color: var(--dark);
       min-height: 100vh;
       background-attachment: fixed;
+      padding-right: var(--sidebar-width);
+      transition: padding-right 0.3s ease;
     }
 
     /* تصميم الشريط العلوي مع تأثيرات متطورة */
@@ -514,9 +517,267 @@
         left: 10px;
       }
     }
+
+    /* القائمة الجانبية */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, #00251a 100%);
+      color: white;
+      z-index: 1000;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+      transform: translateX(0);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow-y: auto;
+      padding-top: 70px;
+    }
+    
+    .sidebar-hidden {
+      transform: translateX(100%);
+    }
+    
+    .sidebar-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: var(--sidebar-width);
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary) 0%, #001510 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1010;
+    }
+    
+    .sidebar-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toggle-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(180deg);
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+      padding: 20px 0;
+    }
+    
+    .sidebar-item {
+      margin: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      padding: 15px 25px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sidebar-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-right: 30px;
+    }
+    
+    .sidebar-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 0;
+      background: var(--secondary);
+      transition: height 0.3s ease;
+    }
+    
+    .sidebar-link:hover::before {
+      height: 100%;
+    }
+    
+    .sidebar-link i {
+      font-size: 1.3rem;
+      margin-left: 15px;
+      min-width: 24px;
+      text-align: center;
+    }
+    
+    .sidebar-link.active {
+      background: rgba(255, 255, 255, 0.15);
+      padding-right: 30px;
+      font-weight: 700;
+    }
+    
+    .sidebar-link.active::before {
+      height: 100%;
+    }
+    
+    .sidebar-footer {
+      padding: 20px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+    }
+    
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+      backdrop-filter: blur(3px);
+    }
+    
+    @media (max-width: 992px) {
+      body {
+        padding-right: 0;
+      }
+      
+      .sidebar {
+        transform: translateX(100%);
+      }
+      
+      .sidebar-visible {
+        transform: translateX(0);
+      }
+      
+      .toggle-btn {
+        display: block;
+      }
+    }
+    
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 900;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: slideInRight 0.8s ease-out;
+    }
+    
+    .menu-toggle:hover {
+      transform: scale(1.1);
+    }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
+
+<!-- القائمة الجانبية -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">
+      <i class="bi bi-list"></i> القائمة الرئيسية
+    </div>
+    <button class="toggle-btn" id="closeSidebar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  
+  <ul class="sidebar-menu">
+    <li class="sidebar-item">
+      <a href="index.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> الصفحة الرئيسية
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="opportunities.html" class="sidebar-link active">
+        <i class="bi bi-map"></i> الفرص الاستثمارية
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="favorites.html" class="sidebar-link">
+        <i class="bi bi-heart"></i> المفضلة
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="reports.html" class="sidebar-link">
+        <i class="bi bi-bar-chart"></i> التقارير والإحصائيات
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="news.html" class="sidebar-link">
+        <i class="bi bi-newspaper"></i> أخبار الاستثمار
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="help.html" class="sidebar-link">
+        <i class="bi bi-question-circle"></i> المساعدة والدعم
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="about.html" class="sidebar-link">
+        <i class="bi bi-info-circle"></i> من نحن
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="contact.html" class="https://mail.google.com/">
+        <i class="bi bi-telephone"></i> اتصل بنا
+      </a>
+    </li>
+  </ul>
+  
+  <div class="sidebar-footer">
+    © 2025 محافظة قنا<br>
+    جميع الحقوق محفوظة
+  </div>
+</div>
+
+<!-- زر فتح القائمة (للأجهزة الصغيرة) -->
+<div class="menu-toggle" id="menuToggle">
+  <i class="bi bi-list"></i>
+</div>
 
 <!-- Header -->
 <header class="text-white">
@@ -1227,6 +1488,20 @@
     }
   }
 
+  // وظائف القائمة الجانبية
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (sidebar.classList.contains('sidebar-visible')) {
+      sidebar.classList.remove('sidebar-visible');
+      overlay.style.display = 'none';
+    } else {
+      sidebar.classList.add('sidebar-visible');
+      overlay.style.display = 'block';
+    }
+  }
+
   // إضافة مستمع لضغط Enter في حقول الإحداثيات
   document.addEventListener('DOMContentLoaded', function() {
     const latInput = document.getElementById('latInput');
@@ -1262,6 +1537,11 @@
         header.style.background = 'linear-gradient(135deg, #004d40, #00251a)';
       }
     });
+    
+    // إعداد أحداث القائمة الجانبية
+    document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
+    document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
+    document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
   });
 </script>
 </body>
