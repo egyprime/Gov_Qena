@@ -241,13 +241,16 @@
       const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
       marker.options.data = opportunity;
       marker.bindPopup(`
-        <b>${opportunity.name}</b><br>
-        القطاع: ${opportunity.sector}<br>
-        المساحة: ${opportunity.area}<br>
-        <button class="btn btn-primary btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
-          <i class="bi bi-heart"></i> المفضلة
-        </button>
-      `);
+  <b>${opportunity.name}</b><br>
+  القطاع: ${opportunity.sector}<br>
+  المساحة: ${opportunity.area}<br>
+  <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
+    <i class="bi bi-envelope"></i>
+  </button>
+  <button class="btn btn-outline-warning btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
+    <i class="bi bi-heart"></i>
+  </button>
+`);
       markers.push(marker);
     });
   }
