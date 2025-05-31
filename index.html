@@ -4,21 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>فرص استثمارية - قنا</title>
-
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"> 
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
   <!-- Leaflet -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"> 
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <style>
     body {
       font-family: 'Tajawal', sans-serif;
       margin: 0;
-      background-color: #f8f9fa;
+      background-color: #f8f9fa; 
     }
 
     header {
@@ -41,7 +40,7 @@
       height: 60px;
       width: 60px;
       object-fit: contain;
-      border-radius: 0; /* شعار مربع */
+      border-radius: 0;
       background: white;
       padding: 4px;
       box-sizing: border-box;
@@ -57,7 +56,6 @@
       border-radius: 8px;
     }
 
-    /* مكان زر القياس أسفل أدوات التكبير (+/-) */
     .measure-control {
       position: absolute;
       left: 10px;
@@ -78,270 +76,246 @@
 </head>
 <body>
 
-  <!-- Header with logos -->
-  <header class="text-white">
-    <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" 
-         alt="شعار المحافظة"
-         onerror="this.src='https://via.placeholder.com/60x60?text=Gov+Logo'">
-    <h1>الفرص الاستثمارية في محافظة قنا</h1>
-    <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png"
-         alt="شعار الموقع"
-         onerror="this.src='https://via.placeholder.com/60x60?text=GIS+Logo'">
-  </header>
+<!-- Header -->
+<header class="text-white">
+  <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg"  alt="شعار المحافظة"
+       onerror="this.src='https://via.placeholder.com/60x60?text=Gov+Logo'">
+  <h1>الفرص الاستثمارية في محافظة قنا</h1>
+  <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع"
+       onerror="this.src='https://via.placeholder.com/60x60?text=GIS+Logo'">
+</header>
 
-  <!-- Filters -->
-  <div class="container mt-3">
-    <div class="row g-2 mb-3">
-      <div class="col-md-3">
-        <select id="sectorFilter" class="form-select">
-          <option value="">كل القطاعات</option>
-          <option value="صناعي">صناعي</option>
-          <option value="زراعي">زراعي</option>
-          <option value="خدماتي">خدماتي</option>
-        </select>
+<!-- Filters -->
+<div class="container mt-3">
+  <div class="row g-2 mb-3">
+    <div class="col-md-3">
+      <select id="sectorFilter" class="form-select">
+        <option value="">كل القطاعات</option>
+        <option value="صناعي">صناعي</option>
+        <option value="زراعي">زراعي</option>
+        <option value="خدماتي">خدماتي</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select id="regionFilter" class="form-select">
+        <option value="">كل المناطق</option>
+        <option value="قفط">قفط</option>
+        <option value="نجع حمادي">نجع حمادي</option>
+        <option value="قنا">قنا</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select id="statusFilter" class="form-select">
+        <option value="">كل الحالات</option>
+        <option value="متاحة">متاحة</option>
+        <option value="قيد الدراسة">قيد الدراسة</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
+    </div>
+    <div class="col-6">
+      <button onclick="filterMarkers()" class="btn btn-primary w-100">
+        <i class="bi bi-search"></i> بدء البحث
+      </button>
+    </div>
+    <div class="col-6">
+      <button onclick="resetFilters()" class="btn btn-outline-secondary w-100">
+        <i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Measurement Button -->
+<div class="measure-control">
+  <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary btn-sm w-100">
+    <i class="bi bi-rulers"></i> بدء القياس
+  </button>
+</div>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Distance Display -->
+<div id="distanceDisplay" style="position: absolute; left: 10px; top: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+  المسافة الكلية: 0 متر
+</div>
+
+<!-- Modal Form -->
+<div class="modal fade" id="contactFormModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">طلب معلومات عن الفرصة</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="col-md-3">
-        <select id="regionFilter" class="form-select">
-          <option value="">كل المناطق</option>
-          <option value="قفط">قفط</option>
-          <option value="نجع حمادي">نجع حمادي</option>
-          <option value="قنا">قنا</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select id="statusFilter" class="form-select">
-          <option value="">كل الحالات</option>
-          <option value="متاحة">متاحة</option>
-          <option value="قيد الدراسة">قيد الدراسة</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
-      </div>
-      <div class="col-6">
-        <button onclick="filterMarkers()" class="btn btn-primary w-100">
-          <i class="bi bi-search"></i> بدء البحث
-        </button>
-      </div>
-      <div class="col-6">
-        <button onclick="resetFilters()" class="btn btn-outline-secondary w-100">
-          <i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين
-        </button>
+      <div class="modal-body">
+        <form id="contactForm">
+          <input type="hidden" id="opportunityId">
+          <div class="mb-2">
+            <label class="form-label">اسمك</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">بريدك الإلكتروني</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">رسالتك</label>
+            <textarea id="message" class="form-control" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">إرسال</button>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Measurement Button -->
-  <div class="measure-control">
-    <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary btn-sm w-100">
-      <i class="bi bi-rulers"></i> بدء القياس
-    </button>
-  </div>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Map -->
-  <div id="map"></div>
+<script>
+  let markers = [];
+  let measuring = false;
+  let polyline = null;
+  let totalDistance = 0;
+  let map;
+  let opportunities = [];
 
-  <!-- Distance Display -->
-  <div id="distanceDisplay" style="position: absolute; left: 10px; top: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-    المسافة الكلية: 0 متر
-  </div>
-
-  <!-- Modal Form -->
-  <div class="modal fade" id="contactFormModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">طلب معلومات عن الفرصة</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="contactForm">
-            <input type="hidden" id="opportunityId">
-            <div class="mb-2">
-              <label class="form-label">اسمك</label>
-              <input type="text" id="name" class="form-control" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">بريدك الإلكتروني</label>
-              <input type="email" id="email" class="form-control" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">رسالتك</label>
-              <textarea id="message" class="form-control" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-success w-100">إرسال</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // المتغيرات العالمية
-    let markers = [];
-    let measuring = false;
-    let polyline = null;
-    let totalDistance = 0;
-    let map;
-    let opportunities = [];
-
-    // دالة قياس المسافات
-    function toggleMeasuring() {
-      measuring = !measuring;
-      const measureBtn = document.getElementById('measureBtn');
-      const distanceDisplay = document.getElementById('distanceDisplay');
-
-      if (measuring) {
-        measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-        polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-        distanceDisplay.style.display = 'block';
-        totalDistance = 0;
-        distanceDisplay.innerText = 'المسافة الكلية: 0 متر';
-        map.on('click', addPoint);
-
-        // إنهاء القياس بالضغط المزدوج
-        map.once('dblclick', () => {
-          measuring = false;
-          measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-          map.off('click', addPoint);
-          if (polyline) {
-            map.removeLayer(polyline);
-            polyline = null;
-          }
-          distanceDisplay.style.display = 'none';
-          totalDistance = 0;
-        });
-
-      } else {
-        measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-        map.off('click', addPoint);
-        if (polyline) {
-          map.removeLayer(polyline);
-          polyline = null;
-        }
-        distanceDisplay.style.display = 'none';
-        totalDistance = 0;
-      }
+  // قياس المسافات
+  function toggleMeasuring() {
+    measuring = !measuring;
+    const measureBtn = document.getElementById('measureBtn');
+    const distanceDisplay = document.getElementById('distanceDisplay');
+    if (measuring) {
+      measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
+      polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+      distanceDisplay.style.display = 'block';
+      map.on('click', addPoint);
+    } else {
+      measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
+      map.off('click', addPoint);
+      if (polyline) map.removeLayer(polyline);
+      polyline = null;
+      distanceDisplay.style.display = 'none';
+      totalDistance = 0;
     }
+  }
 
-    function addPoint(e) {
-      const latlngs = polyline.getLatLngs();
-      latlngs.push(e.latlng);
-      polyline.setLatLngs(latlngs);
-
-      if (latlngs.length > 1) {
-        const lastPoint = latlngs[latlngs.length - 2];
-        const distance = map.distance(lastPoint, e.latlng);
-        totalDistance += distance;
-        document.getElementById('distanceDisplay').innerText =
-          'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
-      }
+  function addPoint(e) {
+    const latlngs = polyline.getLatLngs();
+    latlngs.push(e.latlng);
+    polyline.setLatLngs(latlngs);
+    if (latlngs.length > 1) {
+      const lastPoint = latlngs[latlngs.length - 2];
+      const distance = map.distance(lastPoint, e.latlng);
+      totalDistance += distance;
+      document.getElementById('distanceDisplay').innerText =
+        'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
     }
+  }
 
-    // تحميل الفرص والاستدعاء الأولي للخريطة
-    fetch('opportunities.json')
-      .then(res => res.json())
-      .then(data => {
-        window.opportunities = data;
-        initMap();
-      });
-
-    function initMap() {
-      // إنشاء الخريطة
-      map = L.map('map').setView([26.155, 32.716], 9); // موقع قنا
-
-      // استخدام خريطة MapTiler Satellite
-      L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=73sDwzFoqKJbdF9udESc', {
-        attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
-        tileSize: 512,
-        zoomOffset: -1,
-        maxZoom: 20,
-        minZoom: 0
-      }).addTo(map);
-
-      opportunities.forEach(opportunity => {
-        const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
-        marker.options.data = opportunity;
-
-        marker.bindPopup(`
-          <b>${opportunity.name}</b><br>
-          القطاع: ${opportunity.sector}<br>
-          المساحة: ${opportunity.area}<br>
-          <img src="${opportunity.image}" width="250" style="margin-top: 8px; border-radius: 8px;" /><br>
-          <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
-            <i class="bi bi-envelope"></i>
-          </button>
-          <button class="btn btn-outline-warning btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
-            <i class="bi bi-heart"></i>
-          </button>
-        `);
-
-        markers.push(marker);
-      });
-    }
-
-    // فلاتر البحث
-    function filterMarkers() {
-      const sector = document.getElementById('sectorFilter').value;
-      const region = document.getElementById('regionFilter').value;
-      const status = document.getElementById('statusFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase();
-
-      markers.forEach(marker => {
-        const data = marker.options.data;
-        let show = true;
-
-        if (sector && data.sector !== sector) show = false;
-        if (region && data.region !== region) show = false;
-        if (status && data.status !== status) show = false;
-        if (search && !data.name.toLowerCase().includes(search)) show = false;
-
-        if (show) marker.addTo(map);
-        else map.removeLayer(marker);
-      });
-    }
-
-    function resetFilters() {
-      document.getElementById('sectorFilter').value = '';
-      document.getElementById('regionFilter').value = '';
-      document.getElementById('statusFilter').value = '';
-      document.getElementById('searchInput').value = '';
-      filterMarkers();
-    }
-
-    function saveToFavorites(id) {
-      let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-      if (!favorites.includes(id)) {
-        favorites.push(id);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        alert("تم الحفظ في المفضلة");
-      } else {
-        alert("الفرصة موجودة بالفعل في المفضلة");
-      }
-    }
-
-    function openForm(id) {
-      document.getElementById('opportunityId').value = id;
-      new bootstrap.Modal(document.getElementById('contactFormModal')).show();
-    }
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const id = document.getElementById('opportunityId').value;
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-
-      console.log(`الفرصة رقم ${id}: رسالة من ${name}`);
-      alert("تم إرسال الرسالة بنجاح!");
-      document.getElementById('contactForm').reset();
-      bootstrap.Modal.getInstance(document.getElementById('contactFormModal')).hide();
+  // تحميل الفرص والاستدعاء الأولي للخريطة
+  fetch('opportunities.json')
+    .then(res => {
+      if (!res.ok) throw new Error("فشل تحميل الفرص - ملف غير موجود");
+      return res.json();
+    })
+    .then(data => {
+      window.opportunities = data;
+      console.log("الفرص المحملة:", data);
+      initMap();
+    })
+    .catch(err => {
+      console.error(err);
+      alert("حدث خطأ في تحميل فرص استثمارية: " + err.message);
     });
-  </script>
+
+  function initMap() {
+    map = L.map('map').setView([26.155, 32.716], 9); // موقع قنا
+    L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=73sDwzFoqKJbdF9udESc', {
+      attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
+      tileSize: 512,
+      zoomOffset: -1,
+      maxZoom: 20,
+      minZoom: 0
+    }).addTo(map);
+
+    opportunities.forEach(opportunity => {
+      const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
+      marker.options.data = opportunity;
+      marker.bindPopup(`
+        <b>${opportunity.name}</b><br>
+        القطاع: ${opportunity.sector}<br>
+        المساحة: ${opportunity.area}<br>
+        <img src="${opportunity.image}" width="250" style="margin-top: 8px; border-radius: 8px;" /><br>
+        <button class="btn btn-primary btn-sm mt-2" onclick="openForm(${opportunity.id})">
+          <i class="bi bi-envelope"></i>
+        </button>
+        <button class="btn btn-outline-warning btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
+          <i class="bi bi-heart"></i>
+        </button>
+      `);
+      markers.push(marker);
+    });
+  }
+
+  function filterMarkers() {
+    const sector = document.getElementById('sectorFilter').value;
+    const region = document.getElementById('regionFilter').value;
+    const status = document.getElementById('statusFilter').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    markers.forEach(marker => {
+      const data = marker.options.data;
+      let show = true;
+      if (sector && data.sector !== sector) show = false;
+      if (region && data.region !== region) show = false;
+      if (status && data.status !== status) show = false;
+      if (search && !data.name.toLowerCase().includes(search)) show = false;
+      if (show) marker.addTo(map);
+      else map.removeLayer(marker);
+    });
+  }
+
+  function resetFilters() {
+    document.getElementById('sectorFilter').value = '';
+    document.getElementById('regionFilter').value = '';
+    document.getElementById('statusFilter').value = '';
+    document.getElementById('searchInput').value = '';
+    filterMarkers();
+  }
+
+  function saveToFavorites(id) {
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    if (!favorites.includes(id)) {
+      favorites.push(id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      alert("تم الحفظ في المفضلة");
+    } else {
+      alert("الفرصة موجودة بالفعل في المفضلة");
+    }
+  }
+
+  function openForm(id) {
+    document.getElementById('opportunityId').value = id;
+    new bootstrap.Modal(document.getElementById('contactFormModal')).show();
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const id = document.getElementById('opportunityId').value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    console.log(`الفرصة رقم ${id}: رسالة من ${name}`);
+    alert("تم إرسال الرسالة بنجاح!");
+    document.getElementById('contactForm').reset();
+    bootstrap.Modal.getInstance(document.getElementById('contactFormModal')).hide();
+  });
+</script>
 
 </body>
 </html>
