@@ -6,7 +6,7 @@
   <title>الفرص الاستثمارية - قنا</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap RTL -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
@@ -17,73 +17,323 @@
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
   <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-      margin: 0;
-      background-color: #f8f9fa; 
+    :root {
+      --primary-color: #004d40;
+      --secondary-color: #00695c;
+      --accent-color: #26a69a;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --shadow-glow: 0 8px 32px rgba(0, 77, 64, 0.3);
+      --gradient-primary: linear-gradient(135deg, #004d40 0%, #00695c 50%, #26a69a 100%);
+      --gradient-accent: linear-gradient(45deg, #26a69a, #4db6ac, #80cbc4);
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Enhanced Header */
     header {
-      background: #004d40;
+      background: var(--gradient-primary);
       color: white;
-      padding: 1rem;
+      padding: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(20px);
+      border-bottom: 2px solid var(--glass-border);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: rotate 10s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
     }
 
     header h1 {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       margin: 0;
       flex-grow: 1;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: pulse 2s ease-in-out infinite alternate;
+      font-weight: 700;
+      background: linear-gradient(45deg, #fff, #e0f2f1, #fff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header img {
-      height: 60px;
-      width: 60px;
+      height: 70px;
+      width: 70px;
       object-fit: contain;
-      border-radius: 0;
-      background: white;
-      padding: 4px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      padding: 8px;
       box-sizing: border-box;
+      border: 2px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      animation: bounce 2s ease-in-out infinite;
     }
 
+    header img:hover {
+      transform: scale(1.1) rotate(360deg);
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    /* Enhanced Map Container */
     #map {
       height: 90vh;
       width: 100%;
+      border-radius: 0 0 20px 20px;
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
+      position: relative;
     }
 
-    .measure-control {
-      position: absolute;
-      left: 10px;
-      top: 80px;
-      z-index: 1000;
-      background: white;
-      border-radius: 6px;
-      padding: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      width: 120px;
+    /* Glassmorphism Filters */
+    .filters-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px;
+      box-shadow: var(--shadow-glow);
+      animation: slideInDown 0.8s ease-out;
     }
 
-    .coordinate-input-button {
-      position: absolute;
-      left: 10px;
-      bottom: 10px;
-      z-index: 1000;
+    .form-select, .form-control {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border) !important;
+      border-radius: 15px !important;
+      color: white !important;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
 
-    .leaflet-popup-content-wrapper {
-      max-width: 300px;
+    .form-select:focus, .form-control:focus {
+      box-shadow: 0 0 20px rgba(38, 166, 154, 0.5) !important;
+      border-color: var(--accent-color) !important;
+      transform: translateY(-2px);
     }
 
-    .distance-label .leaflet-div-icon {
-      background-color: transparent !important;
+    .form-select option {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Enhanced Buttons */
+    .btn {
+      border-radius: 25px !important;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
       border: none !important;
     }
 
-    /* تحسين نمط المودال */
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary) !important;
+      box-shadow: 0 4px 15px rgba(0, 77, 64, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 77, 64, 0.5);
+    }
+
+    .btn-outline-secondary {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--glass-border) !important;
+      color: white !important;
+    }
+
+    .btn-outline-secondary:hover {
+      background: var(--gradient-accent) !important;
+      transform: translateY(-3px);
+      color: white !important;
+    }
+
+    /* Enhanced Tools Panel */
+    .measure-control {
+      position: absolute;
+      left: 10px;
+      top: 100px;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: var(--shadow-glow);
+      width: 140px;
+      border: 1px solid var(--glass-border);
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .tool-btn {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border) !important;
+      color: white !important;
+      margin-bottom: 10px;
+      border-radius: 15px !important;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .tool-btn:hover {
+      background: var(--gradient-accent) !important;
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(38, 166, 154, 0.4);
+    }
+
+    .tool-btn.active {
+      background: var(--gradient-primary) !important;
+      animation: pulse 1s ease-in-out infinite alternate;
+    }
+
+    /* Floating Coordinate Button */
+    .coordinate-input-button {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      z-index: 1000;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .coordinate-input-button .btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50% !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      background: var(--gradient-primary) !important;
+      box-shadow: var(--shadow-glow);
+      transition: all 0.3s ease;
+    }
+
+    .coordinate-input-button .btn:hover {
+      transform: scale(1.1) rotate(360deg);
+      box-shadow: 0 0 30px rgba(38, 166, 154, 0.6);
+    }
+
+    /* Enhanced Display Panels */
+    .display-panel {
+      position: absolute;
+      left: 20px;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      padding: 15px 20px;
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      color: white;
+      font-weight: 600;
+      box-shadow: var(--shadow-glow);
+      min-width: 200px;
+      text-align: center;
+      animation: fadeInLeft 0.5s ease-out;
+    }
+
+    #distanceDisplay {
+      top: 20px;
+      background: linear-gradient(135deg, #f44336, #e91e63);
+    }
+
+    #areaDisplay {
+      top: 80px;
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
+    }
+
+    /* Enhanced Modal */
     .modal {
       display: none;
       position: fixed;
@@ -92,7 +342,9 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.3s ease-out;
     }
 
     .modal.show {
@@ -102,159 +354,377 @@
     }
 
     .modal-content {
-      background-color: #fefefe;
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
       margin: auto;
       padding: 0;
-      border: none;
-      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
       width: 90%;
       max-width: 500px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: slideInUp 0.4s ease-out;
+      overflow: hidden;
     }
 
     .modal-header {
-      background-color: #004d40;
+      background: var(--gradient-primary);
       color: white;
-      padding: 15px;
-      border-radius: 8px 8px 0 0;
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .modal-body {
-      padding: 20px;
+      padding: 25px;
+      color: white;
+    }
+
+    .modal-body .form-label {
+      color: #e0f2f1;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
 
     .btn-close {
       background: none;
       border: none;
       color: white;
-      font-size: 20px;
+      font-size: 24px;
       cursor: pointer;
-    }
-
-    /* تحسين شكل الأزرار */
-    .coordinate-input-button .btn {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .btn-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    /* Tooltip Enhancements */
+    .custom-tooltip {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: var(--gradient-accent);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 15px;
+      box-shadow: var(--shadow-glow);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      animation: slideInRight 0.5s ease-out;
+      font-weight: 600;
+      max-width: 300px;
+    }
+
+    /* Popup Enhancements */
+    .leaflet-popup-content-wrapper {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px !important;
+      box-shadow: var(--shadow-glow);
+      color: white;
+    }
+
+    .leaflet-popup-content {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    .leaflet-popup-tip {
+      background: var(--glass-bg) !important;
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Statistics Panel */
+    .stats-panel {
+      position: absolute;
+      right: 20px;
+      top: 100px;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-glow);
+      color: white;
+      min-width: 200px;
+      animation: slideInRight 0.8s ease-out;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+
+    .stat-value {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent-color);
+    }
+
+    /* Loading Animation */
+    .loading-spinner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3000;
+      display: none;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255,255,255,0.1);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .measure-control, .stats-panel {
+        position: relative;
+        width: 100%;
+        margin: 10px;
+        animation: none;
+      }
+      
+      .coordinate-input-button {
+        bottom: 80px;
+      }
+      
+      header h1 {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--glass-bg);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gradient-primary);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gradient-accent);
     }
   </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- Animated Background Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Loading Spinner -->
+<div class="loading-spinner" id="loadingSpinner">
+  <div class="spinner"></div>
+</div>
+
+<!-- Enhanced Header -->
 <header class="text-white">
-  <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg"  alt="شعار المحافظة"
-       onerror="this.src='https://via.placeholder.com/60x60?text=Gov+Logo'">
-  <h1>الفرص الاستثمارية في محافظة قنا</h1>
+  <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" alt="شعار المحافظة"
+       onerror="this.src='https://via.placeholder.com/70x70?text=Gov+Logo'">
+  <h1 class="animate__animated animate__fadeInDown">🏛️ الفرص الاستثمارية في محافظة قنا ⭐</h1>
   <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع"
-       onerror="this.src='https://via.placeholder.com/60x60?text=GIS+Logo'">
+       onerror="this.src='https://via.placeholder.com/70x70?text=GIS+Logo'">
 </header>
 
-<!-- Filters -->
-<div class="container mt-3">
-  <div class="row g-2 mb-3">
+<!-- Enhanced Filters -->
+<div class="filters-container animate__animated animate__fadeInUp">
+  <div class="row g-3 mb-3">
     <div class="col-md-3">
+      <label class="form-label text-white mb-2">🏭 القطاع</label>
       <select id="sectorFilter" class="form-select">
         <option value="">كل القطاعات</option>
-        <option value="صناعي">صناعي</option>
-        <option value="زراعي">زراعي</option>
-        <option value="خدماتي">خدماتي</option>
+        <option value="صناعي">🏭 صناعي</option>
+        <option value="زراعي">🌾 زراعي</option>
+        <option value="خدماتي">🏪 خدماتي</option>
       </select>
     </div>
     <div class="col-md-3">
+      <label class="form-label text-white mb-2">📍 المنطقة</label>
       <select id="regionFilter" class="form-select">
         <option value="">كل المناطق</option>
-        <option value="دشنا">دشنا</option>
-        <option value="الوقف">الوقف</option>
-        <option value="نجع حمادي">نجع حمادي</option>
-        <option value="فرشوط">فرشوط</option>
-        <option value="أبوتشت">أبوتشت</option>
-        <option value="قنا">قنا</option>
-        <option value="قفط">قفط</option>
-        <option value="قوص">قوص</option>
-        <option value="نقادة">نقادة</option>
+        <option value="دشنا">🏘️ دشنا</option>
+        <option value="الوقف">🏘️ الوقف</option>
+        <option value="نجع حمادي">🏘️ نجع حمادي</option>
+        <option value="فرشوط">🏘️ فرشوط</option>
+        <option value="أبوتشت">🏘️ أبوتشت</option>
+        <option value="قنا">🏘️ قنا</option>
+        <option value="قفط">🏘️ قفط</option>
+        <option value="قوص">🏘️ قوص</option>
+        <option value="نقادة">🏘️ نقادة</option>
       </select>
     </div>
     <div class="col-md-3">
+      <label class="form-label text-white mb-2">📊 الحالة</label>
       <select id="statusFilter" class="form-select">
         <option value="">كل الحالات</option>
-        <option value="متاحة">متاحة</option>
-        <option value="قيد الدراسة">قيد الدراسة</option>
+        <option value="متاحة">✅ متاحة</option>
+        <option value="قيد الدراسة">⏳ قيد الدراسة</option>
       </select>
     </div>
     <div class="col-md-3">
+      <label class="form-label text-white mb-2">🔍 البحث</label>
       <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
     </div>
+  </div>
+  <div class="row g-2">
     <div class="col-6">
       <button onclick="filterMarkers()" class="btn btn-primary w-100">
-        <i class="bi bi-search"></i> بدء البحث
+        <i class="bi bi-search"></i> 🔍 بدء البحث
       </button>
     </div>
     <div class="col-6">
       <button onclick="resetFilters()" class="btn btn-outline-secondary w-100">
-        <i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين
+        <i class="bi bi-arrow-counterclockwise"></i> 🔄 إعادة تعيين
       </button>
     </div>
   </div>
 </div>
 
-<!-- Tools Buttons -->
+<!-- Enhanced Tools Panel -->
 <div class="measure-control">
-  <button id="distanceBtn" onclick="toggleDistance()" class="btn btn-outline-primary btn-sm w-100 mb-2" title="قياس المسافات">
-    <i class="bi bi-rulers"></i> قياس المسافة
+  <h6 class="text-white text-center mb-3">🛠️ أدوات القياس</h6>
+  <button id="distanceBtn" onclick="toggleDistance()" class="btn tool-btn w-100 mb-2" title="قياس المسافات">
+    <i class="bi bi-rulers"></i> 📏 المسافة
   </button>
-  <button id="areaBtn" onclick="toggleArea()" class="btn btn-outline-success btn-sm w-100 mb-2" title="قياس المساحة">
-    <i class="bi bi-polygon"></i> قياس المساحة
+  <button id="areaBtn" onclick="toggleArea()" class="btn tool-btn w-100 mb-2" title="قياس المساحة">
+    <i class="bi bi-polygon"></i> 📐 المساحة
   </button>
-  <button id="clearBtn" onclick="clearAll()" class="btn btn-outline-danger btn-sm w-100" title="مسح الكل">
-    <i class="bi bi-trash"></i> مسح الكل
+  <button id="clearBtn" onclick="clearAll()" class="btn tool-btn w-100" title="مسح الكل">
+    <i class="bi bi-trash"></i> 🗑️ مسح الكل
   </button>
 </div>
 
-<!-- Coordinate Button -->
+<!-- Statistics Panel -->
+<div class="stats-panel">
+  <h6 class="text-center mb-3">📊 إحصائيات الفرص</h6>
+  <div class="stat-item">
+    <span>🏭 صناعية:</span>
+    <span class="stat-value" id="industrialCount">0</span>
+  </div>
+  <div class="stat-item">
+    <span>🌾 زراعية:</span>
+    <span class="stat-value" id="agricultureCount">0</span>
+  </div>
+  <div class="stat-item">
+    <span>🏪 خدماتية:</span>
+    <span class="stat-value" id="serviceCount">0</span>
+  </div>
+  <div class="stat-item">
+    <span>✅ متاحة:</span>
+    <span class="stat-value" id="availableCount">0</span>
+  </div>
+</div>
+
+<!-- Enhanced Coordinate Button -->
 <div class="coordinate-input-button">
-  <button id="pinBtn" onclick="openCoordinateModal()" class="btn btn-outline-info" title="أضف نقطة بالإحداثيات">
+  <button id="pinBtn" onclick="openCoordinateModal()" class="btn" title="أضف نقطة بالإحداثيات">
     <i class="bi bi-pin-map-fill"></i>
   </button>
 </div>
 
-<!-- Distance & Area Display -->
-<div id="distanceDisplay" style="position: absolute; left: 10px; top: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-  المسافة الكلية: 0 متر
+<!-- Enhanced Display Panels -->
+<div id="distanceDisplay" class="display-panel" style="display: none;">
+  📏 المسافة الكلية: 0 متر
 </div>
-<div id="areaDisplay" style="position: absolute; left: 10px; top: 50px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-  المساحة: 0 م²
+<div id="areaDisplay" class="display-panel" style="display: none;">
+  📐 المساحة: 0 م²
 </div>
 
-<!-- Coordinate Modal -->
+<!-- Enhanced Modal -->
 <div id="coordinateModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">أدخل إحداثيات النقطة</h5>
+      <h5 class="modal-title">📍 أدخل إحداثيات النقطة</h5>
       <button type="button" class="btn-close" onclick="closeCoordinateModal()">&times;</button>
     </div>
     <div class="modal-body">
       <div class="mb-3">
-        <label class="form-label">خط العرض (Latitude)</label>
+        <label class="form-label">🌐 خط العرض (Latitude)</label>
         <input type="number" id="latInput" class="form-control" placeholder="مثال: 26.1558" step="any">
         <small class="form-text text-muted">قيمة بين -90 و 90</small>
       </div>
       <div class="mb-3">
-        <label class="form-label">خط الطول (Longitude)</label>
+        <label class="form-label">🌐 خط الطول (Longitude)</label>
         <input type="number" id="lngInput" class="form-control" placeholder="مثال: 32.7164" step="any">
         <small class="form-text text-muted">قيمة بين -180 و 180</small>
       </div>
       <div id="errorText" class="alert alert-danger" style="display: none;"></div>
       <div class="mt-3 d-flex justify-content-between">
-        <button class="btn btn-secondary" onclick="closeCoordinateModal()">إلغاء</button>
-        <button class="btn btn-primary" onclick="addManualMarker()">تأكيد</button>
+        <button class="btn btn-outline-secondary" onclick="closeCoordinateModal()">❌ إلغاء</button>
+        <button class="btn btn-primary" onclick="addManualMarker()">✅ تأكيد</button>
       </div>
     </div>
   </div>
@@ -278,396 +748,39 @@
   let areaPolygon = null;
   let manualMarker = null;
 
-  // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
+  // بيانات وهمية للفرص الاستثمارية مع إضافات جديدة
   const opportunities = [
     {
       id: 1,
-      name: "مشروع صناعي 1",
+      name: "مجمع صناعي متكامل",
       lat: 26.155,
       lng: 32.716,
       sector: "صناعي",
       region: "قنا",
-      area: "1000 م²",
-      status: "متاحة"
+      area: "15000 م²",
+      status: "متاحة",
+      investment: "50 مليون جنيه",
+      description: "مجمع صناعي حديث بمواصفات عالمية"
     },
     {
       id: 2,
-      name: "مشروع زراعي 1",
+      name: "مشروع زراعي عضوي",
       lat: 26.200,
       lng: 32.800,
       sector: "زراعي",
       region: "قفط",
-      area: "5000 م²",
-      status: "قيد الدراسة"
+      area: "25000 م²",
+      status: "قيد الدراسة",
+      investment: "30 مليون جنيه",
+      description: "مزرعة عضوية متطورة للمحاصيل النقدية"
     },
     {
       id: 3,
-      name: "مشروع خدمي 1",
+      name: "مركز تجاري حديث",
       lat: 26.100,
       lng: 32.650,
       sector: "خدماتي",
       region: "نجع حمادي",
-      area: "800 م²",
-      status: "متاحة"
-    }
-  ];
-
-  // دالة التنبيه المؤقت
-  function showTooltip(text) {
-    const tooltip = document.createElement('div');
-    tooltip.style.position = 'absolute';
-    tooltip.style.top = '10px';
-    tooltip.style.right = '10px';
-    tooltip.style.zIndex = '1001';
-    tooltip.style.background = '#fff9c4';
-    tooltip.style.padding = '8px';
-    tooltip.style.borderRadius = '5px';
-    tooltip.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-    tooltip.style.border = '1px solid #ffeaa7';
-    tooltip.innerText = text;
-    document.body.appendChild(tooltip);
-
-    setTimeout(() => {
-      if (document.body.contains(tooltip)) {
-        document.body.removeChild(tooltip);
-      }
-    }, 3000);
-  }
-
-  // تهيئة الخريطة
-  function initMap() {
-    // إنشاء الخريطة
-    map = L.map('map').setView([26.155, 32.716], 9); // موقع قنا
-
-    // خريطة MapTiler Satellite
-    L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=73sDwzFoqKJbdF9udESc', {
-      attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
-      tileSize: 512,
-      zoomOffset: -1,
-      maxZoom: 20,
-      minZoom: 0
-    }).addTo(map);
-
-    // إضافة العلامات للفرص الاستثمارية
-    opportunities.forEach(opportunity => {
-      const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
-      marker.options.data = opportunity;
-      marker.bindPopup(`
-        <div style="text-align: right;">
-          <b>${opportunity.name}</b><br>
-          القطاع: ${opportunity.sector}<br>
-          المنطقة: ${opportunity.region}<br>
-          المساحة: ${opportunity.area}<br>
-          الحالة: ${opportunity.status}<br>
-          <button class="btn btn-primary btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
-            <i class="bi bi-heart"></i> المفضلة
-          </button>
-        </div>
-      `);
-      markers.push(marker);
-    });
-  }
-
-  // وظائف قياس المسافة
-  function toggleDistance() {
-    clearOtherTools('distance');
-    if (!window.distanceMode) {
-      window.distanceMode = true;
-      document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-      distancePoints = [];
-      distanceLine = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-      showTooltip("اضغط على الخريطة لتحديد نقاط القياس");
-      map.on('click', addDistancePoint);
-    } else {
-      endDistance();
-    }
-  }
-
-  function addDistancePoint(e) {
-    const latlngs = distanceLine.getLatLngs();
-    latlngs.push(e.latlng);
-    distanceLine.setLatLngs(latlngs);
-
-    if (latlngs.length === 1) {
-      L.circleMarker(e.latlng, { color: 'green', radius: 5 }).addTo(map).bindPopup("نقطة بداية").openPopup();
-    } else {
-      L.circleMarker(e.latlng, { color: 'red', radius: 5 }).addTo(map);
-    }
-
-    if (latlngs.length > 1) {
-      let total = 0;
-      for (let i = 1; i < latlngs.length; i++) {
-        total += map.distance(latlngs[i - 1], latlngs[i]);
-      }
-      const display = document.getElementById('distanceDisplay');
-      if (total >= 1000) {
-        display.innerText = `المسافة الكلية: ${(total / 1000).toFixed(2)} كم`;
-      } else {
-        display.innerText = `المسافة الكلية: ${total.toFixed(2)} متر`;
-      }
-      display.style.display = 'block';
-    }
-  }
-
-  function endDistance() {
-    window.distanceMode = false;
-    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
-    map.off('click', addDistancePoint);
-    document.getElementById('distanceDisplay').style.display = 'none';
-  }
-
-  // وظائف قياس المساحة
-  function toggleArea() {
-    clearOtherTools('area');
-    if (!window.areaMode) {
-      window.areaMode = true;
-      document.getElementById('areaBtn').innerHTML = '<i class="bi bi-check-circle"></i> إنهاء القياس';
-      areaPoints = [];
-      showTooltip("اضغط لرسم رؤوس المضلع، ثم اضغط مجدداً لإنهاء القياس");
-      map.on('click', addAreaPoint);
-    } else {
-      endArea();
-    }
-  }
-
-  function addAreaPoint(e) {
-    areaPoints.push(e.latlng);
-    L.circleMarker(e.latlng, { color: 'orange', radius: 5 }).addTo(map);
-
-    if (areaPoints.length >= 3) {
-      if (areaPolygon) map.removeLayer(areaPolygon);
-      areaPolygon = L.polygon(areaPoints, {
-        color: 'green',
-        fillColor: 'blue',
-        fillOpacity: 0.2
-      }).addTo(map);
-
-      const area = L.GeometryUtil.geodesicArea(areaPoints);
-      const display = document.getElementById('areaDisplay');
-      if (area >= 1e6) {
-        display.innerText = `المساحة: ${(area / 1e6).toFixed(2)} كم²`;
-      } else {
-        display.innerText = `المساحة: ${Math.round(area)} م²`;
-      }
-      display.style.display = 'block';
-    }
-  }
-
-  function endArea() {
-    window.areaMode = false;
-    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
-    map.off('click', addAreaPoint);
-    document.getElementById('areaDisplay').style.display = 'none';
-  }
-
-  // وظائف الإحداثيات اليدوية
-  function openCoordinateModal() {
-    clearOtherTools();
-    const modal = document.getElementById('coordinateModal');
-    modal.classList.add('show');
-    document.getElementById('latInput').value = '';
-    document.getElementById('lngInput').value = '';
-    document.getElementById('errorText').style.display = 'none';
-    
-    // تركيز على الحقل الأول
-    setTimeout(() => {
-      document.getElementById('latInput').focus();
-    }, 100);
-  }
-
-  function closeCoordinateModal() {
-    const modal = document.getElementById('coordinateModal');
-    modal.classList.remove('show');
-    document.getElementById('errorText').style.display = 'none';
-  }
-
-  function addManualMarker() {
-    const latValue = document.getElementById('latInput').value.trim();
-    const lngValue = document.getElementById('lngInput').value.trim();
-    const error = document.getElementById('errorText');
-
-    // التحقق من وجود قيم
-    if (!latValue || !lngValue) {
-      error.innerText = "يرجى إدخال كلا من خط العرض وخط الطول";
-      error.style.display = 'block';
-      return;
-    }
-
-    const lat = parseFloat(latValue);
-    const lng = parseFloat(lngValue);
-
-    // التحقق من صحة القيم
-    if (isNaN(lat) || isNaN(lng)) {
-      error.innerText = "يرجى إدخال أرقام صحيحة فقط";
-      error.style.display = 'block';
-      return;
-    }
-
-    // التحقق من النطاق الصحيح للإحداثيات
-    if (lat < -90 || lat > 90) {
-      error.innerText = "خط العرض يجب أن يكون بين -90 و 90";
-      error.style.display = 'block';
-      return;
-    }
-
-    if (lng < -180 || lng > 180) {
-      error.innerText = "خط الطول يجب أن يكون بين -180 و 180";
-      error.style.display = 'block';
-      return;
-    }
-
-    // إزالة العلامة السابقة إن وجدت
-    if (manualMarker) {
-      map.removeLayer(manualMarker);
-    }
-
-    // إضافة العلامة الجديدة
-    manualMarker = L.marker([lat, lng], {
-      icon: L.icon({
-        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      })
-    }).addTo(map);
-
-    // إضافة نافذة منبثقة
-    manualMarker.bindPopup(`
-      <div style="text-align: right;">
-        <b>نقطة مُدخلة يدويًا</b><br>
-        خط العرض: ${lat.toFixed(6)}<br>
-        خط الطول: ${lng.toFixed(6)}
-      </div>
-    `);
-
-    // الانتقال إلى الموقع وفتح النافذة المنبثقة
-    map.setView([lat, lng], 15);
-    setTimeout(() => {
-      manualMarker.openPopup();
-    }, 500);
-
-    // إغلاق المودال وإظهار رسالة نجاح
-    closeCoordinateModal();
-    showTooltip("تم إضافة النقطة بنجاح!");
-  }
-
-  // مسح جميع الأدوات
-  function clearAll() {
-    // مسح خطوط القياس
-    if (distanceLine) map.removeLayer(distanceLine);
-    if (areaPolygon) map.removeLayer(areaPolygon);
-    
-    // مسح النقطة اليدوية
-    if (manualMarker) map.removeLayer(manualMarker);
-
-    // مسح جميع العلامات المؤقتة
-    map.eachLayer(function(layer) {
-      if (layer instanceof L.CircleMarker) {
-        map.removeLayer(layer);
-      }
-    });
-
-    // إعادة تعيين المتغيرات
-    distancePoints = [];
-    areaPoints = [];
-    distanceLine = null;
-    areaPolygon = null;
-    manualMarker = null;
-
-    // إخفاء النتائج
-    document.getElementById('distanceDisplay').style.display = 'none';
-    document.getElementById('areaDisplay').style.display = 'none';
-
-    // إعادة تعيين الأزرار
-    window.distanceMode = false;
-    window.areaMode = false;
-
-    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
-    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
-
-    // إيقاف جميع الأحداث
-    map.off('click', addDistancePoint);
-    map.off('click', addAreaPoint);
-
-    showTooltip("تم مسح جميع البيانات");
-  }
-
-  function clearOtherTools(currentTool = '') {
-    if (currentTool !== 'distance') endDistance();
-    if (currentTool !== 'area') endArea();
-  }
-
-  // الفلاتر
-  function filterMarkers() {
-    const sector = document.getElementById('sectorFilter').value;
-    const region = document.getElementById('regionFilter').value;
-    const status = document.getElementById('statusFilter').value;
-    const search = document.getElementById('searchInput').value.toLowerCase();
-
-    markers.forEach(marker => {
-      const data = marker.options.data;
-      let show = true;
-      if (sector && data.sector !== sector) show = false;
-      if (region && data.region !== region) show = false;
-      if (status && data.status !== status) show = false;
-      if (search && !data.name.toLowerCase().includes(search)) show = false;
-      
-      if (show) {
-        marker.addTo(map);
-      } else {
-        map.removeLayer(marker);
-      }
-    });
-  }
-
-  function resetFilters() {
-    document.getElementById('sectorFilter').value = '';
-    document.getElementById('regionFilter').value = '';
-    document.getElementById('statusFilter').value = '';
-    document.getElementById('searchInput').value = '';
-    filterMarkers();
-  }
-
-  function saveToFavorites(id) {
-    // استخدام متغير في الذاكرة بدلاً من localStorage
-    if (!window.favorites) {
-      window.favorites = [];
-    }
-    
-    if (!window.favorites.includes(id)) {
-      window.favorites.push(id);
-      alert("تم الحفظ في المفضلة");
-    } else {
-      alert("الفرصة موجودة بالفعل في المفضلة");
-    }
-  }
-
-  // إضافة مستمع لضغط Enter في حقول الإحداثيات
-  document.addEventListener('DOMContentLoaded', function() {
-    const latInput = document.getElementById('latInput');
-    const lngInput = document.getElementById('lngInput');
-    
-    function handleEnterKey(event) {
-      if (event.key === 'Enter') {
-        addManualMarker();
-      }
-    }
-    
-    latInput.addEventListener('keypress', handleEnterKey);
-    lngInput.addEventListener('keypress', handleEnterKey);
-    
-    // إغلاق المودال عند الضغط خارجها
-    document.getElementById('coordinateModal').addEventListener('click', function(event) {
-      if (event.target === this) {
-        closeCoordinateModal();
-      }
-    });
-    
-    // تهيئة الخريطة
-    initMap();
-  });
-</script>
-</body>
-</html>
+      area: "8000 م²",
+      status: "متاحة",
+      investment: "25 ملي
