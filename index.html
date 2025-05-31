@@ -83,11 +83,6 @@
       border: none !important;
     }
 
-    .area-label .leaflet-div-icon {
-      background-color: transparent !important;
-      border: none !important;
-    }
-
     /* تحسين نمط المودال */
     .modal {
       display: none;
@@ -282,9 +277,6 @@
   let distanceLine = null;
   let areaPolygon = null;
   let manualMarker = null;
-  let areaMarkers = [];
-  let areaLabel = null;
-  let distanceMarkers = [];
 
   // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
   const opportunities = [
@@ -425,17 +417,13 @@
   }
 
   // وظائف قياس المساحة
-  let areaMarkers = [];
-  let areaLabel = null;
-
   function toggleArea() {
     clearOtherTools('area');
     if (!window.areaMode) {
       window.areaMode = true;
       document.getElementById('areaBtn').innerHTML = '<i class="bi bi-check-circle"></i> إنهاء القياس';
       areaPoints = [];
-      areaMarkers = [];
-      showTooltip("اضغط لرسم رؤوس المضلع، ثم اضغط على الزر مرة أخرى لإنهاء القياس");
+      showTooltip("اضغط لرسم رؤوس المضلع، ثم اضغط مجدداً لإنهاء القياس");
       map.on('click', addAreaPoint);
     } else {
       endArea();
@@ -444,75 +432,23 @@
 
   function addAreaPoint(e) {
     areaPoints.push(e.latlng);
-    
-    // إضافة علامة للنقطة
-    const marker = L.circleMarker(e.latlng, { 
-      color: 'orange', 
-      fillColor: 'orange',
-      fillOpacity: 0.8,
-      radius: 6,
-      weight: 2
-    }).addTo(map);
-    areaMarkers.push(marker);
+    L.circleMarker(e.latlng, { color: 'orange', radius: 5 }).addTo(map);
 
-    // إذا كان لدينا 3 نقاط أو أكثر، نرسم المضلع
     if (areaPoints.length >= 3) {
-      // إزالة المضلع السابق إن وجد
       if (areaPolygon) map.removeLayer(areaPolygon);
-      if (areaLabel) map.removeLayer(areaLabel);
-      
-      // رسم المضلع الجديد
       areaPolygon = L.polygon(areaPoints, {
-        color: '#2ecc71',
-        fillColor: '#3498db',
-        fillOpacity: 0.3,
-        weight: 3
+        color: 'green',
+        fillColor: 'blue',
+        fillOpacity: 0.2
       }).addTo(map);
 
-      // حساب المساحة
       const area = L.GeometryUtil.geodesicArea(areaPoints);
-      
-      // حساب مركز المضلع
-      const bounds = areaPolygon.getBounds();
-      const center = bounds.getCenter();
-      
-      // تنسيق النص
-      let areaText;
-      if (area >= 1e6) {
-        areaText = `${(area / 1e6).toFixed(2)} كم²`;
-      } else if (area >= 1e4) {
-        areaText = `${(area / 1e4).toFixed(2)} هكتار`;
-      } else {
-        areaText = `${Math.round(area)} م²`;
-      }
-
-      // إضافة تسمية المساحة في وسط المضلع
-      areaLabel = L.marker(center, {
-        icon: L.divIcon({
-          className: 'area-label',
-          html: `<div style="
-                  background: rgba(255,255,255,0.9);
-                  padding: 8px 12px;
-                  border-radius: 20px;
-                  border: 2px solid #2ecc71;
-                  font-weight: bold;
-                  color: #2c3e50;
-                  text-align: center;
-                  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                  white-space: nowrap;
-                  font-size: 14px;
-                ">
-                  <i class="bi bi-square" style="color: #3498db; margin-left: 5px;"></i>
-                  ${areaText}
-                </div>`,
-          iconSize: [120, 40],
-          iconAnchor: [60, 20]
-        })
-      }).addTo(map);
-
-      // تحديث شاشة العرض
       const display = document.getElementById('areaDisplay');
-      display.innerText = `المساحة: ${areaText}`;
+      if (area >= 1e6) {
+        display.innerText = `المساحة: ${(area / 1e6).toFixed(2)} كم²`;
+      } else {
+        display.innerText = `المساحة: ${Math.round(area)} م²`;
+      }
       display.style.display = 'block';
     }
   }
@@ -521,11 +457,7 @@
     window.areaMode = false;
     document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
     map.off('click', addAreaPoint);
-    
-    // الاحتفاظ بالمضلع والتسمية المرسومة
-    // document.getElementById('areaDisplay').style.display = 'none';
-    
-    showTooltip("تم الانتهاء من قياس المساحة");
+    document.getElementById('areaDisplay').style.display = 'none';
   }
 
   // وظائف الإحداثيات اليدوية
@@ -626,7 +558,6 @@
     // مسح خطوط القياس
     if (distanceLine) map.removeLayer(distanceLine);
     if (areaPolygon) map.removeLayer(areaPolygon);
-    if (areaLabel) map.removeLayer(areaLabel);
     
     // مسح النقطة اليدوية
     if (manualMarker) map.removeLayer(manualMarker);
@@ -638,29 +569,12 @@
       }
     });
 
-    // مسح علامات المساحة
-    areaMarkers.forEach(marker => {
-      if (map.hasLayer(marker)) {
-        map.removeLayer(marker);
-      }
-    });
-
-    // مسح علامات المسافة
-    distanceMarkers.forEach(marker => {
-      if (map.hasLayer(marker)) {
-        map.removeLayer(marker);
-      }
-    });
-
     // إعادة تعيين المتغيرات
     distancePoints = [];
     areaPoints = [];
     distanceLine = null;
     areaPolygon = null;
     manualMarker = null;
-    areaMarkers = [];
-    areaLabel = null;
-    distanceMarkers = [];
 
     // إخفاء النتائج
     document.getElementById('distanceDisplay').style.display = 'none';
