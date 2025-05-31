@@ -67,33 +67,83 @@
       width: 120px;
     }
 
+    .coordinate-input-button {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      z-index: 1000;
+    }
+
     .leaflet-popup-content-wrapper {
       max-width: 300px;
     }
-    .measure-control {
-  position: absolute;
-  left: 10px;
-  top: 80px;
-  z-index: 1000;
-  background: white;
-  border-radius: 6px;
-  padding: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  width: 120px;
-}
-.coordinate-input-button {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  z-index: 1000;
-}
-.distance-label .leaflet-div-icon {
-  background-color: transparent !important;
-  border: none !important;
-}
-    
-    <script src="https://unpkg.com/leaflet-geometryutil"></script> 
-    
+
+    .distance-label .leaflet-div-icon {
+      background-color: transparent !important;
+      border: none !important;
+    }
+
+    /* تحسين نمط المودال */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+      background-color: #004d40;
+      color: white;
+      padding: 15px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* تحسين شكل الأزرار */
+    .coordinate-input-button .btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -122,14 +172,14 @@
       <select id="regionFilter" class="form-select">
         <option value="">كل المناطق</option>
         <option value="دشنا">دشنا</option>
-<option value="الوقف">الوقف</option>
-<option value="نجع حمادي">نجع حمادي</option>
-<option value="فرشوط">فرشوط</option>
-<option value="أبوتشت">أبوتشت</option>
-<option value="قنا">قنا</option>
-<option value="قفط">قفط</option>
-<option value="قوص">قوص</option>
-<option value="نقادة">نقادة</option>
+        <option value="الوقف">الوقف</option>
+        <option value="نجع حمادي">نجع حمادي</option>
+        <option value="فرشوط">فرشوط</option>
+        <option value="أبوتشت">أبوتشت</option>
+        <option value="قنا">قنا</option>
+        <option value="قفط">قفط</option>
+        <option value="قوص">قوص</option>
+        <option value="نقادة">نقادة</option>
       </select>
     </div>
     <div class="col-md-3">
@@ -155,20 +205,7 @@
   </div>
 </div>
 
-<!-- Measurement Button -->
-<div class="measure-control">
-  <button id="measureBtn" onclick="toggleMeasuring()" class="btn btn-outline-primary btn-sm w-100">
-    <i class="bi bi-rulers"></i> بدء القياس
-  </button>
-</div>
-
-<!-- Distance Display -->
-<div id="distanceDisplay" style="position: absolute; left: 10px; top: 10px; z-index: 1000; background: white; padding: 10px; border-radius: 5px; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-  المسافة الكلية: 0 متر
-</div>
-
-<!-- Map -->
-  <!-- Tools Buttons -->
+<!-- Tools Buttons -->
 <div class="measure-control">
   <button id="distanceBtn" onclick="toggleDistance()" class="btn btn-outline-primary btn-sm w-100 mb-2" title="قياس المسافات">
     <i class="bi bi-rulers"></i> قياس المسافة
@@ -183,7 +220,7 @@
 
 <!-- Coordinate Button -->
 <div class="coordinate-input-button">
-  <button id="pinBtn" onclick="openCoordinateModal()" class="btn btn-outline-secondary btn-sm" style="position: absolute; left: 10px; bottom: 10px;" title="أضف نقطة بالإحداثيات">
+  <button id="pinBtn" onclick="openCoordinateModal()" class="btn btn-outline-info" title="أضف نقطة بالإحداثيات">
     <i class="bi bi-pin-map-fill"></i>
   </button>
 </div>
@@ -197,240 +234,107 @@
 </div>
 
 <!-- Coordinate Modal -->
-<div id="coordinateModal" class="modal fade" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">أدخل إحداثيات النقطة</h5>
-        <button type="button" class="btn-close" onclick="closeCoordinateModal()"></button>
+<div id="coordinateModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">أدخل إحداثيات النقطة</h5>
+      <button type="button" class="btn-close" onclick="closeCoordinateModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3">
+        <label class="form-label">خط العرض (Latitude)</label>
+        <input type="number" id="latInput" class="form-control" placeholder="مثال: 26.1558" step="any">
+        <small class="form-text text-muted">قيمة بين -90 و 90</small>
       </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label">خط العرض (Latitude)</label>
-          <input type="text" id="latInput" class="form-control" placeholder="مثال: 26.1558">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">خط الطول (Longitude)</label>
-          <input type="text" id="lngInput" class="form-control" placeholder="مثال: 32.7164">
-        </div>
-        <div id="errorText" class="text-danger" style="display: none;"></div>
-        <div class="mt-3 d-flex justify-content-between">
-          <button class="btn btn-secondary" onclick="closeCoordinateModal()">إلغاء</button>
-          <button class="btn btn-primary" onclick="addManualMarker()">تأكيد</button>
-        </div>
+      <div class="mb-3">
+        <label class="form-label">خط الطول (Longitude)</label>
+        <input type="number" id="lngInput" class="form-control" placeholder="مثال: 32.7164" step="any">
+        <small class="form-text text-muted">قيمة بين -180 و 180</small>
+      </div>
+      <div id="errorText" class="alert alert-danger" style="display: none;"></div>
+      <div class="mt-3 d-flex justify-content-between">
+        <button class="btn btn-secondary" onclick="closeCoordinateModal()">إلغاء</button>
+        <button class="btn btn-primary" onclick="addManualMarker()">تأكيد</button>
       </div>
     </div>
   </div>
 </div>
+
 <div id="map"></div>
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet-geometryutil"></script>
 
 <script>
   let markers = [];
-  let measuring = false;
-  let polyline = null;
-  let totalDistance = 0;
   let map;
-// المتغيرات الجديدة
-let distancePoints = [];
-let areaPoints = [];
-let distanceLine = null;
-let areaPolygon = null;
-let manualMarker = null;
-
-// دالة التنبيه المؤقت
-function showTooltip(text) {
-  const tooltip = document.createElement('div');
-  tooltip.style.position = 'absolute';
-  tooltip.style.top = '10px';
-  tooltip.style.left = '10px';
-  tooltip.style.zIndex = '1001';
-  tooltip.style.background = '#fff9c4';
-  tooltip.style.padding = '8px';
-  tooltip.style.borderRadius = '5px';
-  tooltip.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-  tooltip.innerText = text;
-  document.body.appendChild(tooltip);
-
-  setTimeout(() => {
-    document.body.removeChild(tooltip);
-  }, 5000);
-}
   
-  // تحميل الفرص والاستدعاء الأولي للخريطة
-  fetch('opportunities.json')
-    .then(res => {
-      if (!res.ok) throw new Error("فشل تحميل ملف الفرص");
-      return res.json();
-    })
-    .then(data => {
-      console.log("تم تحميل الفرص:", data); // تسجيل البيانات
-      window.opportunities = data;
-      initMap();
-    })
-    .catch(err => {
-      console.error(err);
-      alert("حدث خطأ في تحميل الفرص: " + err.message);
-    });
+  // المتغيرات الجديدة
+  let distancePoints = [];
+  let areaPoints = [];
+  let distanceLine = null;
+  let areaPolygon = null;
+  let manualMarker = null;
 
-  function toggleDistance() {
-  clearOtherTools('distance');
-  if (!window.distanceMode) {
-    window.distanceMode = true;
-    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-    distancePoints = [];
-    distanceLine = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-    showTooltip("اضغط على الخريطة لتحديد نقاط القياس");
-    map.on('click', addDistancePoint);
-  } else {
-    endDistance();
-  }
-}
-
-function addDistancePoint(e) {
-  const latlngs = distanceLine.getLatLngs();
-  latlngs.push(e.latlng);
-  distanceLine.setLatLngs(latlngs);
-
-  if (latlngs.length === 1) {
-    L.circleMarker(e.latlng, { color: 'green' }).addTo(map).bindPopup("نقطة بداية").openPopup();
-  } else {
-    L.circleMarker(e.latlng, { color: 'red' }).addTo(map);
-  }
-
-  if (latlngs.length > 1) {
-    let total = 0;
-    for (let i = 1; i < latlngs.length; i++) {
-      total += map.distance(latlngs[i - 1], latlngs[i]);
+  // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
+  const opportunities = [
+    {
+      id: 1,
+      name: "مشروع صناعي 1",
+      lat: 26.155,
+      lng: 32.716,
+      sector: "صناعي",
+      region: "قنا",
+      area: "1000 م²",
+      status: "متاحة"
+    },
+    {
+      id: 2,
+      name: "مشروع زراعي 1",
+      lat: 26.200,
+      lng: 32.800,
+      sector: "زراعي",
+      region: "قفط",
+      area: "5000 م²",
+      status: "قيد الدراسة"
+    },
+    {
+      id: 3,
+      name: "مشروع خدمي 1",
+      lat: 26.100,
+      lng: 32.650,
+      sector: "خدماتي",
+      region: "نجع حمادي",
+      area: "800 م²",
+      status: "متاحة"
     }
-    const display = document.getElementById('distanceDisplay');
-    if (total >= 1000) {
-      display.innerText = `المسافة الكلية: ${(total / 1000).toFixed(2)} كم`;
-    } else {
-      display.innerText = `المسافة الكلية: ${total.toFixed(2)} متر`;
-    }
-    display.style.display = 'block';
-  }
-}
+  ];
 
-function endDistance() {
-  window.distanceMode = false;
-  document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
-  map.off('click', addDistancePoint);
-  if (distanceLine) map.removeLayer(distanceLine);
-  distanceLine = null;
-  distancePoints = [];
-  document.getElementById('distanceDisplay').style.display = 'none';
-}
+  // دالة التنبيه المؤقت
+  function showTooltip(text) {
+    const tooltip = document.createElement('div');
+    tooltip.style.position = 'absolute';
+    tooltip.style.top = '10px';
+    tooltip.style.right = '10px';
+    tooltip.style.zIndex = '1001';
+    tooltip.style.background = '#fff9c4';
+    tooltip.style.padding = '8px';
+    tooltip.style.borderRadius = '5px';
+    tooltip.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+    tooltip.style.border = '1px solid #ffeaa7';
+    tooltip.innerText = text;
+    document.body.appendChild(tooltip);
 
-  function toggleArea() {
-  clearOtherTools('area');
-  if (!window.areaMode) {
-    window.areaMode = true;
-    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-check-circle"></i> إنهاء القياس';
-    areaPoints = [];
-    showTooltip("اضغط لرسم رؤوس المضلع، ثم اضغط مجدداً لإيقاف القياس");
-    map.on('click', addAreaPoint);
-  } else {
-    endArea();
-  }
-}
-
-function addAreaPoint(e) {
-  areaPoints.push(e.latlng);
-  L.circleMarker(e.latlng, { color: 'orange' }).addTo(map);
-
-  if (areaPoints.length >= 3) {
-    if (areaPolygon) map.removeLayer(areaPolygon);
-    areaPolygon = L.polygon(areaPoints, {
-      color: 'green',
-      fillColor: 'blue',
-      fillOpacity: 0.2
-    }).addTo(map);
-
-    const area = L.GeometryUtil.geodesicArea(areaPoints);
-    const display = document.getElementById('areaDisplay');
-    if (area >= 1e6) {
-      display.innerText = `المساحة: ${(area / 1e6).toFixed(2)} كم²`;
-    } else {
-      display.innerText = `المساحة: ${Math.round(area)} م²`;
-    }
-    display.style.display = 'block';
-  }
-}
-
-function endArea() {
-  window.areaMode = false;
-  document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
-  map.off('click', addAreaPoint);
-  if (areaPolygon) map.removeLayer(areaPolygon);
-  areaPolygon = null;
-  areaPoints = [];
-  document.getElementById('areaDisplay').style.display = 'none';
-}
-
-function openCoordinateModal() {
-  clearOtherTools();
-  document.getElementById('coordinateModal').classList.add('show');
-  document.body.classList.add('modal-open');
-  document.getElementById('latInput').value = '';
-  document.getElementById('lngInput').value = '';
-  document.getElementById('errorText').style.display = 'none';
-}
-
-function closeCoordinateModal() {
-  document.getElementById('coordinateModal').classList.remove('show');
-  document.body.classList.remove('modal-open');
-  document.getElementById('errorText').style.display = 'none';
-}
-
-function addManualMarker() {
-  const lat = parseFloat(document.getElementById('latInput').value.trim());
-  const lng = parseFloat(document.getElementById('lngInput').value.trim());
-  const error = document.getElementById('errorText');
-
-  if (isNaN(lat) || isNaN(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
-    error.innerText = "قيمة إحداثيات غير صالحة. يرجى التأكد من المدخلات.";
-    error.style.display = 'block';
-    return;
+    setTimeout(() => {
+      if (document.body.contains(tooltip)) {
+        document.body.removeChild(tooltip);
+      }
+    }, 3000);
   }
 
-  if (manualMarker) map.removeLayer(manualMarker);
-
-  manualMarker = L.marker([lat, lng]).addTo(map)
-    .bindPopup(`نقطة مُدخلة يدويًا<br>Latitude: ${lat}<br>Longitude: ${lng}`);
-  map.setView([lat, lng], 15);
-  manualMarker.openPopup();
-  closeCoordinateModal();
-}
-
-function clearAll() {
-  if (distanceLine) map.removeLayer(distanceLine);
-  if (areaPolygon) map.removeLayer(areaPolygon);
-  if (manualMarker) map.removeLayer(manualMarker);
-
-  distancePoints = [];
-  areaPoints = [];
-  manualMarker = null;
-
-  document.getElementById('distanceDisplay').style.display = 'none';
-  document.getElementById('areaDisplay').style.display = 'none';
-
-  window.distanceMode = false;
-  window.areaMode = false;
-
-  document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
-  document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
-}
-
-function clearOtherTools(currentTool = '') {
-  if (currentTool !== 'distance') endDistance();
-  if (currentTool !== 'area') endArea();
-}
-  
+  // تهيئة الخريطة
   function initMap() {
     // إنشاء الخريطة
     map = L.map('map').setView([26.155, 32.716], 9); // موقع قنا
@@ -444,53 +348,255 @@ function clearOtherTools(currentTool = '') {
       minZoom: 0
     }).addTo(map);
 
+    // إضافة العلامات للفرص الاستثمارية
     opportunities.forEach(opportunity => {
       const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
       marker.options.data = opportunity;
       marker.bindPopup(`
-        <b>${opportunity.name}</b><br>
-        القطاع: ${opportunity.sector}<br>
-        المساحة: ${opportunity.area}<br>
-        <button class="btn btn-primary btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
-          <i class="bi bi-heart"></i> المفضلة
-        </button>
+        <div style="text-align: right;">
+          <b>${opportunity.name}</b><br>
+          القطاع: ${opportunity.sector}<br>
+          المنطقة: ${opportunity.region}<br>
+          المساحة: ${opportunity.area}<br>
+          الحالة: ${opportunity.status}<br>
+          <button class="btn btn-primary btn-sm mt-2" onclick="saveToFavorites(${opportunity.id})">
+            <i class="bi bi-heart"></i> المفضلة
+          </button>
+        </div>
       `);
       markers.push(marker);
     });
   }
 
-  // دالة قياس المسافات
-  function toggleMeasuring() {
-    measuring = !measuring;
-    const measureBtn = document.getElementById('measureBtn');
-    const distanceDisplay = document.getElementById('distanceDisplay');
-
-    if (measuring) {
-      measureBtn.innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
-      polyline = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
-      distanceDisplay.style.display = 'block';
-      map.on('click', addPoint);
+  // وظائف قياس المسافة
+  function toggleDistance() {
+    clearOtherTools('distance');
+    if (!window.distanceMode) {
+      window.distanceMode = true;
+      document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-stop-circle"></i> إنهاء القياس';
+      distancePoints = [];
+      distanceLine = L.polyline([], { color: 'red', weight: 3 }).addTo(map);
+      showTooltip("اضغط على الخريطة لتحديد نقاط القياس");
+      map.on('click', addDistancePoint);
     } else {
-      measureBtn.innerHTML = '<i class="bi bi-rulers"></i> بدء القياس';
-      map.off('click', addPoint);
-      if (polyline) map.removeLayer(polyline);
-      polyline = null;
-      distanceDisplay.style.display = 'none';
-      totalDistance = 0;
+      endDistance();
     }
   }
 
-  function addPoint(e) {
-    const latlngs = polyline.getLatLngs();
+  function addDistancePoint(e) {
+    const latlngs = distanceLine.getLatLngs();
     latlngs.push(e.latlng);
-    polyline.setLatLngs(latlngs);
-    if (latlngs.length > 1) {
-      const lastPoint = latlngs[latlngs.length - 2];
-      const distance = map.distance(lastPoint, e.latlng);
-      totalDistance += distance;
-      document.getElementById('distanceDisplay').innerText =
-        'المسافة الكلية: ' + totalDistance.toFixed(2) + ' متر';
+    distanceLine.setLatLngs(latlngs);
+
+    if (latlngs.length === 1) {
+      L.circleMarker(e.latlng, { color: 'green', radius: 5 }).addTo(map).bindPopup("نقطة بداية").openPopup();
+    } else {
+      L.circleMarker(e.latlng, { color: 'red', radius: 5 }).addTo(map);
     }
+
+    if (latlngs.length > 1) {
+      let total = 0;
+      for (let i = 1; i < latlngs.length; i++) {
+        total += map.distance(latlngs[i - 1], latlngs[i]);
+      }
+      const display = document.getElementById('distanceDisplay');
+      if (total >= 1000) {
+        display.innerText = `المسافة الكلية: ${(total / 1000).toFixed(2)} كم`;
+      } else {
+        display.innerText = `المسافة الكلية: ${total.toFixed(2)} متر`;
+      }
+      display.style.display = 'block';
+    }
+  }
+
+  function endDistance() {
+    window.distanceMode = false;
+    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
+    map.off('click', addDistancePoint);
+    document.getElementById('distanceDisplay').style.display = 'none';
+  }
+
+  // وظائف قياس المساحة
+  function toggleArea() {
+    clearOtherTools('area');
+    if (!window.areaMode) {
+      window.areaMode = true;
+      document.getElementById('areaBtn').innerHTML = '<i class="bi bi-check-circle"></i> إنهاء القياس';
+      areaPoints = [];
+      showTooltip("اضغط لرسم رؤوس المضلع، ثم اضغط مجدداً لإنهاء القياس");
+      map.on('click', addAreaPoint);
+    } else {
+      endArea();
+    }
+  }
+
+  function addAreaPoint(e) {
+    areaPoints.push(e.latlng);
+    L.circleMarker(e.latlng, { color: 'orange', radius: 5 }).addTo(map);
+
+    if (areaPoints.length >= 3) {
+      if (areaPolygon) map.removeLayer(areaPolygon);
+      areaPolygon = L.polygon(areaPoints, {
+        color: 'green',
+        fillColor: 'blue',
+        fillOpacity: 0.2
+      }).addTo(map);
+
+      const area = L.GeometryUtil.geodesicArea(areaPoints);
+      const display = document.getElementById('areaDisplay');
+      if (area >= 1e6) {
+        display.innerText = `المساحة: ${(area / 1e6).toFixed(2)} كم²`;
+      } else {
+        display.innerText = `المساحة: ${Math.round(area)} م²`;
+      }
+      display.style.display = 'block';
+    }
+  }
+
+  function endArea() {
+    window.areaMode = false;
+    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
+    map.off('click', addAreaPoint);
+    document.getElementById('areaDisplay').style.display = 'none';
+  }
+
+  // وظائف الإحداثيات اليدوية
+  function openCoordinateModal() {
+    clearOtherTools();
+    const modal = document.getElementById('coordinateModal');
+    modal.classList.add('show');
+    document.getElementById('latInput').value = '';
+    document.getElementById('lngInput').value = '';
+    document.getElementById('errorText').style.display = 'none';
+    
+    // تركيز على الحقل الأول
+    setTimeout(() => {
+      document.getElementById('latInput').focus();
+    }, 100);
+  }
+
+  function closeCoordinateModal() {
+    const modal = document.getElementById('coordinateModal');
+    modal.classList.remove('show');
+    document.getElementById('errorText').style.display = 'none';
+  }
+
+  function addManualMarker() {
+    const latValue = document.getElementById('latInput').value.trim();
+    const lngValue = document.getElementById('lngInput').value.trim();
+    const error = document.getElementById('errorText');
+
+    // التحقق من وجود قيم
+    if (!latValue || !lngValue) {
+      error.innerText = "يرجى إدخال كلا من خط العرض وخط الطول";
+      error.style.display = 'block';
+      return;
+    }
+
+    const lat = parseFloat(latValue);
+    const lng = parseFloat(lngValue);
+
+    // التحقق من صحة القيم
+    if (isNaN(lat) || isNaN(lng)) {
+      error.innerText = "يرجى إدخال أرقام صحيحة فقط";
+      error.style.display = 'block';
+      return;
+    }
+
+    // التحقق من النطاق الصحيح للإحداثيات
+    if (lat < -90 || lat > 90) {
+      error.innerText = "خط العرض يجب أن يكون بين -90 و 90";
+      error.style.display = 'block';
+      return;
+    }
+
+    if (lng < -180 || lng > 180) {
+      error.innerText = "خط الطول يجب أن يكون بين -180 و 180";
+      error.style.display = 'block';
+      return;
+    }
+
+    // إزالة العلامة السابقة إن وجدت
+    if (manualMarker) {
+      map.removeLayer(manualMarker);
+    }
+
+    // إضافة العلامة الجديدة
+    manualMarker = L.marker([lat, lng], {
+      icon: L.icon({
+        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      })
+    }).addTo(map);
+
+    // إضافة نافذة منبثقة
+    manualMarker.bindPopup(`
+      <div style="text-align: right;">
+        <b>نقطة مُدخلة يدويًا</b><br>
+        خط العرض: ${lat.toFixed(6)}<br>
+        خط الطول: ${lng.toFixed(6)}
+      </div>
+    `);
+
+    // الانتقال إلى الموقع وفتح النافذة المنبثقة
+    map.setView([lat, lng], 15);
+    setTimeout(() => {
+      manualMarker.openPopup();
+    }, 500);
+
+    // إغلاق المودال وإظهار رسالة نجاح
+    closeCoordinateModal();
+    showTooltip("تم إضافة النقطة بنجاح!");
+  }
+
+  // مسح جميع الأدوات
+  function clearAll() {
+    // مسح خطوط القياس
+    if (distanceLine) map.removeLayer(distanceLine);
+    if (areaPolygon) map.removeLayer(areaPolygon);
+    
+    // مسح النقطة اليدوية
+    if (manualMarker) map.removeLayer(manualMarker);
+
+    // مسح جميع العلامات المؤقتة
+    map.eachLayer(function(layer) {
+      if (layer instanceof L.CircleMarker) {
+        map.removeLayer(layer);
+      }
+    });
+
+    // إعادة تعيين المتغيرات
+    distancePoints = [];
+    areaPoints = [];
+    distanceLine = null;
+    areaPolygon = null;
+    manualMarker = null;
+
+    // إخفاء النتائج
+    document.getElementById('distanceDisplay').style.display = 'none';
+    document.getElementById('areaDisplay').style.display = 'none';
+
+    // إعادة تعيين الأزرار
+    window.distanceMode = false;
+    window.areaMode = false;
+
+    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i> قياس المسافة';
+    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i> قياس المساحة';
+
+    // إيقاف جميع الأحداث
+    map.off('click', addDistancePoint);
+    map.off('click', addAreaPoint);
+
+    showTooltip("تم مسح جميع البيانات");
+  }
+
+  function clearOtherTools(currentTool = '') {
+    if (currentTool !== 'distance') endDistance();
+    if (currentTool !== 'area') endArea();
   }
 
   // الفلاتر
@@ -507,8 +613,12 @@ function clearOtherTools(currentTool = '') {
       if (region && data.region !== region) show = false;
       if (status && data.status !== status) show = false;
       if (search && !data.name.toLowerCase().includes(search)) show = false;
-      if (show) marker.addTo(map);
-      else map.removeLayer(marker);
+      
+      if (show) {
+        marker.addTo(map);
+      } else {
+        map.removeLayer(marker);
+      }
     });
   }
 
@@ -521,15 +631,43 @@ function clearOtherTools(currentTool = '') {
   }
 
   function saveToFavorites(id) {
-    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    if (!favorites.includes(id)) {
-      favorites.push(id);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
+    // استخدام متغير في الذاكرة بدلاً من localStorage
+    if (!window.favorites) {
+      window.favorites = [];
+    }
+    
+    if (!window.favorites.includes(id)) {
+      window.favorites.push(id);
       alert("تم الحفظ في المفضلة");
     } else {
       alert("الفرصة موجودة بالفعل في المفضلة");
     }
   }
+
+  // إضافة مستمع لضغط Enter في حقول الإحداثيات
+  document.addEventListener('DOMContentLoaded', function() {
+    const latInput = document.getElementById('latInput');
+    const lngInput = document.getElementById('lngInput');
+    
+    function handleEnterKey(event) {
+      if (event.key === 'Enter') {
+        addManualMarker();
+      }
+    }
+    
+    latInput.addEventListener('keypress', handleEnterKey);
+    lngInput.addEventListener('keypress', handleEnterKey);
+    
+    // إغلاق المودال عند الضغط خارجها
+    document.getElementById('coordinateModal').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeCoordinateModal();
+      }
+    });
+    
+    // تهيئة الخريطة
+    initMap();
+  });
 </script>
 </body>
 </html>
