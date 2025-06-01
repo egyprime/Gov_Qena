@@ -867,27 +867,27 @@
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="reports.html" class="sidebar-link">
+      <a href="#" class="sidebar-link" onclick="openGuestModal()">
         <i class="bi bi-bar-chart"></i> التقارير والإحصائيات
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="news.html" class="sidebar-link">
+      <a href="#" class="sidebar-link" onclick="openGuestModal()">
         <i class="bi bi-newspaper"></i> أخبار الاستثمار
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="help.html" class="sidebar-link">
+      <a href="#" class="sidebar-link" onclick="openGuestModal()">
         <i class="bi bi-question-circle"></i> المساعدة والدعم
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="about.html" class="sidebar-link">
+      <a href="#" class="sidebar-link" onclick="openGuestModal()">
         <i class="bi bi-info-circle"></i> من نحن
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="#" class="sidebar-link" data-link="contact">
+      <a href="#" class="sidebar-link" onclick="openGuestModal()">
         <i class="bi bi-telephone"></i> اتصل بنا
       </a>
     </li>
@@ -1044,6 +1044,30 @@
         <button class="btn btn-lg btn-danger" onclick="clearAllFavorites()">
           <i class="bi bi-trash"></i> حذف الكل
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الزوار غير المسجلين -->
+<div id="guestModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title"><i class="bi bi-exclamation-triangle"></i> خدمة غير متاحة</h5>
+      <button type="button" class="btn-close" onclick="closeGuestModal()">&times;</button>
+    </div>
+    <div class="modal-body text-center py-4">
+      <div class="mb-4">
+        <i class="bi bi-person-x" style="font-size: 4rem; color: #e64a19;"></i>
+      </div>
+      <h4 class="mb-3">عذرًا، هذه الخدمة غير متاحة للزوار</h4>
+      <p class="text-muted">
+        نعتذر، هذه الخدمة متاحة فقط للأعضاء المسجلين في النظام.<br>
+        يرجى تسجيل الدخول أو إنشاء حساب جديد للوصول إلى كافة الميزات.
+      </p>
+      <div class="mt-4">
+        <button class="btn btn-primary me-2" onclick="closeGuestModal()">فهمت</button>
+        <button class="btn btn-outline-primary">تسجيل الدخول</button>
       </div>
     </div>
   </div>
@@ -1864,6 +1888,22 @@
   function closeContactModal() {
     const modal = document.getElementById('contactModal');
     if (modal) modal.remove();
+  }
+
+  // وظائف فتح وإغلاق نافذة الزوار
+  function openGuestModal() {
+    const modal = document.getElementById('guestModal');
+    modal.classList.add('show');
+    
+    // إغلاق القائمة الجانبية على الأجهزة الصغيرة
+    if (window.innerWidth <= 992) {
+      toggleSidebar();
+    }
+  }
+
+  function closeGuestModal() {
+    const modal = document.getElementById('guestModal');
+    modal.classList.remove('show');
   }
 
   // إضافة مستمع لضغط Enter في حقول الإحداثيات
