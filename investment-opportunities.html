@@ -731,6 +731,107 @@
       min-width: 25px;
       text-align: center;
     }
+    
+    /* أنماط قائمة المفضلة المنبثقة */
+    #favoritesModal {
+      z-index: 2001;
+    }
+    
+    .favorite-list {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    
+    .favorite-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+    
+    .favorite-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .favorite-info {
+      flex-grow: 1;
+    }
+    
+    .favorite-name {
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    
+    .favorite-details {
+      display: flex;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .favorite-details span {
+      background: #f0f0f0;
+      padding: 3px 8px;
+      border-radius: 15px;
+    }
+    
+    .favorite-actions {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .favorite-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    
+    .favorite-btn:hover {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .no-favorites {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+    
+    .no-favorites i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #e0e0e0;
+    }
+    
+    .favorites-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .favorites-count {
+      background: var(--primary);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -760,8 +861,9 @@
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="favorites.html" class="sidebar-link">
+      <a href="#" class="sidebar-link" data-link="favorites">
         <i class="bi bi-heart"></i> المفضلة
+        <span id="favoritesCounter" class="badge bg-danger ms-2">0</span>
       </a>
     </li>
     <li class="sidebar-item">
@@ -918,6 +1020,35 @@
   </div>
 </div>
 
+<!-- Favorites Modal -->
+<div id="favoritesModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title"><i class="bi bi-heart-fill"></i> الفرص المفضلة</h5>
+      <button type="button" class="btn-close" onclick="closeFavoritesModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="favorites-header">
+        <div>
+          <i class="bi bi-bookmark-heart"></i> قائمة الفرص المفضلة
+        </div>
+        <div class="favorites-count" id="favoritesCount">0 عنصر</div>
+      </div>
+      
+      <div class="favorite-list" id="favoritesList">
+        <!-- سيتم ملء القائمة ديناميكياً من خلال جافاسكريبت -->
+      </div>
+      
+      <div class="mt-4 d-flex justify-content-between">
+        <button class="btn btn-lg btn-outline-secondary" onclick="closeFavoritesModal()">إغلاق</button>
+        <button class="btn btn-lg btn-danger" onclick="clearAllFavorites()">
+          <i class="bi bi-trash"></i> حذف الكل
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="map"></div>
 
 <!-- Scripts -->
@@ -947,7 +1078,8 @@
       sector: "صناعي",
       region: "قنا",
       area: "1000 م²",
-      status: "متاحة"
+      status: "متاحة",
+      description: "موقع صناعي ممتاز بالقرب من الطريق السريع، يحتوي على بنية تحتية متكاملة للصناعات المتوسطة والخفيفة."
     },
     {
       id: 2,
@@ -957,7 +1089,8 @@
       sector: "زراعي",
       region: "قفط",
       area: "5000 م²",
-      status: "قيد الدراسة"
+      status: "قيد الدراسة",
+      description: "أرض زراعية خصبة على ضفاف النيل، مناسبة لمشاريع الاستزراع المائي والزراعات المحمية."
     },
     {
       id: 3,
@@ -967,7 +1100,8 @@
       sector: "خدماتي",
       region: "نجع حمادي",
       area: "800 م²",
-      status: "متاحة"
+      status: "متاحة",
+      description: "مكان مميز في وسط المدينة لإنشاء مجمع تجاري أو مركز خدمات متكامل، يقع في منطقة تجارية نشطة."
     },
     {
       id: 4,
@@ -977,7 +1111,8 @@
       sector: "صناعي",
       region: "قنا",
       area: "2500 م²",
-      status: "متاحة"
+      status: "متاحة",
+      description: "منطقة صناعية مجهزة بالكامل للصناعات الثقيلة، تتوفر بها خدمات الكهرباء والمياه والغاز."
     },
     {
       id: 5,
@@ -987,7 +1122,8 @@
       sector: "زراعي",
       region: "دشنا",
       area: "7000 م²",
-      status: "قيد الدراسة"
+      status: "قيد الدراسة",
+      description: "مزرعة متكاملة للاستزراع السمكي والزراعة العضوية، تتوفر بها مصادر مياه طبيعية."
     }
   ];
 
@@ -1089,6 +1225,9 @@
               <i class="bi ${opportunity.status === 'متاحة' ? 'bi-check-circle' : 'bi-clock'}"></i> ${opportunity.status}
             </span>
           </div>
+          <div style="margin: 10px 0; font-size: 0.9rem; color: #444;">
+            ${opportunity.description}
+          </div>
           <button class="btn btn-primary btn-sm w-100" onclick="saveToFavorites(${opportunity.id})" style="border-radius: 10px;">
             <i class="bi bi-heart"></i> حفظ في المفضلة
           </button>
@@ -1112,6 +1251,9 @@
       
       markers.push(marker);
     });
+    
+    // تحديث عدد المفضلة عند التحميل
+    updateFavoritesCounter();
   }
 
   // وظائف قياس المسافة
@@ -1498,18 +1640,132 @@
     filterMarkers();
   }
 
+  // وظائف المفضلة
   function saveToFavorites(id) {
-    // استخدام متغير في الذاكرة بدلاً من localStorage
-    if (!window.favorites) {
-      window.favorites = [];
-    }
+    // الحصول على المفضلة من localStorage
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     
-    if (!window.favorites.includes(id)) {
-      window.favorites.push(id);
+    // إضافة الفرصة إذا لم تكن موجودة
+    if (!favorites.includes(id)) {
+      favorites.push(id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      updateFavoritesCounter();
       showTooltip("تم الحفظ في المفضلة بنجاح!", "success");
     } else {
       showTooltip("الفرصة موجودة بالفعل في المفضلة", "info");
     }
+  }
+  
+  function removeFromFavorites(id) {
+    // الحصول على المفضلة من localStorage
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    
+    // إزالة الفرصة من المفضلة
+    favorites = favorites.filter(item => item !== id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    
+    // تحديث العداد والقائمة
+    updateFavoritesCounter();
+    renderFavoritesList();
+    
+    showTooltip("تم إزالة الفرصة من المفضلة", "success");
+  }
+  
+  function clearAllFavorites() {
+    localStorage.removeItem('favorites');
+    updateFavoritesCounter();
+    renderFavoritesList();
+    showTooltip("تم حذف جميع الفرص من المفضلة", "success");
+  }
+  
+  function updateFavoritesCounter() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const counter = document.getElementById('favoritesCounter');
+    counter.textContent = favorites.length;
+    
+    // تحديث عدد المفضلة في عنوان النافذة
+    const countElement = document.getElementById('favoritesCount');
+    if (countElement) {
+      countElement.textContent = `${favorites.length} عنصر${favorites.length === 1 ? '' : 'اً'}`;
+    }
+  }
+  
+  function renderFavoritesList() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const container = document.getElementById('favoritesList');
+    
+    // مسح المحتوى الحالي
+    container.innerHTML = '';
+    
+    if (favorites.length === 0) {
+      // عرض رسالة عدم وجود مفضلة
+      container.innerHTML = `
+        <div class="no-favorites">
+          <i class="bi bi-heart"></i>
+          <h4>لا توجد فرص في المفضلة</h4>
+          <p>اضغط على زر "حفظ في المفضلة" في أي فرصة لإضافتها هنا</p>
+        </div>
+      `;
+      return;
+    }
+    
+    // عرض قائمة المفضلة
+    favorites.forEach(id => {
+      const opportunity = opportunities.find(op => op.id === id);
+      if (opportunity) {
+        const item = document.createElement('div');
+        item.className = 'favorite-item';
+        item.innerHTML = `
+          <div class="favorite-info">
+            <div class="favorite-name">${opportunity.name}</div>
+            <div class="favorite-details">
+              <span><i class="bi bi-building"></i> ${opportunity.sector}</span>
+              <span><i class="bi bi-geo-alt"></i> ${opportunity.region}</span>
+              <span><i class="bi bi-arrows-fullscreen"></i> ${opportunity.area}</span>
+            </div>
+          </div>
+          <div class="favorite-actions">
+            <button class="favorite-btn" onclick="showFavoriteOnMap(${opportunity.id})" title="عرض على الخريطة">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="favorite-btn" onclick="removeFromFavorites(${opportunity.id})" title="حذف من المفضلة">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      }
+    });
+  }
+  
+  function showFavoriteOnMap(id) {
+    const opportunity = opportunities.find(op => op.id === id);
+    if (opportunity) {
+      // إغلاق نافذة المفضلة
+      closeFavoritesModal();
+      
+      // الانتقال إلى موقع الفرصة على الخريطة
+      map.setView([opportunity.lat, opportunity.lng], 14);
+      
+      // إيجاد العلامة وفتح نافذتها المنبثقة
+      const marker = markers.find(m => m.options.data.id === id);
+      if (marker) {
+        setTimeout(() => {
+          marker.openPopup();
+        }, 500);
+      }
+    }
+  }
+  
+  function openFavoritesModal() {
+    renderFavoritesList();
+    const modal = document.getElementById('favoritesModal');
+    modal.classList.add('show');
+  }
+  
+  function closeFavoritesModal() {
+    const modal = document.getElementById('favoritesModal');
+    modal.classList.remove('show');
   }
 
   // وظائف القائمة الجانبية
@@ -1533,6 +1789,9 @@
     if (linkType === 'contact') {
       event.preventDefault();
       showContactModal();
+    } else if (linkType === 'favorites') {
+      event.preventDefault();
+      openFavoritesModal();
     } else if (this.getAttribute('href') !== '#') {
       window.location.href = this.getAttribute('href');
     }
