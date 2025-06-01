@@ -1,106 +1,50 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>العودة للصفحة الرئيسية</title>
-  
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معرض الصور - محافظة قنا</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
     
     body {
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
       padding: 20px;
-      background-attachment: fixed;
+      color: white;
+      overflow-x: hidden;
     }
     
-    .return-container {
-      text-align: center;
-      max-width: 600px;
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .container {
       width: 100%;
+      max-width: 1200px;
+      text-align: center;
       padding: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 1s ease-out;
-    }
-    
-    .return-icon {
-      font-size: 5rem;
-      margin-bottom: 30px;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-      animation: pulse 2s infinite;
-    }
-    
-    .page-title {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    
-    .return-message {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      line-height: 1.8;
-      color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .return-button {
-      display: inline-block;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 15px 50px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1.2rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      margin: 20px 0;
       position: relative;
       overflow: hidden;
-    }
-    
-    .return-button i {
-      margin-left: 10px;
-      transition: transform 0.3s ease;
-    }
-    
-    .return-button:hover {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
-      border-color: rgba(255, 255, 255, 0.6);
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      color: white;
-    }
-    
-    .return-button:hover i {
-      transform: translateX(-5px);
-    }
-    
-    .current-page {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.7);
+      animation: fadeIn 1.5s ease-out;
     }
     
     @keyframes fadeIn {
@@ -108,127 +52,323 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.05); opacity: 1; }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      z-index: -1;
     }
     
-    /* Developer signature */
-    .developer-signature {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 25px;
-      font-size: 0.85rem;
-      z-index: 1000;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
-      max-width: 280px;
+    .header {
+      margin-bottom: 40px;
     }
     
-    .dev-info {
+    .header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #ffcc00, transparent);
+      border-radius: 50%;
+    }
+    
+    .header p {
+      font-size: 1.4rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .image-wrapper {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        0 0 0 15px rgba(255, 215, 0, 0.1),
+        0 0 0 30px rgba(178, 34, 34, 0.05);
+      transform: perspective(1000px) rotateY(0deg);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateY(0deg); }
+      50% { transform: translateY(-20px) rotateY(5deg); }
+    }
+    
+    .image-wrapper:hover {
+      transform: perspective(1000px) rotateY(5deg);
+      box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.8),
+        0 0 0 15px rgba(255, 215, 0, 0.2),
+        0 0 0 30px rgba(178, 34, 34, 0.1);
+    }
+    
+    .main-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .image-wrapper:hover .main-image {
+      transform: scale(1.03);
+    }
+    
+    .image-caption {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      font-size: 1.4rem;
+      border-top: 2px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .gallery-controls {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+      flex-wrap: wrap;
     }
     
-    .dev-icon {
-      width: 30px;
-      height: 30px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+    .control-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .control-btn:hover {
+      background: rgba(255, 215, 0, 0.3);
+      transform: scale(1.1);
+      border-color: #ffcc00;
+    }
+    
+    .info-box {
+      background: rgba(0, 0, 0, 0.5);
+      max-width: 700px;
+      margin: 40px auto 0;
+      padding: 25px;
+      border-radius: 15px;
+      border-left: 4px solid #ffcc00;
+      text-align: right;
+      position: relative;
+    }
+    
+    .info-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #ffcc00;
+    }
+    
+    .info-box p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+    
+    .info-box::after {
+      content: '';
+      position: absolute;
+      top: -15px;
+      right: 30px;
+      width: 30px;
+      height: 30px;
+      background: #ffcc00;
+      border-radius: 50%;
+    }
+    
+    .decoration {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      animation: floatParticle linear infinite;
+    }
+    
+    @keyframes floatParticle {
+      to { transform: translateY(-100vh) rotate(360deg); }
     }
     
     @media (max-width: 768px) {
-      .return-container {
-        padding: 30px 20px;
+      .container {
+        padding: 25px 15px;
       }
       
-      .return-icon {
-        font-size: 4rem;
+      .header h1 {
+        font-size: 2.5rem;
       }
       
-      .page-title {
-        font-size: 2rem;
-      }
-      
-      .return-button {
-        padding: 12px 40px;
+      .header p {
         font-size: 1.1rem;
+      }
+      
+      .image-caption {
+        font-size: 1.1rem;
+        padding: 15px;
+      }
+      
+      .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+      
+      .info-box h3 {
+        font-size: 1.5rem;
+      }
+      
+      .info-box p {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="return-container">
-    <div class="return-icon">
-      <i class="bi bi-house-door"></i>
+  <div class="container">
+    <div class="decoration" id="decoration"></div>
+    
+    <div class="header">
+      <h1><i class="fas fa-camera"></i> المناطق الصناعية بمحافظة قنا</h1>
+      <p>صورة توضح المناطق الصناعية بمحافظة قنا</p>
     </div>
     
-    <h1 class="page-title">العودة للصفحة الرئيسية</h1>
-    
-    <p class="return-message">
-      هذه صفحة غير متاحة الان <span id="current-page-name">شكرا</span>.<br>
-      يمكنك استخدام الزر أدناه للعودة إلى القائمة الرئيسية لمحافظة قنا.
-    </p>
-    
-    <a href="index.html" class="return-button">
-      <i class="bi bi-arrow-right"></i> العودة للرئيسية
-    </a>
-    
-    <div class="current-page">
-      الصفحة الحالية: <span id="page-name-display">غير متاح</span>
+    <div class="image-wrapper">
+      <img src="https://i.ibb.co/LDcn2yFP/image.jpg" alt="صورة محافظة قنا" class="main-image">
+      <div class="image-caption">
+        <i class="fas fa-landmark"></i> محافظة قنا - جوهرة الصعيد
+      </div>
     </div>
-  </div>
-  
-  <!-- توقيع المطور -->
-  <div class="developer-signature">
-    <div class="dev-info">
-      <div class="dev-icon">
-        <i class="bi bi-code-slash"></i>
+    
+    <div class="gallery-controls">
+      <div class="control-btn" title="تكبير الصورة">
+        <i class="fas fa-search-plus"></i>
       </div>
-      <div class="dev-details">
-        <div class="dev-name">م. علي علام</div>
-        <div class="dev-contact">01025300992</div>
+      <div class="control-btn" title="تصغير الصورة">
+        <i class="fas fa-search-minus"></i>
       </div>
+      <div class="control-btn" title="تدوير الصورة">
+        <i class="fas fa-sync-alt"></i>
+      </div>
+      <div class="control-btn" title="تحميل الصورة">
+        <i class="fas fa-download"></i>
+      </div>
+      <div class="control-btn" title="مشاركة الصورة">
+        <i class="fas fa-share-alt"></i>
+      </div>
+    </div>
+    
+    <div class="info-box">
+      <h3><i class="fas fa-info-circle"></i> نبذة عن الصورة</h3>
+      <p>منظومة المناطق الصناعية بمحافظة قنا تشمل:
+• المنطقة الصناعية بالكلّاحين (قفط)
+• منطقة “هو” الصناعية (نجع حمادي)
+• المنطقة الصناعية بقنا الجديدة
+• المنطقة الصناعية بغرب قنا
+• المنطقة الحرة العامة بالكلّاحين
+• المنطقة الاستثمارية بجبل الجير</p>
     </div>
   </div>
   
   <script>
-    // تحديد اسم الصفحة الحالية من عنوان URL
-    const pageNames = {
-      'investment-opportunities.html': 'الفرص الاستثمارية',
-      'government-services.html': 'الخدمات الحكومية',
-      'public-facilities.html': 'المرافق العامة',
-      'transportation.html': 'النقل والمواصلات',
-      'tourism.html': 'السياحة والآثار',
-      'reports.html': 'التقارير والإحصائيات'
-    };
-    
-    // الحصول على اسم الملف الحالي
-    const currentPage = window.location.pathname.split('/').pop();
-    
-    // عرض اسم الصفحة الحالية
-    if (pageNames[currentPage]) {
-      document.getElementById('current-page-name').textContent = pageNames[currentPage];
-      document.getElementById('page-name-display').textContent = pageNames[currentPage];
+    // إنشاء الجسيمات المتحركة للخلفية
+    function createParticles() {
+      const container = document.getElementById('decoration');
+      const colors = ['rgba(255, 255, 255, 0.3)', 'rgba(255, 215, 0, 0.3)', 'rgba(178, 34, 34, 0.3)'];
+      
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // أحجام عشوائية
+        const size = Math.random() * 20 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // مواقع عشوائية
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // ألوان عشوائية
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // مدة حركة عشوائية
+        const duration = Math.random() * 20 + 10;
+        particle.style.animation = `floatParticle ${duration}s linear infinite`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(particle);
+      }
     }
     
-    // إضافة مؤثرات للزر عند التحميل
-    document.querySelector('.return-button').addEventListener('mouseover', function() {
-      this.style.transform = 'translateY(-5px)';
+    // تكبير وتصغير الصورة
+    let currentScale = 1;
+    document.querySelectorAll('.control-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const img = document.querySelector('.main-image');
+        
+        if (this.querySelector('.fa-search-plus')) {
+          currentScale += 0.1;
+          img.style.transform = `scale(${currentScale})`;
+        } 
+        else if (this.querySelector('.fa-search-minus')) {
+          currentScale = Math.max(0.5, currentScale - 0.1);
+          img.style.transform = `scale(${currentScale})`;
+        } 
+        else if (this.querySelector('.fa-sync-alt')) {
+          const rotation = Math.floor(Math.random() * 360);
+          img.style.transform = `rotate(${rotation}deg) scale(${currentScale})`;
+        } 
+        else if (this.querySelector('.fa-download')) {
+          alert('سيتم تحميل الصورة قريباً...');
+        } 
+        else if (this.querySelector('.fa-share-alt')) {
+          alert('خيارات المشاركة ستظهر هنا...');
+        }
+      });
     });
     
-    document.querySelector('.return-button').addEventListener('mouseout', function() {
-      this.style.transform = 'translateY(0)';
+    // تهيئة الصفحة عند التحميل
+    window.addEventListener('load', function() {
+      createParticles();
+      
+      // تأثير ظهور تدريجي
+      document.querySelector('.container').style.animation = 'fadeIn 1.5s ease-out';
     });
   </script>
 </body>
