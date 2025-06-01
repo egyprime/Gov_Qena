@@ -226,9 +226,9 @@
       to { transform: translateY(-100vh) rotate(360deg); }
     }
     
-    /* زر الصفحة الرئيسية الجديد */
+    /* زر الصفحة الرئيسية الجديد - تم تحسينه */
     .home-button {
-      position: absolute;
+      position: fixed; /* تغيير من absolute إلى fixed ليبقى ثابتًا */
       top: 20px;
       left: 20px;
       background: rgba(255, 255, 255, 0.15);
@@ -245,11 +245,83 @@
       transition: all 0.3s ease;
       backdrop-filter: blur(5px);
       text-decoration: none;
-      z-index: 10;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
     
     .home-button:hover {
-      background: rgba(255, 215, 0, 0.3);
+      background: rgba(255, 215, 0, 0.5);
+      transform: scale(1.1);
+      border-color: #ffcc00;
+      color: #ffcc00;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* زر الرجوع للصفحة السابقة */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .back-button:hover {
+      background: rgba(70, 130, 180, 0.5); /* لون أزرق */
+      transform: scale(1.1);
+      border-color: #4682b4;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* شريط التنقل */
+    .navbar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px 25px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .nav-btn:hover {
+      background: rgba(255, 215, 0, 0.5);
       transform: scale(1.1);
       border-color: #ffcc00;
       color: #ffcc00;
@@ -287,21 +359,36 @@
         font-size: 1rem;
       }
       
-      .home-button {
+      .home-button, .back-button {
         width: 50px;
         height: 50px;
         font-size: 1.5rem;
+      }
+      
+      .navbar {
+        padding: 10px 15px;
+      }
+      
+      .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
       }
     }
   </style>
 </head>
 <body>
+  <!-- زر الصفحة الرئيسية - تم تحسينه -->
+  <a href="index.html" class="home-button" title="العودة إلى الصفحة الرئيسية">
+    <i class="fas fa-home"></i>
+  </a>
+  
+  <!-- زر الرجوع للصفحة السابقة -->
+  <div class="back-button" id="backButton" title="العودة للصفحة السابقة">
+    <i class="fas fa-arrow-left"></i>
+  </div>
+  
   <div class="container">
-    <!-- زر الصفحة الرئيسية المضاف -->
-    <a href="#" class="home-button" title="العودة إلى الصفحة الرئيسية">
-      <i class="fas fa-home"></i>
-    </a>
-    
     <div class="decoration" id="decoration"></div>
     
     <div class="header">
@@ -344,6 +431,22 @@
 • المنطقة الحرة العامة بالكلّاحين
 • المنطقة الاستثمارية بجبل الجير</p>
     </div>
+  </div>
+  
+  <!-- شريط التنقل السفلي -->
+  <div class="navbar">
+    <a href="index.html" class="nav-btn" title="الصفحة الرئيسية">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="gallery.html" class="nav-btn" title="معرض الصور">
+      <i class="fas fa-images"></i>
+    </a>
+    <a href="about.html" class="nav-btn" title="عن الموقع">
+      <i class="fas fa-info-circle"></i>
+    </a>
+    <a href="contact.html" class="nav-btn" title="اتصل بنا">
+      <i class="fas fa-envelope"></i>
+    </a>
   </div>
   
   <script>
@@ -411,12 +514,9 @@
       // تأثير ظهور تدريجي
       document.querySelector('.container').style.animation = 'fadeIn 1.5s ease-out';
       
-      // إضافة تفاعل لزر الصفحة الرئيسية
-      document.querySelector('.home-button').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('سيتم نقل إلى الصفحة الرئيسية...');
-        // في التطبيق الفعلي، استخدم:
-        // window.location.href = "رابط الصفحة الرئيسية هنا";
+      // إضافة وظيفة لزر الرجوع
+      document.getElementById('backButton').addEventListener('click', function() {
+        history.back();
       });
     });
   </script>
