@@ -17,16 +17,6 @@
   <!-- Animate CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-  <!-- Developer Signature (Hidden in Source) -->
-  <!--
-    =================================================
-    تم تطوير هذا الموقع بواسطة:
-    المهندس علي علام
-    هاتف: 01025300992
-    تخصص: تطوير المواقع ونظم المعلومات الجغرافية
-    =================================================
-  -->
-
   <style>
     :root {
       --primary: #004d40;
@@ -288,63 +278,6 @@
     .card-5 .card-icon { background: var(--gradient-5); }
     .card-6 .card-icon { background: var(--gradient-6); }
 
-    /* توقيع المطور */
-    .developer-signature {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 25px;
-      font-size: 0.85rem;
-      z-index: 1000;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      max-width: 280px;
-    }
-
-    .developer-signature:hover {
-      background: rgba(0, 0, 0, 0.95);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-
-    .dev-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .dev-icon {
-      width: 30px;
-      height: 30px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-    }
-
-    .dev-details {
-      flex: 1;
-    }
-
-    .dev-name {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .dev-contact {
-      font-size: 0.75rem;
-      opacity: 0.8;
-      direction: ltr;
-      text-align: left;
-    }
-
     /* القسم السفلي */
     .footer-section {
       background: rgba(0, 0, 0, 0.2);
@@ -389,7 +322,7 @@
       color: white;
     }
 
-    /* قسم المطور في الفوتر */
+    /* قسم المطور */
     .developer-credit {
       margin-top: 2rem;
       padding-top: 1rem;
@@ -408,7 +341,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
+      gap: 5px;
       flex-wrap: wrap;
     }
 
@@ -473,13 +406,6 @@
         font-size: 2rem;
       }
 
-      .developer-signature {
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-        max-width: none;
-      }
-
       .credit-info {
         flex-direction: column;
         gap: 8px;
@@ -501,11 +427,6 @@
 
       .card-title {
         font-size: 1.2rem;
-      }
-
-      .developer-signature {
-        font-size: 0.8rem;
-        padding: 10px 15px;
       }
     }
 
@@ -648,19 +569,6 @@
   </div>
 </div>
 
-<!-- توقيع المطور (عائم) -->
-<div class="developer-signature" onclick="showDeveloperInfo()">
-  <div class="dev-info">
-    <div class="dev-icon">
-      <i class="bi bi-code-slash"></i>
-    </div>
-    <div class="dev-details">
-      <div class="dev-name">م. علي علام</div>
-      <div class="dev-contact">01025300992</div>
-    </div>
-  </div>
-</div>
-
 <!-- القسم السفلي -->
 <footer class="footer-section">
   <div class="footer-content">
@@ -687,11 +595,9 @@
     
     <!-- قسم المطور -->
     <div class="developer-credit">
-      <div class="credit-title">تم التطوير بواسطة</div>
+      <div class="credit-title">إعداد</div>
       <div class="credit-info">
-        <span><i class="bi bi-person-badge"></i> المهندس علي علام</span>
-        <span><i class="bi bi-telephone"></i> 01025300992</span>
-        <span><i class="bi bi-gear"></i> مطور نظم المعلومات الجغرافية</span>
+        <span><i class="bi bi-gear"></i> وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا</span>
       </div>
     </div>
     
@@ -735,71 +641,5 @@
     setTimeout(() => {
       window.location.href = pageName;
     }, 1500);
-  }
-  
-  // إضافة معلومات المطور إلى console
-  console.log(`
-  ═══════════════════════════════════════════════════════════════════════════════════════════════
-  ╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-  ║                                    معلومات المطور                                            ║
-  ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-  ║  الاسم: المهندس علي علام                                                                     ║
-  ║  التخصص: تطوير المواقع ونظم المعلومات الجغرافية                                              ║
-  ║  الهاتف: 01025300992                                                                         ║
-  ║  المشروع: النظام الجغرافي لمحافظة قنا                                                         ║
-  ║  التاريخ: ${new Date().toLocaleDateString('ar-EG')}                                                                          ║
-  ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
-  ═══════════════════════════════════════════════════════════════════════════════════════════════
-  `);
-
-  // دالة عرض معلومات المطور
-  function showDeveloperInfo() {
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      backdrop-filter: blur(5px);
-    `;
-    
-    modal.innerHTML = `
-      <div style="
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 20px;
-        text-align: center;
-        color: white;
-        max-width: 400px;
-        width: 90%;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      ">
-        <div style="font-size: 3rem; margin-bottom: 1rem;">
-          <i class="bi bi-person-circle"></i>
-        </div>
-        <h3 style="margin-bottom: 1rem; font-size: 1.8rem;">المهندس علي علام</h3>
-        <p style="margin-bottom: 1rem;"><i class="bi bi-phone"></i> 01025300992</p>
-        <p style="margin-bottom: 1.5rem;">تطوير المواقع ونظم المعلومات الجغرافية</p>
-        <button onclick="this.parentElement.parentElement.remove()" style="
-          background: rgba(255,255,255,0.2);
-          border: none;
-          padding: 10px 30px;
-          border-radius: 30px;
-          color: white;
-          font-weight: bold;
-          cursor: pointer;
-          transition: all 0.3s;
-        ">إغلاق</button>
-      </div>
-    `;
-    
-    document.body.appendChild(modal);
   }
 </script>
