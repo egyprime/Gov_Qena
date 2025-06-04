@@ -832,6 +832,96 @@
       border-radius: 20px;
       font-size: 0.9rem;
     }
+    
+    /* أنماط جديدة لعرض الصورة */
+    .opportunity-image {
+      width: 100%;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-bottom: 10px;
+      border: 2px solid #eee;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .opportunity-image:hover {
+      transform: scale(1.03);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* نافذة عرض الصورة المكبرة */
+    #imageModal {
+      z-index: 2002;
+      background: rgba(0, 0, 0, 0.9);
+    }
+    
+    .image-modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .image-modal-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+    
+    .image-modal-header {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+    }
+    
+    .image-modal-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      border-radius: 0 0 10px 10px;
+    }
+    
+    .image-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    
+    .image-nav:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .image-prev {
+      left: 15px;
+    }
+    
+    .image-next {
+      right: 15px;
+    }
   </style>
 </head>
 <body>
@@ -1073,6 +1163,26 @@
   </div>
 </div>
 
+<!-- نافذة عرض الصورة المكبرة -->
+<div id="imageModal" class="modal">
+  <div class="image-modal-content">
+    <div class="image-modal-header">
+      <button class="btn-close" onclick="closeImageModal()">&times;</button>
+    </div>
+    
+    <div class="image-nav image-prev" onclick="navigateImage(-1)">
+      <i class="bi bi-chevron-left"></i>
+    </div>
+    
+    <div class="image-nav image-next" onclick="navigateImage(1)">
+      <i class="bi bi-chevron-right"></i>
+    </div>
+    
+    <img id="expandedImg" alt="صورة الفرصة الاستثمارية">
+    <div class="image-modal-title" id="imageTitle"></div>
+  </div>
+</div>
+
 <div id="map"></div>
 
 <!-- Scripts -->
@@ -1091,6 +1201,10 @@
   let areaPolygon = null;
   let manualMarker = null;
   let areaLabel = null; // لتخزين نص مساحة المضلع
+  
+  // متغيرات لعرض الصور
+  let currentImageIndex = 0;
+  let imageGallery = [];
 
   // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
   const opportunities = [
@@ -1103,7 +1217,8 @@
       region: "قنا",
       area: "1000 م²",
       status: "متاحة",
-      description: "موقع صناعي ممتاز بالقرب من الطريق السريع، يحتوي على بنية تحتية متكاملة للصناعات المتوسطة والخفيفة."
+      description: "موقع صناعي ممتاز بالقرب من الطريق السريع، يحتوي على بنية تحتية متكاملة للصناعات المتوسطة والخفيفة.",
+      imageUrl: "https://via.placeholder.com/400x300?text=صورة+المشروع+الصناعي+1"
     },
     {
       id: 2,
@@ -1114,7 +1229,8 @@
       region: "قفط",
       area: "5000 م²",
       status: "قيد الدراسة",
-      description: "أرض زراعية خصبة على ضفاف النيل، مناسبة لمشاريع الاستزراع المائي والزراعات المحمية."
+      description: "أرض زراعية خصبة على ضفاف النيل، مناسبة لمشاريع الاستزراع المائي والزراعات المحمية.",
+      imageUrl: "https://via.placeholder.com/400x300?text=صورة+المشروع+الزراعي+1"
     },
     {
       id: 3,
@@ -1125,7 +1241,8 @@
       region: "نجع حمادي",
       area: "800 م²",
       status: "متاحة",
-      description: "مكان مميز في وسط المدينة لإنشاء مجمع تجاري أو مركز خدمات متكامل، يقع في منطقة تجارية نشطة."
+      description: "مكان مميز في وسط المدينة لإنشاء مجمع تجاري أو مركز خدمات متكامل، يقع في منطقة تجارية نشطة.",
+      imageUrl: "https://via.placeholder.com/400x300?text=صورة+المشروع+الخدمي+1"
     },
     {
       id: 4,
@@ -1136,7 +1253,8 @@
       region: "قنا",
       area: "2500 م²",
       status: "متاحة",
-      description: "منطقة صناعية مجهزة بالكامل للصناعات الثقيلة، تتوفر بها خدمات الكهرباء والمياه والغاز."
+      description: "منطقة صناعية مجهزة بالكامل للصناعات الثقيلة، تتوفر بها خدمات الكهرباء والمياه والغاز.",
+      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
     },
     {
       id: 5,
@@ -1147,7 +1265,8 @@
       region: "دشنا",
       area: "7000 م²",
       status: "قيد الدراسة",
-      description: "مزرعة متكاملة للاستزراع السمكي والزراعة العضوية، تتوفر بها مصادر مياه طبيعية."
+      description: "مزرعة متكاملة للاستزراع السمكي والزراعة العضوية، تتوفر بها مصادر مياه طبيعية.",
+      imageUrl: "https://via.placeholder.com/400x300?text=صورة+المشروع+الزراعي+2"
     }
   ];
 
@@ -1230,11 +1349,23 @@
       marker.options.data = opportunity;
       
       // تصميم نافذة المعلومات
+      let imageHtml = '';
+      if (opportunity.imageUrl) {
+        imageHtml = `
+          <div class="mb-2 text-center">
+            <img src="${opportunity.imageUrl}" class="opportunity-image" 
+                 alt="صورة ${opportunity.name}"
+                 onclick="openImageModal('${opportunity.imageUrl}', '${opportunity.name}')">
+          </div>
+        `;
+      }
+      
       const popupContent = `
         <div style="text-align: right; min-width: 250px;">
           <div style="background: linear-gradient(135deg, #004d40, #00796b); color: white; padding: 10px; border-radius: 10px 10px 0 0; margin: -15px -15px 10px -15px;">
             <h4 style="margin: 0; font-weight: bold;">${opportunity.name}</h4>
           </div>
+          ${imageHtml}
           <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0;">
             <span style="background: #e3f2fd; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
               <i class="bi bi-building"></i> ${opportunity.sector}
@@ -1278,6 +1409,16 @@
     
     // تحديث عدد المفضلة عند التحميل
     updateFavoritesCounter();
+    
+    // تهيئة معرض الصور
+    opportunities.forEach(opportunity => {
+      if (opportunity.imageUrl) {
+        imageGallery.push({
+          url: opportunity.imageUrl,
+          name: opportunity.name
+        });
+      }
+    });
   }
 
   // وظائف قياس المسافة
@@ -1906,6 +2047,46 @@
     modal.classList.remove('show');
   }
 
+  // وظائف عرض الصورة
+  function openImageModal(imageUrl, imageName) {
+    // العثور على فهرس الصورة في المعرض
+    currentImageIndex = imageGallery.findIndex(img => img.url === imageUrl);
+    
+    if (currentImageIndex === -1) {
+      currentImageIndex = 0;
+    }
+    
+    // تحديث الصورة وعنوانها
+    document.getElementById('expandedImg').src = imageGallery[currentImageIndex].url;
+    document.getElementById('imageTitle').textContent = imageGallery[currentImageIndex].name;
+    
+    // إظهار النافذة المنبثقة
+    document.getElementById('imageModal').classList.add('show');
+    
+    // إخفاء شريط التمرير للجسم
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageModal() {
+    document.getElementById('imageModal').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  function navigateImage(direction) {
+    currentImageIndex += direction;
+    
+    // التكرار في المعرض
+    if (currentImageIndex < 0) {
+      currentImageIndex = imageGallery.length - 1;
+    } else if (currentImageIndex >= imageGallery.length) {
+      currentImageIndex = 0;
+    }
+    
+    // تحديث الصورة وعنوانها
+    document.getElementById('expandedImg').src = imageGallery[currentImageIndex].url;
+    document.getElementById('imageTitle').textContent = imageGallery[currentImageIndex].name;
+  }
+
   // إضافة مستمع لضغط Enter في حقول الإحداثيات
   document.addEventListener('DOMContentLoaded', function() {
     const latInput = document.getElementById('latInput');
@@ -1924,6 +2105,13 @@
     document.getElementById('coordinateModal').addEventListener('click', function(event) {
       if (event.target === this) {
         closeCoordinateModal();
+      }
+    });
+    
+    // إغلاق نافذة الصورة عند الضغط خارجها
+    document.getElementById('imageModal').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeImageModal();
       }
     });
     
