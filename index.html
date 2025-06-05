@@ -276,6 +276,9 @@
     .card-1 .card-icon { background: var(--gradient-1); }
     .card-2 .card-icon { background: var(--gradient-2); }
     .card-3 .card-icon { background: var(--gradient-3); }
+    .card-4 .card-icon { background: var(--gradient-4); }
+    .card-6 .card-icon { background: var(--gradient-6); }
+
 
     /* القسم السفلي */
     .footer-section {
@@ -468,7 +471,7 @@
     <!-- كارت الفرص الاستثمارية -->
     <a href="investment-opportunities.html" class="menu-card card-1" style="--delay: 0.1s">
       <div class="card-icon pulse">
-        <i class="bi bi-building"></i>
+        <i class="bi bi-graph-up-arrow"></i>
       </div>
       <h3 class="card-title">الفرص الاستثمارية</h3>
       <p class="card-description">
@@ -479,8 +482,22 @@
       </span>
     </a>
 
+    <!-- كارت الخدمات الحكومية -->
+    <div class="menu-card card-2" style="--delay: 0.2s" onclick="navigateToPage('government-services.html')">
+      <div class="card-icon">
+        <i class="bi bi-shield-check"></i>
+      </div>
+      <h3 class="card-title">الخدمات والمرافق العامة</h3>
+      <p class="card-description">
+        استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.
+      </p>
+      <a href="#" class="card-button">
+        <i class="bi bi-arrow-left"></i> عرض الخدمات
+      </a>
+    </div>
+
     <!-- كارت المناطق الصناعية -->
-    <a href="industrial-areas.html" class="menu-card card-2" style="--delay: 0.2s">
+    <a href="industrial-areas.html" class="menu-card card-3" style="--delay: 0.2s">
       <div class="card-icon">
         <i class="bi bi-gear"></i>
       </div>
@@ -493,8 +510,36 @@
       </span>
     </a>
 
+    <!-- كارت النقل والمواصلات -->
+    <div class="menu-card card-4" style="--delay: 0.4s" onclick="navigateToPage('transportation.html')">
+      <div class="card-icon">
+        <i class="bi bi-bus-front"></i>
+      </div>
+      <h3 class="card-title">النقل والمواصلات</h3>
+      <p class="card-description">
+        معلومات شاملة عن شبكة النقل العام والطرق الرئيسية ومحطات القطار والحافلات في المحافظة
+      </p>
+      <a href="#" class="card-button">
+        <i class="bi bi-arrow-left"></i> عرض الخريطة
+      </a>
+    </div>
+
+    <!-- كارت السياحة والآثار -->
+    <div class="menu-card card-5" style="--delay: 0.5s" onclick="navigateToPage('tourism.html')">
+      <div class="card-icon">
+        <img src="https://i.ibb.co/W4xL5jXh/Chat-GPT-Image-5-2025-02-49-41.png" alt="السياحة والآثار" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
+      </div>
+      <h3 class="card-title">السياحة والآثار</h3>
+      <p class="card-description">
+        اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة
+      </p>
+      <a href="#" class="card-button">
+        <i class="bi bi-arrow-left"></i> جولة سياحية
+      </a>
+    </div>
+
     <!-- كارت المناطق الحرفية -->
-    <a href="craft-areas.html" class="menu-card card-3" style="--delay: 0.3s">
+    <a href="craft-areas.html" class="menu-card card-6" style="--delay: 0.3s">
       <div class="card-icon">
         <i class="bi bi-brush"></i>
       </div>
