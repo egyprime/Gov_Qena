@@ -371,7 +371,6 @@
             position: relative;
         }
 
-        /* MODIFIED SECTION TITLE */
         .section-title {
             font-size: 2.5rem;
             margin-bottom: 50px;
@@ -397,7 +396,6 @@
             height: 3px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
-        /* END OF MODIFICATION */
 
         .map-container {
             height: 600px;
@@ -413,7 +411,6 @@
             width: 100%;
         }
         
-        /* MODIFIED FILTER BUTTONS */
         .map-filter {
             display: flex;
             justify-content: center;
@@ -431,9 +428,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
-            display: flex; /* Added */
-            align-items: center; /* Added */
-            gap: 10px; /* Added */
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .filter-btn:hover, .filter-btn.active {
@@ -460,11 +457,6 @@
         .filter-btn.active .filter-icon-wrapper {
             border-color: var(--black);
         }
-        /* END OF MODIFICATION */
-
-
-        /* Map Legend REMOVED */
-
 
         /* About Section */
         .about-section {
@@ -624,7 +616,7 @@
         }
     </style>
 </head>
-<body>
+<body id="home">
     <div class="hieroglyph-bg"></div>
     
     <header>
@@ -632,11 +624,11 @@
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-icon">𓀀</div>
-                    <h1>كنوز قنا</h1>
+                    <h1>بوابة قنا السياحية</h1>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="index.html">الرئيسية</a></li>
                         <li><a href="#sites">المواقع</a></li>
                         <li><a href="#map">الخريطة</a></li>
                         <li><a href="#about">عن قنا</a></li>
@@ -646,7 +638,7 @@
         </div>
     </header>
 
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="floating-elements">
             <div class="floating-element">𓀀</div>
             <div class="floating-element">𓂀</div>
@@ -672,7 +664,7 @@
 
     <section class="map-section" id="map">
         <div class="container">
-            <h2 class="section-title">خريطة كنوز قنا</h2>
+            <h2 class="section-title">خريطة السياحية والآثار بقنا</h2>
             
             <div class="map-filter">
                 <button class="filter-btn active" data-filter="all">الكل</button>
@@ -705,7 +697,7 @@
                 <h2>عن محافظة قنا</h2>
                 <p>تقع محافظة قنا في صعيد مصر، وتعتبر واحدة من أهم المناطق السياحية في مصر لما تحتويه من آثار فرعونية وإسلامية وقبطية عريقة. تشتهر قنا بمعابدها الضخمة ومزاراتها الدينية ومحمياتها الطبيعية الفريدة.</p>
                 <p>تضم محافظة قنا العديد من الكنوز الأثرية التي تعود إلى عصور مختلفة، من أبرزها معبد دندرة الشهير الذي يعد من أفضل المعابد المحفوظة في مصر، ومعابد شنهور والجبلين، بالإضافة إلى الأديرة القبطية العريقة مثل دير الأنبا بلامون، والمساجد التاريخية كمسجد سيدي عبد الرحيم القنائي.</p>
-                <p>كما تشتهر قنا بطبيعتها الخلابة مثل محمية وادي قنا التي تتميز بتنوع بيولوجي فريد، وقناطر نجع حمادي التي تعد تحفة هندسية على نهر النيل.</p>
+                <p>كما تشتهر قنا بطبيعتها الخلابة التي تتميز بتنوع بيولوجي فريد، وقناطر نجع حمادي التي تعد تحفة هندسية على نهر النيل.</p>
             </div>
         </div>
     </section>
@@ -720,7 +712,7 @@
                 <div class="footer-column">
                     <h3>روابط سريعة</h3>
                     <ul>
-                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="index.html">الرئيسية</a></li>
                         <li><a href="#sites">المواقع الأثرية</a></li>
                         <li><a href="#map">الخريطة التفاعلية</a></li>
                         <li><a href="#about">عن محافظة قنا</a></li>
@@ -731,7 +723,6 @@
                     <ul>
                         <li><a href="#" data-site="0">معبد دندرة</a></li>
                         <li><a href="#" data-site="1">معبد شنهور</a></li>
-                        <li><a href="#" data-site="2">محمية وادي قنا</a></li>
                         <li><a href="#" data-site="3">مسجد سيدي عبد الرحيم</a></li>
                     </ul>
                 </div>
@@ -795,7 +786,7 @@
                 type: "temple",
                 description: "مجمع معابد بطلمي روماني مخصص لعبادة الإلهة حتحور، يعد من أفضل المعابد المحفوظة في مصر.",
                 icon: "𓉐",
-                image: "https://images.unsplash.com/photo-1627483297924-9eabf8c0c9a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: "https://i.ibb.co/m5N4rJsD/image.png"
             },
             {
                 name: "معبد شنهور",
@@ -803,15 +794,7 @@
                 type: "temple",
                 description: "معبد صغير مخصص للإله مين وعبادة الثالوث المقدس (إيزيس وحورس وأوزوريس).",
                 icon: "𓉐",
-                image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                name: "محمية وادي قنا",
-                coords: [29.65830, 31.88060],
-                type: "nature",
-                description: "محمية طبيعية تتميز بتنوع بيولوجي فريد وتشكل موطنًا للعديد من الكائنات النادرة.",
-                icon: "🌿",
-                image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: "https://i.ibb.co/pjsYNrMV/image.jpg"
             },
             {
                 name: "مسجد سيدي عبد الرحيم القنائي",
@@ -819,7 +802,7 @@
                 type: "mosque",
                 description: "أحد أهم المساجد التاريخية في قنا، بني في القرن السابع الهجري ويتميز بعمارة إسلامية فريدة.",
                 icon: "🕌",
-                image: "https://images.unsplash.com/photo-1580334621420-2c7a0a1b0e8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: "https://i.ibb.co/yFsWkj5S/image.jpg"
             },
             {
                 name: "دير الأنبا بلامون",
@@ -827,15 +810,7 @@
                 type: "church",
                 description: "دير قبطي أثري يعود للقرن الرابع الميلادي، يعد من أقدم الأديرة في صعيد مصر.",
                 icon: "⛪",
-                image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                name: "معبد الجبلين",
-                coords: [25.48306, 32.48528],
-                type: "temple",
-                description: "معبد صغير يعود للعصر البطلمي، بني بين جبلين ويتميز بمناظر طبيعية خلابة.",
-                icon: "𓉐",
-                image: "https://images.unsplash.com/photo-1543429776-2782fc586c3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: "https://i.ibb.co/cpjsNKN/image.jpg"
             },
             {
                 name: "قصر الأمير يوسف كمال",
@@ -843,7 +818,7 @@
                 type: "palace",
                 description: "قصر تاريخي بني في أوائل القرن العشرين، يجمع بين الطرازين الإسلامي والأوروبي.",
                 icon: "🏰",
-                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: "https://i.ibb.co/BVC29gFb/image.webp"
             },
             {
                 name: "قناطر نجع حمادي",
@@ -851,7 +826,7 @@
                 type: "nature",
                 description: "نظام قناطر مائية مبهر بني على النيل في العصر الحديث، يوفر مناظر طبيعية رائعة.",
                 icon: "🌊",
-                image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: "https://i.ibb.co/qFPr0RTj/image.jpg"
             }
         ];
         
@@ -965,19 +940,26 @@
             });
         });
         
-        // Smooth scrolling for navigation links
+        // MODIFIED SCRIPT for Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+            const href = anchor.getAttribute('href');
+            // Check if the link is an internal anchor link
+            if (href && href.startsWith('#')) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) { // Check if the target element exists
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Adjust for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
                 });
-            });
+            }
+            // If it's a normal link like "index.html", the browser will handle it by default.
         });
         
         // GSAP Animations
