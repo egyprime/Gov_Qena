@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-57WT3ED2BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-57WT3ED2BQ', {
+      page_title: 'الصفحة الرئيسية - محافظة قنا',
+      page_location: window.location.href,
+      send_page_view: true
+    });
+  </script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>القائمة الرئيسية - محافظة قنا</title>
@@ -383,7 +396,7 @@
     </p>
   </div>
   <div class="menu-grid">
-    <a href="investment-opportunities.html" class="menu-card card-1">
+    <a href="investment-opportunities.html" class="menu-card card-1" onclick="trackClick('الفرص الاستثمارية')">
       <div class="card-icon pulse">
         <i class="bi bi-graph-up-arrow"></i>
       </div>
@@ -395,7 +408,7 @@
         <i class="bi bi-arrow-left"></i> استكشف الفرص
       </span>
     </a>
-    <a href="government-services.html" class="menu-card card-2">
+    <a href="government-services.html" class="menu-card card-2" onclick="trackClick('الخدمات والمرافق العامة')">
       <div class="card-icon">
         <i class="bi bi-shield-check"></i>
       </div>
@@ -407,7 +420,7 @@
         <i class="bi bi-arrow-left"></i> عرض الخدمات
       </span>
     </a>
-    <a href="industrial-areas.html" class="menu-card card-3">
+    <a href="industrial-areas.html" class="menu-card card-3" onclick="trackClick('المناطق الصناعية')">
       <div class="card-icon">
         <i class="bi bi-gear"></i>
       </div>
@@ -419,7 +432,7 @@
         <i class="bi bi-arrow-left"></i> استكشف المناطق
       </span>
     </a>
-    <a href="transportation.html" class="menu-card card-4">
+    <a href="transportation.html" class="menu-card card-4" onclick="trackClick('النقل والمواصلات')">
       <div class="card-icon">
         <i class="bi bi-bus-front"></i>
       </div>
@@ -431,7 +444,7 @@
         <i class="bi bi-arrow-left"></i> عرض الخريطة
       </span>
     </a>
-    <a href="tourism.html" class="menu-card card-5">
+    <a href="tourism.html" class="menu-card card-5" onclick="trackClick('السياحة والآثار')">
       <div class="card-icon">
         <img src="https://i.ibb.co/W4xL5jXh/Chat-GPT-Image-5-2025-02-49-41.png" alt="السياحة والآثار" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
       </div>
@@ -443,7 +456,7 @@
         <i class="bi bi-arrow-left"></i> جولة سياحية
       </span>
     </a>
-    <a href="craft-areas.html" class="menu-card card-6">
+    <a href="craft-areas.html" class="menu-card card-6" onclick="trackClick('المناطق الحرفية')">
       <div class="card-icon">
         <i class="bi bi-brush"></i>
       </div>
@@ -462,19 +475,19 @@
     <h4>البوابة الجغرافية لمحافظة قنا</h4>
     <p>نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين</p>
     <div class="social-links">
-      <a href="#" class="social-link" title="فيسبوك">
+      <a href="#" class="social-link" title="فيسبوك" onclick="trackSocial('فيسبوك')">
         <i class="bi bi-facebook"></i>
       </a>
-      <a href="#" class="social-link" title="تويتر">
+      <a href="#" class="social-link" title="تويتر" onclick="trackSocial('تويتر')">
         <i class="bi bi-twitter"></i>
       </a>
-      <a href="#" class="social-link" title="إنستغرام">
+      <a href="#" class="social-link" title="إنستغرام" onclick="trackSocial('إنستغرام')">
         <i class="bi bi-instagram"></i>
       </a>
-      <a href="#" class="social-link" title="يوتيوب">
+      <a href="#" class="social-link" title="يوتيوب" onclick="trackSocial('يوتيوب')">
         <i class="bi bi-youtube"></i>
       </a>
-      <a href="#" class="social-link" title="لينكد إن">
+      <a href="#" class="social-link" title="لينكد إن" onclick="trackSocial('لينكد إن')">
         <i class="bi bi-linkedin"></i>
       </a>
     </div>
@@ -489,6 +502,61 @@
     </div>
   </div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // تتبع النقرات على الأقسام
+  function trackClick(sectionName) {
+    gtag('event', 'click', {
+      event_category: 'navigation',
+      event_label: sectionName,
+      value: 1
+    });
+  }
+
+  // تتبع النقرات على وسائل التواصل الاجتماعي
+  function trackSocial(platform) {
+    gtag('event', 'social_click', {
+      event_category: 'social_media',
+      event_label: platform,
+      value: 1
+    });
+  }
+
+  // تتبع وقت البقاء في الصفحة
+  let startTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    let timeSpent = Math.round((Date.now() - startTime) / 1000);
+    gtag('event', 'timing_complete', {
+      event_category: 'engagement',
+      name: 'time_on_page',
+      value: timeSpent
+    });
+  });
+
+  // تتبع التمرير
+  let scrollTracked = false;
+  window.addEventListener('scroll', function() {
+    if (!scrollTracked && window.scrollY > 200) {
+      scrollTracked = true;
+      gtag('event', 'scroll', {
+        event_category: 'engagement',
+        event_label: 'scrolled_200px',
+        value: 1
+      });
+    }
+  });
+
+  // تتبع معلومات المتصفح والجهاز
+  gtag('event', 'page_view', {
+    event_category: 'device_info',
+    custom_parameters: {
+      screen_resolution: screen.width + 'x' + screen.height,
+      browser_language: navigator.language,
+      user_agent: navigator.userAgent.substring(0, 100)
+    }
+  });
+</script>
 </body>
 </html>
