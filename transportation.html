@@ -3,634 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شبكة النقل العام بمحافظة قنا</title>
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
-    
-    <!-- Google Fonts for Arabic -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <title>شوارع وطرق محافظة قنا</title>
     <style>
-        * {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Sans Arabic', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            direction: rtl; /* Set text direction to right-to-left for Arabic */
+            text-align: right; /* Align text to the right */
         }
-        
-        /* Navigation Bar */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #667eea;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            position: relative;
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #333;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-        
-        /* Main Content */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 2rem 2rem;
-        }
-        
-        .section {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        .section.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/><path fill="%23764ba2" d="M0 300L50 283.3C100 266.7 200 233.3 300 216.7C400 200 500 200 600 216.7C700 233.3 800 266.7 900 283.3C1000 300 1100 300 1150 300L1200 300V600H1150C1100 600 1000 600 900 600C800 600 700 600 600 600C500 600 400 600 300 600C200 600 100 600 50 600H0V300Z"/></svg>');
-            background-size: cover;
-            background-position: center;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            color: white;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.9;
-            line-height: 1.8;
-        }
-        
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card h2 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-        
-        .card h3 {
-            color: #764ba2;
-            margin: 1.5rem 0 1rem;
-            font-size: 1.5rem;
-        }
-        
-        /* Tables */
-        .table-container {
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
+            width: 80%;
+            margin: auto;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
         }
-        
-        th, td {
-            padding: 1rem;
-            text-align: right;
-            border-bottom: 1px solid #eee;
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            font-weight: 600;
-        }
-        
-        tr:hover {
-            background: rgba(102, 126, 234, 0.05);
-        }
-        
-        /* Lists */
-        .company-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .company-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
+        header {
+            background: #4CAF50;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77b377 3px solid;
             text-align: center;
-            font-weight: 600;
-            transition: transform 0.3s ease;
         }
-        
-        .company-item:hover {
-            transform: scale(1.05);
+        header h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 2.5em;
         }
-        
-        .route-list {
-            list-style: none;
-            margin: 1rem 0;
+        .main-content {
+            padding: 20px;
+            background: #ffffff;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        .route-list li {
-            background: rgba(102, 126, 234, 0.1);
-            margin: 0.5rem 0;
-            padding: 1rem;
-            border-radius: 10px;
-            border-right: 4px solid #667eea;
-            transition: all 0.3s ease;
+        .main-content h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
-        
-        .route-list li:hover {
-            background: rgba(102, 126, 234, 0.2);
-            transform: translateX(-5px);
+        .main-content p {
+            margin-bottom: 15px;
         }
-        
-        /* Map */
-        #map {
-            height: 500px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 70px;
-                right: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 2rem;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 100px 1rem 2rem;
-            }
-            
-            .card {
-                padding: 1.5rem;
-            }
-            
-            .company-list {
-                grid-template-columns: 1fr;
-            }
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        /* Loading Animation */
-        .loading {
+        .image-caption {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 5px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .button {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(102, 126, 234, 0.3);
-            border-radius: 50%;
-            border-top-color: #667eea;
-            animation: spin 1s ease-in-out infinite;
+            background: #007BFF;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            font-size: 1.1em;
         }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .button:hover {
+            background: #0056b3;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #ffffff;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">🚌 شبكة النقل بقنا</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link active">الرئيسية</a></li>
-                <li><a href="#trains" class="nav-link">القطارات</a></li>
-                <li><a href="#buses" class="nav-link">الحافلات</a></li>
-                <li><a href="#roads" class="nav-link">الطرق</a></li>
-                <li><a href="#map" class="nav-link">الخريطة</a></li>
-                <li><a href="#contact" class="nav-link">اتصل بنا</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <header>
+        <div class="container">
+            <h1>شوارع وطرق محافظة قنا</h1>
         </div>
-    </nav>
+    </header>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Home Section -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <h1>شبكة النقل العام بمحافظة قنا</h1>
-                <p>هذه المنصة تعرض خدمات النقل العام المتاحة في محافظة قنا، بما في ذلك القطارات والحافلات وشبكة الطرق. نهدف إلى توفير معلومات شاملة ومحدثة لتسهيل التنقل والسفر في المحافظة وخارجها.</p>
-            </div>
-            
-            <div class="card">
-                <h2>مرحباً بكم في شبكة النقل بقنا</h2>
-                <p>محافظة قنا تقع في قلب صعيد مصر وتعتبر همزة وصل مهمة بين شمال وجنوب البلاد. تتميز بشبكة نقل متطورة تشمل:</p>
-                <ul style="margin: 1rem 0; padding-right: 2rem;">
-                    <li>خط السكة الحديد الرئيسي القاهرة - أسوان</li>
-                    <li>شبكة حافلات تربط المحافظة بجميع أنحاء مصر</li>
-                    <li>شبكة طرق حديثة ومطورة</li>
-                    <li>خدمات السرفيس المحلية</li>
-                </ul>
-                <p>استخدم القوائم أعلاه للتنقل بين الأقسام المختلفة والاطلاع على التفاصيل الكاملة لكل وسيلة نقل.</p>
-            </div>
+        <section class="main-content">
+            <h2>نظرة عامة على شبكة الطرق في قنا</h2>
+            <p>تتميز محافظة قنا بشبكة متنوعة من الشوارع والطرق التي تربط مدنها وقراها المختلفة، وتلعب دورًا حيويًا في حركة التجارة والنقل والسفر داخل المحافظة وبينها وبين المحافظات المجاورة.</p>
+            <p>تشمل هذه الشبكة طرقًا رئيسية وحيوية تسهل الوصول إلى المعالم الهامة والمراكز الخدمية، بالإضافة إلى مجموعة من الشوارع الفرعية التي تخدم الأحياء السكنية والتجمعات المحلية.</p>
+            <p>تهدف البنية التحتية للطرق في قنا إلى توفير سهولة التنقل وربط كافة أجزاء المحافظة، مما يدعم التنمية الاقتصادية والاجتماعية ويسهم في تحسين جودة الحياة للمواطنين.</p>
+            <p>تجري أعمال الصيانة والتطوير بشكل مستمر للحفاظ على كفاءة هذه الطرق وتحسين تدفق الحركة المرورية، بما يتناسب مع النمو السكاني والتوسع العمراني في المحافظة.</p>
         </section>
 
-        <!-- Trains Section -->
-        <section id="trains" class="section">
-            <div class="card">
-                <h2>🚆 خدمات القطارات</h2>
-                <p>محطة قنا تقع على الخط الرئيسي للسكة الحديد (القاهرة - أسوان) وتخدم معظم قطارات الشمال والجنوب.</p>
-                
-                <h3>الوجهات والأسعار</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>الوجهة</th>
-                                <th>السعر (جنيه)</th>
-                                <th>زمن الرحلة</th>
-                                <th>نوع القطار</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>الأقصر</td>
-                                <td>مكيف: 21 ج / عادي: 14 ج</td>
-                                <td>40 دقيقة</td>
-                                <td>سريع/عادي</td>
-                            </tr>
-                            <tr>
-                                <td>البلينا</td>
-                                <td>8 - 15 ج</td>
-                                <td>ساعتان</td>
-                                <td>محلي</td>
-                            </tr>
-                            <tr>
-                                <td>القاهرة</td>
-                                <td>45 - 85 ج</td>
-                                <td>8-10 ساعات</td>
-                                <td>سريع/مكيف</td>
-                            </tr>
-                            <tr>
-                                <td>أسوان</td>
-                                <td>25 - 45 ج</td>
-                                <td>3 ساعات</td>
-                                <td>سريع/عادي</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <p><strong>معلومات إضافية:</strong> محطة قنا للسكك الحديدية تعتبر إحدى المحطات الرئيسية على خط القاهرة - أسوان، حيث تتوقف معظم القطارات التي تربط شمال مصر بجنوبها. يُنصح بحجز التذاكر مسبقاً خاصة في المواسم والأعياد.</p>
-            </div>
-        </section>
+        <div class="image-container">
+            <img src="https://egy-map.com/governorate/%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9-%D9%82%D9%86%D8%A7" alt="خريطة محافظة قنا" class="map-image">
+            <p class="image-caption">خريطة توضيحية لمحافظة قنا</p>
+        </div>
 
-        <!-- Buses Section -->
-        <section id="buses" class="section">
-            <div class="card">
-                <h2>🚌 خدمات الحافلات</h2>
-                
-                <h3>شركات النقل العاملة</h3>
-                <div class="company-list">
-                    <div class="company-item">Upper Egypt Bus Co</div>
-                    <div class="company-item">Blue Bus</div>
-                    <div class="company-item">White Bus</div>
-                    <div class="company-item">Go Bus</div>
-                    <div class="company-item">Mr. Bus</div>
-                    <div class="company-item">Pharaoh's Fleet</div>
-                </div>
-                
-                <h3>الوجهات والأسعار</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>الوجهة</th>
-                                <th>السعر (جنيه)</th>
-                                <th>عدد الرحلات اليومية</th>
-                                <th>مدة الرحلة</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>القاهرة</td>
-                                <td>60 ج</td>
-                                <td>3 - 28 رحلة</td>
-                                <td>8-10 ساعات</td>
-                            </tr>
-                            <tr>
-                                <td>الغردقة</td>
-                                <td>25 ج</td>
-                                <td>5-8 رحلات</td>
-                                <td>3 ساعات</td>
-                            </tr>
-                            <tr>
-                                <td>السويس</td>
-                                <td>60 ج</td>
-                                <td>2-4 رحلات</td>
-                                <td>6 ساعات</td>
-                            </tr>
-                            <tr>
-                                <td>الأقصر</td>
-                                <td>15 ج</td>
-                                <td>10-15 رحلة</td>
-                                <td>45 دقيقة</td>
-                            </tr>
-                            <tr>
-                                <td>أسوان</td>
-                                <td>35 ج</td>
-                                <td>8-12 رحلة</td>
-                                <td>3 ساعات</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <h3>خدمات السرفيس المحلية</h3>
-                <p>تتوفر سيارات السرفيس (الميني فان) التي تربط قنا بالقرى والمراكز المجاورة مثل:</p>
-                <ul class="route-list">
-                    <li>قنا ↔ نقادة ↔ قوص (سعر الرحلة: 5-8 جنيه)</li>
-                    <li>قنا ↔ دندرة ↔ قفط (سعر الرحلة: 3-6 جنيه)</li>
-                    <li>قنا ↔ الوقف ↔ هو (سعر الرحلة: 4-7 جنيه)</li>
-                    <li>قنا ↔ فرشوط ↔ نجع حمادي (سعر الرحلة: 8-12 جنيه)</li>
-                </ul>
-                
-                <p><strong>ملاحظة:</strong> أسعار السرفيس قد تتغير حسب أسعار الوقود وتكون أكثر مرونة من الحافلات الكبيرة، كما تتميز بالانطلاق عند اكتمال العدد.</p>
-            </div>
-        </section>
-
-        <!-- Roads Section -->
-        <section id="roads" class="section">
-            <div class="card">
-                <h2>🛣️ شبكة الطرق والمواصلات</h2>
-                
-                <h3>الطرق الرئيسية</h3>
-                <ul class="route-list">
-                    <li><strong>طريق قنا - الغردقة (طريق الصحراء الشرقية):</strong> يربط قنا بالبحر الأحمر عبر الصحراء الشرقية، بطول 165 كم تقريباً</li>
-                    <li><strong>طريق قنا - أسوان الزراعي:</strong> يمر عبر الأراضي الزراعية ويخدم القرى على ضفاف النيل</li>
-                    <li><strong>طريق قنا - سوهاج:</strong> الطريق الشمالي الذي يربط قنا بباقي محافظات الصعيد</li>
-                    <li><strong>طريق قنا - نجع حمادي:</strong> طريق محلي مهم يخدم شمال المحافظة</li>
-                </ul>
-                
-                <h3>المشاريع والتطوير</h3>
-                <p>تشهد شبكة الطرق في محافظة قنا تطويراً مستمراً من خلال:</p>
-                <ul class="route-list">
-                    <li><strong>مشروع الطريق السريع 26 يوليو:</strong> طريق سريع حديث يربط القاهرة بأسوان مروراً بقنا</li>
-                    <li><strong>إنشاء وتطوير الجسور:</strong> جسور جديدة على النيل وترع الري لتحسين الاتصال</li>
-                    <li><strong>تحصين الطرق:</strong> أعمال تحصين وتوسيع للطرق الحالية</li>
-                    <li><strong>طرق الخدمة:</strong> إنشاء طرق خدمة للمناطق الصناعية والسياحية</li>
-                </ul>
-                
-                <h3>مديرية الطرق والمواصلات</h3>
-                <p>تقوم مديرية الطرق والمواصلات بمحافظة قنا بالإشراف على جميع أعمال الصيانة والتطوير للطرق، بالإضافة إلى مشاريع إنشاء الجسور الجديدة والكباري العلوية لتحسين انسيابية المرور وزيادة الأمان على الطرق.</p>
-                
-                <p><strong>للمزيد من المعلومات:</strong> يمكن التواصل مع مديرية الطرق والمواصلات بقنا على الرقم: 096-5555555</p>
-            </div>
-        </section>
-
-        <!-- Map Section -->
-        <section id="map" class="section">
-            <div class="card">
-                <h2>🗺️ الخريطة التفاعلية</h2>
-                <p>استكشف شبكة النقل في محافظة قنا من خلال هذه الخريطة التفاعلية التي تُظهر محطات القطار والحافلات والطرق الرئيسية.</p>
-                <div id="map"></div>
-                <div id="mapLoading" style="text-align: center; margin: 2rem 0;">
-                    <div class="loading"></div>
-                    <p>جاري تحميل الخريطة...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="card">
-                <h2>📞 اتصل بنا</h2>
-                
-                <h3>معلومات الاتصال</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
-                    <div>
-                        <h4 style="color: #667eea; margin-bottom: 1rem;">🚂 محطة قنا للسكك الحديدية</h4>
-                        <p><strong>العنوان:</strong> شارع المحطة، قنا</p>
-                        <p><strong>الهاتف:</strong> 096-5235555</p>
-                        <p><strong>مواعيد العمل:</strong> 24 ساعة</p>
-                    </div>
-                    
-                    <div>
-                        <h4 style="color: #667eea; margin-bottom: 1rem;">🚌 محطة الحافلات الرئيسية</h4>
-                        <p><strong>العنوان:</strong> شارع الجمهورية، قنا</p>
-                        <p><strong>الهاتف:</strong> 096-5123456</p>
-                        <p><strong>مواعيد العمل:</strong> من 5:00 ص إلى 12:00 م</p>
-                    </div>
-                </div>
-                
-                <h3>الجهات المسؤولة</h3>
-                <ul class="route-list">
-                    <li><strong>مديرية الطرق والمواصلات:</strong> 096-5555555</li>
-                    <li><strong>شركة سكك حديد مصر:</strong> 096-5235555</li>
-                    <li><strong>نقابة النقل البري:</strong> 096-5444444</li>
-                    <li><strong>مرور قنا:</strong> 096-5333333</li>
-                </ul>
-                
-                <h3>خدمات الطوارئ</h3>
-                <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
-                    <p><strong>الشرطة:</strong> 122</p>
-                    <p><strong>الإسعاف:</strong> 123</p>
-                    <p><strong>الإطفاء:</strong> 180</p>
-                    <p><strong>مساعدة الطريق:</strong> 096-5666666</p>
-                </div>
-                
-                <p><strong>ملاحظة:</strong> لأي استفسارات حول مواعيد الرحلات أو تحديث المعلومات، يُرجى التواصل مع الجهة المختصة مباشرة.</p>
-            </div>
-        </section>
+        <div class="button-container">
+            <a href="index.html" class="button">العودة للصفحة الرئيسية</a>
+        </div>
     </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-    
-    <script>
-        // Navigation functionality
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('.section');
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinksContainer = document.getElementById('navLinks');
-        
-        // Handle navigation
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Remove active class from all links and sections
-                navLinks.forEach(l => l.classList.remove('active'));
-                sections.forEach(s => s.classList.remove('active'));
-                
-                // Add active class to clicked link
-                link.classList.add('active');
-                
-                // Show corresponding section
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                    
-                    // Initialize map if map section is shown
-                    if (targetId === 'map' && !window.mapInitialized) {
-                        initializeMap();
-                    }
-                }
-                
-                // Close mobile menu
-                navLinksContainer.classList.remove('active');
-            });
-        });
-        
-        // Mobile menu toggle
-        menuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.navbar')) {
-                navLinksContainer.classList.remove('active');
-            }
-        });
-        
-        // Map initialization
-        let map;
-        window.mapInitialized = false;
-        
-        function initializeMap() {
-            if (window.mapInitialized) return;
-            
-            const mapLoading = document.getElementById('mapLoading');
-            
-            try {
-                // Initialize map centered on Qena
-                map = L.map('map').setView([26.1644, 32.7167], 10);
-                
-                // Add OpenStreetMap tiles
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(map);
-                
-                // Qena locations data
-                const locations = [
-                    {
-                        name: 'محطة قنا للسكك الحديدية',
-                        type: 'train',
-                        coords: [26.1644, 32.7167],
-                        info: 'المحطة الرئيسية للسكك الحديدية - خط القاهرة أسوان'
-                    },
-                    {
-                        name: 'محطة الحافلات الرئيسية',
-                        type: 'bus',
-                        coords: [26.1590, 32.7200
+    <footer>
+        <p>&copy; 2025 محافظة قنا - جميع الحقوق محفوظة (نموذج موقع)</p>
+    </footer>
+</body>
+</html>
