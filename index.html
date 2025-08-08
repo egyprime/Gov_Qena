@@ -36,6 +36,8 @@
       --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
       --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
       --gradient-6: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      --blue-gradient: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);
+      --light-blue-gradient: linear-gradient(135deg, #4fc3f7 0%, #b3e5fc 100%);
     }
     * {
       box-sizing: border-box;
@@ -247,7 +249,14 @@
     .card-2 .card-icon { background: var(--gradient-2); }
     .card-3 .card-icon { background: var(--gradient-3); }
     .card-4 .card-icon { background: var(--gradient-4); }
+    .card-5 .card-icon { background: var(--gradient-5); }
     .card-6 .card-icon { background: var(--gradient-6); }
+    .card-7 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%); }
+    .card-8 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
+    .card-9 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
+    .card-10 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
+    .card-11 .card-icon { background: linear-gradient(135deg, #006064 0%, #4db6ac 100%); }
+    .card-12 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #7986cb 100%); }
     .footer-section {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(20px);
@@ -325,6 +334,84 @@
     .pulse {
       animation: pulse 3s infinite;
     }
+    
+    /* أنماط النوافذ المنبثقة */
+    .modal-content {
+      background: linear-gradient(to bottom, #0d47a1, #1976d2, #42a5f5);
+      border-radius: 15px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .modal-header {
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 15px 20px;
+      color: white;
+      font-weight: bold;
+    }
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .modal-body {
+      padding: 20px;
+      color: white;
+    }
+    .modal-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    .modal-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      border-left: 4px solid #42a5f5;
+    }
+    .modal-footer {
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 15px;
+    }
+    .btn-close {
+      filter: invert(1);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* تأثيرات إضافية */
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .watermark {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-style: italic;
+    }
+    
     @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
@@ -390,7 +477,8 @@
 </header>
 <div class="main-container">
   <div class="welcome-section">
-    <h1 class="welcome-title">مرحباً بكم في البوابة الجغرافية</h1
+    <h1 class="welcome-title">مرحباً بكم في البوابة الجغرافية</h1>
+    <p class="welcome-subtitle">نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين</p>
   </div>
   <div class="menu-grid">
     <a href="investment-opportunities.html" class="menu-card card-1" onclick="trackClick('الفرص الاستثمارية')">
@@ -417,18 +505,6 @@
         <i class="bi bi-arrow-left"></i> عرض الخدمات
       </span>
     </a>
-    <a href="industrial-areas.html" class="menu-card card-3" onclick="trackClick('قطاع الصناعة')">
-      <div class="card-icon">
-        <i class="bi bi-gear"></i>
-      </div>
-      <h3 class="card-title">قطاع الصناعة</h3>
-      <p class="card-description">
-        اكتشف المناطق الصناعية المتاحة في محافظة قنا مع تفاصيل المساحات والتجهيزات والخدمات المقدمة للمستثمرين
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> استكشف المناطق
-      </span>
-    </a>
     <a href="transportation.html" class="menu-card card-4" onclick="trackClick('النقل والمواصلات')">
       <div class="card-icon">
         <i class="bi bi-bus-front"></i>
@@ -453,29 +529,276 @@
         <i class="bi bi-arrow-left"></i> جولة سياحية
       </span>
     </a>
-    <a href="craft-areas.html" class="menu-card card-6" onclick="trackClick('المناطق الحرفية')">
+    
+    <!-- الخانات الجديدة -->
+    <div class="menu-card card-7" data-bs-toggle="modal" data-bs-target="#modal1">
       <div class="card-icon">
-        <i class="bi bi-brush"></i>
+        <i class="bi bi-buildings"></i>
+      </div>
+      <h3 class="card-title">المناطق الصناعية</h3>
+      <p class="card-description">
+        خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
+    
+    <div class="menu-card card-8" data-bs-toggle="modal" data-bs-target="#modal2">
+      <div class="card-icon">
+        <i class="bi bi-house-door"></i>
+      </div>
+      <h3 class="card-title">قُرى الظهير</h3>
+      <p class="card-description">
+        حدود القرى الصحراوية، شبكات الطرق وارتباطها بالمراكز الحضرية لخطة تنمية ريفية مستدامة.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
+    
+    <div class="menu-card card-9" data-bs-toggle="modal" data-bs-target="#modal3">
+      <div class="card-icon">
+        <i class="bi bi-heart"></i>
+      </div>
+      <h3 class="card-title">مشروعات حياة كريمة</h3>
+      <p class="card-description">
+        مواقع تدخل البرنامج، الخدمات المقدمة وخطط التطوير لمتابعة التنفيذ والتقييم.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
+    
+    <div class="menu-card card-10" data-bs-toggle="modal" data-bs-target="#modal4">
+      <div class="card-icon">
+        <i class="bi bi-building"></i>
+      </div>
+      <h3 class="card-title">الواقع العمراني</h3>
+      <p class="card-description">
+        عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
+    
+    <div class="menu-card card-11" data-bs-toggle="modal" data-bs-target="#modal5">
+      <div class="card-icon">
+        <i class="bi bi-hammer"></i>
       </div>
       <h3 class="card-title">المناطق الحرفية</h3>
       <p class="card-description">
-        استكشف المناطق الحرفية في محافظة قنا ودعم الصناعات التقليدية والحرف اليدوية المميزة للمحافظة
+        توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.
       </p>
       <span class="card-button">
-        <i class="bi bi-arrow-left"></i> استكشف الحرف
+        <i class="bi bi-image"></i> عرض الصورة
       </span>
-    </a>
+    </div>
+    
+    <div class="menu-card card-12" data-bs-toggle="modal" data-bs-target="#modal6">
+      <div class="card-icon">
+        <i class="bi bi-geo-alt"></i>
+      </div>
+      <h3 class="card-title">المقاصد السياحية</h3>
+      <p class="card-description">
+        المعالم والمسارات والخدمات السياحية المحيطة لتسهيل الترويج والتنقل للسائحين.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
+    
+    <div class="menu-card card-7" data-bs-toggle="modal" data-bs-target="#modal7">
+      <div class="card-icon">
+        <i class="bi bi-tree"></i>
+      </div>
+      <h3 class="card-title">المناطق الزراعية</h3>
+      <p class="card-description">
+        خرائط الأراضي المزروعة، أنظمة الري والمحاصيل السائدة لدعم التخطيط والإدارة الزراعية.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
+    
+    <div class="menu-card card-8" data-bs-toggle="modal" data-bs-target="#modal8">
+      <div class="card-icon">
+        <i class="bi bi-cash-coin"></i>
+      </div>
+      <h3 class="card-title">مراكز الاستثمار</h3>
+      <p class="card-description">
+        مواقع الأولوية الاستثمارية، الحوافز والمساحات المتاحة لجذب المشروعات وتنميتها.
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض الصورة
+      </span>
+    </div>
   </div>
 </div>
+
+<!-- النوافذ المنبثقة للخانات الجديدة -->
+<div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المناطق الصناعية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/FbTyH94v/image.jpg" alt="المناطق الصناعية" class="modal-img">
+        <p class="modal-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">قُرى الظهير</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/ns46wNw0/image.jpg" alt="قُرى الظهير" class="modal-img">
+        <p class="modal-description">حدود القرى الصحراوية، شبكات الطرق وارتباطها بالمراكز الحضرية لخطة تنمية ريفية مستدامة.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">مشروعات حياة كريمة</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/mFNzR165/image.jpg" alt="مشروعات حياة كريمة" class="modal-img">
+        <p class="modal-description">مواقع تدخل البرنامج، الخدمات المقدمة وخطط التطوير لمتابعة التنفيذ والتقييم.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">الواقع العمراني</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/21rgnvmb/image.jpg" alt="الواقع العمراني" class="modal-img">
+        <p class="modal-description">عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المناطق الحرفية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/PZKfCHrH/image.jpg" alt="المناطق الحرفية" class="modal-img">
+        <p class="modal-description">توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المقاصد السياحية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/TDGVtfTp/image.jpg" alt="المقاصد السياحية" class="modal-img">
+        <p class="modal-description">المعالم والمسارات والخدمات السياحية المحيطة لتسهيل الترويج والتنقل للسائحين.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المناطق الزراعية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/0yGb0Jtk/image.jpg" alt="المناطق الزراعية" class="modal-img">
+        <p class="modal-description">خرائط الأراضي المزروعة، أنظمة الري والمحاصيل السائدة لدعم التخطيط والإدارة الزراعية.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal8" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">مراكز الاستثمار</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/YF5bmcC1/image.jpg" alt="مراكز الاستثمار" class="modal-img">
+        <p class="modal-description">مواقع الأولوية الاستثمارية، الحوافز والمساحات المتاحة لجذب المشروعات وتنميتها.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer-section">
   <div class="footer-content">
     <h4>البوابة الجغرافية لمحافظة قنا</h4>
     <p>نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين</p>
     <div class="social-links">
-  <a href="http://qena.gov.eg/Default.aspx" class="social-link" title="موقع المحافظة" target="_blank" rel="noopener">
-    <i class="bi bi-globe"></i>
-  </a>
-</div>
+      <a href="http://qena.gov.eg/Default.aspx" class="social-link" title="موقع المحافظة" target="_blank" rel="noopener">
+        <i class="bi bi-globe"></i>
+      </a>
+    </div>
     <div class="developer-credit">
       <div class="credit-title">إعداد</div>
       <div class="credit-info">
@@ -542,7 +865,17 @@
       user_agent: navigator.userAgent.substring(0, 100)
     }
   });
+  
+  // تتبع فتح النوافذ المنبثقة
+  document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
+    button.addEventListener('click', function() {
+      const modalId = this.getAttribute('data-bs-target').substring(1);
+      gtag('event', 'modal_open', {
+        event_category: 'modal',
+        event_label: modalId
+      });
+    });
+  });
 </script>
 </body>
 </html>
-
