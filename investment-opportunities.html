@@ -1221,67 +1221,199 @@
 
   // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
   const opportunities = [
-    {
-      id: 1,
-      name: "مشروع صناعي 1",
-      lat: 26.155,
-      lng: 32.716,
-      sector: "صناعي",
-      region: "قنا",
-      area: "1000 م²",
-      status: "متاحة",
-      description: "موقع صناعي ممتاز بالقرب من الطريق السريع، يحتوي على بنية تحتية متكاملة للصناعات المتوسطة والخفيفة.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 2,
-      name: "مشروع زراعي 1",
-      lat: 26.200,
-      lng: 32.800,
-      sector: "زراعي",
-      region: "قفط",
-      area: "5000 م²",
-      status: "قيد الدراسة",
-      description: "أرض زراعية خصبة على ضفاف النيل، مناسبة لمشاريع الاستزراع المائي والزراعات المحمية.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 3,
-      name: "مشروع خدمي 1",
-      lat: 26.100,
-      lng: 32.650,
-      sector: "خدماتي",
-      region: "نجع حمادي",
-      area: "800 م²",
-      status: "متاحة",
-      description: "مكان مميز في وسط المدينة لإنشاء مجمع تجاري أو مركز خدمات متكامل، يقع في منطقة تجارية نشطة.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 4,
-      name: "مشروع صناعي 2",
-      lat: 26.170,
-      lng: 32.750,
-      sector: "صناعي",
-      region: "قنا",
-      area: "2500 م²",
-      status: "متاحة",
-      description: "منطقة صناعية مجهزة بالكامل للصناعات الثقيلة، تتوفر بها خدمات الكهرباء والمياه والغاز.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 5,
-      name: "مشروع زراعي 2",
-      lat: 26.220,
-      lng: 32.830,
-      sector: "زراعي",
-      region: "دشنا",
-      area: "7000 م²",
-      status: "قيد الدراسة",
-      description: "مزرعة متكاملة للاستزراع السمكي والزراعة العضوية، تتوفر بها مصادر مياه طبيعية.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    }
-  ];
+  {
+    id: 1,
+    name: "اقامة محطة وقود سيارات وخدمات",
+    lat: 26.158463518000076,
+    lng: 32.701038605000065,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "2295 م²",
+    status: "متاحة",
+    description: "قطعة ارض بمساحة 2295م2 مبني السلخانة القديم",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 2,
+    name: "اقامة مول تجاري",
+    lat: 26.05172725400007,
+    lng: 32.238860343000056,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "الارض محاطة بسور فقط علي اربع شوارع",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 3,
+    name: "ارض فضاء بالترعة المضرانية",
+    lat: 26.057552846000078,
+    lng: 32.237520205000067,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "الترعة الضمرنية بنجع حمادي",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 4,
+    name: "اقامة محطة وقود سيارات وخدمات",
+    lat: 26.204804724000041,
+    lng: 32.739218099000027,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "2698.4 م²",
+    status: "متاحة",
+    description: "قطعة ارض بمساحة 2698.4",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 5,
+    name: "ارض كازينة عبدالاه سابقا",
+    lat: 26.158502295000062,
+    lng: 32.721339635000049,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء بميدان الساعة وبها بعض مباني",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 6,
+    name: "نشاط اداري وتجاري",
+    lat: 26.056594583000049,
+    lng: 32.239662297000052,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 7,
+    name: "نشاط اداري وتجاري",
+    lat: 26.056062664000024,
+    lng: 32.240573633000054,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 8,
+    name: "نشاط اداري وتجاري",
+    lat: 26.056535404000044,
+    lng: 32.239436221000062,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 9,
+    name: "نشاط اداري وتجاري",
+    lat: 26.05623586300004,
+    lng: 32.239933594000036,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 10,
+    name: "نشاط اداري وتجاري",
+    lat: 26.055625354000028,
+    lng: 32.241253045000065,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 11,
+    name: "نشاط ادار وتجاري",
+    lat: 26.05578132200003,
+    lng: 32.240569765000032,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 12,
+    name: "حديقة المساكن",
+    lat: 26.187720862000049,
+    lng: 32.755919836000032,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء مسورة",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 13,
+    name: "نشاط اداري وتجاري",
+    lat: 26.055344664000074,
+    lng: 32.241589558000044,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 14,
+    name: "نشاط اداري وتجاري",
+    lat: 26.056412907000038,
+    lng: 32.240077674000077,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "ارض فضاء",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 15,
+    name: "ارض فضاء بالترعة الضمرانية",
+    lat: 26.057805173000077,
+    lng: 32.237574659000074,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "غير محددة",
+    status: "متاحة",
+    description: "الترعة الضمرانية بنجع حمادي",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  },
+  {
+    id: 16,
+    name: "اقامة محطة وقود وخدمات",
+    lat: 26.158303839000041,
+    lng: 32.702211308000074,
+    sector: "خدماتي",
+    region: "قنا",
+    area: "3370 م²",
+    status: "متاحة",
+    description: "قطعة ارض بمساحة 3370 م2",
+    imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+  }
+];
 
   // دالة التنبيه المؤقت
   function showTooltip(text, type = "info") {
