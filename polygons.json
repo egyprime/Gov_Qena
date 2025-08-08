@@ -1,0 +1,28 @@
+{
+  "polygons": [
+    {
+      "id": 1,
+      "name": "مثلث",
+      "type": "triangle",
+      "sides": 3,
+      "color": "#FF5733",
+      "points": "150,50 250,250 50,250"
+    },
+    {
+      "id": 2,
+      "name": "مربع",
+      "type": "square",
+      "sides": 4,
+      "color": "#33FF57",
+      "points": "50,50 250,50 250,250 50,250"
+    },
+    {
+      "id": 3,
+      "name": "خماسي",
+      "type": "pentagon",
+      "sides": 5,
+      "color": "#3357FF",
+      "points": "150,50 250,100 225,200 75,200 50,100"
+    }
+  ]
+}
