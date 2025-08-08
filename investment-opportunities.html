@@ -4,22 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>الفرص الاستثمارية - قنا</title>
-  
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Bootstrap RTL -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
-  
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
-  <!-- Animate CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  
   <style>
     :root {
       --primary: #004d40;
@@ -30,1060 +19,274 @@
       --dark: #263238;
       --sidebar-width: 280px;
     }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Tajawal', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e0f2f1 100%);
-      color: var(--dark);
-      min-height: 100vh;
-      background-attachment: fixed;
-      padding-right: var(--sidebar-width);
-      transition: padding-right 0.3s ease;
+      font-family: 'Tajawal', sans-serif; margin: 0; background: linear-gradient(135deg, #f8f9fa 0%, #e0f2f1 100%);
+      color: var(--dark); min-height: 100vh; background-attachment: fixed; padding-right: var(--sidebar-width); transition: padding-right 0.3s ease;
     }
-
-    /* تصميم الشريط العلوي مع تأثيرات متطورة */
     header {
-      background: linear-gradient(135deg, var(--primary) 0%, #00251a 100%);
-      color: white;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 100;
-      animation: slideDown 0.8s ease-out;
+      background: linear-gradient(135deg, var(--primary) 0%, #00251a 100%); color: white; padding: 1rem;
+      display: flex; justify-content: space-between; align-items: center; text-align: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative; z-index: 100; animation: slideDown 0.8s ease-out;
     }
-    
     header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--secondary), var(--accent));
     }
-
-    header h1 {
-      font-size: 1.5rem;
-      margin: 0;
-      flex-grow: 1;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 1s ease-out;
-    }
-
-    header img {
-      height: 70px;
-      width: 70px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: white;
-      padding: 4px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-      transition: all 0.4s ease;
-    }
-    
-    header img:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    }
-
-    #map {
-      height: 90vh;
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-      margin: 1rem auto;
-      animation: fadeIn 1.2s ease-out;
-      border: 1px solid rgba(0, 77, 64, 0.2);
-    }
-
-    /* أدوات التحكم مع تأثيرات جميلة */
+    header h1 { font-size: 1.5rem; margin: 0; flex-grow: 1; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); animation: fadeIn 1s ease-out; }
+    header img { height: 70px; width: 70px; object-fit: contain; border-radius: 50%; background: white; padding: 4px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); transition: all 0.4s ease; }
+    header img:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); }
+    #map { height: 90vh; width: 100%; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); overflow: hidden; margin: 1rem auto; animation: fadeIn 1.2s ease-out; border: 1px solid rgba(0, 77, 64, 0.2); }
     .measure-control {
-      position: absolute;
-      left: 15px;
-      top: 85px;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 30px;
-      padding: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      animation: slideInLeft 0.8s ease-out;
+      position: absolute; left: 15px; top: 85px; z-index: 1000; background: rgba(255, 255, 255, 0.95); border-radius: 30px; padding: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); width: 50px; display: flex; flex-direction: column; gap: 10px; backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 0, 0, 0.1); animation: slideInLeft 0.8s ease-out;
     }
-
     .measure-control button {
-      width: 45px;
-      height: 45px;
-      border-radius: 50% !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-      position: relative;
-      overflow: hidden;
-      border: none !important;
+      width: 45px; height: 45px; border-radius: 50% !important; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); position: relative; overflow: hidden; border: none !important;
     }
-    
     .measure-control button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.2); transform: translateY(100%); transition: transform 0.3s ease;
     }
-    
-    .measure-control button:hover::after {
-      transform: translateY(0);
-    }
-    
-    .measure-control button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
-    }
-    
-    .measure-control button i {
-      transition: transform 0.3s ease;
-    }
-    
-    .measure-control button:hover i {
-      transform: scale(1.2);
-    }
-
-    #distanceBtn {
-      background: linear-gradient(135deg, #1976d2, #64b5f6);
-      color: white;
-    }
-    
-    #areaBtn {
-      background: linear-gradient(135deg, #388e3c, #81c784);
-      color: white;
-    }
-    
-    #clearBtn {
-      background: linear-gradient(135deg, #d32f2f, #f44336);
-      color: white;
-    }
-
+    .measure-control button:hover::after { transform: translateY(0); }
+    .measure-control button:hover { transform: translateY(-3px); box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25); }
+    .measure-control button i { transition: transform 0.3s ease; }
+    .measure-control button:hover i { transform: scale(1.2); }
+    #distanceBtn { background: linear-gradient(135deg, #1976d2, #64b5f6); color: white; }
+    #areaBtn { background: linear-gradient(135deg, #388e3c, #81c784); color: white; }
+    #clearBtn { background: linear-gradient(135deg, #d32f2f, #f44336); color: white; }
     .coordinate-input-button {
-      position: absolute;
-      left: 15px;
-      bottom: 15px;
-      z-index: 1000;
-      animation: slideInLeft 1s ease-out;
+      position: absolute; left: 15px; bottom: 15px; z-index: 1000; animation: slideInLeft 1s ease-out;
     }
-    
     .coordinate-input-button .btn {
-      width: 60px;
-      height: 60px;
-      border-radius: 50% !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      background: linear-gradient(135deg, var(--accent), #ff7043);
-      color: white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-      border: none;
+      width: 60px; height: 60px; border-radius: 50% !important; display: flex; align-items: center; justify-content: center;
+      font-size: 24px; background: linear-gradient(135deg, var(--accent), #ff7043); color: white; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease; border: none;
     }
-    
-    .coordinate-input-button .btn:hover {
-      transform: scale(1.1) rotate(10deg);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    /* تصميم عرض القياسات */
+    .coordinate-input-button .btn:hover { transform: scale(1.1) rotate(10deg); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); }
     #distanceDisplay, #areaDisplay {
-      position: absolute;
-      left: 15px;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 12px 18px;
-      border-radius: 30px;
-      display: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-      font-weight: bold;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      animation: fadeIn 0.5s ease-out;
+      position: absolute; left: 15px; z-index: 1000; background: rgba(255, 255, 255, 0.95); padding: 12px 18px;
+      border-radius: 30px; display: none; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); font-weight: bold; backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 0, 0, 0.1); animation: fadeIn 0.5s ease-out;
     }
-    
-    #distanceDisplay {
-      top: 15px;
-      background: linear-gradient(135deg, #1976d2, #64b5f6);
-      color: white;
-    }
-    
-    #areaDisplay {
-      top: 65px;
-      background: linear-gradient(135deg, #388e3c, #81c784);
-      color: white;
-    }
-
-    /* تحسين نمط المودال */
+    #distanceDisplay { top: 15px; background: linear-gradient(135deg, #1976d2, #64b5f6); color: white; }
+    #areaDisplay { top: 65px; background: linear-gradient(135deg, #388e3c, #81c784); color: white; }
     .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s ease-out;
+      display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px); align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out;
     }
-    
-    .modal.show {
-      display: flex;
-    }
-
+    .modal.show { display: flex; }
     .modal-content {
-      background: linear-gradient(145deg, #f8f9fa, #e0f2f1);
-      margin: auto;
-      padding: 0;
-      border: none;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      transform: scale(0.95);
+      background: linear-gradient(145deg, #f8f9fa, #e0f2f1); margin: auto; padding: 0; border: none; border-radius: 20px;
+      width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); overflow: hidden; transform: scale(0.95);
       animation: zoomIn 0.4s ease-out forwards;
     }
-
     .modal-header {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 20px;
+      display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     }
-    
-    .modal-header h5 {
-      font-weight: 700;
-    }
-
-    .modal-body {
-      padding: 25px;
-    }
-    
-    .form-label {
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-    
+    .modal-header h5 { font-weight: 700; }
+    .modal-body { padding: 25px; }
+    .form-label { font-weight: 600; color: var(--dark); margin-bottom: 8px; }
     .form-control {
-      border-radius: 12px !important;
-      padding: 12px 15px;
-      border: 2px solid #e0e0e0;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px !important; padding: 12px 15px; border: 2px solid #e0e0e0; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.8);
     }
-    
-    .form-control:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.2);
-      background: white;
-    }
-
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.2); background: white; }
     .btn-close {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-      opacity: 0.8;
-      transition: all 0.3s ease;
+      background: none; border: none; color: white; font-size: 28px; cursor: pointer; opacity: 0.8; transition: all 0.3s ease;
     }
-    
-    .btn-close:hover {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    /* تصميم الفلاتر */
+    .btn-close:hover { opacity: 1; transform: scale(1.1); }
     .filters-container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 20px;
-      margin: 20px auto;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 20px; margin: 20px auto;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); backdrop-filter: blur(5px); border: 1px solid rgba(0, 0, 0, 0.05);
       animation: slideInDown 0.8s ease-out;
     }
-    
     .filters-container h2 {
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 700;
-      position: relative;
-      padding-bottom: 10px;
+      color: var(--primary); text-align: center; margin-bottom: 20px; font-weight: 700; position: relative; padding-bottom: 10px;
     }
-    
     .filters-container h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--secondary), var(--accent));
-      border-radius: 10px;
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 3px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent)); border-radius: 10px;
     }
-    
     .filter-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; font-weight: 600;
+      transition: all 0.3s ease; border: none; border-radius: 12px; padding: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    
-    .filter-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-      background: linear-gradient(135deg, var(--primary-light), var(--primary));
-    }
-    
+    .filter-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); background: linear-gradient(135deg, var(--primary-light), var(--primary)); }
     .reset-btn {
-      background: linear-gradient(135deg, #616161, #9e9e9e);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, #616161, #9e9e9e); color: white; border: none; border-radius: 12px; padding: 12px;
+      font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    
-    .reset-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-      background: linear-gradient(135deg, #757575, #616161);
-    }
-    
-    /* تأثيرات للخريطة */
-    .leaflet-popup-content-wrapper {
-      border-radius: 15px !important;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .leaflet-popup-content {
-      margin: 15px !important;
-    }
-    
-    /* تنسيق نص المساحة داخل المضلع */
+    .reset-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); background: linear-gradient(135deg, #757575, #616161); }
+    .leaflet-popup-content-wrapper { border-radius: 15px !important; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .leaflet-popup-content { margin: 15px !important; }
     .area-label-content {
-      background: rgba(56, 142, 60, 0.85);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 30px;
-      font-weight: bold;
-      border: 2px solid white;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-      font-size: 1.1rem;
-      transform: translateY(-50%);
+      background: rgba(56, 142, 60, 0.85); color: white; padding: 10px 15px; border-radius: 30px; font-weight: bold;
+      border: 2px solid white; text-align: center; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); font-size: 1.1rem; transform: translateY(-50%);
     }
-
-    /* تأثيرات عند التكبير والتصغير */
-    .area-label {
-      transition: transform 0.3s ease;
-    }
-
-    .leaflet-zoom-anim .area-label {
-      transition: transform 0.25s cubic-bezier(0,0,0.25,1);
-    }
-
-    @keyframes pulseArea {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .area-label-content {
-      animation: pulseArea 2s infinite;
-    }
-    
-    /* رسوم متحركة */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    
-    @keyframes slideInLeft {
-      from { transform: translateX(-50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes slideInDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      70% { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-    
-    /* تصميم متجاوب */
+    .area-label { transition: transform 0.3s ease; }
+    .leaflet-zoom-anim .area-label { transition: transform 0.25s cubic-bezier(0,0,0.25,1); }
+    @keyframes pulseArea { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    .area-label-content { animation: pulseArea 2s infinite; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideInDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    .pulse { animation: pulse 2s infinite; }
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px 10px;
-      }
-      
-      header h1 {
-        font-size: 1.2rem;
-      }
-      
-      header img {
-        height: 50px;
-        width: 50px;
-      }
-      
-      .filters-container {
-        padding: 15px;
-      }
-      
-      .measure-control {
-        top: 120px;
-        left: 10px;
-      }
-      
-      .coordinate-input-button {
-        left: 10px;
-      }
+      header { flex-direction: column; gap: 10px; padding: 15px 10px; }
+      header h1 { font-size: 1.2rem; }
+      header img { height: 50px; width: 50px; }
+      .filters-container { padding: 15px; }
+      .measure-control { top: 120px; left: 10px; }
+      .coordinate-input-button { left: 10px; }
     }
-
-    /* القائمة الجانبية */
     .sidebar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: var(--sidebar-width);
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, #00251a 100%);
-      color: white;
-      z-index: 1000;
-      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
-      transform: translateX(0);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      overflow-y: auto;
-      padding-top: 70px;
+      position: fixed; top: 0; right: 0; width: var(--sidebar-width); height: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, #00251a 100%); color: white; z-index: 1000;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3); transform: translateX(0); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow-y: auto; padding-top: 70px;
     }
-    
-    .sidebar-hidden {
-      transform: translateX(100%);
-    }
-    
+    .sidebar-hidden { transform: translateX(100%); }
     .sidebar-header {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: var(--sidebar-width);
-      height: 70px;
-      background: linear-gradient(135deg, var(--primary) 0%, #001510 100%);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 1010;
+      position: fixed; top: 0; right: 0; width: var(--sidebar-width); height: 70px;
+      background: linear-gradient(135deg, var(--primary) 0%, #001510 100%); display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); z-index: 1010;
     }
-    
-    .sidebar-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
+    .sidebar-title { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
     .toggle-btn {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 1.8rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: transparent; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: all 0.3s ease;
+      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
     }
-    
-    .toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: rotate(180deg);
-    }
-    
-    .sidebar-menu {
-      list-style: none;
-      padding: 20px 0;
-    }
-    
-    .sidebar-item {
-      margin: 5px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
+    .toggle-btn:hover { background: rgba(255, 255, 255, 0.1); transform: rotate(180deg); }
+    .sidebar-menu { list-style: none; padding: 20px 0; }
+    .sidebar-item { margin: 5px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .sidebar-link {
-      display: flex;
-      align-items: center;
-      padding: 15px 25px;
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      display: flex; align-items: center; padding: 15px 25px; color: white; text-decoration: none; font-size: 1.1rem;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
     }
-    
-    .sidebar-link:hover {
-      background: rgba(255, 255, 255, 0.1);
-      padding-right: 30px;
-    }
-    
+    .sidebar-link:hover { background: rgba(255, 255, 255, 0.1); padding-right: 30px; }
     .sidebar-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 4px;
-      height: 0;
-      background: var(--secondary);
-      transition: height 0.3s ease;
+      content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 0; background: var(--secondary); transition: height 0.3s ease;
     }
-    
-    .sidebar-link:hover::before {
-      height: 100%;
-    }
-    
-    .sidebar-link i {
-      font-size: 1.3rem;
-      margin-left: 15px;
-      min-width: 24px;
-      text-align: center;
-    }
-    
-    .sidebar-link.active {
-      background: rgba(255, 255, 255, 0.15);
-      padding-right: 30px;
-      font-weight: 700;
-    }
-    
-    .sidebar-link.active::before {
-      height: 100%;
-    }
-    
-    .sidebar-footer {
-      padding: 20px;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 20px;
-    }
-    
-    .sidebar-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      display: none;
-      backdrop-filter: blur(3px);
-    }
-    
+    .sidebar-link:hover::before { height: 100%; }
+    .sidebar-link i { font-size: 1.3rem; margin-left: 15px; min-width: 24px; text-align: center; }
+    .sidebar-link.active { background: rgba(255, 255, 255, 0.15); padding-right: 30px; font-weight: 700; }
+    .sidebar-link.active::before { height: 100%; }
+    .sidebar-footer { padding: 20px; text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 20px; }
+    .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999; display: none; backdrop-filter: blur(3px); }
     @media (max-width: 992px) {
-      body {
-        padding-right: 0;
-      }
-      
-      .sidebar {
-        transform: translateX(100%);
-      }
-      
-      .sidebar-visible {
-        transform: translateX(0);
-      }
-      
-      .toggle-btn {
-        display: block;
-      }
+      body { padding-right: 0; }
+      .sidebar { transform: translateX(100%); }
+      .sidebar-visible { transform: translateX(0); }
+      .toggle-btn { display: block; }
     }
-    
     .menu-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 900;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      animation: slideInRight 0.8s ease-out;
+      position: fixed; top: 20px; right: 20px; z-index: 900; width: 50px; height: 50px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); cursor: pointer; transition: all 0.3s ease; animation: slideInRight 0.8s ease-out;
     }
-    
-    .menu-toggle:hover {
-      transform: scale(1.1);
-    }
-    
-    @keyframes slideInRight {
-      from { transform: translateX(100px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    /* أنماط الاتصال العامة */
-    .contact-info {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 15px;
-    }
-    
-    .contact-info a {
-      color: white;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      padding: 8px 0;
-    }
-    
-    .contact-info a:hover {
-      color: var(--secondary);
-      padding-right: 5px;
-    }
-    
-    .contact-info i {
-      font-size: 1.2rem;
-      min-width: 25px;
-      text-align: center;
-    }
-    
-    /* أنماط قائمة المفضلة المنبثقة */
-    #favoritesModal {
-      z-index: 2001;
-    }
-    
-    .favorite-list {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding-right: 10px;
-    }
-    
+    .menu-toggle:hover { transform: scale(1.1); }
+    @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .contact-info { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 15px; margin-top: 15px; }
+    .contact-info a { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; padding: 8px 0; }
+    .contact-info a:hover { color: var(--secondary); padding-right: 5px; }
+    .contact-info i { font-size: 1.2rem; min-width: 25px; text-align: center; }
+    #favoritesModal { z-index: 2001; }
+    .favorite-list { max-height: 60vh; overflow-y: auto; padding-right: 10px; }
     .favorite-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 15px;
-      margin-bottom: 10px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-      border-left: 4px solid var(--accent);
-      transition: all 0.3s ease;
+      display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; margin-bottom: 10px;
+      background: white; border-radius: 12px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); border-left: 4px solid var(--accent); transition: all 0.3s ease;
     }
-    
-    .favorite-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    }
-    
-    .favorite-info {
-      flex-grow: 1;
-    }
-    
-    .favorite-name {
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 5px;
-    }
-    
-    .favorite-details {
-      display: flex;
-      gap: 10px;
-      font-size: 0.85rem;
-      color: #666;
-    }
-    
-    .favorite-details span {
-      background: #f0f0f0;
-      padding: 3px 8px;
-      border-radius: 15px;
-    }
-    
-    .favorite-actions {
-      display: flex;
-      gap: 8px;
-    }
-    
+    .favorite-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
+    .favorite-info { flex-grow: 1; }
+    .favorite-name { font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+    .favorite-details { display: flex; gap: 10px; font-size: 0.85rem; color: #666; }
+    .favorite-details span { background: #f0f0f0; padding: 3px 8px; border-radius: 15px; }
+    .favorite-actions { display: flex; gap: 8px; }
     .favorite-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f5f5f5;
-      border: none;
-      transition: all 0.3s ease;
+      width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: #f5f5f5; border: none; transition: all 0.3s ease;
     }
-    
-    .favorite-btn:hover {
-      background: var(--accent);
-      color: white;
-    }
-    
-    .no-favorites {
-      text-align: center;
-      padding: 30px;
-      color: #666;
-    }
-    
-    .no-favorites i {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #e0e0e0;
-    }
-    
-    .favorites-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .favorites-count {
-      background: var(--primary);
-      color: white;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-    }
-    
-    /* أنماط جديدة لعرض الصورة */
+    .favorite-btn:hover { background: var(--accent); color: white; }
+    .no-favorites { text-align: center; padding: 30px; color: #666; }
+    .no-favorites i { font-size: 3rem; margin-bottom: 15px; color: #e0e0e0; }
+    .favorites-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .favorites-count { background: var(--primary); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.9rem; }
     .opportunity-image {
-      width: 100%;
-      height: 120px;
-      border-radius: 8px;
-      object-fit: cover;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      margin-bottom: 10px;
-      border: 2px solid #eee;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      width: 100%; height: 120px; border-radius: 8px; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;
+      margin-bottom: 10px; border: 2px solid #eee; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     }
-    
-    .opportunity-image:hover {
-      transform: scale(1.03);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    /* نافذة عرض الصورة المكبرة */
-    #imageModal {
-      z-index: 2002;
-      background: rgba(0, 0, 0, 0.9);
-    }
-    
-    .image-modal-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .image-modal-content img {
-      max-width: 100%;
-      max-height: 90vh;
-      border-radius: 10px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-    }
-    
-    .image-modal-header {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      z-index: 10;
-    }
-    
+    .opportunity-image:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+    #imageModal { z-index: 2002; background: rgba(0, 0, 0, 0.9); }
+    .image-modal-content { position: relative; max-width: 90%; max-height: 90%; display: flex; justify-content: center; align-items: center; }
+    .image-modal-content img { max-width: 100%; max-height: 90vh; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
+    .image-modal-header { position: absolute; top: 15px; right: 15px; z-index: 10; }
     .image-modal-title {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-size: 1.2rem;
-      border-radius: 0 0 10px 10px;
+      position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px;
+      text-align: center; font-size: 1.2rem; border-radius: 0 0 10px 10px;
     }
-    
     .image-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 10;
+      position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.7); border-radius: 50%;
+      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer;
+      transition: all 0.3s ease; z-index: 10;
     }
-    
-    .image-nav:hover {
-      background: rgba(255, 255, 255, 0.9);
-      transform: translateY(-50%) scale(1.1);
-    }
-    
-    .image-prev {
-      left: 15px;
-    }
-    
-    .image-next {
-      right: 15px;
-    }
+    .image-nav:hover { background: rgba(255, 255, 255, 0.9); transform: translateY(-50%) scale(1.1); }
+    .image-prev { left: 15px; }
+    .image-next { right: 15px; }
   </style>
 </head>
 <body>
-
-<!-- القائمة الجانبية -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <div class="sidebar-title">
-      <i class="bi bi-list"></i> القائمة الرئيسية
-    </div>
-    <button class="toggle-btn" id="closeSidebar">
-      <i class="bi bi-x-lg"></i>
-    </button>
+    <div class="sidebar-title"><i class="bi bi-list"></i> القائمة الرئيسية</div>
+    <button class="toggle-btn" id="closeSidebar"><i class="bi bi-x-lg"></i></button>
   </div>
-  
   <ul class="sidebar-menu">
-    <li class="sidebar-item">
-      <a href="index.html" class="sidebar-link">
-        <i class="bi bi-house-door"></i> الصفحة الرئيسية
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="opportunities.html" class="sidebar-link active">
-        <i class="bi bi-map"></i> الفرص الاستثمارية
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" data-link="favorites">
-        <i class="bi bi-heart"></i> المفضلة
-        <span id="favoritesCounter" class="badge bg-danger ms-2">0</span>
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" onclick="openGuestModal()">
-        <i class="bi bi-bar-chart"></i> التقارير والإحصائيات
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" onclick="openGuestModal()">
-        <i class="bi bi-newspaper"></i> أخبار الاستثمار
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" onclick="openGuestModal()">
-        <i class="bi bi-question-circle"></i> المساعدة والدعم
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" onclick="openGuestModal()">
-        <i class="bi bi-info-circle"></i> من نحن
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" onclick="openGuestModal()">
-        <i class="bi bi-telephone"></i> اتصل بنا
-      </a>
-    </li>
+    <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="bi bi-house-door"></i> الصفحة الرئيسية</a></li>
+    <li class="sidebar-item"><a href="opportunities.html" class="sidebar-link active"><i class="bi bi-map"></i> الفرص الاستثمارية</a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-link" data-link="favorites"><i class="bi bi-heart"></i> المفضلة<span id="favoritesCounter" class="badge bg-danger ms-2">0</span></a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-link" onclick="openGuestModal()"><i class="bi bi-bar-chart"></i> التقارير والإحصائيات</a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-link" onclick="openGuestModal()"><i class="bi bi-newspaper"></i> أخبار الاستثمار</a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-link" onclick="openGuestModal()"><i class="bi bi-question-circle"></i> المساعدة والدعم</a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-link" onclick="openGuestModal()"><i class="bi bi-info-circle"></i> من نحن</a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-link" onclick="openGuestModal()"><i class="bi bi-telephone"></i> اتصل بنا</a></li>
   </ul>
-  
-  <div class="sidebar-footer">
-    © 2025 محافظة قنا<br>
-    جميع الحقوق محفوظة
-  </div>
+  <div class="sidebar-footer">© 2025 محافظة قنا<br>جميع الحقوق محفوظة</div>
 </div>
-
-<!-- زر فتح القائمة (للأجهزة الصغيرة) -->
-<div class="menu-toggle" id="menuToggle">
-  <i class="bi bi-list"></i>
-</div>
-
-<!-- Header -->
+<div class="menu-toggle" id="menuToggle"><i class="bi bi-list"></i></div>
 <header class="text-white">
-  <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg"  alt="شعار المحافظة"
-       onerror="this.src='https://via.placeholder.com/70x70?text=Gov+Logo'">
-  
+  <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" alt="شعار المحافظة" onerror="this.src='https://via.placeholder.com/70x70?text=Gov+Logo'">
   <h1>الفرص الاستثمارية في محافظة قنا</h1>
-  <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع"
-       onerror="this.src='https://via.placeholder.com/70x70?text=GIS+Logo'">
+  <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع" onerror="this.src='https://via.placeholder.com/70x70?text=GIS+Logo'">
 </header>
-
-<!-- Filters -->
 <div class="container mt-3">
   <div class="filters-container">
     <h2><i class="bi bi-funnel"></i> تصفية الفرص الاستثمارية</h2>
     <div class="row g-3 mb-3">
-      <div class="col-md-3">
-        <select id="sectorFilter" class="form-select">
-          <option value="">كل القطاعات</option>
-          <option value="صناعي">صناعي</option>
-          <option value="زراعي">زراعي</option>
-          <option value="خدماتي">خدماتي</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select id="regionFilter" class="form-select">
-          <option value="">كل المناطق</option>
-          <option value="دشنا">دشنا</option>
-          <option value="الوقف">الوقف</option>
-          <option value="نجع حمادي">نجع حمادي</option>
-          <option value="فرشوط">فرشوط</option>
-          <option value="أبوتشت">أبوتشت</option>
-          <option value="قنا">قنا</option>
-          <option value="قفط">قفط</option>
-          <option value="قوص">قوص</option>
-          <option value="نقادة">نقادة</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select id="statusFilter" class="form-select">
-          <option value="">كل الحالات</option>
-          <option value="متاحة">متاحة</option>
-          <option value="قيد الدراسة">قيد الدراسة</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
-      </div>
-      <div class="col-6">
-        <button onclick="filterMarkers()" class="filter-btn w-100">
-          <i class="bi bi-search"></i> بدء البحث
-        </button>
-      </div>
-      <div class="col-6">
-        <button onclick="resetFilters()" class="reset-btn w-100">
-          <i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين
-        </button>
-      </div>
+      <div class="col-md-3"><select id="sectorFilter" class="form-select"><option value="">كل القطاعات</option><option value="صناعي">صناعي</option><option value="زراعي">زراعي</option><option value="خدماتي">خدماتي</option></select></div>
+      <div class="col-md-3"><select id="regionFilter" class="form-select"><option value="">كل المناطق</option><option value="دشنا">دشنا</option><option value="الوقف">الوقف</option><option value="نجع حمادي">نجع حمادي</option><option value="فرشوط">فرشوط</option><option value="أبوتشت">أبوتشت</option><option value="قنا">قنا</option><option value="قفط">قفط</option><option value="قوص">قوص</option><option value="نقادة">نقادة</option></select></div>
+      <div class="col-md-3"><select id="statusFilter" class="form-select"><option value="">كل الحالات</option><option value="متاحة">متاحة</option><option value="قيد الدراسة">قيد الدراسة</option></select></div>
+      <div class="col-md-3"><input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم..."></div>
+      <div class="col-6"><button onclick="filterMarkers()" class="filter-btn w-100"><i class="bi bi-search"></i> بدء البحث</button></div>
+      <div class="col-6"><button onclick="resetFilters()" class="reset-btn w-100"><i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين</button></div>
     </div>
   </div>
 </div>
-
-<!-- Tools Buttons -->
 <div class="measure-control">
-  <button id="distanceBtn" onclick="toggleDistance()" class="btn" title="قياس المسافات">
-    <i class="bi bi-rulers"></i>
-  </button>
-  <button id="areaBtn" onclick="toggleArea()" class="btn" title="قياس المساحة">
-    <i class="bi bi-polygon"></i>
-  </button>
-  <button id="clearBtn" onclick="clearAll()" class="btn" title="مسح الكل">
-    <i class="bi bi-trash"></i>
-  </button>
+  <button id="distanceBtn" onclick="toggleDistance()" class="btn" title="قياس المسافات"><i class="bi bi-rulers"></i></button>
+  <button id="areaBtn" onclick="toggleArea()" class="btn" title="قياس المساحة" style="display: block;"><i class="bi bi-polygon"></i></button>
+  <button id="clearBtn" onclick="clearAll()" class="btn" title="مسح الكل"><i class="bi bi-trash"></i></button>
 </div>
-
-<!-- Coordinate Button -->
 <div class="coordinate-input-button">
-  <button id="pinBtn" onclick="openCoordinateModal()" class="btn pulse" title="أضف نقطة بالإحداثيات">
-    <i class="bi bi-pin-map-fill"></i>
-  </button>
+  <button id="pinBtn" onclick="openCoordinateModal()" class="btn pulse" title="أضف نقطة بالإحداثيات"><i class="bi bi-pin-map-fill"></i></button>
 </div>
-
-<!-- Distance & Area Display -->
-<div id="distanceDisplay" style="display: none;">
-  <i class="bi bi-rulers"></i> المسافة الكلية: 0 متر
-</div>
-<div id="areaDisplay" style="display: none;">
-  <i class="bi bi-polygon"></i> المساحة: 0 م²
-</div>
-
-<!-- Coordinate Modal -->
+<div id="distanceDisplay" style="display: none;"><i class="bi bi-rulers"></i> المسافة الكلية: 0 متر</div>
+<div id="areaDisplay" style="display: none;"><i class="bi bi-polygon"></i> المساحة: 0 م²</div>
 <div id="coordinateModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -1109,8 +312,6 @@
     </div>
   </div>
 </div>
-
-<!-- Favorites Modal -->
 <div id="favoritesModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -1119,27 +320,17 @@
     </div>
     <div class="modal-body">
       <div class="favorites-header">
-        <div>
-          <i class="bi bi-bookmark-heart"></i> قائمة الفرص المفضلة
-        </div>
+        <div><i class="bi bi-bookmark-heart"></i> قائمة الفرص المفضلة</div>
         <div class="favorites-count" id="favoritesCount">0 عنصر</div>
       </div>
-      
-      <div class="favorite-list" id="favoritesList">
-        <!-- سيتم ملء القائمة ديناميكياً من خلال جافاسكريبت -->
-      </div>
-      
+      <div class="favorite-list" id="favoritesList"></div>
       <div class="mt-4 d-flex justify-content-between">
         <button class="btn btn-lg btn-outline-secondary" onclick="closeFavoritesModal()">إغلاق</button>
-        <button class="btn btn-lg btn-danger" onclick="clearAllFavorites()">
-          <i class="bi bi-trash"></i> حذف الكل
-        </button>
+        <button class="btn btn-lg btn-danger" onclick="clearAllFavorites()"><i class="bi bi-trash"></i> حذف الكل</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- نافذة الزوار غير المسجلين -->
 <div id="guestModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -1147,14 +338,9 @@
       <button type="button" class="btn-close" onclick="closeGuestModal()">&times;</button>
     </div>
     <div class="modal-body text-center py-4">
-      <div class="mb-4">
-        <i class="bi bi-person-x" style="font-size: 4rem; color: #e64a19;"></i>
-      </div>
+      <div class="mb-4"><i class="bi bi-person-x" style="font-size: 4rem; color: #e64a19;"></i></div>
       <h4 class="mb-3">عذرًا، هذه الخدمة غير متاحة للزوار</h4>
-      <p class="text-muted">
-        نعتذر، هذه الخدمة متاحة فقط للأعضاء المسجلين في النظام.<br>
-        يرجى تسجيل الدخول أو إنشاء حساب جديد للوصول إلى كافة الميزات.
-      </p>
+      <p class="text-muted">نعتذر، هذه الخدمة متاحة فقط للأعضاء المسجلين في النظام.<br>يرجى تسجيل الدخول أو إنشاء حساب جديد للوصول إلى كافة الميزات.</p>
       <div class="mt-4">
         <button class="btn btn-primary me-2" onclick="closeGuestModal()">فهمت</button>
         <button class="btn btn-outline-primary">تسجيل الدخول</button>
@@ -1162,115 +348,34 @@
     </div>
   </div>
 </div>
-
-<!-- نافذة عرض الصورة المكبرة -->
 <div id="imageModal" class="modal">
   <div class="image-modal-content">
     <div class="image-modal-header">
       <button class="btn-close" onclick="closeImageModal()">&times;</button>
     </div>
-    
-    <div class="image-nav image-prev" onclick="navigateImage(-1)">
-      <i class="bi bi-chevron-left"></i>
-    </div>
-    
-    <div class="image-nav image-next" onclick="navigateImage(1)">
-      <i class="bi bi-chevron-right"></i>
-    </div>
-    
+    <div class="image-nav image-prev" onclick="navigateImage(-1)"><i class="bi bi-chevron-left"></i></div>
+    <div class="image-nav image-next" onclick="navigateImage(1)"><i class="bi bi-chevron-right"></i></div>
     <img id="expandedImg" alt="صورة الفرصة الاستثمارية">
     <div class="image-modal-title" id="imageTitle"></div>
   </div>
 </div>
-
 <div id="map"></div>
-
-<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
 <script>
   let markers = [];
   let map;
-  
-  // المتغيرات الجديدة
   let distancePoints = [];
   let areaPoints = [];
   let distanceLine = null;
   let areaPolygon = null;
   let manualMarker = null;
-  let areaLabel = null; // لتخزين نص مساحة المضلع
-  
-  // متغيرات لعرض الصور
+  let areaLabel = null;
   let currentImageIndex = 0;
   let imageGallery = [];
+  let opportunities = [];
 
-  // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
-  const opportunities = [
-    {
-      id: 1,
-      name: "مشروع صناعي 1",
-      lat: 26.155,
-      lng: 32.716,
-      sector: "صناعي",
-      region: "قنا",
-      area: "1000 م²",
-      status: "متاحة",
-      description: "موقع صناعي ممتاز بالقرب من الطريق السريع، يحتوي على بنية تحتية متكاملة للصناعات المتوسطة والخفيفة.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 2,
-      name: "مشروع زراعي 1",
-      lat: 26.200,
-      lng: 32.800,
-      sector: "زراعي",
-      region: "قفط",
-      area: "5000 م²",
-      status: "قيد الدراسة",
-      description: "أرض زراعية خصبة على ضفاف النيل، مناسبة لمشاريع الاستزراع المائي والزراعات المحمية.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 3,
-      name: "مشروع خدمي 1",
-      lat: 26.100,
-      lng: 32.650,
-      sector: "خدماتي",
-      region: "نجع حمادي",
-      area: "800 م²",
-      status: "متاحة",
-      description: "مكان مميز في وسط المدينة لإنشاء مجمع تجاري أو مركز خدمات متكامل، يقع في منطقة تجارية نشطة.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 4,
-      name: "مشروع صناعي 2",
-      lat: 26.170,
-      lng: 32.750,
-      sector: "صناعي",
-      region: "قنا",
-      area: "2500 م²",
-      status: "متاحة",
-      description: "منطقة صناعية مجهزة بالكامل للصناعات الثقيلة، تتوفر بها خدمات الكهرباء والمياه والغاز.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    },
-    {
-      id: 5,
-      name: "مشروع زراعي 2",
-      lat: 26.220,
-      lng: 32.830,
-      sector: "زراعي",
-      region: "دشنا",
-      area: "7000 م²",
-      status: "قيد الدراسة",
-      description: "مزرعة متكاملة للاستزراع السمكي والزراعة العضوية، تتوفر بها مصادر مياه طبيعية.",
-      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
-    }
-  ];
-
-  // دالة التنبيه المؤقت
   function showTooltip(text, type = "info") {
     const tooltip = document.createElement('div');
     tooltip.id = 'custom-tooltip';
@@ -1285,7 +390,6 @@
     tooltip.style.color = 'white';
     tooltip.style.transition = 'all 0.3s ease';
     tooltip.style.transform = 'translateX(120%)';
-    
     if (type === "success") {
       tooltip.style.background = 'linear-gradient(135deg, #388e3c, #81c784)';
     } else if (type === "error") {
@@ -1293,32 +397,17 @@
     } else {
       tooltip.style.background = 'linear-gradient(135deg, #1976d2, #64b5f6)';
     }
-    
     tooltip.innerHTML = `<i class="bi ${type === 'success' ? 'bi-check-circle' : type === 'error' ? 'bi-exclamation-circle' : 'bi-info-circle'}"></i> ${text}`;
     document.body.appendChild(tooltip);
-
-    // إظهار التنبيه بتحريكه
-    setTimeout(() => {
-      tooltip.style.transform = 'translateX(0)';
-    }, 10);
-
-    // إخفاء التنبيه بعد 3 ثوان
+    setTimeout(() => { tooltip.style.transform = 'translateX(0)'; }, 10);
     setTimeout(() => {
       tooltip.style.transform = 'translateX(120%)';
-      setTimeout(() => {
-        if (document.body.contains(tooltip)) {
-          document.body.removeChild(tooltip);
-        }
-      }, 300);
+      setTimeout(() => { if (document.body.contains(tooltip)) document.body.removeChild(tooltip); }, 300);
     }, 3000);
   }
 
-  // تهيئة الخريطة
   function initMap() {
-    // إنشاء الخريطة
-    map = L.map('map').setView([26.155, 32.716], 9); // موقع قنا
-
-    // خريطة MapTiler Satellite
+    map = L.map('map').setView([26.155, 32.716], 9);
     L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=73sDwzFoqKJbdF9udESc', {
       attribution: '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>',
       tileSize: 512,
@@ -1327,101 +416,87 @@
       minZoom: 0
     }).addTo(map);
 
-    // إضافة العلامات للفرص الاستثمارية
-    opportunities.forEach(opportunity => {
-      // اختيار لون حسب القطاع
-      let iconColor;
-      if (opportunity.sector === "صناعي") iconColor = 'red';
-      else if (opportunity.sector === "زراعي") iconColor = 'green';
-      else iconColor = 'blue';
-      
-      // إنشاء أيقونة مخصصة
-      const customIcon = L.divIcon({
-        className: 'custom-div-icon',
-        html: `<div style="background-color: ${iconColor}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
-                <div style="position: absolute; left: 30%; top: 30%; transform: rotate(45deg); color: white; font-size: 12px; font-weight: bold;">${opportunity.sector.charAt(0)}</div>
-              </div>`,
-        iconSize: [30, 30],
-        iconAnchor: [15, 30]
-      });
-
-      const marker = L.marker([opportunity.lat, opportunity.lng], {icon: customIcon}).addTo(map);
-      marker.options.data = opportunity;
-      
-      // تصميم نافذة المعلومات
-      let imageHtml = '';
-      if (opportunity.imageUrl) {
-        imageHtml = `
-          <div class="mb-2 text-center">
-            <img src="${opportunity.imageUrl}" class="opportunity-image" 
-                 alt="صورة ${opportunity.name}"
-                 onclick="openImageModal('${opportunity.imageUrl}', '${opportunity.name}')">
-          </div>
-        `;
-      }
-      
-      const popupContent = `
-        <div style="text-align: right; min-width: 250px;">
-          <div style="background: linear-gradient(135deg, #004d40, #00796b); color: white; padding: 10px; border-radius: 10px 10px 0 0; margin: -15px -15px 10px -15px;">
-            <h4 style="margin: 0; font-weight: bold;">${opportunity.name}</h4>
-          </div>
-          ${imageHtml}
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0;">
-            <span style="background: #e3f2fd; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi bi-building"></i> ${opportunity.sector}
-            </span>
-            <span style="background: #e8f5e9; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi bi-geo-alt"></i> ${opportunity.region}
-            </span>
-            <span style="background: #fff3e0; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi bi-arrows-fullscreen"></i> ${opportunity.area}
-            </span>
-            <span style="background: ${opportunity.status === 'متاحة' ? '#e8f5e9' : '#ffebee'}; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi ${opportunity.status === 'متاحة' ? 'bi-check-circle' : 'bi-clock'}"></i> ${opportunity.status}
-            </span>
-          </div>
-          <div style="margin: 10px 0; font-size: 0.9rem; color: #444;">
-            ${opportunity.description}
-          </div>
-          <button class="btn btn-primary btn-sm w-100" onclick="saveToFavorites(${opportunity.id})" style="border-radius: 10px;">
-            <i class="bi bi-heart"></i> حفظ في المفضلة
-          </button>
-        </div>
-      `;
-      
-      marker.bindPopup(popupContent);
-      
-      // تأثير عند فتح النافذة المنبثقة
-      marker.on('popupopen', function() {
-        const popup = marker.getPopup();
-        const element = popup.getElement();
-        anime({
-          targets: element,
-          scale: [0.8, 1],
-          opacity: [0, 1],
-          duration: 500,
-          easing: 'easeOutElastic(1, .8)'
+    fetch('foras_estsmarea_67.json')
+      .then(response => response.json())
+      .then(data => {
+        opportunities = data;
+        opportunities.forEach(opportunity => {
+          let iconColor;
+          if (opportunity.sector === "صناعي") iconColor = 'red';
+          else if (opportunity.sector === "زراعي") iconColor = 'green';
+          else iconColor = 'blue';
+          const customIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-color: ${iconColor}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+                    <div style="position: absolute; left: 30%; top: 30%; transform: rotate(45deg); color: white; font-size: 12px; font-weight: bold;">${opportunity.sector.charAt(0)}</div>
+                  </div>`,
+            iconSize: [30, 30],
+            iconAnchor: [15, 30]
+          });
+          if (opportunity.geometry && opportunity.geometry.type === "Polygon") {
+            const polygon = L.polygon(opportunity.geometry.coordinates[0].map(coord => [coord[1], coord[0]]), {
+              color: iconColor,
+              fillColor: iconColor,
+              fillOpacity: 0.3,
+              weight: 3
+            }).addTo(map);
+            polygon.options.data = opportunity;
+            const popupContent = `
+              <div style="text-align: right; min-width: 250px;">
+                <div style="background: linear-gradient(135deg, #004d40, #00796b); color: white; padding: 10px; border-radius: 10px 10px 0 0; margin: -15px -15px 10px -15px;">
+                  <h4 style="margin: 0; font-weight: bold;">${opportunity.name}</h4>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0;">
+                  <span style="background: #e3f2fd; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
+                    <i class="bi bi-building"></i> ${opportunity.sector}
+                  </span>
+                  <span style="background: #e8f5e9; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
+                    <i class="bi bi-geo-alt"></i> ${opportunity.region}
+                  </span>
+                  <span style="background: #fff3e0; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
+                    <i class="bi bi-arrows-fullscreen"></i> ${opportunity.area}
+                  </span>
+                  <span style="background: ${opportunity.status === 'متاحة' ? '#e8f5e9' : '#ffebee'}; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
+                    <i class="bi ${opportunity.status === 'متاحة' ? 'bi-check-circle' : 'bi-clock'}"></i> ${opportunity.status}
+                  </span>
+                </div>
+                <div style="margin: 10px 0; font-size: 0.9rem; color: #444;">
+                  ${opportunity.description}
+                </div>
+                <button class="btn btn-primary btn-sm w-100" onclick="saveToFavorites(${opportunity.id})" style="border-radius: 10px;">
+                  <i class="bi bi-heart"></i> حفظ في المفضلة
+                </button>
+              </div>
+            `;
+            polygon.bindPopup(popupContent);
+            polygon.on('popupopen', function() {
+              const popup = polygon.getPopup();
+              const element = popup.getElement();
+              anime({
+                targets: element,
+                scale: [0.8, 1],
+                opacity: [0, 1],
+                duration: 500,
+                easing: 'easeOutElastic(1, .8)'
+              });
+            });
+            markers.push(polygon);
+          }
+          if (opportunity.imageUrl) {
+            imageGallery.push({
+              url: opportunity.imageUrl,
+              name: opportunity.name
+            });
+          }
         });
+        updateFavoritesCounter();
+      })
+      .catch(error => {
+        showTooltip("خطأ في تحميل بيانات JSON", "error");
+        console.error('Error loading JSON:', error);
       });
-      
-      markers.push(marker);
-    });
-    
-    // تحديث عدد المفضلة عند التحميل
-    updateFavoritesCounter();
-    
-    // تهيئة معرض الصور
-    opportunities.forEach(opportunity => {
-      if (opportunity.imageUrl) {
-        imageGallery.push({
-          url: opportunity.imageUrl,
-          name: opportunity.name
-        });
-      }
-    });
   }
 
-  // وظائف قياس المسافة
   function toggleDistance() {
     clearOtherTools('distance');
     if (!window.distanceMode) {
@@ -1440,36 +515,27 @@
     const latlngs = distanceLine.getLatLngs();
     latlngs.push(e.latlng);
     distanceLine.setLatLngs(latlngs);
-
-    // إضافة علامة نقطة
     const pointMarker = L.circleMarker(e.latlng, { 
       color: '#1976d2',
       fillColor: '#64b5f6',
       fillOpacity: 1,
       radius: 7
     }).addTo(map);
-    
-    // إضافة رقم للنقطة
     if (latlngs.length === 1) {
       pointMarker.bindPopup("نقطة بداية").openPopup();
     }
-
     if (latlngs.length > 1) {
       let total = 0;
       for (let i = 1; i < latlngs.length; i++) {
         total += map.distance(latlngs[i - 1], latlngs[i]);
-        
-        // إضافة مسافة بين النقاط
         const midPoint = L.latLng(
           (latlngs[i - 1].lat + latlngs[i].lat) / 2,
           (latlngs[i - 1].lng + latlngs[i].lng) / 2
         );
-        
         const distance = map.distance(latlngs[i - 1], latlngs[i]);
         const distanceText = distance >= 1000 ? 
           `${(distance / 1000).toFixed(2)} كم` : 
           `${distance.toFixed(0)} م`;
-        
         L.marker(midPoint, {
           icon: L.divIcon({
             className: 'distance-label',
@@ -1478,7 +544,6 @@
           })
         }).addTo(map);
       }
-      
       const display = document.getElementById('distanceDisplay');
       if (total >= 1000) {
         display.innerHTML = `<i class="bi bi-rulers"></i> المسافة الكلية: ${(total / 1000).toFixed(2)} كم`;
@@ -1496,7 +561,6 @@
     document.getElementById('distanceDisplay').style.display = 'none';
   }
 
-  // وظائف قياس المساحة
   function toggleArea() {
     clearOtherTools('area');
     if (!window.areaMode) {
@@ -1510,15 +574,12 @@
     }
   }
 
-  // دالة جديدة لحساب المساحة الجيوديسية (بدون مكتبات خارجية)
   function geodesicArea(latLngs) {
     let area = 0.0;
     const len = latLngs.length;
     let j = len - 1;
     let p1, p2;
-
     if (len < 3) return 0;
-
     for (let i = 0; i < len; j = i, i++) {
       p1 = latLngs[i];
       p2 = latLngs[j];
@@ -1535,18 +596,13 @@
 
   function addAreaPoint(e) {
     areaPoints.push(e.latlng);
-    
-    // إضافة علامة نقطة
     const pointMarker = L.circleMarker(e.latlng, { 
       color: '#388e3c',
       fillColor: '#81c784',
       fillOpacity: 1,
       radius: 7
     }).addTo(map);
-    
-    // إضافة رقم للنقطة
     pointMarker.bindPopup(`النقطة ${areaPoints.length}`).openPopup();
-
     if (areaPoints.length >= 3) {
       if (areaPolygon) map.removeLayer(areaPolygon);
       areaPolygon = L.polygon(areaPoints, {
@@ -1555,10 +611,7 @@
         fillOpacity: 0.3,
         weight: 3
       }).addTo(map);
-
-      // استخدام الدالة الجديدة لحساب المساحة
       const area = geodesicArea(areaPoints);
-      
       const display = document.getElementById('areaDisplay');
       if (area >= 1e6) {
         display.innerHTML = `<i class="bi bi-polygon"></i> المساحة: ${(area / 1e6).toFixed(2)} كم²`;
@@ -1566,22 +619,16 @@
         display.innerHTML = `<i class="bi bi-polygon"></i> المساحة: ${Math.round(area)} م²`;
       }
       display.style.display = 'block';
-      
-      // تحديث تسمية المساحة داخل المضلع
       updateAreaLabel(area);
     }
   }
 
-  // إنشاء وتحديث نص المساحة داخل المضلع
   function updateAreaLabel(area) {
     if (areaLabel) {
       map.removeLayer(areaLabel);
       areaLabel = null;
     }
-    
     if (!areaPolygon || areaPoints.length < 3) return;
-    
-    // حساب مركز المضلع (المتوسط الحسابي للإحداثيات)
     let latSum = 0;
     let lngSum = 0;
     for (let i = 0; i < areaPoints.length; i++) {
@@ -1589,24 +636,20 @@
       lngSum += areaPoints[i].lng;
     }
     const centroid = L.latLng(latSum / areaPoints.length, lngSum / areaPoints.length);
-    
-    // تنسيق نص المساحة
     let areaText;
     if (area >= 1e6) {
       areaText = `${(area / 1e6).toFixed(2)} كم²`;
     } else {
       areaText = `${Math.round(area)} م²`;
     }
-    
-    // إنشاء التسمية الجديدة
     areaLabel = L.marker(centroid, {
       icon: L.divIcon({
         className: 'area-label',
         html: `<div class="area-label-content">${areaText}</div>`,
-        iconSize: [null, 24] // الحجم التلقائي حسب المحتوى
+        iconSize: [null, 24],
+        interactive: false
       }),
-      zIndexOffset: 1000,
-      interactive: false // لا يتفاعل مع النقرات
+      zIndexOffset: 1000
     }).addTo(map);
   }
 
@@ -1617,7 +660,6 @@
     document.getElementById('areaDisplay').style.display = 'none';
   }
 
-  // وظائف الإحداثيات اليدوية
   function openCoordinateModal() {
     clearOtherTools();
     const modal = document.getElementById('coordinateModal');
@@ -1625,11 +667,7 @@
     document.getElementById('latInput').value = '';
     document.getElementById('lngInput').value = '';
     document.getElementById('errorText').style.display = 'none';
-    
-    // تركيز على الحقل الأول
-    setTimeout(() => {
-      document.getElementById('latInput').focus();
-    }, 100);
+    setTimeout(() => { document.getElementById('latInput').focus(); }, 100);
   }
 
   function closeCoordinateModal() {
@@ -1642,43 +680,29 @@
     const latValue = document.getElementById('latInput').value.trim();
     const lngValue = document.getElementById('lngInput').value.trim();
     const error = document.getElementById('errorText');
-
-    // التحقق من وجود قيم
     if (!latValue || !lngValue) {
       error.innerHTML = "<i class='bi bi-exclamation-circle'></i> يرجى إدخال كلا من خط العرض وخط الطول";
       error.style.display = 'block';
       return;
     }
-
     const lat = parseFloat(latValue);
     const lng = parseFloat(lngValue);
-
-    // التحقق من صحة القيم
     if (isNaN(lat) || isNaN(lng)) {
       error.innerHTML = "<i class='bi bi-exclamation-circle'></i> يرجى إدخال أرقام صحيحة فقط";
       error.style.display = 'block';
       return;
     }
-
-    // التحقق من النطاق الصحيح للإحداثيات
     if (lat < -90 || lat > 90) {
       error.innerHTML = "<i class='bi bi-exclamation-circle'></i> خط العرض يجب أن يكون بين -90 و 90";
       error.style.display = 'block';
       return;
     }
-
     if (lng < -180 || lng > 180) {
       error.innerHTML = "<i class='bi bi-exclamation-circle'></i> خط الطول يجب أن يكون بين -180 و 180";
       error.style.display = 'block';
       return;
     }
-
-    // إزالة العلامة السابقة إن وجدت
-    if (manualMarker) {
-      map.removeLayer(manualMarker);
-    }
-
-    // إنشاء أيقونة مخصصة للنقطة اليدوية
+    if (manualMarker) map.removeLayer(manualMarker);
     const customIcon = L.divIcon({
       className: 'custom-div-icon',
       html: `<div style="background: linear-gradient(135deg, #e64a19, #ff7043); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.4);">
@@ -1687,13 +711,7 @@
       iconSize: [40, 40],
       iconAnchor: [20, 40]
     });
-
-    // إضافة العلامة الجديدة
-    manualMarker = L.marker([lat, lng], {
-      icon: customIcon
-    }).addTo(map);
-
-    // إضافة نافذة منبثقة
+    manualMarker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
     manualMarker.bindPopup(`
       <div style="text-align: right; min-width: 250px;">
         <div style="background: linear-gradient(135deg, #e64a19, #ff7043); color: white; padding: 10px; border-radius: 10px 10px 0 0; margin: -15px -15px 10px -15px;">
@@ -1705,34 +723,17 @@
         </div>
       </div>
     `);
-
-    // الانتقال إلى الموقع وفتح النافذة المنبثقة
     map.setView([lat, lng], 15);
-    setTimeout(() => {
-      manualMarker.openPopup();
-    }, 500);
-
-    // إغلاق المودال وإظهار رسالة نجاح
+    setTimeout(() => { manualMarker.openPopup(); }, 500);
     closeCoordinateModal();
     showTooltip("تم إضافة النقطة بنجاح!", "success");
   }
 
-  // مسح جميع الأدوات
   function clearAll() {
-    // مسح خطوط القياس
     if (distanceLine) map.removeLayer(distanceLine);
     if (areaPolygon) map.removeLayer(areaPolygon);
-    
-    // مسح النقطة اليدوية
     if (manualMarker) map.removeLayer(manualMarker);
-    
-    // إزالة تسمية المساحة
-    if (areaLabel) {
-      map.removeLayer(areaLabel);
-      areaLabel = null;
-    }
-
-    // مسح جميع العلامات المؤقتة
+    if (areaLabel) { map.removeLayer(areaLabel); areaLabel = null; }
     map.eachLayer(function(layer) {
       if (layer instanceof L.CircleMarker || 
           (layer instanceof L.Marker && layer.options.icon && 
@@ -1741,29 +742,19 @@
         map.removeLayer(layer);
       }
     });
-
-    // إعادة تعيين المتغيرات
     distancePoints = [];
     areaPoints = [];
     distanceLine = null;
     areaPolygon = null;
     manualMarker = null;
-
-    // إخفاء النتائج
     document.getElementById('distanceDisplay').style.display = 'none';
     document.getElementById('areaDisplay').style.display = 'none';
-
-    // إعادة تعيين الأزرار
     window.distanceMode = false;
     window.areaMode = false;
-
     document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i>';
     document.getElementById('areaBtn').innerHTML = '<i class="bi bi-polygon"></i>';
-
-    // إيقاف جميع الأحداث
     map.off('click', addDistancePoint);
     map.off('click', addAreaPoint);
-
     showTooltip("تم مسح جميع الأدوات والقياسات", "success");
   }
 
@@ -1772,13 +763,11 @@
     if (currentTool !== 'area') endArea();
   }
 
-  // الفلاتر
   function filterMarkers() {
     const sector = document.getElementById('sectorFilter').value;
     const region = document.getElementById('regionFilter').value;
     const status = document.getElementById('statusFilter').value;
     const search = document.getElementById('searchInput').value.toLowerCase();
-
     markers.forEach(marker => {
       const data = marker.options.data;
       let show = true;
@@ -1786,14 +775,8 @@
       if (region && data.region !== region) show = false;
       if (status && data.status !== status) show = false;
       if (search && !data.name.toLowerCase().includes(search)) show = false;
-      
-      if (show) {
-        marker.addTo(map);
-      } else {
-        map.removeLayer(marker);
-      }
+      if (show) { marker.addTo(map); } else { map.removeLayer(marker); }
     });
-    
     showTooltip(`تم تطبيق الفلاتر وتم عرض ${markers.filter(m => map.hasLayer(m)).length} فرصة`);
   }
 
@@ -1805,12 +788,8 @@
     filterMarkers();
   }
 
-  // وظائف المفضلة
   function saveToFavorites(id) {
-    // الحصول على المفضلة من localStorage
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    
-    // إضافة الفرصة إذا لم تكن موجودة
     if (!favorites.includes(id)) {
       favorites.push(id);
       localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -1820,50 +799,38 @@
       showTooltip("الفرصة موجودة بالفعل في المفضلة", "info");
     }
   }
-  
+
   function removeFromFavorites(id) {
-    // الحصول على المفضلة من localStorage
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    
-    // إزالة الفرصة من المفضلة
     favorites = favorites.filter(item => item !== id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
-    
-    // تحديث العداد والقائمة
     updateFavoritesCounter();
     renderFavoritesList();
-    
     showTooltip("تم إزالة الفرصة من المفضلة", "success");
   }
-  
+
   function clearAllFavorites() {
     localStorage.removeItem('favorites');
     updateFavoritesCounter();
     renderFavoritesList();
     showTooltip("تم حذف جميع الفرص من المفضلة", "success");
   }
-  
+
   function updateFavoritesCounter() {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const counter = document.getElementById('favoritesCounter');
     counter.textContent = favorites.length;
-    
-    // تحديث عدد المفضلة في عنوان النافذة
     const countElement = document.getElementById('favoritesCount');
     if (countElement) {
       countElement.textContent = `${favorites.length} عنصر${favorites.length === 1 ? '' : 'اً'}`;
     }
   }
-  
+
   function renderFavoritesList() {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const container = document.getElementById('favoritesList');
-    
-    // مسح المحتوى الحالي
     container.innerHTML = '';
-    
     if (favorites.length === 0) {
-      // عرض رسالة عدم وجود مفضلة
       container.innerHTML = `
         <div class="no-favorites">
           <i class="bi bi-heart"></i>
@@ -1873,8 +840,6 @@
       `;
       return;
     }
-    
-    // عرض قائمة المفضلة
     favorites.forEach(id => {
       const opportunity = opportunities.find(op => op.id === id);
       if (opportunity) {
@@ -1890,54 +855,41 @@
             </div>
           </div>
           <div class="favorite-actions">
-            <button class="favorite-btn" onclick="showFavoriteOnMap(${opportunity.id})" title="عرض على الخريطة">
-              <i class="bi bi-eye"></i>
-            </button>
-            <button class="favorite-btn" onclick="removeFromFavorites(${opportunity.id})" title="حذف من المفضلة">
-              <i class="bi bi-trash"></i>
-            </button>
+            <button class="favorite-btn" onclick="showFavoriteOnMap(${opportunity.id})" title="عرض على الخريطة"><i class="bi bi-eye"></i></button>
+            <button class="favorite-btn" onclick="removeFromFavorites(${opportunity.id})" title="حذف من المفضلة"><i class="bi bi-trash"></i></button>
           </div>
         `;
         container.appendChild(item);
       }
     });
   }
-  
+
   function showFavoriteOnMap(id) {
     const opportunity = opportunities.find(op => op.id === id);
     if (opportunity) {
-      // إغلاق نافذة المفضلة
       closeFavoritesModal();
-      
-      // الانتقال إلى موقع الفرصة على الخريطة
-      map.setView([opportunity.lat, opportunity.lng], 14);
-      
-      // إيجاد العلامة وفتح نافذتها المنبثقة
+      map.setView([opportunity.geometry.coordinates[0][0][1], opportunity.geometry.coordinates[0][0][0]], 14);
       const marker = markers.find(m => m.options.data.id === id);
       if (marker) {
-        setTimeout(() => {
-          marker.openPopup();
-        }, 500);
+        setTimeout(() => { marker.openPopup(); }, 500);
       }
     }
   }
-  
+
   function openFavoritesModal() {
     renderFavoritesList();
     const modal = document.getElementById('favoritesModal');
     modal.classList.add('show');
   }
-  
+
   function closeFavoritesModal() {
     const modal = document.getElementById('favoritesModal');
     modal.classList.remove('show');
   }
 
-  // وظائف القائمة الجانبية
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-    
     if (sidebar.classList.contains('sidebar-visible')) {
       sidebar.classList.remove('sidebar-visible');
       overlay.style.display = 'none';
@@ -1947,10 +899,8 @@
     }
   }
 
-  // دالة لمعالجة الروابط
   function handleMenuLinks(event) {
     const linkType = this.getAttribute('data-link');
-    
     if (linkType === 'contact') {
       event.preventDefault();
       showContactModal();
@@ -1960,14 +910,9 @@
     } else if (this.getAttribute('href') !== '#') {
       window.location.href = this.getAttribute('href');
     }
-    
-    // إغلاق القائمة على الأجهزة الصغيرة
-    if (window.innerWidth <= 992) {
-      toggleSidebar();
-    }
+    if (window.innerWidth <= 992) { toggleSidebar(); }
   }
 
-  // إظهار نافذة اتصل بنا
   function showContactModal() {
     const contactContent = `
       <div class="modal-content">
@@ -1983,63 +928,33 @@
             <h4 class="mt-3">قسم نظم المعلومات الجغرافية</h4>
             <p class="text-muted">محافظة قنا</p>
           </div>
-          
           <div class="contact-info">
-            <a href="tel:0960000000">
-              <i class="bi bi-telephone"></i>
-              <div>
-                <div class="fw-bold">اتصال هاتفي</div>
-                <div>0960000000</div>
-              </div>
-            </a>
-            
-            <a href="mailto:gis@qena.gov.eg">
-              <i class="bi bi-envelope"></i>
-              <div>
-                <div class="fw-bold">البريد الإلكتروني</div>
-                <div>gis@qena.gov.eg</div>
-              </div>
-            </a>
-            
-            <a href="#" onclick="showTooltip('متاح من الساعة 9 صباحاً حتى 3 مساءاً أيام الأحد إلى الخميس', 'info')">
-              <i class="bi bi-clock"></i>
-              <div>
-                <div class="fw-bold">ساعات العمل</div>
-                <div>9:00 ص - 3:00 م (أحد - خميس)</div>
-              </div>
-            </a>
+            <a href="tel:0960000000"><i class="bi bi-telephone"></i><div><div class="fw-bold">اتصال هاتفي</div><div>0960000000</div></div></a>
+            <a href="mailto:gis@qena.gov.eg"><i class="bi bi-envelope"></i><div><div class="fw-bold">البريد الإلكتروني</div><div>gis@qena.gov.eg</div></div></a>
+            <a href="#" onclick="showTooltip('متاح من الساعة 9 صباحاً حتى 3 مساءاً أيام الأحد إلى الخميس', 'info')"><i class="bi bi-clock"></i><div><div class="fw-bold">ساعات العمل</div><div>9:00 ص - 3:00 م (أحد - خميس)</div></div></a>
           </div>
-          
           <div class="mt-4 text-center">
-            <button class="btn btn-primary px-4" onclick="closeContactModal()">
-              <i class="bi bi-check-circle"></i> فهمت
-            </button>
+            <button class="btn btn-primary px-4" onclick="closeContactModal()"><i class="bi bi-check-circle"></i> فهمت</button>
           </div>
         </div>
       </div>
     `;
-    
     const contactModal = document.createElement('div');
     contactModal.id = 'contactModal';
     contactModal.className = 'modal show';
     contactModal.innerHTML = contactContent;
     document.body.appendChild(contactModal);
   }
-  
+
   function closeContactModal() {
     const modal = document.getElementById('contactModal');
     if (modal) modal.remove();
   }
 
-  // وظائف فتح وإغلاق نافذة الزوار
   function openGuestModal() {
     const modal = document.getElementById('guestModal');
     modal.classList.add('show');
-    
-    // إغلاق القائمة الجانبية على الأجهزة الصغيرة
-    if (window.innerWidth <= 992) {
-      toggleSidebar();
-    }
+    if (window.innerWidth <= 992) { toggleSidebar(); }
   }
 
   function closeGuestModal() {
@@ -2047,23 +962,12 @@
     modal.classList.remove('show');
   }
 
-  // وظائف عرض الصورة
   function openImageModal(imageUrl, imageName) {
-    // العثور على فهرس الصورة في المعرض
     currentImageIndex = imageGallery.findIndex(img => img.url === imageUrl);
-    
-    if (currentImageIndex === -1) {
-      currentImageIndex = 0;
-    }
-    
-    // تحديث الصورة وعنوانها
+    if (currentImageIndex === -1) { currentImageIndex = 0; }
     document.getElementById('expandedImg').src = imageGallery[currentImageIndex].url;
     document.getElementById('imageTitle').textContent = imageGallery[currentImageIndex].name;
-    
-    // إظهار النافذة المنبثقة
     document.getElementById('imageModal').classList.add('show');
-    
-    // إخفاء شريط التمرير للجسم
     document.body.style.overflow = 'hidden';
   }
 
@@ -2074,51 +978,27 @@
 
   function navigateImage(direction) {
     currentImageIndex += direction;
-    
-    // التكرار في المعرض
-    if (currentImageIndex < 0) {
-      currentImageIndex = imageGallery.length - 1;
-    } else if (currentImageIndex >= imageGallery.length) {
-      currentImageIndex = 0;
-    }
-    
-    // تحديث الصورة وعنوانها
+    if (currentImageIndex < 0) { currentImageIndex = imageGallery.length - 1; }
+    else if (currentImageIndex >= imageGallery.length) { currentImageIndex = 0; }
     document.getElementById('expandedImg').src = imageGallery[currentImageIndex].url;
     document.getElementById('imageTitle').textContent = imageGallery[currentImageIndex].name;
   }
 
-  // إضافة مستمع لضغط Enter في حقول الإحداثيات
   document.addEventListener('DOMContentLoaded', function() {
     const latInput = document.getElementById('latInput');
     const lngInput = document.getElementById('lngInput');
-    
     function handleEnterKey(event) {
-      if (event.key === 'Enter') {
-        addManualMarker();
-      }
+      if (event.key === 'Enter') { addManualMarker(); }
     }
-    
     latInput.addEventListener('keypress', handleEnterKey);
     lngInput.addEventListener('keypress', handleEnterKey);
-    
-    // إغلاق المودال عند الضغط خارجها
     document.getElementById('coordinateModal').addEventListener('click', function(event) {
-      if (event.target === this) {
-        closeCoordinateModal();
-      }
+      if (event.target === this) { closeCoordinateModal(); }
     });
-    
-    // إغلاق نافذة الصورة عند الضغط خارجها
     document.getElementById('imageModal').addEventListener('click', function(event) {
-      if (event.target === this) {
-        closeImageModal();
-      }
+      if (event.target === this) { closeImageModal(); }
     });
-    
-    // تهيئة الخريطة
     initMap();
-    
-    // إضافة تأثيرات عند التمرير
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
       if (window.scrollY > 50) {
@@ -2129,22 +1009,12 @@
         header.style.background = 'linear-gradient(135deg, #004d40, #00251a)';
       }
     });
-    
-    // إعداد أحداث القائمة الجانبية
     document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
     document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
     document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
-    
-    // تفعيل روابط القائمة
     const menuLinks = document.querySelectorAll('.sidebar-link');
-    menuLinks.forEach(link => {
-      link.addEventListener('click', handleMenuLinks);
-    });
-    
-    // إظهار رسالة ترحيبية عامة
-    setTimeout(() => {
-      showTooltip("مرحباً بكم في نظام الفرص الاستثمارية بمحافظة قنا", "info");
-    }, 3000);
+    menuLinks.forEach(link => { link.addEventListener('click', handleMenuLinks); });
+    setTimeout(() => { showTooltip("مرحباً بكم في نظام الفرص الاستثمارية بمحافظة قنا", "info"); }, 3000);
   });
 </script>
 </body>
