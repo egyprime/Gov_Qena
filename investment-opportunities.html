@@ -78,7 +78,7 @@
         }).addTo(map);
 
         // جلب بيانات المناطق السكنية من ملف JSON
-        fetch('qena_houses.json')
+        fetch('polygons.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('حدث خطأ في جلب البيانات');
@@ -148,10 +148,11 @@
             .catch(error => {
                 console.error('Error:', error);
                 document.getElementById('houses-list').innerHTML = `
-                    <p style="color: red;">حدث خطأ في تحميل البيانات. يرجى التأكد من وجود ملف qena_houses.json</p>
+                    <p style="color: red;">حدث خطأ في تحميل البيانات. يرجى التأكد من وجود ملف polygons.json</p>
                     <p>${error.message}</p>
                 `;
             });
     </script>
 </body>
 </html>
+
