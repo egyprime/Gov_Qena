@@ -184,6 +184,11 @@
       background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
     }
+    
+    #polygonsBtn {
+      background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+      color: white;
+    }
 
     .coordinate-input-button {
       position: absolute;
@@ -1066,6 +1071,10 @@
   <button id="clearBtn" onclick="clearAll()" class="btn" title="مسح الكل">
     <i class="bi bi-trash"></i>
   </button>
+  <!-- زر جديد لتبديل عرض المضلعات -->
+  <button id="polygonsBtn" onclick="togglePolygons()" class="btn" title="عرض/إخفاء المضلعات">
+    <i class="bi bi-bounding-box"></i>
+  </button>
 </div>
 
 <!-- Coordinate Button -->
@@ -1205,6 +1214,10 @@
   // متغيرات لعرض الصور
   let currentImageIndex = 0;
   let imageGallery = [];
+
+  // متغيرات جديدة للمضلعات
+  let polygonsLayer = null;
+  let polygonsVisible = true;
 
   // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
   const opportunities = [
@@ -1419,6 +1432,86 @@
         });
       }
     });
+    
+    // تحميل المضلعات من ملف JSON
+    loadPolygons();
+  }
+  
+  // دالة لتحميل وعرض المضلعات
+  function loadPolygons() {
+    fetch('polygons.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('حدث خطأ في جلب بيانات المضلعات');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // إزالة الطبقة القديمة إذا كانت موجودة
+        if (polygonsLayer) {
+          map.removeLayer(polygonsLayer);
+        }
+        
+        // إنشاء طبقة جديدة للمضلعات
+        polygonsLayer = L.geoJSON(data, {
+          style: function(feature) {
+            // يمكنك تخصيص النمط حسب الخصائص أو استخدام لون ثابت
+            return {
+              color: feature.properties.color || '#7b1fa2',
+              weight: 2,
+              opacity: 1,
+              fillOpacity: 0.3,
+              fillColor: feature.properties.fillColor || '#9c27b0'
+            };
+          },
+          onEachFeature: function(feature, layer) {
+            // إضافة نافذة منبثقة لكل مضلع
+            if (feature.properties) {
+              let popupContent = `<div style="text-align: right; min-width: 200px; direction: rtl;">`;
+              popupContent += `<h4 style="margin-top: 0; color: #7b1fa2;">${feature.properties.name || 'مضلع'}</h4>`;
+              
+              // إضافة خصائص المضلع
+              for (const key in feature.properties) {
+                if (key !== 'name' && key !== 'color' && key !== 'fillColor') {
+                  popupContent += `<p><strong>${key}:</strong> ${feature.properties[key]}</p>`;
+                }
+              }
+              
+              popupContent += `</div>`;
+              layer.bindPopup(popupContent);
+            }
+          }
+        });
+        
+        // إذا كان العرض مفعلًا، نضيف الطبقة إلى الخريطة
+        if (polygonsVisible) {
+          polygonsLayer.addTo(map);
+          // ضبط عرض الخريطة ليشمل جميع المضلعات
+          map.fitBounds(polygonsLayer.getBounds());
+          showTooltip("تم تحميل المضلعات بنجاح", "success");
+        }
+      })
+      .catch(error => {
+        console.error('Error loading polygons:', error);
+        showTooltip("حدث خطأ في تحميل المضلعات", "error");
+      });
+  }
+  
+  // دالة تبديل عرض المضلعات
+  function togglePolygons() {
+    polygonsVisible = !polygonsVisible;
+    
+    if (polygonsLayer) {
+      if (polygonsVisible) {
+        polygonsLayer.addTo(map);
+        document.getElementById('polygonsBtn').innerHTML = '<i class="bi bi-bounding-box"></i>';
+        showTooltip("تم عرض المضلعات", "success");
+      } else {
+        map.removeLayer(polygonsLayer);
+        document.getElementById('polygonsBtn').innerHTML = '<i class="bi bi-bounding-box-fill"></i>';
+        showTooltip("تم إخفاء المضلعات", "info");
+      }
+    }
   }
 
   // وظائف قياس المسافة
