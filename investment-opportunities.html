@@ -3,111 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض المضلعات</title>
+    <title>خريطة المناطق السكنية في قنا، مصر</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f5f5f5;
         }
-        h1 {
-            color: #333;
-        }
-        .polygon-container {
+        #map-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
+            flex-direction: column;
+            height: 100vh;
         }
-        .polygon-card {
+        #map {
+            flex: 1;
+            height: 70vh;
+        }
+        #header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        #sidebar {
             background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 300px;
+            padding: 15px;
+            overflow-y: auto;
+            height: 30vh;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
         }
-        .polygon-svg {
-            width: 200px;
-            height: 200px;
-            margin: 10px auto;
+        .house-info {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            cursor: pointer;
         }
-        .polygon-info {
-            margin-top: 15px;
-            text-align: right;
+        .house-info:hover {
+            background-color: #f9f9f9;
         }
-        .polygon-info h3 {
-            color: #444;
-            margin-bottom: 5px;
+        .house-info h3 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
         }
-        .polygon-info p {
-            color: #666;
-            margin: 5px 0;
+        .house-info p {
+            margin: 0;
+            color: #7f8c8d;
+        }
+        .highlighted {
+            background-color: #e3f2fd;
         }
     </style>
 </head>
 <body>
-    <h1>عرض المضلعات الهندسية</h1>
-    
-    <div class="polygon-container" id="polygons-container">
-        <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+    <div id="map-container">
+        <div id="header">
+            <h1>خريطة المناطق السكنية في محافظة قنا، مصر</h1>
+        </div>
+        <div id="map"></div>
+        <div id="sidebar">
+            <h2 style="text-align: center; margin-top: 0;">قائمة المناطق السكنية</h2>
+            <div id="houses-list"></div>
+        </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // جلب بيانات المضلعات من ملف JSON
-        fetch('polygons.json')
-            .then(response => response.json())
+        // إنشاء الخريطة
+        const map = L.map('map').setView([26.1550, 32.7165], 14);
+
+        // إضافة طبقة الخريطة الأساسية
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // جلب بيانات المناطق السكنية من ملف JSON
+        fetch('qena_houses.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('حدث خطأ في جلب البيانات');
+                }
+                return response.json();
+            })
             .then(data => {
-                const container = document.getElementById('polygons-container');
-                
-                data.polygons.forEach(polygon => {
-                    // إنشاء بطاقة لكل مضلع
-                    const card = document.createElement('div');
-                    card.className = 'polygon-card';
-                    
-                    // إنشاء SVG لعرض المضلع
-                    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.setAttribute('class', 'polygon-svg');
-                    svg.setAttribute('viewBox', '0 0 300 300');
-                    
-                    const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-                    poly.setAttribute('points', polygon.points);
-                    poly.setAttribute('fill', polygon.color);
-                    poly.setAttribute('stroke', '#333');
-                    poly.setAttribute('stroke-width', '2');
-                    
-                    svg.appendChild(poly);
-                    
-                    // إنشاء معلومات المضلع
-                    const infoDiv = document.createElement('div');
-                    infoDiv.className = 'polygon-info';
-                    
-                    const name = document.createElement('h3');
-                    name.textContent = polygon.name;
-                    
-                    const type = document.createElement('p');
-                    type.textContent = `النوع: ${polygon.type}`;
-                    
-                    const sides = document.createElement('p');
-                    sides.textContent = `عدد الأضلاع: ${polygon.sides}`;
-                    
-                    infoDiv.appendChild(name);
-                    infoDiv.appendChild(type);
-                    infoDiv.appendChild(sides);
-                    
-                    // إضافة العناصر إلى البطاقة
-                    card.appendChild(svg);
-                    card.appendChild(infoDiv);
-                    
-                    // إضافة البطاقة إلى الحاوية
-                    container.appendChild(card);
+                const housesList = document.getElementById('houses-list');
+                const polygons = [];
+
+                data.features.forEach(feature => {
+                    // إنشاء مضلع على الخريطة
+                    const polygon = L.polygon(
+                        feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]),
+                        {
+                            color: feature.properties.color,
+                            fillOpacity: 0.5,
+                            weight: 2
+                        }
+                    ).addTo(map);
+
+                    // إضافة معلومات النافذة المنبثقة
+                    polygon.bindPopup(`
+                        <h3>${feature.properties.name}</h3>
+                        <p>${feature.properties.description}</p>
+                        <p>ID: ${feature.properties.id}</p>
+                    `);
+
+                    // إنشاء عنصر في القائمة الجانبية
+                    const houseElement = document.createElement('div');
+                    houseElement.className = 'house-info';
+                    houseElement.innerHTML = `
+                        <h3>${feature.properties.name}</h3>
+                        <p>${feature.properties.description}</p>
+                    `;
+
+                    // إضافة تفاعل عند النقر
+                    houseElement.addEventListener('click', () => {
+                        // إزالة التمييز من جميع العناصر
+                        document.querySelectorAll('.house-info').forEach(el => {
+                            el.classList.remove('highlighted');
+                        });
+                        
+                        // تمييز العنصر المحدد
+                        houseElement.classList.add('highlighted');
+                        
+                        // تكبير وتحديد المضلع على الخريطة
+                        map.fitBounds(polygon.getBounds());
+                        polygon.setStyle({ weight: 5 });
+                        
+                        // إعادة النمط بعد ثانية
+                        setTimeout(() => {
+                            polygon.setStyle({ weight: 2 });
+                        }, 1000);
+                    });
+
+                    housesList.appendChild(houseElement);
+                    polygons.push(polygon);
                 });
+
+                // ضبط عرض الخريطة ليشمل جميع المضلعات
+                if (polygons.length > 0) {
+                    const group = new L.featureGroup(polygons);
+                    map.fitBounds(group.getBounds());
+                }
             })
             .catch(error => {
-                console.error('حدث خطأ أثناء جلب البيانات:', error);
-                document.getElementById('polygons-container').innerHTML = 
-                    '<p>حدث خطأ أثناء تحميل المضلعات. يرجى المحاولة لاحقاً.</p>';
+                console.error('Error:', error);
+                document.getElementById('houses-list').innerHTML = `
+                    <p style="color: red;">حدث خطأ في تحميل البيانات. يرجى التأكد من وجود ملف qena_houses.json</p>
+                    <p>${error.message}</p>
+                `;
             });
     </script>
 </body>
