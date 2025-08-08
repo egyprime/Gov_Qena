@@ -14,7 +14,7 @@
     
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+      background: linear-gradient(135deg, #0d47a1, #1976d2, #64b5f6);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       min-height: 100vh;
@@ -22,7 +22,7 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      color: white;
+      color: #fff;
       overflow-x: hidden;
     }
     
@@ -37,11 +37,11 @@
       max-width: 1200px;
       text-align: center;
       padding: 40px;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(15px);
       border-radius: 25px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       position: relative;
       overflow: hidden;
       animation: fadeIn 1.5s ease-out;
@@ -59,7 +59,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
       z-index: -1;
     }
     
@@ -69,11 +69,12 @@
     }
     
     .header h1 {
-      font-size: 3.5rem;
+      font-size: 3rem;
       margin-bottom: 15px;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       position: relative;
       display: inline-block;
+      color: #fff;
     }
     
     .header h1::after {
@@ -83,16 +84,17 @@
       left: 10%;
       width: 80%;
       height: 3px;
-      background: linear-gradient(to right, transparent, #ffcc00, transparent);
+      background: linear-gradient(to right, transparent, #64b5f6, transparent);
       border-radius: 50%;
     }
     
     .header p {
-      font-size: 1.4rem;
-      opacity: 0.9;
+      font-size: 1.3rem;
+      opacity: 0.95;
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.6;
+      color: #e3f2fd;
     }
     
     .image-wrapper {
@@ -102,43 +104,44 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 
-        0 20px 50px rgba(0, 0, 0, 0.7),
-        0 0 0 15px rgba(255, 215, 0, 0.1),
-        0 0 0 30px rgba(178, 34, 34, 0.05);
-      transform: perspective(1000px) rotateY(0deg);
+        0 20px 50px rgba(0, 0, 0, 0.3),
+        0 0 0 15px rgba(100, 181, 246, 0.2),
+        0 0 0 30px rgba(25, 118, 210, 0.1);
       transition: transform 0.5s ease, box-shadow 0.5s ease;
       animation: float 6s ease-in-out infinite;
+      cursor: grab;
+      touch-action: none;
     }
     
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotateY(0deg); }
-      50% { transform: translateY(-20px) rotateY(5deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
     
     .image-wrapper:hover {
-      transform: perspective(1000px) rotateY(5deg);
       box-shadow: 
-        0 25px 60px rgba(0, 0, 0, 0.8),
-        0 0 0 15px rgba(255, 215, 0, 0.2),
-        0 0 0 30px rgba(178, 34, 34, 0.1);
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 0 15px rgba(100, 181, 246, 0.3),
+        0 0 0 30px rgba(25, 118, 210, 0.15);
     }
     
     .main-image {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.5s ease;
+      transition: transform 0.2s ease;
+      transform-origin: center center;
     }
     
     .image-wrapper:hover .main-image {
-      transform: scale(1.03);
+      transform: scale(1.01);
     }
     
     .image-caption {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(25, 118, 210, 0.8);
       padding: 20px;
-      font-size: 1.4rem;
-      border-top: 2px solid rgba(255, 215, 0, 0.3);
+      font-size: 1.3rem;
+      border-top: 2px solid rgba(255, 255, 255, 0.3);
     }
     
     .gallery-controls {
@@ -150,8 +153,8 @@
     }
     
     .control-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
       color: white;
       width: 60px;
       height: 60px;
@@ -163,35 +166,37 @@
       cursor: pointer;
       transition: all 0.3s ease;
       backdrop-filter: blur(5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
     .control-btn:hover {
-      background: rgba(255, 215, 0, 0.3);
+      background: rgba(100, 181, 246, 0.5);
       transform: scale(1.1);
-      border-color: #ffcc00;
+      border-color: #64b5f6;
     }
     
     .info-box {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(25, 118, 210, 0.4);
       max-width: 700px;
       margin: 40px auto 0;
       padding: 25px;
       border-radius: 15px;
-      border-left: 4px solid #ffcc00;
+      border-left: 4px solid #64b5f6;
       text-align: right;
       position: relative;
     }
     
     .info-box h3 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin-bottom: 15px;
-      color: #ffcc00;
+      color: #e3f2fd;
     }
     
     .info-box p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       line-height: 1.8;
-      opacity: 0.9;
+      opacity: 0.95;
+      color: #fff;
     }
     
     .info-box::after {
@@ -201,7 +206,7 @@
       right: 30px;
       width: 30px;
       height: 30px;
-      background: #ffcc00;
+      background: #64b5f6;
       border-radius: 50%;
     }
     
@@ -218,7 +223,7 @@
     .particle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       animation: floatParticle linear infinite;
     }
     
@@ -226,13 +231,12 @@
       to { transform: translateY(-100vh) rotate(360deg); }
     }
     
-    /* زر الصفحة الرئيسية الجديد - تم تحسينه */
     .home-button {
-      position: fixed; /* تغيير من absolute إلى fixed ليبقى ثابتًا */
+      position: fixed;
       top: 20px;
       left: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
       color: white;
       width: 60px;
       height: 60px;
@@ -246,24 +250,23 @@
       backdrop-filter: blur(5px);
       text-decoration: none;
       z-index: 1000;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
     
     .home-button:hover {
-      background: rgba(255, 215, 0, 0.5);
+      background: rgba(100, 181, 246, 0.5);
       transform: scale(1.1);
-      border-color: #ffcc00;
-      color: #ffcc00;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      border-color: #64b5f6;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
     
-    /* زر الرجوع للصفحة السابقة */
     .back-button {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
       color: white;
       width: 60px;
       height: 60px;
@@ -277,18 +280,17 @@
       backdrop-filter: blur(5px);
       text-decoration: none;
       z-index: 1000;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
     
     .back-button:hover {
-      background: rgba(70, 130, 180, 0.5); /* لون أزرق */
+      background: rgba(100, 181, 246, 0.5);
       transform: scale(1.1);
-      border-color: #4682b4;
+      border-color: #64b5f6;
       color: white;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
     
-    /* شريط التنقل */
     .navbar {
       position: fixed;
       bottom: 20px;
@@ -296,17 +298,17 @@
       transform: translateX(-50%);
       display: flex;
       gap: 15px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(25, 118, 210, 0.5);
       padding: 15px 25px;
       border-radius: 50px;
       backdrop-filter: blur(10px);
       z-index: 1000;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
     
     .nav-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
       color: white;
       width: 50px;
       height: 50px;
@@ -321,10 +323,68 @@
     }
     
     .nav-btn:hover {
-      background: rgba(255, 215, 0, 0.5);
+      background: rgba(100, 181, 246, 0.7);
       transform: scale(1.1);
-      border-color: #ffcc00;
-      color: #ffcc00;
+      border-color: #64b5f6;
+      color: white;
+    }
+    
+    .zoom-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      border-radius: 50px;
+      width: fit-content;
+      margin: 20px auto 0;
+    }
+    
+    .zoom-btn {
+      background: rgba(25, 118, 210, 0.7);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .zoom-btn:hover {
+      background: rgba(100, 181, 246, 1);
+      transform: scale(1.1);
+    }
+    
+    .zoom-indicator {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .reset-btn {
+      background: rgba(25, 118, 210, 0.7);
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .reset-btn:hover {
+      background: rgba(100, 181, 246, 1);
+      transform: scale(1.05);
     }
     
     @media (max-width: 768px) {
@@ -333,7 +393,7 @@
       }
       
       .header h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
       }
       
       .header p {
@@ -352,7 +412,7 @@
       }
       
       .info-box h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
       
       .info-box p {
@@ -374,11 +434,16 @@
         height: 40px;
         font-size: 1.2rem;
       }
+      
+      .zoom-controls {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- زر الصفحة الرئيسية - تم تحسينه -->
+  <!-- زر الصفحة الرئيسية -->
   <a href="index.html" class="home-button" title="العودة إلى الصفحة الرئيسية">
     <i class="fas fa-home"></i>
   </a>
@@ -392,40 +457,43 @@
     <div class="decoration" id="decoration"></div>
     
     <div class="header">
-      <h1><i class="fas fa-camera"></i> المناطق الصناعية بمحافظة قنا</h1>
+      <h1><i class="fas fa-industry"></i> المناطق الصناعية بمحافظة قنا</h1>
       <p>صورة توضح المناطق الصناعية بمحافظة قنا</p>
     </div>
     
-    <div class="image-wrapper">
-      <img src="https://i.ibb.co/LDcn2yFP/image.jpg" alt="صورة محافظة قنا" class="main-image">
+    <div class="image-wrapper" id="imageWrapper">
+      <img src="https://i.ibb.co/GQDrxLZd/image.jpg" alt="المناطق الصناعية بمحافظة قنا" class="main-image" id="mainImage">
       <div class="image-caption">
-        <i class="fas fa-landmark"></i> محافظة قنا - جوهرة الصعيد
+        <i class="fas fa-map-marker-alt"></i> محافظة قنا - جوهرة الصعيد
       </div>
     </div>
     
     <div class="gallery-controls">
-      <div class="control-btn" title="تكبير الصورة">
+      <div class="control-btn" id="zoomInBtn" title="تكبير الصورة">
         <i class="fas fa-search-plus"></i>
       </div>
-      <div class="control-btn" title="تصغير الصورة">
+      <div class="control-btn" id="zoomOutBtn" title="تصغير الصورة">
         <i class="fas fa-search-minus"></i>
       </div>
-      <div class="control-btn" title="تدوير الصورة">
+      <div class="control-btn" id="resetZoomBtn" title="إعادة تعيين الصورة">
         <i class="fas fa-sync-alt"></i>
       </div>
-      <div class="control-btn" title="تحميل الصورة">
-        <i class="fas fa-download"></i>
+    </div>
+    
+    <div class="zoom-controls">
+      <div class="zoom-indicator">
+        <i class="fas fa-search"></i> مستوى التكبير: <span id="zoomLevel">100%</span>
       </div>
-      <div class="control-btn" title="مشاركة الصورة">
-        <i class="fas fa-share-alt"></i>
-      </div>
+      <button class="reset-btn" id="resetPanBtn">
+        <i class="fas fa-expand"></i> إعادة تعيين الموضع
+      </button>
     </div>
     
     <div class="info-box">
       <h3><i class="fas fa-info-circle"></i> نبذة عن الصورة</h3>
       <p>منظومة المناطق الصناعية بمحافظة قنا تشمل:
 • المنطقة الصناعية بالكلّاحين (قفط)
-• منطقة “هو” الصناعية (نجع حمادي)
+• منطقة "هو" الصناعية (نجع حمادي)
 • المنطقة الصناعية بقنا الجديدة
 • المنطقة الصناعية بغرب قنا
 • المنطقة الحرة العامة بالكلّاحين
@@ -453,9 +521,9 @@
     // إنشاء الجسيمات المتحركة للخلفية
     function createParticles() {
       const container = document.getElementById('decoration');
-      const colors = ['rgba(255, 255, 255, 0.3)', 'rgba(255, 215, 0, 0.3)', 'rgba(178, 34, 34, 0.3)'];
+      const colors = ['rgba(255, 255, 255, 0.3)', 'rgba(100, 181, 246, 0.3)', 'rgba(25, 118, 210, 0.3)'];
       
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 25; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
@@ -480,32 +548,62 @@
       }
     }
     
-    // تكبير وتصغير الصورة
-    let currentScale = 1;
-    document.querySelectorAll('.control-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const img = document.querySelector('.main-image');
-        
-        if (this.querySelector('.fa-search-plus')) {
-          currentScale += 0.1;
-          img.style.transform = `scale(${currentScale})`;
-        } 
-        else if (this.querySelector('.fa-search-minus')) {
-          currentScale = Math.max(0.5, currentScale - 0.1);
-          img.style.transform = `scale(${currentScale})`;
-        } 
-        else if (this.querySelector('.fa-sync-alt')) {
-          const rotation = Math.floor(Math.random() * 360);
-          img.style.transform = `rotate(${rotation}deg) scale(${currentScale})`;
-        } 
-        else if (this.querySelector('.fa-download')) {
-          alert('سيتم تحميل الصورة قريباً...');
-        } 
-        else if (this.querySelector('.fa-share-alt')) {
-          alert('خيارات المشاركة ستظهر هنا...');
-        }
-      });
-    });
+    // تهيئة المتغيرات للتحكم في الصورة
+    let scale = 1;
+    let posX = 0;
+    let posY = 0;
+    let isDragging = false;
+    let startX, startY;
+    const image = document.getElementById('mainImage');
+    const imageWrapper = document.getElementById('imageWrapper');
+    const zoomLevel = document.getElementById('zoomLevel');
+    
+    // وظائف التكبير والتصغير
+    function zoomIn() {
+      scale = Math.min(scale + 0.2, 3);
+      updateImageTransform();
+    }
+    
+    function zoomOut() {
+      scale = Math.max(scale - 0.2, 0.5);
+      updateImageTransform();
+    }
+    
+    function resetZoom() {
+      scale = 1;
+      posX = 0;
+      posY = 0;
+      updateImageTransform();
+    }
+    
+    function updateImageTransform() {
+      image.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+      zoomLevel.textContent = `${Math.round(scale * 100)}%`;
+    }
+    
+    // إضافة وظيفة السحب للصورة
+    function startDrag(e) {
+      if (scale > 1) {
+        isDragging = true;
+        startX = e.clientX - posX;
+        startY = e.clientY - posY;
+        imageWrapper.style.cursor = 'grabbing';
+      }
+    }
+    
+    function drag(e) {
+      if (isDragging && scale > 1) {
+        e.preventDefault();
+        posX = e.clientX - startX;
+        posY = e.clientY - startY;
+        updateImageTransform();
+      }
+    }
+    
+    function endDrag() {
+      isDragging = false;
+      imageWrapper.style.cursor = 'grab';
+    }
     
     // تهيئة الصفحة عند التحميل
     window.addEventListener('load', function() {
@@ -518,6 +616,36 @@
       document.getElementById('backButton').addEventListener('click', function() {
         history.back();
       });
+      
+      // تهيئة أزرار التكبير
+      document.getElementById('zoomInBtn').addEventListener('click', zoomIn);
+      document.getElementById('zoomOutBtn').addEventListener('click', zoomOut);
+      document.getElementById('resetZoomBtn').addEventListener('click', resetZoom);
+      document.getElementById('resetPanBtn').addEventListener('click', resetZoom);
+      
+      // تهيئة التحكم بالسحب
+      imageWrapper.addEventListener('mousedown', startDrag);
+      imageWrapper.addEventListener('mousemove', drag);
+      imageWrapper.addEventListener('mouseup', endDrag);
+      imageWrapper.addEventListener('mouseleave', endDrag);
+      
+      // تهيئة التحكم بالسحب للشاشات اللمسية
+      imageWrapper.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          startDrag(e.touches[0]);
+        }
+      });
+      
+      imageWrapper.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1) {
+          drag(e.touches[0]);
+        }
+      });
+      
+      imageWrapper.addEventListener('touchend', endDrag);
+      
+      // تهيئة مستوى التكبير
+      updateImageTransform();
     });
   </script>
 </body>
