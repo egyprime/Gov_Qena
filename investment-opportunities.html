@@ -41,7 +41,11 @@
     }).addTo(map);
 
     // ====== تحميل ملف GeoJSON وعرضه ======
-    fetch('foras_estsmarea_67.json')
+    fetch('./foras_estsmarea_67.json') // جرب إضافة ./ قبل اسم الملف
+   .then(response => {
+      console.log(response.status); // يجب أن يعطي 200
+      return response.json();
+   })
       .then(resp => {
         if (!resp.ok) throw new Error('HTTP error ' + resp.status);
         return resp.json();
@@ -82,3 +86,4 @@
   </script>
 </body>
 </html>
+
