@@ -111,7 +111,7 @@
     /* أدوات التحكم مع تأثيرات جميلة */
     .measure-control {
       position: absolute;
-      right: 15px; /* تعديل الموقع ليكون في اليمين */
+      left: 15px;
       top: 85px;
       z-index: 1000;
       background: rgba(255, 255, 255, 0.95);
@@ -128,8 +128,8 @@
     }
 
     .measure-control button {
-      width: 50px; /* زيادة حجم الأزرار */
-      height: 50px;
+      width: 45px;
+      height: 45px;
       border-radius: 50% !important;
       display: flex;
       align-items: center;
@@ -187,7 +187,7 @@
 
     .coordinate-input-button {
       position: absolute;
-      right: 15px; /* تعديل الموقع ليكون في اليمين */
+      left: 15px;
       bottom: 15px;
       z-index: 1000;
       animation: slideInLeft 1s ease-out;
@@ -216,7 +216,7 @@
     /* تصميم عرض القياسات */
     #distanceDisplay, #areaDisplay {
       position: absolute;
-      right: 15px; /* تعديل الموقع ليكون في اليمين */
+      left: 15px;
       z-index: 1000;
       background: rgba(255, 255, 255, 0.95);
       padding: 12px 18px;
@@ -504,11 +504,11 @@
       
       .measure-control {
         top: 120px;
-        right: 10px;
+        left: 10px;
       }
       
       .coordinate-input-button {
-        right: 10px;
+        left: 10px;
       }
     }
 
@@ -916,11 +916,11 @@
     }
     
     .image-prev {
-      right: 15px;
+      left: 15px;
     }
     
     .image-next {
-      left: 15px;
+      right: 15px;
     }
   </style>
 </head>
@@ -1060,7 +1060,7 @@
   <button id="distanceBtn" onclick="toggleDistance()" class="btn" title="قياس المسافات">
     <i class="bi bi-rulers"></i>
   </button>
-  <button id="areaBtn" onclick="toggleArea()" class="btn" title="قياس المساحات"> <!-- تغيير العنوان هنا -->
+  <button id="areaBtn" onclick="toggleArea()" class="btn" title="قياس المساحة">
     <i class="bi bi-polygon"></i>
   </button>
   <button id="clearBtn" onclick="clearAll()" class="btn" title="مسح الكل">
@@ -1193,7 +1193,6 @@
 <script>
   let markers = [];
   let map;
-  let opportunities = []; // سيتم تعبئتها من ملف JSON
   
   // المتغيرات الجديدة
   let distancePoints = [];
@@ -1206,6 +1205,70 @@
   // متغيرات لعرض الصور
   let currentImageIndex = 0;
   let imageGallery = [];
+
+  // بيانات وهمية للفرص الاستثمارية (يمكن استبدالها بملف JSON)
+  const opportunities = [
+    {
+      id: 1,
+      name: "مشروع صناعي 1",
+      lat: 26.155,
+      lng: 32.716,
+      sector: "صناعي",
+      region: "قنا",
+      area: "1000 م²",
+      status: "متاحة",
+      description: "موقع صناعي ممتاز بالقرب من الطريق السريع، يحتوي على بنية تحتية متكاملة للصناعات المتوسطة والخفيفة.",
+      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+    },
+    {
+      id: 2,
+      name: "مشروع زراعي 1",
+      lat: 26.200,
+      lng: 32.800,
+      sector: "زراعي",
+      region: "قفط",
+      area: "5000 م²",
+      status: "قيد الدراسة",
+      description: "أرض زراعية خصبة على ضفاف النيل، مناسبة لمشاريع الاستزراع المائي والزراعات المحمية.",
+      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+    },
+    {
+      id: 3,
+      name: "مشروع خدمي 1",
+      lat: 26.100,
+      lng: 32.650,
+      sector: "خدماتي",
+      region: "نجع حمادي",
+      area: "800 م²",
+      status: "متاحة",
+      description: "مكان مميز في وسط المدينة لإنشاء مجمع تجاري أو مركز خدمات متكامل، يقع في منطقة تجارية نشطة.",
+      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+    },
+    {
+      id: 4,
+      name: "مشروع صناعي 2",
+      lat: 26.170,
+      lng: 32.750,
+      sector: "صناعي",
+      region: "قنا",
+      area: "2500 م²",
+      status: "متاحة",
+      description: "منطقة صناعية مجهزة بالكامل للصناعات الثقيلة، تتوفر بها خدمات الكهرباء والمياه والغاز.",
+      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+    },
+    {
+      id: 5,
+      name: "مشروع زراعي 2",
+      lat: 26.220,
+      lng: 32.830,
+      sector: "زراعي",
+      region: "دشنا",
+      area: "7000 م²",
+      status: "قيد الدراسة",
+      description: "مزرعة متكاملة للاستزراع السمكي والزراعة العضوية، تتوفر بها مصادر مياه طبيعية.",
+      imageUrl: "https://i.ibb.co/FLND0MbN/Firts-Photo.jpg"
+    }
+  ];
 
   // دالة التنبيه المؤقت
   function showTooltip(text, type = "info") {
@@ -1264,23 +1327,6 @@
       minZoom: 0
     }).addTo(map);
 
-    // جلب بيانات الفرص الاستثمارية من ملف JSON
-    fetch('foras_estsmarea_67.json')
-      .then(response => response.json())
-      .then(data => {
-        opportunities = data;
-        createMarkers();
-      })
-      .catch(error => {
-        console.error('حدث خطأ أثناء جلب البيانات:', error);
-        showTooltip('حدث خطأ في جلب بيانات الفرص الاستثمارية', 'error');
-      });
-    
-    // تحديث عدد المفضلة عند التحميل
-    updateFavoritesCounter();
-  }
-
-  function createMarkers() {
     // إضافة العلامات للفرص الاستثمارية
     opportunities.forEach(opportunity => {
       // اختيار لون حسب القطاع
@@ -1312,12 +1358,6 @@
                  onclick="openImageModal('${opportunity.imageUrl}', '${opportunity.name}')">
           </div>
         `;
-        
-        // إضافة الصورة إلى معرض الصور
-        imageGallery.push({
-          url: opportunity.imageUrl,
-          name: opportunity.name
-        });
       }
       
       const popupContent = `
@@ -1367,7 +1407,18 @@
       markers.push(marker);
     });
     
-    showTooltip(`تم تحميل ${opportunities.length} فرصة استثمارية بنجاح`, "success");
+    // تحديث عدد المفضلة عند التحميل
+    updateFavoritesCounter();
+    
+    // تهيئة معرض الصور
+    opportunities.forEach(opportunity => {
+      if (opportunity.imageUrl) {
+        imageGallery.push({
+          url: opportunity.imageUrl,
+          name: opportunity.name
+        });
+      }
+    });
   }
 
   // وظائف قياس المسافة
