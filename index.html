@@ -16,7 +16,7 @@
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>القائمة الرئيسية - محافظة قنا</title>
+  <title>البوابة الجغرافية - محافظة قنا</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -504,6 +504,51 @@
       line-height: 1.5;
     }
     
+    /* أنماط نوافذ الخدمات قيد التطوير */
+    .coming-soon-modal .modal-content {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    }
+    .coming-soon-icon {
+      font-size: 5rem;
+      text-align: center;
+      margin: 1rem 0;
+      color: rgba(255, 255, 255, 0.8);
+      animation: pulse 2s infinite;
+    }
+    .coming-soon-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .coming-soon-text {
+      text-align: center;
+      font-size: 1.1rem;
+      padding: 0 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .progress-container {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      height: 20px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #43e97b, #38f9d7);
+      border-radius: 10px;
+      width: 65%;
+      animation: progressAnimation 3s infinite alternate;
+    }
+    @keyframes progressAnimation {
+      0% { width: 65%; }
+      100% { width: 80%; }
+    }
+    
     @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
@@ -557,6 +602,9 @@
       }
       .overview-content {
         padding: 1rem;
+      }
+      .coming-soon-title {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -631,7 +679,60 @@
       </span>
     </a>
     
-    <!-- الخانة الجديدة: نظرة عن قنا -->
+    <!-- الخانات الجديدة -->
+    <div class="menu-card card-7" data-bs-toggle="modal" data-bs-target="#comingSoon1">
+      <div class="card-icon">
+        <i class="bi bi-rulers"></i>
+      </div>
+      <h3 class="card-title">رفع مساحي</h3>
+      <p class="card-description">
+        خدمة لرفع المقاسات وتحديد المساحات للمباني للحصول على تراخيص البناء
+      </p>
+      <span class="card-button">
+        <i class="bi bi-arrow-left"></i> طلب الخدمة
+      </span>
+    </div>
+    
+    <div class="menu-card card-8" data-bs-toggle="modal" data-bs-target="#comingSoon2">
+      <div class="card-icon">
+        <i class="bi bi-clock-history"></i>
+      </div>
+      <h3 class="card-title">تسجيل زمني</h3>
+      <p class="card-description">
+        تتبع التغيرات الزمنية للمباني والمناطق عبر الصور الجوية التاريخية
+      </p>
+      <span class="card-button">
+        <i class="bi bi-arrow-left"></i> عرض التغيرات
+      </span>
+    </div>
+    
+    <div class="menu-card card-9" data-bs-toggle="modal" data-bs-target="#comingSoon3">
+      <div class="card-icon">
+        <i class="bi bi-file-earmark-text"></i>
+      </div>
+      <h3 class="card-title">شهادة بيانات</h3>
+      <p class="card-description">
+        خدمة خاصة بمنظومة التصالحات عن مخالفات البناء
+      </p>
+      <span class="card-button">
+        <i class="bi bi-arrow-left"></i> تقديم الطلب
+      </span>
+    </div>
+    
+    <div class="menu-card card-10" data-bs-toggle="modal" data-bs-target="#modal3">
+      <div class="card-icon">
+        <i class="bi bi-heart"></i>
+      </div>
+      <h3 class="card-title">حياة كريمة</h3>
+      <p class="card-description">
+        مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية
+      </p>
+      <span class="card-button">
+        <i class="bi bi-image"></i> عرض التفاصيل
+      </span>
+    </div>
+    
+    <!-- خانة نظرة عن قنا في النهاية -->
     <div class="menu-card card-3" id="overview-card">
       <div class="card-icon">
         <i class="bi bi-binoculars"></i>
@@ -644,6 +745,8 @@
         <i class="bi bi-arrow-left"></i> ابدأ الاستكشاف
       </span>
     </div>
+  </div>
+</div>
 
 <!-- قسم نظرة عن قنا -->
 <div class="overview-container" id="overview-container">
@@ -723,8 +826,248 @@
   </div>
 </div>
 
-<!-- النوافذ المنبثقة للخانات الجديدة -->
-<!-- تبقى كما هي بدون تغيير -->
+<!-- النوافذ المنبثقة للخانات الثمانية -->
+<div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المناطق الصناعية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/FbTyH94v/image.jpg" alt="المناطق الصناعية" class="modal-img">
+        <p class="modal-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">قُرى الظهير</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/ns46wNw0/image.jpg" alt="قُرى الظهير" class="modal-img">
+        <p class="modal-description">حدود القرى الصحراوية، شبكات الطرق وارتباطها بالمراكز الحضرية لخطة تنمية ريفية مستدامة.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">مشروعات حياة كريمة</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/mFNzR165/image.jpg" alt="مشروعات حياة كريمة" class="modal-img">
+        <p class="modal-description">مواقع تدخل البرنامج، الخدمات المقدمة وخطط التطوير لمتابعة التنفيذ والتقييم.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">الواقع العمراني</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/21rgnvmb/image.jpg" alt="الواقع العمراني" class="modal-img">
+        <p class="modal-description">عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المناطق الحرفية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/PZKfCHrH/image.jpg" alt="المناطق الحرفية" class="modal-img">
+        <p class="modal-description">توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المقاصد السياحية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/TDGVtfTp/image.jpg" alt="المقاصد السياحية" class="modal-img">
+        <p class="modal-description">المعالم والمسارات والخدمات السياحية المحيطة لتسهيل الترويج والتنقل للسائحين.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المناطق الزراعية</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/0yGb0Jtk/image.jpg" alt="المناطق الزراعية" class="modal-img">
+        <p class="modal-description">خرائط الأراضي المزروعة، أنظمة الري والمحاصيل السائدة لدعم التخطيط والإدارة الزراعية.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal8" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">مراكز الاستثمار</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/YF5bmcC1/image.jpg" alt="مراكز الاستثمار" class="modal-img">
+        <p class="modal-description">مواقع الأولوية الاستثمارية، الحوافز والمساحات المتاحة لجذب المشروعات وتنميتها.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<!-- نوافذ الخدمات قيد التطوير -->
+<div class="modal fade coming-soon-modal" id="comingSoon1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">رفع مساحي</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="coming-soon-icon">
+          <i class="bi bi-rulers"></i>
+        </div>
+        <h3 class="coming-soon-title">الخدمة قيد التطوير</h3>
+        <p class="coming-soon-text">
+          خدمة الرفع المساحي تتيح للمواطنين طلب فريق متخصص لقياس مساحة العقار وتحديد الحدود بدقة، 
+          مما يساعد في الحصول على تراخيص البناء بسهولة. ستتلقى تقريراً مفصلاً وكرتاً رقمياً ببيانات العقار.
+        </p>
+        <div class="progress-container">
+          <div class="progress-bar"></div>
+        </div>
+        <p class="coming-soon-text">
+          نعمل حالياً على تطوير هذه الخدمة لتكون متاحة قريباً. يمكنك متابعة آخر التحديثات عبر البوابة.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade coming-soon-modal" id="comingSoon2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">تسجيل زمني</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="coming-soon-icon">
+          <i class="bi bi-clock-history"></i>
+        </div>
+        <h3 class="coming-soon-title">الخدمة قيد التطوير</h3>
+        <p class="coming-soon-text">
+          خدمة التسجيل الزمني تتيح لك تتبع التغيرات في المباني والمناطق عبر الزمن باستخدام الصور الجوية التاريخية. 
+          يمكنك فحص الحيز العمراني ومقارنة حالة العقار في سنوات مختلفة لمراقبة التطور العمراني.
+        </p>
+        <div class="progress-container">
+          <div class="progress-bar"></div>
+        </div>
+        <p class="coming-soon-text">
+          نعمل حالياً على تطوير هذه الخدمة لتكون متاحة قريباً. يمكنك متابعة آخر التحديثات عبر البوابة.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade coming-soon-modal" id="comingSoon3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">شهادة بيانات</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="coming-soon-icon">
+          <i class="bi bi-file-earmark-text"></i>
+        </div>
+        <h3 class="coming-soon-title">الخدمة قيد التطوير</h3>
+        <p class="coming-soon-text">
+          خدمة شهادة البيانات مخصصة لمنظومة التصالحات عن مخالفات البناء،.
+        </p>
+        <div class="progress-container">
+          <div class="progress-bar"></div>
+        </div>
+        <p class="coming-soon-text">
+          نعمل حالياً على تطوير هذه الخدمة لتكون متاحة قريباً. يمكنك متابعة آخر التحديثات عبر البوابة.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer class="footer-section">
   <div class="footer-content">
@@ -829,6 +1172,27 @@
       this.style.display = 'none';
     }
   });
+  
+  // تعديل سلوك النوافذ المنبثقة داخل قسم "نظرة عن قنا"
+document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card => {
+  card.addEventListener('click', function(e) {
+    e.preventDefault();
+    const modalId = this.getAttribute('data-bs-target');
+    const modal = document.querySelector(modalId);
+    
+    // إخفاء قسم نظرة عن قنا مؤقتاً
+    document.getElementById('overview-container').style.display = 'none';
+    
+    // عرض النافذة المنبثقة
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+    
+    // عند إغلاق النافذة المنبثقة، إعادة عرض قسم نظرة عن قنا
+    modal.addEventListener('hidden.bs.modal', function() {
+      document.getElementById('overview-container').style.display = 'block';
+    });
+  });
+});
 </script>
 </body>
 </html>
