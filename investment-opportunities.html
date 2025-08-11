@@ -106,10 +106,6 @@
       background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
     }
-    #polygonsBtn {
-      background: linear-gradient(135deg, #7b1fa2, #9c27b0);
-      color: white;
-    }
     #distanceDisplay, #areaDisplay {
       position: absolute;
       left: 15px;
@@ -172,52 +168,12 @@
     .modal-body {
       padding: 25px;
     }
-    .form-control {
-      border-radius: 12px !important;
-      padding: 12px 15px;
-      border: 2px solid #e0e0e0;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.8);
-    }
     .btn-close {
       background: none;
       border: none;
       color: white;
       font-size: 28px;
       cursor: pointer;
-    }
-    .filters-container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 20px;
-      margin: 20px auto;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      display: none;
-    }
-    .filters-container.show {
-      display: block;
-    }
-    .filter-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .reset-btn {
-      background: linear-gradient(135deg, #616161, #9e9e9e);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .leaflet-popup-content-wrapper {
       border-radius: 15px !important;
@@ -357,6 +313,69 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
+    .favorite-list {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    .favorite-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+    .favorite-info {
+      flex-grow: 1;
+    }
+    .favorite-name {
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    .favorite-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .favorite-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .no-favorites {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+    .no-favorites i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #e0e0e0;
+    }
+    .favorites-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .favorites-count {
+      background: var(--primary);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -381,6 +400,12 @@
         <i class="bi bi-map"></i> الفرص الاستثمارية
       </a>
     </li>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link" data-link="favorites">
+        <i class="bi bi-heart"></i> المفضلة
+        <span id="favoritesCounter" class="badge bg-danger ms-2">0</span>
+      </a>
+    </li>
   </ul>
   <div class="sidebar-footer">
     © 2025 محافظة قنا<br>
@@ -395,55 +420,6 @@
   <h1>الفرص الاستثمارية في محافظة قنا</h1>
   <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع">
 </header>
-<div class="container mt-3">
-  <button id="toggleFilters" class="btn btn-primary mb-2">تصفية الفرص الاستثمارية</button>
-  <div class="filters-container" id="filtersContainer">
-    <div class="row g-3 mb-3">
-      <div class="col-md-3">
-        <select id="sectorFilter" class="form-select">
-          <option value="">كل القطاعات</option>
-          <option value="صناعي">صناعي</option>
-          <option value="زراعي">زراعي</option>
-          <option value="خدماتي">خدماتي</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select id="regionFilter" class="form-select">
-          <option value="">كل المناطق</option>
-          <option value="دشنا">دشنا</option>
-          <option value="الوقف">الوقف</option>
-          <option value="نجع حمادي">نجع حمادي</option>
-          <option value="فرشوط">فرشوط</option>
-          <option value="أبوتشت">أبوتشت</option>
-          <option value="قنا">قنا</option>
-          <option value="قفط">قفط</option>
-          <option value="قوص">قوص</option>
-          <option value="نقادة">نقادة</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select id="statusFilter" class="form-select">
-          <option value="">كل الحالات</option>
-          <option value="متاحة">متاحة</option>
-          <option value="قيد الدراسة">قيد الدراسة</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="ابحث بالاسم...">
-      </div>
-      <div class="col-6">
-        <button onclick="filterMarkers()" class="filter-btn w-100">
-          <i class="bi bi-search"></i> بدء البحث
-        </button>
-      </div>
-      <div class="col-6">
-        <button onclick="resetFilters()" class="reset-btn w-100">
-          <i class="bi bi-arrow-counterclockwise"></i> إعادة تعيين
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="measure-control">
   <button id="distanceBtn" onclick="toggleDistance()" class="btn" title="قياس المسافات">
     <i class="bi bi-rulers"></i>
@@ -454,15 +430,36 @@
   <button id="clearBtn" onclick="clearAll()" class="btn" title="مسح الكل">
     <i class="bi bi-trash"></i>
   </button>
-  <button id="polygonsBtn" onclick="togglePolygons()" class="btn" title="عرض/إخفاء المضلعات">
-    <i class="bi bi-bounding-box"></i>
-  </button>
 </div>
 <div id="distanceDisplay" style="display: none;">
   <i class="bi bi-rulers"></i> المسافة الكلية: 0 متر
 </div>
 <div id="areaDisplay" style="display: none;">
   <i class="bi bi-polygon"></i> المساحة: 0 م²
+</div>
+<div id="favoritesModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title"><i class="bi bi-heart-fill"></i> الفرص المفضلة</h5>
+      <button type="button" class="btn-close" onclick="closeFavoritesModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="favorites-header">
+        <div>
+          <i class="bi bi-bookmark-heart"></i> قائمة الفرص المفضلة
+        </div>
+        <div class="favorites-count" id="favoritesCount">0 عنصر</div>
+      </div>
+      <div class="favorite-list" id="favoritesList">
+      </div>
+      <div class="mt-4 d-flex justify-content-between">
+        <button class="btn btn-lg btn-outline-secondary" onclick="closeFavoritesModal()">إغلاق</button>
+        <button class="btn btn-lg btn-danger" onclick="clearAllFavorites()">
+          <i class="bi bi-trash"></i> حذف الكل
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="map"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -475,92 +472,993 @@
   let distanceLine = null;
   let areaPolygon = null;
   let areaLabel = null;
-  let polygonsLayer = null;
-  let polygonsVisible = true;
-  const opportunities = [
-    {id:1,name:"اقامة محطة وقود سيارات وخدمات",lat:26.158463518000076,lng:32.701038605000065,sector:"خدماتي",region:"قنا",area:"2295 م²",status:"متاحة"},
-    {id:2,name:"اقامة مول تجاري",lat:26.05172725400007,lng:32.238860343000056,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:3,name:"ارض فضاء بالترعة المضرانية",lat:26.057552846000078,lng:32.237520205000067,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:4,name:"اقامة محطة وقود سيارات وخدمات",lat:26.204804724000041,lng:32.739218099000027,sector:"خدماتي",region:"قنا",area:"2698.4 م²",status:"متاحة"},
-    {id:5,name:"ارض كازينة عبدالاه سابقا",lat:26.158502295000062,lng:32.721339635000049,sector:"خدماتي",region:"قنا",area:"غير محددة",status:"متاحة"},
-    {id:6,name:"نشاط اداري وتجاري",lat:26.056594583000049,lng:32.239662297000052,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:7,name:"نشاط اداري وتجاري",lat:26.056062664000024,lng:32.240573633000054,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:8,name:"نشاط اداري وتجاري",lat:26.056535404000044,lng:32.239436221000062,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:9,name:"نشاط اداري وتجاري",lat:26.05623586300004,lng:32.239933594000036,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:10,name:"نشاط اداري وتجاري",lat:26.055625354000028,lng:32.241253045000065,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:11,name:"نشاط ادار وتجاري",lat:26.05578132200003,lng:32.240569765000032,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:12,name:"حديقة المساكن",lat:26.187720862000049,lng:32.755919836000032,sector:"خدماتي",region:"قنا",area:"غير محددة",status:"متاحة"},
-    {id:13,name:"نشاط اداري وتجاري",lat:26.055344664000074,lng:32.241589558000044,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:14,name:"نشاط اداري وتجاري",lat:26.056412907000038,lng:32.240077674000077,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:15,name:"ارض فضاء بالترعة الضمرانية",lat:26.057805173000077,lng:32.237574659000074,sector:"خدماتي",region:"نجع حمادي",area:"غير محددة",status:"متاحة"},
-    {id:16,name:"اقامة محطة وقود وخدمات",lat:26.158303839000041,lng:32.702211308000074,sector:"خدماتي",region:"قنا",area:"3370 م²",status:"متاحة"}
-  ];
   const geoData = {
-    "type": "FeatureCollection",
-    "features": [
-      {"type":"Feature","id":1,"geometry":{"type":"Point","coordinates":[32.237556000000041,26.057750000000055,0]},"properties":{"OID":1,"Name":"الترعه الضمرانيه"}},
-      {"type":"Feature","id":2,"geometry":{"type":"Point","coordinates":[32.716472000000067,26.155500000000075,0]},"properties":{"OID":2,"Name":"النادى الأجتماعى و سينما و مسرح قنا"}},
-      {"type":"Feature","id":3,"geometry":{"type":"Point","coordinates":[32.721333000000072,26.158528000000047,0]},"properties":{"OID":3,"Name":"أرض كازينو عبدالله سابقا"}},
-      {"type":"Feature","id":4,"geometry":{"type":"Point","coordinates":[32.699250000000063,26.154750000000035,0]},"properties":{"OID":4,"Name":"فندق سياحى"}},
-      {"type":"Feature","id":5,"geometry":{"type":"Point","coordinates":[32.240028000000052,26.044361000000038,0]},"properties":{"OID":5,"Name":"إقامه فندق سياحى"}},
-      {"type":"Feature","id":6,"geometry":{"type":"Point","coordinates":[32.739528000000064,26.205472000000043,0]},"properties":{"OID":6,"Name":"إقامه محطة وقود سيارات"}},
-      {"type":"Feature","id":7,"geometry":{"type":"Point","coordinates":[32.239667000000054,26.056639000000075,0]},"properties":{"OID":7,"Name":"نشاط إدارى و تجارى"}},
-      {"type":"Feature","id":8,"geometry":{"type":"Point","coordinates":[32.240722000000062,26.05600000000004,0]},"properties":{"OID":8,"Name":"نشاط إدارى و تجارى"}},
-      {"type":"Feature","id":9,"geometry":{"type":"Point","coordinates":[32.23941700000006,26.056528000000071,0]},"properties":{"OID":9,"Name":"نشاط إدارى و تجارى"}},
-      {"type":"Feature","id":10,"geometry":{"type":"Point","coordinates":[32.23997200000008,26.056250000000034,0]},"properties":{"OID":10,"Name":"نشاط إدارى و تجارى"}},
-      {"type":"Feature","id":11,"geometry":{"type":"Point","coordinates":[32.241278000000079,26.055611000000056,0]},"properties":{"OID":11,"Name":"نشاط إدارى و تجارى"}},
-      {"type":"Feature","id":12,"geometry":{"type":"Point","coordinates":[32.238861000000043,26.051667000000066,0]},"properties":{"OID":12,"Name":"إقامه مول تجارى"}},
-      {"type":"Feature","id":13,"geometry":{"type":"Point","coordinates":[32.240583000000072,26.055806000000075,0]},"properties":{"OID":13,"Name":"نشاط إدارى و تجارى"}},
-      {"type":"Feature","id":14,"geometry":{"type":"Point","coordinates":[32.756083000000046,26.188611000000037,0]},"properties":{"OID":14,"Name":"حديقة المساكن"}},
-      {"type":"Feature","id":15,"geometry":{"type":"Point","coordinates":[32.248722000000043,26.039139000000034,0]},"properties":{"OID":15,"Name":"مرسى نجح حمادى السياحى"}},
-      {"type":"Feature","id":16,"geometry":{"type":"Point","coordinates":[32.241667000000064,26.055333000000076,0]},"properties":{"OID":16,"Name":"نشاط إدارى وتجارى"}},
-      {"type":"Feature","id":17,"geometry":{"type":"Point","coordinates":[32.240083000000027,26.056389000000024,0]},"properties":{"OID":17,"Name":"نشاط إدارى وتجارى"}},
-      {"type":"Feature","id":18,"geometry":{"type":"Point","coordinates":[32.658167000000049,25.554167000000064,0]},"properties":{"OID":18,"Name":"مشروعات انتاج داجنى"}},
-      {"type":"Feature","id":19,"geometry":{"type":"Point","coordinates":[32.239186000000075,26.051681000000031,0]},"properties":{"OID":19,"Name":"ارض فضاء محاطة بسور كائنة بمدينة نجع حمادى"}},
-      {"type":"Feature","id":20,"geometry":{"type":"Point","coordinates":[32.239865000000066,26.044510000000059,0]},"properties":{"OID":20,"Name":"قطعة ارض فضاء بمدينة نجع حمادي بجوار الحماية المدنية"}},
-      {"type":"Feature","id":21,"geometry":{"type":"Point","coordinates":[32.239651000000038,26.048686000000032,0]},"properties":{"OID":21,"Name":"ارض فضاء خلف سنترال نجع حمادي"}},
-      {"type":"Feature","id":22,"geometry":{"type":"Point","coordinates":[32.40053400000005,32.239410000000078,0]},"properties":{"OID":22,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":23,"geometry":{"type":"Point","coordinates":[32.240124000000037,26.056233000000077,0]},"properties":{"OID":23,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":24,"geometry":{"type":"Point","coordinates":[32.240055000000041,26.056540000000041,0]},"properties":{"OID":24,"Name":"الترعه الضمرانيه بنجع حمادى"}},
-      {"type":"Feature","id":25,"geometry":{"type":"Point","coordinates":[32.239607000000035,26.056813000000034,0]},"properties":{"OID":25,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":26,"geometry":{"type":"Point","coordinates":[32.241149000000064,26.055849000000023,0]},"properties":{"OID":26,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":27,"geometry":{"type":"Point","coordinates":[32.241537000000051,26.055595000000039,0]},"properties":{"OID":27,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":28,"geometry":{"type":"Point","coordinates":[32.240335000000073,26.056091000000038,0]},"properties":{"OID":28,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":29,"geometry":{"type":"Point","coordinates":[32.240515000000073,26.056237000000067,0]},"properties":{"OID":29,"Name":"ارض فضاء بالترعة الضمرانية"}},
-      {"type":"Feature","id":30,"geometry":{"type":"Point","coordinates":[32.242787000000078,26.054098000000067,0]},"properties":{"OID":30,"Name":"مبني الهيئة العامه للاستعلامات"}},
-      {"type":"Feature","id":31,"geometry":{"type":"Point","coordinates":[32.243333000000064,26.052038000000039,0]},"properties":{"OID":31,"Name":"مبني الوحدة المحلية لمركز ومدينة نجع حمادي القديم"}},
-      {"type":"Feature","id":32,"geometry":{"type":"Point","coordinates":[32.233624000000077,26.056112000000041,0]},"properties":{"OID":32,"Name":"مخزن مضبوطات المرافق والاشغالات"}},
-      {"type":"Feature","id":33,"geometry":{"type":"Point","coordinates":[32.240829000000076,26.046703000000036,0]},"properties":{"OID":33,"Name":"قطعة ارض فضاء بشارع خلف المرور"}},
-      {"type":"Feature","id":34,"geometry":{"type":"Point","coordinates":[32.307727000000057,25.956792000000064,0]},"properties":{"OID":34,"Name":"قطعة ارض فضاء بجوار الشادر الجديد بحاجر جبل هو"}},
-      {"type":"Feature","id":35,"geometry":{"type":"Point","coordinates":[32.237214000000051,26.057823000000042,0]},"properties":{"OID":35,"Name":"ارض للاستثمار العقاري بالترعة الضمرانية"}},
-      {"type":"Feature","id":36,"geometry":{"type":"Point","coordinates":[32.237054000000057,26.057653000000073,0]},"properties":{"OID":36,"Name":"ارض للاستثمار العقاري بالترعة الضمرانية"}},
-      {"type":"Feature","id":37,"geometry":{"type":"Point","coordinates":[32.23390100000006,26.056018000000051,0]},"properties":{"OID":37,"Name":"قطعة ارض بشارع التحرير مخزن مضبوطات المرافق والاشغالات"}},
-      {"type":"Feature","id":38,"geometry":{"type":"Point","coordinates":[32.239455000000078,26.044976000000077,0]},"properties":{"OID":38,"Name":"مبني دورين مقر مؤقت للسجل المدني بشارع 15 مايو"}},
-      {"type":"Feature","id":39,"geometry":{"type":"Point","coordinates":[32.237309000000039,26.054675000000032,0]},"properties":{"OID":39,"Name":"ورشة الاتوبيس لم يتم استلامها حتي الان من شركة الاتوبيس وجاري التنسيق مع الامن لاستلامها"}},
-      {"type":"Feature","id":40,"geometry":{"type":"Point","coordinates":[32.227154000000041,26.058932000000027,0]},"properties":{"OID":40,"Name":"ارض فضاء الشادر القديم"}},
-      {"type":"Feature","id":41,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":41,"Name":"Placemark"}},
-      {"type":"Feature","id":42,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":42,"Name":"Placemark"}},
-      {"type":"Feature","id":43,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":43,"Name":"Placemark"}},
-      {"type":"Feature","id":44,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":44,"Name":"Placemark"}},
-      {"type":"Feature","id":45,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":45,"Name":"Placemark"}},
-      {"type":"Feature","id":46,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":46,"Name":"Placemark"}},
-      {"type":"Feature","id":47,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":47,"Name":"Placemark"}},
-      {"type":"Feature","id":48,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":48,"Name":"Placemark"}},
-      {"type":"Feature","id":49,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":49,"Name":"Placemark"}},
-      {"type":"Feature","id":50,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":50,"Name":"Placemark"}},
-      {"type":"Feature","id":51,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":51,"Name":"Placemark"}},
-      {"type":"Feature","id":52,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":52,"Name":"Placemark"}},
-      {"type":"Feature","id":53,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":53,"Name":"Placemark"}},
-      {"type":"Feature","id":54,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":54,"Name":"Placemark"}},
-      {"type":"Feature","id":55,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":55,"Name":"Placemark"}},
-      {"type":"Feature","id":56,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":56,"Name":"Placemark"}},
-      {"type":"Feature","id":57,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":57,"Name":"Placemark"}},
-      {"type":"Feature","id":58,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":58,"Name":"Placemark"}},
-      {"type":"Feature","id":59,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":59,"Name":"Placemark"}},
-      {"type":"Feature","id":60,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":60,"Name":"Placemark"}},
-      {"type":"Feature","id":61,"geometry":{"type":"Point","coordinates":[5.6843418860808015e-14,5.6843418860808015e-14,0]},"properties":{"OID":61,"Name":"Placemark"}}
+    "type" : "FeatureCollection",
+    "features" : [
+      {
+        "type" : "Feature",
+        "id" : 1,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.237556000000041,
+            26.057750000000055,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 1,
+          "Name" : "الترعه الضمرانيه"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 2,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.716472000000067,
+            26.155500000000075,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 2,
+          "Name" : "النادى الأجتماعى و سينما و مسرح قنا"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 3,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.721333000000072,
+            26.158528000000047,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 3,
+          "Name" : "أرض كازينو عبدالله سابقا"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 4,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.699250000000063,
+            26.154750000000035,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 4,
+          "Name" : "فندق سياحى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 5,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240028000000052,
+            26.044361000000038,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 5,
+          "Name" : "إقامه فندق سياحى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 6,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.739528000000064,
+            26.205472000000043,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 6,
+          "Name" : "إقامه محطة وقود سيارات"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 7,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.239667000000054,
+            26.056639000000075,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 7,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 8,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240722000000062,
+            26.05600000000004,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 8,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 9,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.23941700000006,
+            26.056528000000071,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 9,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 10,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.23997200000008,
+            26.056250000000034,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 10,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 11,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.241278000000079,
+            26.055611000000056,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 11,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 12,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.238861000000043,
+            26.051667000000066,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 12,
+          "Name" : "إقامه مول تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 13,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240583000000072,
+            26.055806000000075,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 13,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 14,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.756083000000046,
+            26.188611000000037,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 14,
+          "Name" : "حديقة المساكن"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 15,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.248722000000043,
+            26.039139000000034,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 15,
+          "Name" : "مرسى نجح حمادى السياحى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 16,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.241667000000064,
+            26.055333000000076,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 16,
+          "Name" : "نشاط إدارى وتجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 17,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240083000000027,
+            26.056389000000024,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 17,
+          "Name" : "نشاط إدارى و تجارى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 18,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.658167000000049,
+            25.554167000000064,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 18,
+          "Name" : "مشروعات انتاج داجنى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 19,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.239186000000075,
+            26.051681000000031,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 19,
+          "Name" : "ارض فضاء محاطة بسور كائنة بمدينة نجع حمادى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 20,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.239865000000066,
+            26.044510000000059,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 20,
+          "Name" : "قطعة ارض فضاء بمدينة نجع حمادي بجوار الحماية المدنية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 21,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.239651000000038,
+            26.048686000000032,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 21,
+          "Name" : "ارض فضاء خلف سنترال نجع حمادي"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 22,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.40053400000005,
+            32.239410000000078,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 22,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 23,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240124000000037,
+            26.056233000000077,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 23,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 24,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240055000000041,
+            26.056540000000041,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 24,
+          "Name" : "الترعه الضمرانيه بنجع حمادى"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 25,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.239607000000035,
+            26.056813000000034,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 25,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 26,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.241149000000064,
+            26.055849000000023,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 26,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 27,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.241537000000051,
+            26.055595000000039,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 27,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 28,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240335000000073,
+            26.056091000000038,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 28,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 29,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240515000000073,
+            26.056237000000067,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 29,
+          "Name" : "ارض فضاء بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 30,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.242787000000078,
+            26.054098000000067,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 30,
+          "Name" : "مبني الهيئة العامه للاستعلامات"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 31,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.243333000000064,
+            26.052038000000039,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 31,
+          "Name" : "مبني الوحدة المحلية لمركز ومدينة نجع حمادي القديم"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 32,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.233624000000077,
+            26.056112000000041,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 32,
+          "Name" : "مخزن مضبوطات المرافق والاشغالات"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 33,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.240829000000076,
+            26.046703000000036,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 33,
+          "Name" : "قطعة ارض فضاء بشارع خلف المرور"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 34,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.307727000000057,
+            25.956792000000064,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 34,
+          "Name" : "قطعة ارض فضاء بجوار الشادر الجديد بحاجر جبل هو"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 35,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.237214000000051,
+            26.057823000000042,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 35,
+          "Name" : "ارض للاستثمار العقاري بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 36,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.237054000000057,
+            26.057653000000073,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 36,
+          "Name" : "ارض للاستثمار العقاري بالترعة الضمرانية"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 37,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.23390100000006,
+            26.056018000000051,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 37,
+          "Name" : "قطعة ارض بشارع التحرير مخزن مضبوطات المرافق والاشغالات"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 38,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.239455000000078,
+            26.044976000000077,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 38,
+          "Name" : "مبني دورين مقر مؤقت للسجل المدني بشارع 15 مايو"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 39,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.237309000000039,
+            26.054675000000032,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 39,
+          "Name" : "ورشة الاتوبيس لم يتم استلامها حتي الان من شركة الاتوبيس وجاري التنسيق مع الامن لاستلامها"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 40,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            32.227154000000041,
+            26.058932000000027,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 40,
+          "Name" : "ارض فضاء الشادر القديم"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 41,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 41,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 42,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 42,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 43,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 43,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 44,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 44,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 45,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 45,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 46,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 46,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 47,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 47,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 48,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 48,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 49,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 49,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 50,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 50,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 51,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 51,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 52,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 52,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 53,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 53,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 54,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 54,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 55,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 55,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 56,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 56,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 57,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 57,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 58,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 58,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 59,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 59,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 60,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 60,
+          "Name" : "Placemark"
+        }
+      },
+      {
+        "type" : "Feature",
+        "id" : 61,
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [
+            5.6843418860808015e-14,
+            5.6843418860808015e-14,
+            0
+          ]
+        },
+        "properties" : {
+          "OID" : 61,
+          "Name" : "Placemark"
+        }
+      }
     ]
   };
+  const opportunities = geoData.features.map((feature, index) => ({
+    id: index + 1,
+    name: feature.properties.Name,
+    lng: feature.geometry.coordinates[0],
+    lat: feature.geometry.coordinates[1]
+  })).filter(op => op.name !== "Placemark");
   function initMap() {
     map = L.map('map').setView([26.155, 32.716], 9);
     L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=73sDwzFoqKJbdF9udESc', {
@@ -571,52 +1469,26 @@
       minZoom: 0
     }).addTo(map);
     opportunities.forEach(opportunity => {
-      let iconColor = opportunity.sector === "صناعي" ? 'red' : opportunity.sector === "زراعي" ? 'green' : 'blue';
-      const customIcon = L.divIcon({
-        className: 'custom-div-icon',
-        html: `<div style="background-color: ${iconColor}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); position: relative;">
-                <div style="position: absolute; left: 30%; top: 30%; transform: rotate(45deg); color: white; font-size: 12px; font-weight: bold;">${opportunity.sector.charAt(0)}</div>
-              </div>`,
-        iconSize: [30, 30],
-        iconAnchor: [15, 30]
-      });
-      const marker = L.marker([opportunity.lat, opportunity.lng], {icon: customIcon}).addTo(map);
+      const marker = L.marker([opportunity.lat, opportunity.lng]).addTo(map);
       marker.options.data = opportunity;
       const popupContent = `
         <div style="text-align: right; min-width: 250px;">
           <div style="background: linear-gradient(135deg, #004d40, #00796b); color: white; padding: 10px; border-radius: 10px 10px 0 0; margin: -15px -15px 10px -15px;">
             <h4 style="margin: 0; font-weight: bold;">${opportunity.name}</h4>
           </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0;">
-            <span style="background: #e3f2fd; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi bi-building"></i> ${opportunity.sector}
-            </span>
-            <span style="background: #e8f5e9; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi bi-geo-alt"></i> ${opportunity.region}
-            </span>
-            <span style="background: #fff3e0; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi bi-arrows-fullscreen"></i> ${opportunity.area}
-            </span>
-            <span style="background: ${opportunity.status === 'متاحة' ? '#e8f5e9' : '#ffebee'}; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">
-              <i class="bi ${opportunity.status === 'متاحة' ? 'bi-check-circle' : 'bi-clock'}"></i> ${opportunity.status}
-            </span>
+          <div style="padding: 10px 0;">
+            <p><i class="bi bi-geo-alt"></i> خط العرض: ${opportunity.lat.toFixed(6)}</p>
+            <p><i class="bi bi-geo-alt"></i> خط الطول: ${opportunity.lng.toFixed(6)}</p>
           </div>
+          <button class="btn btn-primary btn-sm w-100" onclick="saveToFavorites(${opportunity.id})" style="border-radius: 10px;">
+            <i class="bi bi-heart"></i> حفظ في المفضلة
+          </button>
         </div>
       `;
       marker.bindPopup(popupContent);
       markers.push(marker);
     });
-    L.geoJSON(geoData, {
-      pointToLayer: function (feature, latlng) {
-        return L.marker(latlng);
-      },
-      onEachFeature: function (feature, layer) {
-        if (feature.properties && feature.properties.Name) {
-          const coords = feature.geometry.coordinates;
-          layer.bindPopup(`<div style="text-align: right;"><b>${feature.properties.Name}</b><br>إحداثيات: ${coords[1].toFixed(6)}, ${coords[0].toFixed(6)}</div>`);
-        }
-      }
-    }).addTo(map);
+    updateFavoritesCounter();
   }
   function toggleDistance() {
     if (window.distanceMode) {
@@ -709,41 +1581,89 @@
     map.off('click', addDistancePoint);
     map.off('click', addAreaPoint);
   }
-  function togglePolygons() {
-    polygonsVisible = !polygonsVisible;
-    if (polygonsLayer) {
-      if (polygonsVisible) {
-        polygonsLayer.addTo(map);
-      } else {
-        map.removeLayer(polygonsLayer);
-      }
+  function saveToFavorites(id) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    if (!favorites.includes(id)) {
+      favorites.push(id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      updateFavoritesCounter();
     }
   }
-  function filterMarkers() {
-    const sector = document.getElementById('sectorFilter').value;
-    const region = document.getElementById('regionFilter').value;
-    const status = document.getElementById('statusFilter').value;
-    const search = document.getElementById('searchInput').value.toLowerCase();
-    markers.forEach(marker => {
-      const data = marker.options.data;
-      let show = true;
-      if (sector && data.sector !== sector) show = false;
-      if (region && data.region !== region) show = false;
-      if (status && data.status !== status) show = false;
-      if (search && !data.name.toLowerCase().includes(search)) show = false;
-      if (show) {
-        marker.addTo(map);
-      } else {
-        map.removeLayer(marker);
+  function removeFromFavorites(id) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    favorites = favorites.filter(item => item !== id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    updateFavoritesCounter();
+    renderFavoritesList();
+  }
+  function clearAllFavorites() {
+    localStorage.removeItem('favorites');
+    updateFavoritesCounter();
+    renderFavoritesList();
+  }
+  function updateFavoritesCounter() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    document.getElementById('favoritesCounter').textContent = favorites.length;
+    const countElement = document.getElementById('favoritesCount');
+    if (countElement) {
+      countElement.textContent = `${favorites.length} عنصر${favorites.length === 1 ? '' : 'اً'}`;
+    }
+  }
+  function renderFavoritesList() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const container = document.getElementById('favoritesList');
+    container.innerHTML = '';
+    if (favorites.length === 0) {
+      container.innerHTML = `
+        <div class="no-favorites">
+          <i class="bi bi-heart"></i>
+          <h4>لا توجد فرص في المفضلة</h4>
+          <p>اضغط على زر "حفظ في المفضلة" في أي فرصة لإضافتها هنا</p>
+        </div>
+      `;
+      return;
+    }
+    favorites.forEach(id => {
+      const opportunity = opportunities.find(op => op.id === id);
+      if (opportunity) {
+        const item = document.createElement('div');
+        item.className = 'favorite-item';
+        item.innerHTML = `
+          <div class="favorite-info">
+            <div class="favorite-name">${opportunity.name}</div>
+          </div>
+          <div class="favorite-actions">
+            <button class="favorite-btn" onclick="showFavoriteOnMap(${opportunity.id})" title="عرض على الخريطة">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="favorite-btn" onclick="removeFromFavorites(${opportunity.id})" title="حذف من المفضلة">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
       }
     });
   }
-  function resetFilters() {
-    document.getElementById('sectorFilter').value = '';
-    document.getElementById('regionFilter').value = '';
-    document.getElementById('statusFilter').value = '';
-    document.getElementById('searchInput').value = '';
-    filterMarkers();
+  function showFavoriteOnMap(id) {
+    const opportunity = opportunities.find(op => op.id === id);
+    if (opportunity) {
+      closeFavoritesModal();
+      map.setView([opportunity.lat, opportunity.lng], 14);
+      const marker = markers.find(m => m.options.data.id === id);
+      if (marker) {
+        setTimeout(() => {
+          marker.openPopup();
+        }, 500);
+      }
+    }
+  }
+  function openFavoritesModal() {
+    renderFavoritesList();
+    document.getElementById('favoritesModal').classList.add('show');
+  }
+  function closeFavoritesModal() {
+    document.getElementById('favoritesModal').classList.remove('show');
   }
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -756,14 +1676,24 @@
       overlay.style.display = 'block';
     }
   }
+  function handleMenuLinks(event) {
+    const linkType = this.getAttribute('data-link');
+    if (linkType === 'favorites') {
+      event.preventDefault();
+      openFavoritesModal();
+    }
+    if (window.innerWidth <= 992) {
+      toggleSidebar();
+    }
+  }
   document.addEventListener('DOMContentLoaded', function() {
     initMap();
     document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
     document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
     document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
-    document.getElementById('toggleFilters').addEventListener('click', function() {
-      const container = document.getElementById('filtersContainer');
-      container.classList.toggle('show');
+    const menuLinks = document.querySelectorAll('.sidebar-link');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', handleMenuLinks);
     });
   });
 </script>
