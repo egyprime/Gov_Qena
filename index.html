@@ -874,13 +874,17 @@
       </div>
       <div class="modal-body">
         <img src="https://i.ibb.co/mFNzR165/image.jpg" alt="مشروعات حياة كريمة" class="modal-img">
-        <!-- أضف هذا الكود داخل نافذة "حياة كريمة" المنبثقة (modal) بعد عنصر الصورة -->
 <div class="d-flex justify-content-center gap-3 mt-3">
-  <a href="https://www.facebook.com/profile.php?id=100063948729691" 
-   target="_blank" 
-   class="btn btn-primary btn-lg">
+  <a href="#" class="btn btn-primary btn-lg" 
+   onclick="document.getElementById('qrcode').style.display='block'">
   <i class="bi bi-facebook me-2"></i> صفحة الفيسبوك
 </a>
+
+<div id="qrcode" style="display:none; text-align:center; margin-top:15px;">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://fb.com/profile.php?id=100063948729691" 
+       alt="QR Code للصفحة">
+  <p>مسح الكود للذهاب إلى صفحتنا</p>
+</div>
   
   <a href="http://qena.gov.eg/haiatkreamaa/default.aspx" 
      target="_blank" 
@@ -1210,6 +1214,5 @@ document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card
 </script>
 </body>
 </html>
-
 
 
