@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خريطة محافظة قنا مع طبقات البيانات</title>
+    <title>خريطة الأساس - محافظة قنا</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -383,6 +383,42 @@
             100% { transform: scale(1); }
         }
         
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border-radius: 15px;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(13, 71, 161, 0.2);
+            border-top: 5px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+        
         @media (max-width: 768px) {
             .content {
                 flex-direction: column;
@@ -407,7 +443,7 @@
         <header>
             <h1>
                 <span class="header-icon"><i class="fas fa-map-marked-alt"></i></span>
-                خريطة محافظة قنا مع طبقات البيانات
+                خريطة الأساس - محافظة قنا
             </h1>
         </header>
         
@@ -453,24 +489,24 @@
         </div>
         
         <div class="info-panel">
-            <h2>📊 معلومات حول طبقات البيانات</h2>
+            <h2>📊 إحصائيات محافظة قنا</h2>
             <div class="data-stats">
                 <div class="stat-card">
-                    <h3>طبقة المحافظة</h3>
-                    <div class="stat-value">gov.json</div>
-                    <div class="stat-label">تمثل الحدود الإدارية لمحافظة قنا</div>
+                    <h3>عدد المراكز</h3>
+                    <div class="stat-value">9</div>
+                    <div class="stat-label">مركز رئيسي في المحافظة</div>
                 </div>
                 
                 <div class="stat-card">
-                    <h3>طبقة المراكز</h3>
-                    <div class="stat-value">marakez.json</div>
-                    <div class="stat-label">تمثل حدود المراكز التابعة للمحافظة</div>
+                    <h3>عدد القرى والشياخات</h3>
+                    <div class="stat-value">172</div>
+                    <div class="stat-label">قرية وشياخة</div>
                 </div>
                 
                 <div class="stat-card">
-                    <h3>طبقة القرى</h3>
-                    <div class="stat-value">vilag.json</div>
-                    <div class="stat-label">تمثل حدود القرى والشياخات في المحافظة</div>
+                    <h3>عدد السكان</h3>
+                    <div class="stat-value">3.7M+</div>
+                    <div class="stat-label">نسمة (تقديرات 2025)</div>
                 </div>
             </div>
         </div>
@@ -626,32 +662,58 @@
             setTimeout(() => activeButton.blur(), 300);
         }
         
+        // إضافة شاشة تحميل
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.className = 'loading-overlay';
+        loadingOverlay.innerHTML = `
+            <div class="spinner"></div>
+            <div class="loading-text">جاري تحميل بيانات الخريطة...</div>
+        `;
+        document.querySelector('.map-container').appendChild(loadingOverlay);
+        
         // تحميل ملفات GeoJSON
         function loadGeoJSON(layer, url) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    layer.addData(data);
-                    
-                    // ضبط مستوى التكبير ليتناسب مع جميع البيانات
-                    if (Object.keys(data).length > 0) {
-                        const bounds = layer.getBounds();
-                        if (bounds.isValid()) {
-                            map.fitBounds(bounds);
+            return new Promise((resolve, reject) => {
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
                         }
-                    }
-                })
-                .catch(error => {
-                    console.error('حدث خطأ في تحميل ملف GeoJSON:', error);
-                    // عرض رسالة خطأ للمستخدم
-                    alert(`تعذر تحميل ملف ${url}. يرجى التحقق من وجود الملف.`);
-                });
+                        return response.json();
+                    })
+                    .then(data => {
+                        layer.addData(data);
+                        resolve();
+                    })
+                    .catch(error => {
+                        console.error('حدث خطأ في تحميل ملف GeoJSON:', error);
+                        alert(`تعذر تحميل ملف ${url}. يرجى التحقق من وجود الملف.`);
+                        reject(error);
+                    });
+            });
         }
         
         // تحميل ملفات GeoJSON الخارجية
-        loadGeoJSON(govLayer, 'gov.json');
-        loadGeoJSON(markezLayer, 'marakez.json');
-        loadGeoJSON(vilagLayer, 'vilag.json');
+        Promise.all([
+            loadGeoJSON(govLayer, 'gov.json'),
+            loadGeoJSON(markezLayer, 'marakez.json'),
+            loadGeoJSON(vilagLayer, 'vilag.json')
+        ])
+        .then(() => {
+            // بعد تحميل جميع الملفات
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                
+                // ضبط مستوى التكبير ليتناسب مع جميع البيانات
+                const bounds = new L.featureGroup([govLayer, markezLayer, vilagLayer]).getBounds();
+                if (bounds.isValid()) {
+                    map.fitBounds(bounds);
+                }
+            }, 1000);
+        })
+        .catch(() => {
+            loadingOverlay.innerHTML = '<div class="loading-text" style="color:red;">حدث خطأ في تحميل البيانات</div>';
+        });
         
         // إضافة شعار الخريطة
         const mapLogo = L.control({position: 'bottomleft'});
