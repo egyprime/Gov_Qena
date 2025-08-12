@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خريطة الأساس - محافظة قنا</title>
+    <title> خريطة الأساس - محافظة قنا </title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -39,6 +39,29 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
         header {
@@ -435,10 +458,21 @@
             .map-container {
                 height: 400px;
             }
+            
+            .back-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="government-services.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> الرجوع للصفحة السابقة
+    </a>
+    
     <div class="container">
         <header>
             <h1>
@@ -575,21 +609,24 @@
         const govLayer = L.geoJSON(null, {
             style: govStyle,
             onEachFeature: function(feature, layer) {
-                layer.bindPopup(`<b>${feature.properties.name || 'حدود محافظة قنا'}</b>`);
+                const name = feature.properties.name || 'حدود محافظة قنا';
+                layer.bindPopup(`<b>${name}</b>`);
             }
         });
         
         const markezLayer = L.geoJSON(null, {
             style: markezStyle,
             onEachFeature: function(feature, layer) {
-                layer.bindPopup(`<b>${feature.properties.name || 'مركز قنا'}</b>`);
+                const name = feature.properties.name || 'مركز قنا';
+                layer.bindPopup(`<b>${name}</b>`);
             }
         });
         
         const vilagLayer = L.geoJSON(null, {
             style: vilagStyle,
             onEachFeature: function(feature, layer) {
-                layer.bindPopup(`<b>${feature.properties.name || 'قرية في قنا'}</b>`);
+                const name = feature.properties.name || 'قرية في قنا';
+                layer.bindPopup(`<b>${name}</b>`);
             }
         });
         
@@ -677,11 +714,12 @@
                 fetch(url)
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
+                            throw new Error(`خطأ HTTP! الحالة: ${response.status}`);
                         }
                         return response.json();
                     })
                     .then(data => {
+                        console.log(`تم تحميل ${url} بنجاح`);
                         layer.addData(data);
                         resolve();
                     })
@@ -709,6 +747,22 @@
                 if (bounds.isValid()) {
                     map.fitBounds(bounds);
                 }
+                
+                // إضافة رسالة نجاح
+                const successMsg = document.createElement('div');
+                successMsg.className = 'loading-text';
+                successMsg.innerHTML = 'تم تحميل جميع بيانات الخريطة بنجاح!';
+                successMsg.style.color = '#388e3c';
+                successMsg.style.fontWeight = 'bold';
+                loadingOverlay.innerHTML = '';
+                loadingOverlay.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 500);
+                }, 2000);
             }, 1000);
         })
         .catch(() => {
