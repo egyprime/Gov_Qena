@@ -307,6 +307,62 @@
             font-size: 16px;
             color: #FFD700;
         }
+        
+        /* إضافة خريطة الأساس */
+        .base-map-card {
+            grid-column: 1 / -1; /* تأخذ العرض الكامل */
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(76, 175, 80, 0.3));
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+        }
+        
+        .base-map-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,215,0,0.2)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+        
+        .base-map-icon {
+            font-size: 48px;
+            color: #FFD700;
+            margin-bottom: 15px;
+            z-index: 1;
+        }
+        
+        .base-map-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 10px;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .base-map-description {
+            font-size: 18px;
+            max-width: 700px;
+            text-align: center;
+            z-index: 1;
+            line-height: 1.6;
+        }
+        
+        /* تعديل رسالة التعليمات */
+        .instructions i {
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body>
@@ -335,6 +391,18 @@
                 </div>
                 
                 <div class="services-grid">
+                    <!-- خريطة الأساس -->
+                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1m70wN3F3ScVUaXxIXrwAcNu9fPUT6Qo&usp=sharing" target="_blank" class="service-card base-map-card">
+                        <div class="service-icon base-map-icon">
+                            <i class="fas fa-map"></i>
+                        </div>
+                        <h3 class="service-title base-map-title">خريطة الأساس</h3>
+                        <p class="base-map-description">
+                            الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية والطرق الرئيسية والمراكز الحيوية
+                            التي تمثل البنية التحتية للمحافظة
+                        </p>
+                    </a>
+                    
                     <!-- الصرف الصحي -->
                     <a href="https://www.google.com/maps/d/u/0/edit?mid=1m70wN3F3ScVUaXxIXrwAcNu9fPUT6Qo&usp=sharing" target="_blank" class="service-card">
                         <div class="service-icon">
@@ -434,35 +502,14 @@
             <p>بوابة الخدمات والمرافق العامة للمواطنين</p>
             
             <div class="developer-credit">
-              <div class="credit-title">إعداد</div
+              <div class="credit-title">إعداد</div>
               <div class="credit-info">
-               <span><i class="bi bi-gear"></i> وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا</span>
+               <span><i class="fas fa-cogs"></i> وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا</span>
                </div>
             <div class="copyright">
                 © 2025 جميع الحقوق محفوظة - محافظة قنا
             </div>
         </footer>
     </div>
-    
-    <script>
-        // إضافة رسالة تأكيد عند النقر على أي بطاقة خدمة
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                const serviceName = this.querySelector('.service-title').textContent;
-                if(confirm(`هل تريد الانتقال إلى خريطة ${serviceName}؟`)) {
-                    // يتم الانتقال عبر الرابط الموجود في الوسم <a>
-                    return true;
-                } else {
-                    e.preventDefault();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
-
-
-
-
-
-
