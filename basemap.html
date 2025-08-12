@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خريطة محافظة قنا </title>
+    <title>خريطة محافظة قنا مع طبقات البيانات</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -15,6 +15,9 @@
             --light-blue: #42a5f5;
             --dark-blue: #002171;
             --accent-blue: #29b6f6;
+            --gov-color: #d32f2f;
+            --markez-color: #1976d2;
+            --vilag-color: #388e3c;
             --background-gradient: linear-gradient(135deg, #e3f2fd, #bbdefb, #90caf9);
         }
         
@@ -41,19 +44,20 @@
         header {
             text-align: center;
             padding: 30px 0;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             animation: fadeInDown 1s ease;
             position: relative;
             border: 1px solid var(--light-blue);
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+            color: white;
         }
         
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 15px;
-            color: var(--primary-blue);
             position: relative;
             display: inline-block;
         }
@@ -68,6 +72,12 @@
             height: 4px;
             background: var(--accent-blue);
             border-radius: 2px;
+        }
+        
+        .header-icon {
+            display: inline-block;
+            margin-left: 15px;
+            animation: pulse 2s infinite;
         }
         
         .content {
@@ -99,7 +109,7 @@
         .controls {
             width: 100%;
             max-width: 300px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -137,7 +147,7 @@
         .layer-btn {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
             padding: 12px 15px;
             margin: 10px 0;
@@ -148,26 +158,26 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
+            text-align: right;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
         .layer-btn:hover {
-            background: var(--light-blue);
-            color: white;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
         
         .layer-btn.active {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
             font-weight: bold;
         }
         
+        .layer-icon {
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
         .data-controls {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
@@ -207,24 +217,20 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             min-height: 80px;
+            flex-direction: column;
         }
         
         .data-btn:hover {
-            background: var(--light-blue);
-            color: white;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
         
         .data-btn.active {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
             font-weight: bold;
         }
         
         .info-panel {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
@@ -304,6 +310,34 @@
             animation: fadeIn 1s ease;
         }
         
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+        }
+        
+        .legend h4 {
+            margin: 0 0 10px;
+            text-align: center;
+            color: var(--primary-blue);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            margin-left: 8px;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -343,6 +377,12 @@
             }
         }
         
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
         @media (max-width: 768px) {
             .content {
                 flex-direction: column;
@@ -365,7 +405,10 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-map-marked-alt"></i> خريطة الأساس لمحافظة قنا </h1>
+            <h1>
+                <span class="header-icon"><i class="fas fa-map-marked-alt"></i></span>
+                خريطة محافظة قنا مع طبقات البيانات
+            </h1>
         </header>
         
         <div class="content">
@@ -394,43 +437,46 @@
         <div class="data-controls">
             <h2>👆 تحكم في طبقات البيانات</h2>
             <div class="data-buttons">
-                <button id="govBtn" class="data-btn">
+                <button id="govBtn" class="data-btn" style="border-left: 5px solid var(--gov-color);">
+                    <i class="fas fa-landmark" style="color: var(--gov-color); font-size: 1.5rem; margin-bottom: 8px;"></i>
                     <span>🏛️ حدود المحافظة</span>
                 </button>
-                <button id="markezBtn" class="data-btn">
+                <button id="markezBtn" class="data-btn" style="border-left: 5px solid var(--markez-color);">
+                    <i class="fas fa-city" style="color: var(--markez-color); font-size: 1.5rem; margin-bottom: 8px;"></i>
                     <span>🏙️ حدود المراكز</span>
                 </button>
-                <button id="vilagBtn" class="data-btn">
+                <button id="vilagBtn" class="data-btn" style="border-left: 5px solid var(--vilag-color);">
+                    <i class="fas fa-home" style="color: var(--vilag-color); font-size: 1.5rem; margin-bottom: 8px;"></i>
                     <span>🏡 حدود القرى والشياخات</span>
                 </button>
             </div>
         </div>
         
         <div class="info-panel">
-            <h2>📊 إحصائيات محافظة قنا</h2>
+            <h2>📊 معلومات حول طبقات البيانات</h2>
             <div class="data-stats">
                 <div class="stat-card">
-                    <h3>عدد المراكز</h3>
-                    <div class="stat-value">9</div>
-                    <div class="stat-label">مركز رئيسي في المحافظة</div>
+                    <h3>طبقة المحافظة</h3>
+                    <div class="stat-value">gov.json</div>
+                    <div class="stat-label">تمثل الحدود الإدارية لمحافظة قنا</div>
                 </div>
                 
                 <div class="stat-card">
-                    <h3>عدد القرى والشياخات</h3>
-                    <div class="stat-value">172</div>
-                    <div class="stat-label">قرية وشياخة</div>
+                    <h3>طبقة المراكز</h3>
+                    <div class="stat-value">marakez.json</div>
+                    <div class="stat-label">تمثل حدود المراكز التابعة للمحافظة</div>
                 </div>
                 
                 <div class="stat-card">
-                    <h3>عدد السكان</h3>
-                    <div class="stat-value">3.7M+</div>
-                    <div class="stat-label">نسمة (تقديرات 2025)</div>
+                    <h3>طبقة القرى</h3>
+                    <div class="stat-value">vilag.json</div>
+                    <div class="stat-label">تمثل حدود القرى والشياخات في المحافظة</div>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>جميع الحقوق محفوظة © 2025 </p>
+            <p>جميع الحقوق محفوظة © 2025</p>
             <p>اعداد: وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا</p>
         </footer>
     </div>
@@ -467,25 +513,48 @@
         // إضافة الطبقة الافتراضية
         googleSat.addTo(map);
         
-        // أنماط طبقات البيانات (إطار أحمر بدون تعبئة)
-        const borderStyle = {
-            color: '#ff0000',
+        // أنماط طبقات البيانات
+        const govStyle = {
+            color: '#d32f2f',
             fillColor: 'transparent',
             fillOpacity: 0,
             weight: 3
         };
         
+        const markezStyle = {
+            color: '#1976d2',
+            fillColor: 'transparent',
+            fillOpacity: 0,
+            weight: 2
+        };
+        
+        const vilagStyle = {
+            color: '#388e3c',
+            fillColor: 'transparent',
+            fillOpacity: 0,
+            weight: 1
+        };
+        
         // إنشاء طبقات بيانات فارغة (سيتم ملؤها من ملفات JSON)
         const govLayer = L.geoJSON(null, {
-            style: borderStyle
+            style: govStyle,
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(`<b>${feature.properties.name || 'حدود محافظة قنا'}</b>`);
+            }
         });
         
         const markezLayer = L.geoJSON(null, {
-            style: borderStyle
+            style: markezStyle,
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(`<b>${feature.properties.name || 'مركز قنا'}</b>`);
+            }
         });
         
         const vilagLayer = L.geoJSON(null, {
-            style: borderStyle
+            style: vilagStyle,
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(`<b>${feature.properties.name || 'قرية في قنا'}</b>`);
+            }
         });
         
         // متغير لتتبع الطبقة الحالية
@@ -517,28 +586,31 @@
         document.getElementById('govBtn').addEventListener('click', function() {
             if (map.hasLayer(govLayer)) {
                 map.removeLayer(govLayer);
+                this.classList.remove('active');
             } else {
                 govLayer.addTo(map);
+                this.classList.add('active');
             }
-            updateActiveButton(this);
         });
         
         document.getElementById('markezBtn').addEventListener('click', function() {
             if (map.hasLayer(markezLayer)) {
                 map.removeLayer(markezLayer);
+                this.classList.remove('active');
             } else {
                 markezLayer.addTo(map);
+                this.classList.add('active');
             }
-            updateActiveButton(this);
         });
         
         document.getElementById('vilagBtn').addEventListener('click', function() {
             if (map.hasLayer(vilagLayer)) {
                 map.removeLayer(vilagLayer);
+                this.classList.remove('active');
             } else {
                 vilagLayer.addTo(map);
+                this.classList.add('active');
             }
-            updateActiveButton(this);
         });
         
         // تحديث الأزرار النشطة
@@ -554,111 +626,32 @@
             setTimeout(() => activeButton.blur(), 300);
         }
         
-        // محاكاة لتحميل ملفات JSON (في الواقع سيتم استبدال هذا بروابط الملفات الفعلية)
+        // تحميل ملفات GeoJSON
         function loadGeoJSON(layer, url) {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     layer.addData(data);
+                    
+                    // ضبط مستوى التكبير ليتناسب مع جميع البيانات
+                    if (Object.keys(data).length > 0) {
+                        const bounds = layer.getBounds();
+                        if (bounds.isValid()) {
+                            map.fitBounds(bounds);
+                        }
+                    }
                 })
                 .catch(error => {
-                    console.error('Error loading GeoJSON:', error);
+                    console.error('حدث خطأ في تحميل ملف GeoJSON:', error);
+                    // عرض رسالة خطأ للمستخدم
+                    alert(`تعذر تحميل ملف ${url}. يرجى التحقق من وجود الملف.`);
                 });
         }
         
-        // في الواقع، استخدم الروابط الصحيحة لملفاتك:
-        // loadGeoJSON(govLayer, 'gov.json');
-        // loadGeoJSON(markezLayer, 'marakez.json');
-        // loadGeoJSON(vilagLayer, 'vilag.json');
-        
-        // محاكاة للبيانات (لأغراض العرض فقط)
-        setTimeout(() => {
-            // محاكاة حدود المحافظة
-            const govData = {
-                "type": "FeatureCollection",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "properties": {"name": "حدود محافظة قنا"},
-                        "geometry": {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [32.60, 25.90], [32.80, 25.90], 
-                                [32.80, 26.40], [32.60, 26.40], 
-                                [32.60, 25.90]
-                            ]]
-                        }
-                    }
-                ]
-            };
-            
-            // محاكاة حدود المراكز
-            const markezData = {
-                "type": "FeatureCollection",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "properties": {"name": "مركز قنا"},
-                        "geometry": {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [32.65, 26.10], [32.75, 26.10], 
-                                [32.75, 26.20], [32.65, 26.20], 
-                                [32.65, 26.10]
-                            ]]
-                        }
-                    },
-                    {
-                        "type": "Feature",
-                        "properties": {"name": "مركز نجع حمادي"},
-                        "geometry": {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [32.55, 26.00], [32.65, 26.00], 
-                                [32.65, 26.10], [32.55, 26.10], 
-                                [32.55, 26.00]
-                            ]]
-                        }
-                    }
-                ]
-            };
-            
-            // محاكاة حدود القرى
-            const vilagData = {
-                "type": "FeatureCollection",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "properties": {"name": "قرية السلام"},
-                        "geometry": {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [32.68, 26.12], [32.70, 26.12], 
-                                [32.70, 26.14], [32.68, 26.14], 
-                                [32.68, 26.12]
-                            ]]
-                        }
-                    },
-                    {
-                        "type": "Feature",
-                        "properties": {"name": "قرية النور"},
-                        "geometry": {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [32.72, 26.15], [32.74, 26.15], 
-                                [32.74, 26.17], [32.72, 26.17], 
-                                [32.72, 26.15]
-                            ]]
-                        }
-                    }
-                ]
-            };
-            
-            // إضافة البيانات المحاكاة
-            govLayer.addData(govData);
-            markezLayer.addData(markezData);
-            vilagLayer.addData(vilagData);
-        }, 1000);
+        // تحميل ملفات GeoJSON الخارجية
+        loadGeoJSON(govLayer, 'gov.json');
+        loadGeoJSON(markezLayer, 'marakez.json');
+        loadGeoJSON(vilagLayer, 'vilag.json');
         
         // إضافة شعار الخريطة
         const mapLogo = L.control({position: 'bottomleft'});
@@ -678,6 +671,29 @@
         
         // إضافة مقياس الرسم
         L.control.scale({position: 'bottomleft'}).addTo(map);
+        
+        // إضافة وسيلة إيضاح (Legend)
+        const legend = L.control({position: 'bottomright'});
+        legend.onAdd = function() {
+            const div = L.DomUtil.create('div', 'legend');
+            div.innerHTML = `
+                <h4>مفتاح الخريطة</h4>
+                <div class="legend-item">
+                    <span>حدود المحافظة</span>
+                    <div class="legend-color" style="background-color: ${govStyle.color}"></div>
+                </div>
+                <div class="legend-item">
+                    <span>حدود المراكز</span>
+                    <div class="legend-color" style="background-color: ${markezStyle.color}"></div>
+                </div>
+                <div class="legend-item">
+                    <span>حدود القرى</span>
+                    <div class="legend-color" style="background-color: ${vilagStyle.color}"></div>
+                </div>
+            `;
+            return div;
+        };
+        legend.addTo(map);
     </script>
 </body>
 </html>
