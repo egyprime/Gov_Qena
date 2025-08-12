@@ -1,21 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-57WT3ED2BQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-57WT3ED2BQ', {
-      page_title: 'الصفحة الرئيسية - محافظة قنا',
-      page_location: window.location.href,
-      send_page_view: true
-    });
-  </script>
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>البوابة الجغرافية - محافظة قنا</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
@@ -427,7 +414,7 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(10px);
-      z-index: 2000;
+      z-index: 1050;
       overflow-y: auto;
       padding: 2rem;
     }
@@ -745,28 +732,27 @@
     </div>
     
     <div class="overview-grid">
+      <!-- تم حذف الخانات التالية:
+        مشروعات حياة كريمة
+        قُرى الظهير
+        المقاصد السياحية
+      -->
+      
+      <!-- الخانة الجديدة: المثلث الذهبي -->
+      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal9">
+        <div class="overview-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+          <i class="bi bi-stars"></i>
+        </div>
+        <h4 class="overview-card-title">المثلث الذهبي</h4>
+        <p class="overview-card-description">فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات</p>
+      </div>
+      
       <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal1">
         <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
           <i class="bi bi-buildings"></i>
         </div>
         <h4 class="overview-card-title">المناطق الصناعية</h4>
         <p class="overview-card-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal2">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%);">
-          <i class="bi bi-house-door"></i>
-        </div>
-        <h4 class="overview-card-title">قُرى الظهير</h4>
-        <p class="overview-card-description">حدود القرى الصحراوية وارتباطها بالمراكز الحضرية</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal3">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%);">
-          <i class="bi bi-heart"></i>
-        </div>
-        <h4 class="overview-card-title">مشروعات حياة كريمة</h4>
-        <p class="overview-card-description">للتفاصيل اكثر من خلال روابط اعلاه</p>
       </div>
       
       <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal4">
@@ -783,14 +769,6 @@
         </div>
         <h4 class="overview-card-title">المناطق الحرفية</h4>
         <p class="overview-card-description">توزيع الأسواق والورش الحرفية</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal6">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #1a237e 0%, #7986cb 100%);">
-          <i class="bi bi-geo-alt"></i>
-        </div>
-        <h4 class="overview-card-title">المقاصد السياحية</h4>
-        <p class="overview-card-description">المعالم والمسارات والخدمات السياحية</p>
       </div>
       
       <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal7">
@@ -861,25 +839,6 @@
       <div class="modal-body">
         <img src="https://i.ibb.co/FbTyH94v/image.jpg" alt="المناطق الصناعية" class="modal-img">
         <p class="modal-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">قُرى الظهير</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/ns46wNw0/image.jpg" alt="قُرى الظهير" class="modal-img">
-        <p class="modal-description">حدود القرى الصحراوية، شبكات الطرق وارتباطها بالمراكز الحضرية لخطة تنمية ريفية مستدامة.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
@@ -975,36 +934,6 @@
   </div>
 </div>
 
-<!-- السكريبت الخاص بالتحكم في QR Code -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // عرض/إخفاء QR Code
-  const showQRBtn = document.getElementById('showQR');
-  const qrContainer = document.getElementById('qrContainer');
-  const closeQRBtn = document.getElementById('closeQR');
-  
-  if(showQRBtn && qrContainer) {
-    showQRBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      qrContainer.style.display = 'block';
-    });
-  }
-  
-  if(closeQRBtn && qrContainer) {
-    closeQRBtn.addEventListener('click', function() {
-      qrContainer.style.display = 'none';
-    });
-  }
-  
-  // إغلاق QR Code عند النقر خارج المنطقة
-  window.addEventListener('click', function(e) {
-    if(qrContainer && e.target === qrContainer) {
-      qrContainer.style.display = 'none';
-    }
-  });
-});
-</script>
-
 <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -1034,25 +963,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="modal-body">
         <img src="https://i.ibb.co/PZKfCHrH/image.jpg" alt="المناطق الحرفية" class="modal-img">
         <p class="modal-description">توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">المقاصد السياحية</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/TDGVtfTp/image.jpg" alt="المقاصد السياحية" class="modal-img">
-        <p class="modal-description">المعالم والمسارات والخدمات السياحية المحيطة لتسهيل الترويج والتنقل للسائحين.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
@@ -1100,92 +1010,45 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
-<!-- نوافذ الخدمات قيد التطوير -->
-<div class="modal fade coming-soon-modal" id="comingSoon1" tabindex="-1" aria-hidden="true">
+<!-- نافذة جديدة للمثلث الذهبي -->
+<div class="modal fade" id="modal9" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">رفع مساحي</h5>
+        <h5 class="modal-title">المثلث الذهبي</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="coming-soon-icon">
-          <i class="bi bi-rulers"></i>
+        <img src="https://i.ibb.co/NgV11HhX/image.jpg" alt="المثلث الذهبي" class="modal-img">
+        <p class="modal-description">فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات</p>
+        
+        <!-- معلومات إضافية -->
+        <div class="mt-4 p-3 bg-light rounded-3">
+          <h6 class="fw-bold text-dark mb-3">مجالات الاستثمار في المثلث الذهبي:</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2 text-dark">
+              <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+              <strong>التعدين</strong>: استخراج وتصنيع المعادن والثروات الطبيعية
+            </li>
+            <li class="mb-2 text-dark">
+              <i class="bi bi-gear-fill text-success me-2"></i>
+              <strong>الصناعة</strong>: مصانع ومنشآت صناعية متطورة
+            </li>
+            <li class="mb-2 text-dark">
+              <i class="bi bi-tree-fill text-warning me-2"></i>
+              <strong>الزراعة</strong>: مشاريع زراعية متطورة واستصلاح الأراضي
+            </li>
+            <li class="text-dark">
+              <i class="bi bi-briefcase-fill text-info me-2"></i>
+              <strong>الخدمات</strong>: خدمات لوجستية وتجارية متكاملة
+            </li>
+          </ul>
         </div>
-        <h3 class="coming-soon-title">الخدمة قيد التطوير</h3>
-        <p class="coming-soon-text">
-          خدمة الرفع المساحي تتيح للمواطنين طلب فريق متخصص لقياس مساحة العقار وتحديد الحدود بدقة، 
-          مما يساعد في الحصول على تراخيص البناء بسهولة. ستتلقى تقريراً مفصلاً وكرتاً رقمياً ببيانات العقار.
-        </p>
-        <div class="progress-container">
-          <div class="progress-bar"></div>
-        </div>
-        <p class="coming-soon-text">
-          نعمل حالياً على تطوير هذه الخدمة لتكون متاحة قريباً. يمكنك متابعة آخر التحديثات عبر البوابة.
-        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade coming-soon-modal" id="comingSoon2" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">تسجيل مكاني</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="coming-soon-icon">
-          <i class="bi bi-clock-history"></i>
-        </div>
-        <h3 class="coming-soon-title">الخدمة قيد التطوير</h3>
-        <p class="coming-soon-text">
-          خدمة التسجيل مكاني تتيح لك تتبع التغيرات في المباني والمناطق عبر الزمن باستخدام الصور الجوية التاريخية. 
-          يمكنك فحص الحيز العمراني ومقارنة حالة العقار في سنوات مختلفة لمراقبة التطور العمراني.
-        </p>
-        <div class="progress-container">
-          <div class="progress-bar"></div>
-        </div>
-        <p class="coming-soon-text">
-          نعمل حالياً على تطوير هذه الخدمة لتكون متاحة قريباً. يمكنك متابعة آخر التحديثات عبر البوابة.
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade coming-soon-modal" id="comingSoon3" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">شهادة بيانات</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="coming-soon-icon">
-          <i class="bi bi-file-earmark-text"></i>
-        </div>
-        <h3 class="coming-soon-title">الخدمة قيد التطوير</h3>
-        <p class="coming-soon-text">
-          خدمة شهادة البيانات مخصصة لمنظومة التصالحات عن مخالفات البناء،.
-        </p>
-        <div class="progress-container">
-          <div class="progress-bar"></div>
-        </div>
-        <p class="coming-soon-text">
-          نعمل حالياً على تطوير هذه الخدمة لتكون متاحة قريباً. يمكنك متابعة آخر التحديثات عبر البوابة.
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
     </div>
   </div>
 </div>
@@ -1215,68 +1078,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
   // تتبع النقرات على الأقسام
   function trackClick(sectionName) {
-    gtag('event', 'click', {
-      event_category: 'navigation',
-      event_label: sectionName,
-      value: 1
-    });
+    console.log('تم النقر على: ' + sectionName);
   }
 
-  // تتبع النقرات على وسائل التواصل الاجتماعي
-  function trackSocial(platform) {
-    gtag('event', 'social_click', {
-      event_category: 'social_media',
-      event_label: platform,
-      value: 1
-    });
-  }
-
-  // تتبع وقت البقاء في الصفحة
-  let startTime = Date.now();
-  
-  window.addEventListener('beforeunload', function() {
-    let timeSpent = Math.round((Date.now() - startTime) / 1000);
-    gtag('event', 'timing_complete', {
-      event_category: 'engagement',
-      name: 'time_on_page',
-      value: timeSpent
-    });
-  });
-
-  // تتبع التمرير
-  let scrollTracked = false;
-  window.addEventListener('scroll', function() {
-    if (!scrollTracked && window.scrollY > 200) {
-      scrollTracked = true;
-      gtag('event', 'scroll', {
-        event_category: 'engagement',
-        event_label: 'scrolled_200px',
-        value: 1
-      });
-    }
-  });
-
-  // تتبع معلومات المتصفح والجهاز
-  gtag('event', 'page_view', {
-    event_category: 'device_info',
-    custom_parameters: {
-      screen_resolution: screen.width + 'x' + screen.height,
-      browser_language: navigator.language,
-      user_agent: navigator.userAgent.substring(0, 100)
-    }
-  });
-  
-  // تتبع فتح النوافذ المنبثقة
-  document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
-    button.addEventListener('click', function() {
-      const modalId = this.getAttribute('data-bs-target').substring(1);
-      gtag('event', 'modal_open', {
-        event_category: 'modal',
-        event_label: modalId
-      });
-    });
-  });
-  
   // التحكم في قسم نظرة عن قنا
   document.getElementById('overview-card').addEventListener('click', function() {
     document.getElementById('overview-container').style.display = 'block';
@@ -1311,86 +1115,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // حل المشكلة الرئيسية: إعادة ضبط الطبقة الخلفية عند إغلاق النوافذ
-  const modals = document.querySelectorAll('.modal');
-  modals.forEach(modal => {
-    modal.addEventListener('hidden.bs.modal', function() {
-      // إعادة تنشيط الطبقة الخلفية عند إغلاق أي نافذة
-      document.body.classList.remove('modal-open');
-      document.querySelector('.modal-backdrop')?.remove();
-    });
+  // التحكم في QR Code
+  document.getElementById('showQR').addEventListener('click', function() {
+    document.getElementById('qrContainer').style.display = 'block';
   });
   
-  // حل إضافي: تعديل سلوك النوافذ المنبثقة داخل قسم "نظرة عن قنا"
-  document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card => {
-    card.addEventListener('click', function(e) {
-      e.preventDefault();
-      const modalId = this.getAttribute('data-bs-target');
-      const modal = document.querySelector(modalId);
-      
-      // إخفاء قسم نظرة عن قنا مؤقتاً
-      document.getElementById('overview-container').style.display = 'none';
-      
-      // عرض النافذة المنبثقة
-      const modalInstance = new bootstrap.Modal(modal);
-      modalInstance.show();
-      
-      // عند إغلاق النافذة المنبثقة، إعادة عرض قسم نظرة عن قنا
-      modal.addEventListener('hidden.bs.modal', function() {
-        document.getElementById('overview-container').style.display = 'block';
-        // التأكد من إزالة أي طبقات خلفية متبقية
-        document.body.classList.remove('modal-open');
-        document.querySelector('.modal-backdrop')?.remove();
-      });
-    });
+  document.getElementById('closeQR').addEventListener('click', function() {
+    document.getElementById('qrContainer').style.display = 'none';
   });
-
-  // حل إضافي: تعديل سلوك النوافذ المنبثقة داخل قسم "وحدة نظم المعلومات الجغرافية"
-  document.querySelectorAll('#gis-unit-container .overview-card[data-bs-toggle="modal"]').forEach(card => {
-    card.addEventListener('click', function(e) {
-      e.preventDefault();
-      const modalId = this.getAttribute('data-bs-target');
-      const modal = document.querySelector(modalId);
-      
-      // إخفاء قسم وحدة نظم المعلومات الجغرافية مؤقتاً
-      document.getElementById('gis-unit-container').style.display = 'none';
-      
-      // عرض النافذة المنبثقة
-      const modalInstance = new bootstrap.Modal(modal);
-      modalInstance.show();
-      
-      // عند إغلاق النافذة المنبثقة، إعادة عرض القسم
-      modal.addEventListener('hidden.bs.modal', function() {
-        document.getElementById('gis-unit-container').style.display = 'block';
-        // التأكد من إزالة أي طبقات خلفية متبقية
-        document.body.classList.remove('modal-open');
-        document.querySelector('.modal-backdrop')?.remove();
-      });
-    });
-  });
-  
-  // حل نهائي: إدارة الطبقات الخلفية يدوياً
-  function resetBackdrops() {
-    // إزالة جميع الطبقات الخلفية
-    const backdrops = document.querySelectorAll('.modal-backdrop');
-    backdrops.forEach(backdrop => {
-      backdrop.remove();
-    });
-    
-    // إعادة ضبط حالة الجسم
-    document.body.classList.remove('modal-open');
-    document.body.style.overflow = 'auto';
-    document.body.style.paddingRight = '0';
-  }
-  
-  // استدعاء الدالة عند إغلاق أي نافذة
-  modals.forEach(modal => {
-    modal.addEventListener('hidden.bs.modal', resetBackdrops);
-  });
-  
-  // استدعاء الدالة عند إغلاق الأقسام
-  document.getElementById('close-overview').addEventListener('click', resetBackdrops);
-  document.getElementById('close-gis-unit').addEventListener('click', resetBackdrops);
 </script>
 </body>
 </html>
