@@ -419,6 +419,14 @@
             z-index: 1000;
             border-radius: 15px;
             flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
         }
         
         .spinner {
@@ -440,6 +448,42 @@
             font-size: 1.2rem;
             color: var(--primary-blue);
             font-weight: bold;
+        }
+        
+        .popup-content {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .popup-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .popup-content th, .popup-content td {
+            padding: 8px;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .popup-content th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        
+        .popup-content tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .popup-title {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--accent-blue);
         }
         
         @media (max-width: 768px) {
@@ -552,6 +596,11 @@
     </div>
 
     <script>
+        // تتبع حالة التحميل
+        let govLoaded = false;
+        let markezLoaded = false;
+        let vilagLoaded = false;
+        
         // تهيئة الخريطة
         const map = L.map('map', {
             center: [26.1644, 32.7267], // مركز محافظة قنا
@@ -609,24 +658,81 @@
         const govLayer = L.geoJSON(null, {
             style: govStyle,
             onEachFeature: function(feature, layer) {
+                // إنشاء محتوى البوب أب
                 const name = feature.properties.name || 'حدود محافظة قنا';
-                layer.bindPopup(`<b>${name}</b>`);
+                let popupContent = `<div class="popup-content">`;
+                popupContent += `<div class="popup-title">${name}</div>`;
+                popupContent += `<table>`;
+                
+                // إضافة جميع الخصائص ما عدا المحددة
+                for (const key in feature.properties) {
+                    // استبعاد الخصائص غير المرغوب فيها
+                    if (key === 'OBJECTID' || key === 'Shape_Length' || key === 'Shape_Area') continue;
+                    
+                    popupContent += `
+                        <tr>
+                            <td>${key}</td>
+                            <td>${feature.properties[key]}</td>
+                        </tr>
+                    `;
+                }
+                
+                popupContent += `</table></div>`;
+                layer.bindPopup(popupContent);
             }
         });
         
         const markezLayer = L.geoJSON(null, {
             style: markezStyle,
             onEachFeature: function(feature, layer) {
+                // إنشاء محتوى البوب أب
                 const name = feature.properties.name || 'مركز قنا';
-                layer.bindPopup(`<b>${name}</b>`);
+                let popupContent = `<div class="popup-content">`;
+                popupContent += `<div class="popup-title">${name}</div>`;
+                popupContent += `<table>`;
+                
+                // إضافة جميع الخصائص ما عدا المحددة
+                for (const key in feature.properties) {
+                    // استبعاد الخصائص غير المرغوب فيها
+                    if (key === 'OBJECTID' || key === 'Shape_Length' || key === 'Shape_Area') continue;
+                    
+                    popupContent += `
+                        <tr>
+                            <td>${key}</td>
+                            <td>${feature.properties[key]}</td>
+                        </tr>
+                    `;
+                }
+                
+                popupContent += `</table></div>`;
+                layer.bindPopup(popupContent);
             }
         });
         
         const vilagLayer = L.geoJSON(null, {
             style: vilagStyle,
             onEachFeature: function(feature, layer) {
+                // إنشاء محتوى البوب أب
                 const name = feature.properties.name || 'قرية في قنا';
-                layer.bindPopup(`<b>${name}</b>`);
+                let popupContent = `<div class="popup-content">`;
+                popupContent += `<div class="popup-title">${name}</div>`;
+                popupContent += `<table>`;
+                
+                // إضافة جميع الخصائص ما عدا المحددة
+                for (const key in feature.properties) {
+                    // استبعاد الخصائص غير المرغوب فيها
+                    if (key === 'OBJECTID' || key === 'Shape_Length' || key === 'Shape_Area') continue;
+                    
+                    popupContent += `
+                        <tr>
+                            <td>${key}</td>
+                            <td>${feature.properties[key]}</td>
+                        </tr>
+                    `;
+                }
+                
+                popupContent += `</table></div>`;
+                layer.bindPopup(popupContent);
             }
         });
         
@@ -661,8 +767,17 @@
                 map.removeLayer(govLayer);
                 this.classList.remove('active');
             } else {
-                govLayer.addTo(map);
-                this.classList.add('active');
+                // إذا لم يتم تحميل الطبقة بعد، قم بتحميلها
+                if (!govLoaded) {
+                    loadGeoJSON(govLayer, 'gov.json').then(() => {
+                        govLayer.addTo(map);
+                        govLoaded = true;
+                        this.classList.add('active');
+                    });
+                } else {
+                    govLayer.addTo(map);
+                    this.classList.add('active');
+                }
             }
         });
         
@@ -671,8 +786,17 @@
                 map.removeLayer(markezLayer);
                 this.classList.remove('active');
             } else {
-                markezLayer.addTo(map);
-                this.classList.add('active');
+                // إذا لم يتم تحميل الطبقة بعد، قم بتحميلها
+                if (!markezLoaded) {
+                    loadGeoJSON(markezLayer, 'marakez.json').then(() => {
+                        markezLayer.addTo(map);
+                        markezLoaded = true;
+                        this.classList.add('active');
+                    });
+                } else {
+                    markezLayer.addTo(map);
+                    this.classList.add('active');
+                }
             }
         });
         
@@ -681,8 +805,17 @@
                 map.removeLayer(vilagLayer);
                 this.classList.remove('active');
             } else {
-                vilagLayer.addTo(map);
-                this.classList.add('active');
+                // إذا لم يتم تحميل الطبقة بعد، قم بتحميلها
+                if (!vilagLoaded) {
+                    loadGeoJSON(vilagLayer, 'vilag.json').then(() => {
+                        vilagLayer.addTo(map);
+                        vilagLoaded = true;
+                        this.classList.add('active');
+                    });
+                } else {
+                    vilagLayer.addTo(map);
+                    this.classList.add('active');
+                }
             }
         });
         
@@ -710,6 +843,11 @@
         
         // تحميل ملفات GeoJSON
         function loadGeoJSON(layer, url) {
+            // إظهار شاشة التحميل فقط عند الضرورة
+            if (!loadingOverlay.classList.contains('visible')) {
+                loadingOverlay.classList.add('visible');
+            }
+            
             return new Promise((resolve, reject) => {
                 fetch(url)
                     .then(response => {
@@ -721,53 +859,30 @@
                     .then(data => {
                         console.log(`تم تحميل ${url} بنجاح`);
                         layer.addData(data);
+                        
+                        // إخفاء شاشة التحميل إذا تم تحميل جميع الطبقات
+                        if (govLoaded && markezLoaded && vilagLoaded) {
+                            setTimeout(() => {
+                                loadingOverlay.classList.remove('visible');
+                            }, 500);
+                        }
+                        
                         resolve();
                     })
                     .catch(error => {
                         console.error('حدث خطأ في تحميل ملف GeoJSON:', error);
                         alert(`تعذر تحميل ملف ${url}. يرجى التحقق من وجود الملف.`);
+                        
+                        // إخفاء شاشة التحميل في حالة الخطأ
+                        loadingOverlay.classList.remove('visible');
+                        
                         reject(error);
                     });
             });
         }
         
-        // تحميل ملفات GeoJSON الخارجية
-        Promise.all([
-            loadGeoJSON(govLayer, 'gov.json'),
-            loadGeoJSON(markezLayer, 'marakez.json'),
-            loadGeoJSON(vilagLayer, 'vilag.json')
-        ])
-        .then(() => {
-            // بعد تحميل جميع الملفات
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-                
-                // ضبط مستوى التكبير ليتناسب مع جميع البيانات
-                const bounds = new L.featureGroup([govLayer, markezLayer, vilagLayer]).getBounds();
-                if (bounds.isValid()) {
-                    map.fitBounds(bounds);
-                }
-                
-                // إضافة رسالة نجاح
-                const successMsg = document.createElement('div');
-                successMsg.className = 'loading-text';
-                successMsg.innerHTML = 'تم تحميل جميع بيانات الخريطة بنجاح!';
-                successMsg.style.color = '#388e3c';
-                successMsg.style.fontWeight = 'bold';
-                loadingOverlay.innerHTML = '';
-                loadingOverlay.appendChild(successMsg);
-                
-                setTimeout(() => {
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
-                    }, 500);
-                }, 2000);
-            }, 1000);
-        })
-        .catch(() => {
-            loadingOverlay.innerHTML = '<div class="loading-text" style="color:red;">حدث خطأ في تحميل البيانات</div>';
-        });
+        // تحميل ملفات GeoJSON الخارجية عند الطلب فقط
+        // (تم نقل عملية التحميل إلى معالجات أحداث الأزرار)
         
         // إضافة شعار الخريطة
         const mapLogo = L.control({position: 'bottomleft'});
@@ -810,6 +925,120 @@
             return div;
         };
         legend.addTo(map);
+        
+        // إضافة بيانات وهمية للاختبار (لأننا لا نستطيع الوصول إلى ملفاتك الحقيقية)
+        // في تطبيقك الحقيقي، سيتم تحميل البيانات من ملفات JSON
+        setTimeout(() => {
+            // بيانات وهمية لحدود المحافظة
+            const govData = {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": "محافظة قنا",
+                            "code": "QENA01",
+                            "population": 3700000,
+                            "area": "1890 كم²",
+                            "governor": "محمد عبد الحميد"
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[
+                                [32.7, 26.1], [32.8, 26.1], [32.8, 26.2], [32.7, 26.2], [32.7, 26.1]
+                            ]]
+                        }
+                    }
+                ]
+            };
+            
+            // بيانات وهمية للمراكز
+            const markezData = {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": "مركز قنا",
+                            "code": "C001",
+                            "villages": 25,
+                            "population": 500000
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[
+                                [32.72, 26.16], [32.73, 26.16], [32.73, 26.17], [32.72, 26.17], [32.72, 26.16]
+                            ]]
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": "مركز قفط",
+                            "code": "C002",
+                            "villages": 18,
+                            "population": 350000
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[
+                                [32.74, 26.14], [32.75, 26.14], [32.75, 26.15], [32.74, 26.15], [32.74, 26.14]
+                            ]]
+                        }
+                    }
+                ]
+            };
+            
+            // بيانات وهمية للقرى
+            const vilagData = {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": "قرية العسيرات",
+                            "code": "V001",
+                            "population": 15000,
+                            "area": "12 كم²"
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[
+                                [32.71, 26.15], [32.715, 26.15], [32.715, 26.155], [32.71, 26.155], [32.71, 26.15]
+                            ]]
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": "قرية الدير",
+                            "code": "V002",
+                            "population": 18000,
+                            "area": "15 كم²"
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[
+                                [32.72, 26.14], [32.725, 26.14], [32.725, 26.145], [32.72, 26.145], [32.72, 26.14]
+                            ]]
+                        }
+                    }
+                ]
+            };
+            
+            // إضافة البيانات الوهمية إلى الطبقات
+            govLayer.addData(govData);
+            markezLayer.addData(markezData);
+            vilagLayer.addData(vilagData);
+            
+            // تم تحميل البيانات الوهمية بنجاح
+            govLoaded = true;
+            markezLoaded = true;
+            vilagLoaded = true;
+            
+            // إخفاء شاشة التحميل
+            loadingOverlay.classList.remove('visible');
+        }, 1000);
     </script>
 </body>
 </html>
