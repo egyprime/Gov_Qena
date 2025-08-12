@@ -257,6 +257,10 @@
     .card-10 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
     .card-11 .card-icon { background: linear-gradient(135deg, #006064 0%, #4db6ac 100%); }
     .card-12 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #7986cb 100%); }
+    .card-13 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%); }
+    .card-14 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
+    .card-15 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
+    .card-16 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
     .footer-section {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(20px);
@@ -679,47 +683,9 @@
       </span>
     </a>
     
-    <!-- الخانات الجديدة -->
-    <div class="menu-card card-7" data-bs-toggle="modal" data-bs-target="#comingSoon1">
-      <div class="card-icon">
-        <i class="bi bi-rulers"></i>
-      </div>
-      <h3 class="card-title">رفع مساحي</h3>
-      <p class="card-description">
-        خدمة لرفع المقاسات وتحديد المساحات للمباني للحصول على تراخيص البناء
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> طلب الخدمة
-      </span>
-    </div>
+    <!-- الخدمات الثلاث تم نقلها إلى الخانة الجديدة -->
     
-    <div class="menu-card card-8" data-bs-toggle="modal" data-bs-target="#comingSoon2">
-      <div class="card-icon">
-        <i class="bi bi-clock-history"></i>
-      </div>
-      <h3 class="card-title">تسجيل مكاني</h3>
-      <p class="card-description">
-        تتبع التغيرات الزمنية للمباني والمناطق عبر الصور الجوية التاريخية
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> عرض التغيرات
-      </span>
-    </div>
-    
-    <div class="menu-card card-9" data-bs-toggle="modal" data-bs-target="#comingSoon3">
-      <div class="card-icon">
-        <i class="bi bi-file-earmark-text"></i>
-      </div>
-      <h3 class="card-title">شهادة بيانات</h3>
-      <p class="card-description">
-        خدمة خاصة بمنظومة التصالحات عن مخالفات البناء
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> تقديم الطلب
-      </span>
-    </div>
-    
-    <div class="menu-card card-10" data-bs-toggle="modal" data-bs-target="#modal3">
+    <a href="#" class="menu-card card-10" data-bs-toggle="modal" data-bs-target="#modal3">
       <div class="card-icon">
         <i class="bi bi-heart"></i>
       </div>
@@ -730,9 +696,9 @@
       <span class="card-button">
         <i class="bi bi-image"></i> عرض التفاصيل
       </span>
-    </div>
+    </a>
     
-    <!-- خانة نظرة عن قنا في النهاية -->
+    <!-- خانة نظرة عن قنا -->
     <div class="menu-card card-3" id="overview-card">
       <div class="card-icon">
         <i class="bi bi-binoculars"></i>
@@ -743,6 +709,20 @@
       </p>
       <span class="card-button">
         <i class="bi bi-arrow-left"></i> ابدأ الاستكشاف
+      </span>
+    </div>
+    
+    <!-- الخانة الجديدة: وحدة نظم المعلومات الجغرافية -->
+    <div class="menu-card card-13" id="gis-unit-card">
+      <div class="card-icon">
+        <i class="bi bi-geo-alt"></i>
+      </div>
+      <h3 class="card-title">وحدة نظم المعلومات الجغرافية</h3>
+      <p class="card-description">
+        خدمات وحدة نظم المعلومات الجغرافية: الرفع المساحي، التسجيل الزمني، شهادات البيانات
+      </p>
+      <span class="card-button">
+        <i class="bi bi-arrow-left"></i> عرض الخدمات
       </span>
     </div>
   </div>
@@ -821,6 +801,44 @@
         </div>
         <h4 class="overview-card-title">مراكز الاستثمار</h4>
         <p class="overview-card-description">مواقع الأولوية الاستثمارية والحوافز</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- قسم وحدة نظم المعلومات الجغرافية الجديدة -->
+<div class="overview-container" id="gis-unit-container">
+  <div class="overview-content">
+    <div class="overview-header">
+      <h2 class="overview-title">وحدة نظم المعلومات الجغرافية</h2>
+      <button class="close-overview" id="close-gis-unit">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    
+    <div class="overview-grid">
+      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#comingSoon1">
+        <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
+          <i class="bi bi-rulers"></i>
+        </div>
+        <h4 class="overview-card-title">رفع مساحي</h4>
+        <p class="overview-card-description">خدمة لرفع المقاسات وتحديد المساحات للمباني للحصول على تراخيص البناء</p>
+      </div>
+      
+      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#comingSoon2">
+        <div class="overview-icon" style="background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%);">
+          <i class="bi bi-clock-history"></i>
+        </div>
+        <h4 class="overview-card-title">تسجيل مكاني</h4>
+        <p class="overview-card-description">تتبع التغيرات الزمنية للمباني والمناطق عبر الصور الجوية التاريخية</p>
+      </div>
+      
+      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#comingSoon3">
+        <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%);">
+          <i class="bi bi-file-earmark-text"></i>
+        </div>
+        <h4 class="overview-card-title">شهادة بيانات</h4>
+        <p class="overview-card-description">خدمة خاصة بمنظومة التصالحات عن مخالفات البناء</p>
       </div>
     </div>
   </div>
@@ -1191,6 +1209,23 @@
     }
   });
   
+  // التحكم في قسم وحدة نظم المعلومات الجغرافية
+  document.getElementById('gis-unit-card').addEventListener('click', function() {
+    document.getElementById('gis-unit-container').style.display = 'block';
+    trackClick('وحدة نظم المعلومات الجغرافية');
+  });
+  
+  document.getElementById('close-gis-unit').addEventListener('click', function() {
+    document.getElementById('gis-unit-container').style.display = 'none';
+  });
+  
+  // إغلاق القسم عند النقر خارج المحتوى
+  document.getElementById('gis-unit-container').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
+  
   // تعديل سلوك النوافذ المنبثقة داخل قسم "نظرة عن قنا"
 document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card => {
   card.addEventListener('click', function(e) {
@@ -1211,13 +1246,27 @@ document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card
     });
   });
 });
+
+// تعديل سلوك النوافذ المنبثقة داخل قسم "وحدة نظم المعلومات الجغرافية"
+document.querySelectorAll('#gis-unit-container .overview-card[data-bs-toggle="modal"]').forEach(card => {
+  card.addEventListener('click', function(e) {
+    e.preventDefault();
+    const modalId = this.getAttribute('data-bs-target');
+    const modal = document.querySelector(modalId);
+    
+    // إخفاء قسم وحدة نظم المعلومات الجغرافية مؤقتاً
+    document.getElementById('gis-unit-container').style.display = 'none';
+    
+    // عرض النافذة المنبثقة
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+    
+    // عند إغلاق النافذة المنبثقة، إعادة عرض القسم
+    modal.addEventListener('hidden.bs.modal', function() {
+      document.getElementById('gis-unit-container').style.display = 'block';
+    });
+  });
+});
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
