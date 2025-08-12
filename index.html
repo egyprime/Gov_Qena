@@ -51,6 +51,7 @@
       background-attachment: fixed;
       color: var(--dark);
       overflow-x: hidden;
+      transition: filter 0.3s ease;
     }
     body::before {
       content: '';
@@ -553,6 +554,11 @@
       100% { width: 80%; }
     }
     
+    /* حل مشكلة الطبقة الخلفية */
+    .backdrop-blur {
+      filter: blur(0) !important;
+    }
+    
     @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
@@ -942,24 +948,23 @@
         </div>
         
         <!-- معلومات إضافية -->
-        <!-- هذا هو الجزء الذي يجب تعديله فقط -->
-<div class="mt-4 p-3 bg-light rounded-3">
-  <h6 class="fw-bold text-dark mb-3">طرق متابعة مشروعات حياة كريمة:</h6>
-  <ul class="list-unstyled">
-    <li class="mb-2 text-dark"> <!-- أضف text-dark هنا -->
-      <i class="bi bi-check-circle-fill text-success me-2"></i>
-      <strong>موقع حياة كريمة</strong>: لمتابعة كافة المشروعات والتطورات
-    </li>
-    <li class="mb-2 text-dark"> <!-- أضف text-dark هنا -->
-      <i class="bi bi-check-circle-fill text-success me-2"></i>
-      <strong>صفحة الفيسبوك</strong>: لمتابعة آخر الأخبار والأنشطة
-    </li>
-    <li class="text-dark"> <!-- أضف text-dark هنا -->
-      <i class="bi bi-check-circle-fill text-success me-2"></i>
-      <strong>موقع المحافظة صفحة حياة كريمة</strong>: لمتابعة التنفيذ المحلي للمشروعات
-    </li>
-  </ul>
-</div>
+        <div class="mt-4 p-3 bg-light rounded-3">
+          <h6 class="fw-bold text-dark mb-3">طرق متابعة مشروعات حياة كريمة:</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2 text-dark">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              <strong>موقع حياة كريمة</strong>: لمتابعة كافة المشروعات والتطورات
+            </li>
+            <li class="mb-2 text-dark">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              <strong>صفحة الفيسبوك</strong>: لمتابعة آخر الأخبار والأنشطة
+            </li>
+            <li class="text-dark">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              <strong>موقع المحافظة صفحة حياة كريمة</strong>: لمتابعة التنفيذ المحلي للمشروعات
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -1306,47 +1311,86 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // تعديل سلوك النوافذ المنبثقة داخل قسم "نظرة عن قنا"
-document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card => {
-  card.addEventListener('click', function(e) {
-    e.preventDefault();
-    const modalId = this.getAttribute('data-bs-target');
-    const modal = document.querySelector(modalId);
-    
-    // إخفاء قسم نظرة عن قنا مؤقتاً
-    document.getElementById('overview-container').style.display = 'none';
-    
-    // عرض النافذة المنبثقة
-    const modalInstance = new bootstrap.Modal(modal);
-    modalInstance.show();
-    
-    // عند إغلاق النافذة المنبثقة، إعادة عرض قسم نظرة عن قنا
+  // حل المشكلة الرئيسية: إعادة ضبط الطبقة الخلفية عند إغلاق النوافذ
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
     modal.addEventListener('hidden.bs.modal', function() {
-      document.getElementById('overview-container').style.display = 'block';
+      // إعادة تنشيط الطبقة الخلفية عند إغلاق أي نافذة
+      document.body.classList.remove('modal-open');
+      document.querySelector('.modal-backdrop')?.remove();
     });
   });
-});
+  
+  // حل إضافي: تعديل سلوك النوافذ المنبثقة داخل قسم "نظرة عن قنا"
+  document.querySelectorAll('.overview-card[data-bs-toggle="modal"]').forEach(card => {
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      const modalId = this.getAttribute('data-bs-target');
+      const modal = document.querySelector(modalId);
+      
+      // إخفاء قسم نظرة عن قنا مؤقتاً
+      document.getElementById('overview-container').style.display = 'none';
+      
+      // عرض النافذة المنبثقة
+      const modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+      
+      // عند إغلاق النافذة المنبثقة، إعادة عرض قسم نظرة عن قنا
+      modal.addEventListener('hidden.bs.modal', function() {
+        document.getElementById('overview-container').style.display = 'block';
+        // التأكد من إزالة أي طبقات خلفية متبقية
+        document.body.classList.remove('modal-open');
+        document.querySelector('.modal-backdrop')?.remove();
+      });
+    });
+  });
 
-// تعديل سلوك النوافذ المنبثقة داخل قسم "وحدة نظم المعلومات الجغرافية"
-document.querySelectorAll('#gis-unit-container .overview-card[data-bs-toggle="modal"]').forEach(card => {
-  card.addEventListener('click', function(e) {
-    e.preventDefault();
-    const modalId = this.getAttribute('data-bs-target');
-    const modal = document.querySelector(modalId);
-    
-    // إخفاء قسم وحدة نظم المعلومات الجغرافية مؤقتاً
-    document.getElementById('gis-unit-container').style.display = 'none';
-    
-    // عرض النافذة المنبثقة
-    const modalInstance = new bootstrap.Modal(modal);
-    modalInstance.show();
-    
-    // عند إغلاق النافذة المنبثقة، إعادة عرض القسم
-    modal.addEventListener('hidden.bs.modal', function() {
-      document.getElementById('gis-unit-container').style.display = 'block';
+  // حل إضافي: تعديل سلوك النوافذ المنبثقة داخل قسم "وحدة نظم المعلومات الجغرافية"
+  document.querySelectorAll('#gis-unit-container .overview-card[data-bs-toggle="modal"]').forEach(card => {
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      const modalId = this.getAttribute('data-bs-target');
+      const modal = document.querySelector(modalId);
+      
+      // إخفاء قسم وحدة نظم المعلومات الجغرافية مؤقتاً
+      document.getElementById('gis-unit-container').style.display = 'none';
+      
+      // عرض النافذة المنبثقة
+      const modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+      
+      // عند إغلاق النافذة المنبثقة، إعادة عرض القسم
+      modal.addEventListener('hidden.bs.modal', function() {
+        document.getElementById('gis-unit-container').style.display = 'block';
+        // التأكد من إزالة أي طبقات خلفية متبقية
+        document.body.classList.remove('modal-open');
+        document.querySelector('.modal-backdrop')?.remove();
+      });
     });
   });
-});
+  
+  // حل نهائي: إدارة الطبقات الخلفية يدوياً
+  function resetBackdrops() {
+    // إزالة جميع الطبقات الخلفية
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => {
+      backdrop.remove();
+    });
+    
+    // إعادة ضبط حالة الجسم
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = 'auto';
+    document.body.style.paddingRight = '0';
+  }
+  
+  // استدعاء الدالة عند إغلاق أي نافذة
+  modals.forEach(modal => {
+    modal.addEventListener('hidden.bs.modal', resetBackdrops);
+  });
+  
+  // استدعاء الدالة عند إغلاق الأقسام
+  document.getElementById('close-overview').addEventListener('click', resetBackdrops);
+  document.getElementById('close-gis-unit').addEventListener('click', resetBackdrops);
 </script>
 </body>
 </html>
