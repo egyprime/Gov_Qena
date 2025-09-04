@@ -112,6 +112,10 @@
             color: var(--accent-orange);
         }
         
+        .nav-menu li a.home-link {
+            color: var(--accent-orange);
+        }
+        
         .btn {
             padding: 10px 20px;
             border-radius: 5px;
@@ -129,6 +133,21 @@
         .btn-primary:hover {
             background-color: var(--light-orange);
             border-color: var(--light-orange);
+        }
+        
+        .btn-map {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-map:hover {
+            background-color: var(--secondary-blue);
         }
         
         /* قسم الهيرو */
@@ -484,8 +503,8 @@
                 <li><a href="#" onclick="showModal('aboutModal'); return false;">عن محافظة قنا</a></li>
                 <li><a href="#" onclick="showModal('investmentModal'); return false;">كيفية الاستثمار</a></li>
                 <li><a href="#" onclick="showModal('faqModal'); return false;">الأسئلة الشائعة</a></li>
-                <li><a href="#" onclick="showModal('contactModal'); return false;">اتصل بنا</a></li>
-                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="#" onclick="showModal('contactModal'); return false;">تواصل معنا</a></li>
+                <li><a href="index.html" class="home-link">الرئيسية</a></li>
             </ul>
         </div>
     </nav>
@@ -495,7 +514,7 @@
         <div class="container hero-content">
             <h1>فرص استثمارية مميزة في محافظة قنا</h1>
             <p>اكتشف أفضل الفرص الاستثمارية المتاحة في أراضي محافظة قنا واستثمر في مستقبل مزدهر</p>
-            <button class="btn btn-primary">استعرض الفرص الاستثمارية</button>
+            <button class="btn btn-primary" onclick="window.location.href='investment-opportunities.html'">استعرض الفرص الاستثمارية</button>
         </div>
     </section>
 
@@ -632,7 +651,7 @@
                     <div class="project-details">
                         <h3>أرض استصلاح زراعي</h3>
                         <div class="project-status">
-                            <span>المساحة: 1,638,000 م²</span>
+                            <span>المساحة: 1,638,000 м²</span>
                         </div>
                         <div class="progress-bar">
                             <div class="progress" style="width: 40%;"></div>
@@ -676,7 +695,7 @@
         <div class="container">
             <h2>ابدأ رحلتك الاستثمارية اليوم</h2>
             <p>انضم إلى المستثمرين في محافظة قنا واستفد من الفرص الاستثمارية الحصرية</p>
-            <button class="btn btn-primary">تواصل معنا</button>
+            <button class="btn btn-primary" onclick="showModal('contactModal')">تواصل معنا</button>
         </div>
     </section>
 
@@ -718,8 +737,9 @@
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('contactModal')">&times;</span>
-            <h2 class="modal-title">اتصل بنا</h2>
-            <p>قريبًا...</p>
+            <h2 class="modal-title">تواصل معنا</h2>
+            <p>التوجه الي ديوان عام محافظة قنا</p>
+            <button class="btn-map" onclick="openGoogleMaps()">اذهب الان</button>
         </div>
     </div>
 
@@ -774,6 +794,13 @@
         
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // فتح خرائط جوجل بالإحداثيات المحددة
+        function openGoogleMaps() {
+            const latitude = 26.155440411524786;
+            const longitude = 32.71584789974247;
+            window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_blank');
         }
         
         // Close modal when clicking outside of it
