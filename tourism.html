@@ -117,7 +117,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 15px;
         }
 
         nav a {
@@ -125,7 +125,7 @@
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 600;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 30px;
             transition: all 0.3s ease;
             position: relative;
@@ -150,6 +150,28 @@
 
         nav a:hover::after {
             width: 70%;
+        }
+
+        /* تصميم خاص لعنصر الرئيسية */
+        nav a.home-link {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            animation: pulse 2s infinite;
+            font-weight: 700;
+            padding: 12px 25px;
+            border: 1px solid var(--gold-light);
+        }
+
+        nav a.home-link:hover {
+            background: linear-gradient(45deg, var(--gold-light), var(--gold));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+            color: var(--black);
+        }
+
+        nav a.home-link::after {
+            display: none;
         }
 
         /* Hero Section */
@@ -604,6 +626,12 @@
             .section-title { font-size: 2rem; }
             .map-container { height: 400px; }
             .sites-grid { grid-template-columns: 1fr 1fr; }
+            
+            /* تصميم متجاوب للرئيسية في القائمة */
+            nav a.home-link {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -613,6 +641,20 @@
             .map-container { height: 350px; }
             .sites-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; }
+            
+            nav ul {
+                gap: 8px;
+            }
+            
+            nav a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            nav a.home-link {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -628,10 +670,10 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="index.html">الرئيسية</a></li>
                         <li><a href="#sites">المواقع</a></li>
                         <li><a href="#map">الخريطة</a></li>
                         <li><a href="#about">عن قنا</a></li>
+                        <li><a href="index.html" class="home-link">الرئيسية</a></li>
                     </ul>
                 </nav>
             </div>
@@ -789,7 +831,7 @@
                 image: "https://i.ibb.co/m5N4rJsD/image.png"
             },
             {
-                name: "معبد شنهور",
+                name: "معبد شنهор",
                 coords: [25.861108, 32.776861],
                 type: "temple",
                 description: "معبد صغير مخصص للإله مين وعبادة الثالوث المقدس (إيزيس وحورس وأوزوريس).",
@@ -1043,5 +1085,3 @@
     </script>
 </body>
 </html>
-
-
