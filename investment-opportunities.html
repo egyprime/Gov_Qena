@@ -102,10 +102,6 @@
       background: linear-gradient(135deg, #1976d2, #64b5f6);
       color: white;
     }
-    #areaBtn {
-      background: linear-gradient(135deg, #388e3c, #81c784);
-      color: white;
-    }
     #clearBtn {
       background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
@@ -114,7 +110,7 @@
       background: linear-gradient(135deg, #9c27b0, #e91e63);
       color: white;
     }
-    #distanceDisplay, #areaDisplay {
+    #distanceDisplay {
       position: absolute;
       left: 15px;
       z-index: 1000;
@@ -130,11 +126,6 @@
     #distanceDisplay {
       top: 15px;
       background: linear-gradient(135deg, #1976d2, #64b5f6);
-      color: white;
-    }
-    #areaDisplay {
-      top: 65px;
-      background: linear-gradient(135deg, #388e3c, #81c784);
       color: white;
     }
     .coordinate-display {
@@ -198,12 +189,100 @@
       font-size: 28px;
       cursor: pointer;
     }
+    /* تحسينات البوب أب */
     .leaflet-popup-content-wrapper {
       border-radius: 15px !important;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+      background: linear-gradient(135deg, #f8f9fa, #e0f2f1);
+      animation: popupFadeIn 0.4s ease-out;
     }
     .leaflet-popup-content {
       margin: 15px !important;
+      text-align: right;
+      min-width: 250px;
+    }
+    .popup-header {
+      background: var(--blue-gradient);
+      color: white;
+      padding: 12px 15px;
+      border-radius: 10px 10px 0 0;
+      margin: -15px -15px 10px -15px;
+      position: relative;
+      overflow: hidden;
+    }
+    .popup-header::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+    .popup-header h4 {
+      margin: 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .popup-body {
+      padding: 10px 0;
+    }
+    .popup-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 8px 10px;
+      background: rgba(26, 42, 108, 0.05);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .popup-info:hover {
+      background: rgba(26, 42, 108, 0.1);
+      transform: translateX(-5px);
+    }
+    .popup-info i {
+      margin-left: 10px;
+      font-size: 1.2rem;
+      color: #1a2a6c;
+    }
+    .popup-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .popup-btn {
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .popup-btn-favorite {
+      background: linear-gradient(135deg, #e91e63, #9c27b0);
+      color: white;
+    }
+    .popup-btn-favorite:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(233, 30, 99, 0.3);
+    }
+    .popup-btn-zoom {
+      background: linear-gradient(135deg, #1976d2, #64b5f6);
+      color: white;
+    }
+    .popup-btn-zoom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+    }
+    @keyframes popupFadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .sidebar {
       position: fixed;
@@ -600,19 +679,6 @@
       transform: translateY(-50%);
     }
     
-    .area-label {
-      background: rgba(56, 142, 60, 0.8);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      text-align: center;
-      pointer-events: none;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      z-index: 1001;
-    }
-    
     /* تحسينات للشاشات الصغيرة */
     @media (max-width: 768px) {
       .map-controls {
@@ -646,38 +712,17 @@
         padding: 8px;
       }
       
-      #distanceDisplay, #areaDisplay {
+      #distanceDisplay {
         left: auto;
         right: 10px;
-      }
-      
-      #distanceDisplay {
         top: 100px;
       }
       
-      #areaDisplay {
-        top: 150px;
+      .coordinate-display {
+        left: auto;
+        right: 10px;
+        bottom: 70px;
       }
-    }
-    
-    /* تسمية المساحة في مركز المضلع */
-    .area-label-container {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      z-index: 1001;
-      pointer-events: none;
-      text-align: center;
-    }
-    
-    .area-label-text {
-      background: rgba(56, 142, 60, 0.85);
-      color: white;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      white-space: nowrap;
     }
     
     /* زر إخفاء/إظهار قائمة التحكم */
@@ -769,9 +814,6 @@
   <button id="distanceBtn" class="btn" title="قياس المسافات">
     <i class="bi bi-rulers"></i>
   </button>
-  <button id="areaBtn" class="btn" title="قياس المساحة">
-    <i class="bi bi-square"></i> 
-  </button>
   <button id="coordinateBtn" class="btn" title="عرض الإحداثيات">
     <i class="bi bi-geo-alt"></i>
   </button>
@@ -781,9 +823,6 @@
 </div>
 <div id="distanceDisplay" style="display: none;">
   <i class="bi bi-rulers"></i> المسافة الكلية: 0 متر
-</div>
-<div id="areaDisplay" style="display: none;">
-  <i class="bi bi-polygon"></i> المساحة: 0 م²
 </div>
 <div class="coordinate-display">
   <i class="bi bi-geo-alt"></i> الإحداثيات: 
@@ -843,10 +882,7 @@
   let map;
   let polygons = [];
   let distancePoints = [];
-  let areaPoints = [];
   let distanceLine = null;
-  let areaPolygon = null;
-  let areaLabel = null;
   let distanceLabels = [];
   let coordinateMode = false;
   let coordinateMarker = null;
@@ -1068,17 +1104,8 @@
       // تخزين التسمية كخاصية للمضلع
       polygon.label = label;
       
-      // ربط المعلومات مع المضلع
-      polygon.bindPopup(`
-        <div style="text-align: right; min-width: 250px;">
-          <div style="background: linear-gradient(135deg, #1a2a6c, #2c5282); color: white; padding: 10px; border-radius: 10px 10px 0 0; margin: -15px -15px 10px -15px;">
-            <h4 style="margin: 0; font-weight: bold;">${feature.properties.الأسم}</h4>
-          </div>
-          <div style="padding: 10px 0;">
-            <p><i class="bi bi-rulers"></i> ${feature.properties.المساحة}</p>
-          </div>
-        </div>
-      `);
+      // ربط المعلومات مع المضلع (باستخدام البوب أب الجديد)
+      polygon.bindPopup(createPopupContent(feature.properties));
       
       // تخزين المضلع للإشارة إليه لاحقًا
       polygon.feature = feature;
@@ -1126,7 +1153,6 @@
     
     // إضافة وظائف القياس
     document.getElementById('distanceBtn').addEventListener('click', toggleDistance);
-    document.getElementById('areaBtn').addEventListener('click', toggleArea);
     document.getElementById('coordinateBtn').addEventListener('click', toggleCoordinate);
     document.getElementById('clearBtn').addEventListener('click', clearAll);
     
@@ -1136,6 +1162,38 @@
     
     // تهيئة زر إخفاء/إظهار قائمة التحكم
     document.getElementById('toggleControlsBtn').addEventListener('click', toggleMapControls);
+  }
+  
+  // إنشاء محتوى البوب أب الجديد
+  function createPopupContent(properties) {
+    return `
+      <div class="popup-header">
+        <h4>${properties.الأسم}</h4>
+      </div>
+      <div class="popup-body">
+        <div class="popup-info">
+          <i class="bi bi-rulers"></i>
+          <span>${properties.المساحة}</span>
+        </div>
+        <div class="popup-actions">
+          <button class="popup-btn popup-btn-favorite" onclick="addToFavorites('${properties.الأسم}', '${properties.المساحة}')">
+            <i class="bi bi-heart"></i> إضافة للمفضلة
+          </button>
+          <button class="popup-btn popup-btn-zoom" onclick="zoomToPolygon('${properties.الأسم}')">
+            <i class="bi bi-zoom-in"></i> تكبير
+          </button>
+        </div>
+      </div>
+    `;
+  }
+  
+  // التكبير إلى مضلع محدد
+  function zoomToPolygon(name) {
+    const polygon = polygons.find(p => p.feature.properties.الأسم === name);
+    if (polygon) {
+      map.fitBounds(polygon.getBounds());
+      polygon.openPopup();
+    }
   }
   
   // تحديث الأزرار النشطة
@@ -1159,16 +1217,6 @@
       y += coords[i][1];
     }
     return [x / coords.length, y / coords.length];
-  }
-  
-  // حساب مركز المضلع لقياس المساحة
-  function getAreaCentroid(latLngs) {
-    let latSum = 0, lngSum = 0;
-    for (let i = 0; i < latLngs.length; i++) {
-      latSum += latLngs[i].lat;
-      lngSum += latLngs[i].lng;
-    }
-    return L.latLng(latSum / latLngs.length, lngSum / latLngs.length);
   }
   
   // إنشاء قائمة الفرص الاستثمارية
@@ -1220,7 +1268,7 @@
     document.getElementById('opportunitiesModal').classList.remove('show');
   }
   
-  // وظائف قياس المسافة والمساحة
+  // وظائف قياس المسافة
   function toggleDistance() {
     if (window.distanceMode) {
       window.distanceMode = false;
@@ -1286,81 +1334,6 @@
     }
   }
   
-  function toggleArea() {
-    if (window.areaMode) {
-      window.areaMode = false;
-      map.off('click', addAreaPoint);
-      document.getElementById('areaBtn').innerHTML = '<i class="bi bi-square"></i>';
-      document.getElementById('areaDisplay').style.display = 'none';
-    } else {
-      window.areaMode = true;
-      document.getElementById('areaBtn').innerHTML = '<i class="bi bi-stop-circle"></i>';
-      areaPoints = [];
-      map.on('click', addAreaPoint);
-      
-      // إخفاء وضع الإحداثيات إذا كان نشطًا
-      if (coordinateMode) toggleCoordinate();
-    }
-  }
-  
-  // حساب المساحة باستخدام خوارزمية متقدمة
-  function geodesicArea(latLngs) {
-    let area = 0.0;
-    const len = latLngs.length;
-    let j = len - 1;
-    if (len < 3) return 0;
-    
-    for (let i = 0; i < len; j = i, i++) {
-      const p1 = latLngs[i];
-      const p2 = latLngs[j];
-      area += (p2.lng * Math.PI / 180 - p1.lng * Math.PI / 180) * 
-              (2 + Math.sin(p1.lat * Math.PI / 180) + Math.sin(p2.lat * Math.PI / 180));
-    }
-    
-    area = area * 6378137.0 * 6378137.0 / 2.0;
-    return Math.abs(area);
-  }
-  
-  function addAreaPoint(e) {
-    areaPoints.push(e.latlng);
-    L.circleMarker(e.latlng, { color: '#388e3c', fillColor: '#81c784', fillOpacity: 1, radius: 7 }).addTo(map);
-    
-    if (areaPoints.length >= 3) {
-      if (areaPolygon) map.removeLayer(areaPolygon);
-      areaPolygon = L.polygon(areaPoints, { 
-        color: '#388e3c', 
-        fillColor: '#81c784', 
-        fillOpacity: 0.3, 
-        weight: 3 
-      }).addTo(map);
-      
-      // إزالة تسمية المساحة القديمة
-      if (areaLabel) map.removeLayer(areaLabel);
-      
-      // حساب المساحة
-      const area = geodesicArea(areaPoints);
-      
-      // حساب مركز المضلع
-      const centroid = getAreaCentroid(areaPoints);
-      
-      // إنشاء تسمية المساحة في مركز المضلع
-      areaLabel = L.marker(centroid, {
-        icon: L.divIcon({
-          className: 'area-label',
-          html: area >= 1e6 ? `${(area / 1e6).toFixed(2)} كم²` : `${Math.round(area)} م²`,
-          iconSize: [null, null]
-        })
-      }).addTo(map);
-      
-      // تحديث عرض المساحة
-      const display = document.getElementById('areaDisplay');
-      display.innerHTML = area >= 1e6 ? 
-        `<i class="bi bi-polygon"></i> المساحة: ${(area / 1e6).toFixed(2)} كم²` : 
-        `<i class="bi bi-polygon"></i> المساحة: ${Math.round(area)} م²`;
-      display.style.display = 'block';
-    }
-  }
-  
   // وظيفة عرض الإحداثيات
   function toggleCoordinate() {
     coordinateMode = !coordinateMode;
@@ -1374,7 +1347,6 @@
       
       // إخفاء أوضاع القياس الأخرى إذا كانت نشطة
       if (window.distanceMode) toggleDistance();
-      if (window.areaMode) toggleArea();
     } else {
       document.getElementById('coordinateBtn').innerHTML = '<i class="bi bi-geo-alt"></i>';
       document.querySelector('.coordinate-display').style.display = 'none';
@@ -1414,8 +1386,6 @@
   function clearAll() {
     // إزالة عناصر القياس
     if (distanceLine) map.removeLayer(distanceLine);
-    if (areaPolygon) map.removeLayer(areaPolygon);
-    if (areaLabel) map.removeLayer(areaLabel);
     
     // إزالة تسميات المسافات
     distanceLabels.forEach(label => map.removeLayer(label));
@@ -1430,22 +1400,15 @@
     
     // إعادة تعيين المتغيرات
     distancePoints = [];
-    areaPoints = [];
     distanceLine = null;
-    areaPolygon = null;
-    areaLabel = null;
     window.distanceMode = false;
-    window.areaMode = false;
     
     // إعادة تعيين الأزرار
     document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i>';
-    document.getElementById('areaBtn').innerHTML = '<i class="bi bi-square"></i>';
     document.getElementById('distanceDisplay').style.display = 'none';
-    document.getElementById('areaDisplay').style.display = 'none';
     
     // إزالة أحداث الخريطة
     map.off('click', addDistancePoint);
-    map.off('click', addAreaPoint);
     
     // إزالة وضع الإحداثيات إذا كان نشطًا
     if (coordinateMode) {
