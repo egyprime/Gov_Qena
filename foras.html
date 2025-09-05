@@ -668,7 +668,6 @@
             .coordinates {
                 flex-direction: column;
                 gap: 5px;
-            }
         }
     </style>
 </head>
@@ -704,7 +703,7 @@
         <div class="container hero-content">
             <h1>فرص استثمارية مميزة في محافظة قنا</h1>
             <p>اكتشف أفضل الفرص الاستثمارية المتاحة في أراضي محافظة قنا واستثمر في مستقبل مزدهر</p>
-            <button class="btn btn-primary" onclick="window.location.href='#opportunities'">استعرض الفرص الاستثمارية</button>
+            <button class="btn btn-primary" onclick="window.location.href='investment-opportunities.html'">استعرض الفرص الاستثمارية</button>
         </div>
     </section>
 
@@ -756,7 +755,7 @@
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>التواصل مع الوحدة</h3>
-                    <p>قم بزيارة مقرها للتعرف على الفرص المتاحة</p>
+                    <p>قم بزيارة مقرها لل التعرف على الفرص المتاحة</p>
                 </div>
                 
                 <div class="step">
@@ -910,10 +909,10 @@
                 <div class="footer-column">
                     <h3>الفرص الاستثمارية</h3>
                     <ul>
-                        <li><a href="#">مدينة ترفيهية</a></li>
-                        <li><a href="#">محطة تربية دواجن</a></li>
-                        <li><a href="#">أرض استصلاح زراعي</a></li>
-                        <li><a href="#">فندق سياحي وملحق</a></li>
+                        <li><a href="investment-opportunities.html">مدينة ترفيهية</a></li>
+                        <li><a href="investment-opportunities.html">محطة تربية دواجن</a></li>
+                        <li><a href="investment-opportunities.html">أرض استصلاح زراعي</a></li>
+                        <li><a href="investment-opportunities.html">فندق سياحي وملحق</a></li>
                     </ul>
                 </div>
                 
@@ -921,8 +920,6 @@
                     <h3>معلومات الاتصال</h3>
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> ديوان عام محافظة قنا</li>
-                        <li><i class="fas fa-phone"></i> 096 521 1234</li>
-                        <li><i class="fas fa-envelope"></i> gis@qena.gov.eg</li>
                     </ul>
                 </div>
             </div>
@@ -1017,7 +1014,7 @@
                         "FID": 4,
                         "اسم__12": "نشاط اداري وتجاري",
                         "مساحة": 831.89999999999998,
-                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "عنوان": "محافظة قنا - مركز نجع حمadi",
                         "فرصة": "نشاط تجاري خدمي",
                         "نوع": "خدمي",
                         "ORIG_FID": 4
@@ -1068,7 +1065,7 @@
                         "FID": 7,
                         "اسم__12": "نشاط اداري وتجاري",
                         "مساحة": 575.5,
-                        "عنوان": "محافظة قنا - مركز قنا",
+                        "عنوان": "محافظة قna - مركز قنا",
                         "فرصة": "نشاط تجاري خدمي",
                         "نوع": "خدمي",
                         "ORIG_FID": 7
@@ -1239,7 +1236,7 @@
                         "اسم__12": "فندق سياحي",
                         "مساحة": 7012,
                         "عنوان": "محافظة قنا - مركز قنا",
-                        "فرصة": "فندق سياحي ملحق به مول تجار",
+                        "فرصة": "فندق سياحi ملحق به مول تجار",
                         "نوع": "سياحي",
                         "ORIG_FID": 19
                     }
@@ -1304,7 +1301,7 @@
                     },
                     "properties": {
                         "FID": 21,
-                        "اسم__12": "مزرعة 390 فدان شيخ علي",
+                        "اسم__12": "mزرعة 390 فدان شيخ علي",
                         "مساحة": 1638000,
                         "عنوان": "محافظة قنا - مركز نجع حمادي",
                         "فرصة": "استصلاح زراعي 390 فدان",
@@ -1414,24 +1411,29 @@
         
         // وظائف عرض الفرص الاستثمارية
         function getImageForOpportunity(type, title) {
-            // إرجاع صورة مناسبة حسب نوع الفرصة
+            // إنشاء هاش فريد من عنوان الفرصة لضمان صور مختلفة لكل فرصة
+            let hash = 0;
+            for (let i = 0; i < title.length; i++) {
+                hash = title.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            
+            // استخدام الهاش لتحديد صورة مختلفة لكل فرصة
+            const imageIndex = Math.abs(hash) % 10 + 1; // رقم بين 1 و 10
+            
+            // إرجاع صورة مناسبة حسب نوع الفرصة مع اختلاف لكل فرصة
             const imageMap = {
-                'خدمي': 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                'سياحي': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                'زراعي': 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                'صناعي': 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                'خدمي': `https://picsum.photos/800/600?random=${imageIndex}`,
+                'سياحي': `https://picsum.photos/800/600?random=${imageIndex + 10}`,
+                'زراعي': `https://picsum.photos/800/600?random=${imageIndex + 20}`,
+                'صناعي': `https://picsum.photos/800/600?random=${imageIndex + 30}`
             };
             
-            return imageMap[type] || 'https://images.unsplash.com/photo-1563013541-5a2c0e2517e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            return imageMap[type] || `https://picsum.photos/800/600?random=${imageIndex + 40}`;
         }
         
         function formatArea(area) {
-            // تنسيق المساحة بشكل مناسب
-            if (area >= 1000000) {
-                return (area / 1000000).toLocaleString('ar-EG', { maximumFractionDigits: 2 }) + ' كم²';
-            } else {
-                return area.toLocaleString('ar-EG') + ' م²';
-            }
+            // إرجاع المساحة كما هي دون تنسيق
+            return area + ' م²';
         }
         
         function formatCoordinates(coords) {
@@ -1487,7 +1489,7 @@
                             <i class="fas fa-check-circle"></i>
                             <span>هذه الفرصة متاحة</span>
                         </div>
-                        <a href="#" class="view-opportunity">استعرض الفرصة</a>
+                        <a href="investment-opportunities.html" class="view-opportunity">استعرض الفرصة</a>
                     </div>
                 `;
                 
