@@ -665,9 +665,9 @@
     }
     
     @keyframes pulse {
-     0% { box-shadow: 0 0 0 0 rgba(26, 42, 108, 0.4); }
-     70% { box-shadow: 0 0 0 10px rgba(26, 42, 108, 0); }
-     100% { box-shadow: 0 0 0 0 rgba(26, 42, 108, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(26, 42, 108, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(26, 42, 108, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(26, 42, 108, 0); }
     }
     
     /* تسميات القياس */
@@ -852,32 +852,6 @@
       background-color: var(--industrial-color);
       border: 2px solid white;
     }
-    
-    /* ألوان التصفية الإبداعية */
-    .filter-color-indicator {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      margin-left: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .service-color {
-      background-color: var(--service-color);
-    }
-    
-    .tourism-color {
-      background-color: var(--tourism-color);
-    }
-    
-    .agricultural-color {
-      background-color: var(--agricultural-color);
-    }
-    
-    .industrial-color {
-      background-color: var(--industrial-color);
-    }
   </style>
 </head>
 <body>
@@ -946,10 +920,10 @@
   <div class="control-group-title">طبقات الخريطة:</div>
   <div class="map-control-group">
     <button id="satelliteBtn" class="layer-btn active">
-      <i class="bi bi-satellite"></i> 🛰 صور الأقمار الصناعية
+      <i class="bi bi-satellite"></i> 🛰️ صور الأقمار الصناعية
     </button>
     <button id="streetsBtn" class="layer-btn">
-      <i class="bi bi-map"></i> 🗺 الخريطة الطبوغرافية
+      <i class="bi bi-map"></i> 🗺️ الخريطة الطبوغرافية
     </button>
     <button id="hybridBtn" class="layer-btn">
       <i class="bi bi-layers-half"></i> 🌆 هجين (شارع + قمر صناعي)
@@ -964,20 +938,16 @@
   <div class="filter-group">
     <div class="filter-title">نوع الفرصة:</div>
     <label class="filter-checkbox">
-      <input type="checkbox" name="type" value="خدمي" checked> 
-      خدمي <span class="filter-color-indicator service-color"></span>
+      <input type="checkbox" name="type" value="خدمي" checked> خدمي
     </label>
     <label class="filter-checkbox">
-      <input type="checkbox" name="type" value="سياحي" checked> 
-      سياحي <span class="filter-color-indicator tourism-color"></span>
+      <input type="checkbox" name="type" value="سياحي" checked> سياحي
     </label>
     <label class="filter-checkbox">
-      <input type="checkbox" name="type" value="زراعي" checked> 
-      زراعي <span class="filter-color-indicator agricultural-color"></span>
+      <input type="checkbox" name="type" value="زراعي" checked> زراعي
     </label>
     <label class="filter-checkbox">
-      <input type="checkbox" name="type" value="صناعي" checked> 
-      صناعي <span class="filter-color-indicator industrial-color"></span>
+      <input type="checkbox" name="type" value="صناعي" checked> صناعي
     </label>
   </div>
   
@@ -1098,12 +1068,6 @@
   let coordinateMarker = null;
   let currentLayer = null;
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  let filteredPolygons = [];
-  let filteredPoints = [];
-  let activeFilters = {
-    type: ["خدمي", "سياحي", "زراعي", "صناعي"],
-    center: ["ابوتشت", "نجع حمادي", "فرشوط", "دشنا", "الوقف", "قنا", "نقادة", "قوص", "قفط"]
-  };
   
   // بيانات المضلعات الجديدة
   const polygonsData = {
@@ -1155,7 +1119,7 @@
           "FID": 1,
           "اسم__12": "ارض فضاء بالترعة المضرانية",
           "مساحة": 4134.5,
-          "عنوان": "محافظة قنا - مركز نجع حمadi",
+          "عنوان": "محافظة قنا - مركز نجع حمادي",
           "فرصة": "مدارس خاصة",
           "نوع": "خدمي"
         }
@@ -1255,7 +1219,7 @@
           "FID": 5,
           "اسم__12": "نشاط اداري وتجاري",
           "مساحة": 1995,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
+          "عنوان": "محافظة قنا - مركز نجع حمadi",
           "فرصة": "نشاط تجاري خدمي",
           "نوع": "خدمي"
         }
@@ -1279,7 +1243,7 @@
         },
         "properties": {
           "FID": 6,
-          "اسم__12": "نشак اداري وتجاري",
+          "اسم__12": "نشاط اداري وتجاري",
           "مساحة": 340,
           "عنوان": "محافظة قنا - مركز قنا",
           "فرصة": "نشاط تجاري خدمي",
@@ -1305,7 +1269,7 @@
           "FID": 7,
           "اسم__12": "نشاط اداري وتجاري",
           "مساحة": 575.5,
-          "عنوان": "محافظة قنا - مركز قنا",
+          "عنوان": "محافظة قنا - مركز قna",
           "فرصة": "نشاط تجاري خدمي",
           "نوع": "خدمي"
         }
@@ -1330,8 +1294,8 @@
           "اسم__12": "نشاط اداري وتجاري",
           "مساحة": 1602,
           "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمi"
+          "فرصة": "نشاط تجاري خدمi",
+          "نوع": "خدمي"
         }
       },
       {
@@ -1404,9 +1368,9 @@
         },
         "properties": {
           "FID": 11,
-          "اسم__12": "نشاك اداري وتجاري",
+          "اسم__12": "نشак اداري وتجاري",
           "مساحة": 1768,
-          "عنوان": "محافظة قna - مركز نجع حمادي",
+          "عنوان": "محافظة قنا - مركز نجع حمادي",
           "فرصة": "نشاط تجاري خدمي",
           "نوع": "خدمي"
         }
@@ -1540,7 +1504,7 @@
           "FID": 16,
           "اسم__12": "مرسي نجع حمادي السياحي",
           "مساحة": 972,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
+          "عنوان": "محافظة قna - مركز نجع حمادي",
           "فرصة": "مرسي سياحي",
           "نوع": "سياحي"
         }
@@ -1566,7 +1530,7 @@
           "مساحة": 1200,
           "عنوان": "محافظة قنا - مركز نجع حمادي",
           "فرصة": "فندق سياحي",
-          "نوع": "سياحي"
+          "نوع": "سياحi"
         }
       },
       {
@@ -1615,7 +1579,7 @@
           "اسم__12": "فندق سياحي",
           "مساحة": 7012,
           "عنوان": "محافظة قنا - مركز  قنا",
-          "فرصة": "فندق سياحي ملحق به مول تجار",
+          "فرصة": "فندق سياحi ملحق به مول تجار",
           "نوع": "سياحي"
         }
       },
@@ -1751,7 +1715,7 @@
           "FID": 24,
           "اسم__12": "منتجع سياحي",
           "مساحة": 18000,
-          "عنوان": "محافظة قنا - مركز قna",
+          "عنوان": "محافظة قنا - مركز قنا",
           "فرصة": "منتجع سياحي",
           "نوع": "سياحي"
         }
@@ -1834,7 +1798,7 @@
           "مساحة": 1975,
           "عنوان": "محافظة قنا - مركز قنا",
           "فرصة": "محطة تموين سيارات",
-          "نوع": "خدمي",
+          "نوع": "خدمi",
           "ORIG_FID": 2
         }
       },
@@ -1851,7 +1815,7 @@
           "مساحة": 3500,
           "عنوان": "محافظة قنا - مركز  نجع حمادي",
           "فرصة": "مول تجاري او مجمع طبي",
-          "نوع": "خدمi",
+          "نوع": "خدمي",
           "ORIG_FID": 3
         }
       },
@@ -1952,7 +1916,7 @@
           "اسم__12": "نشاط ادار وتجاري",
           "مساحة": 1970,
           "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمi",
+          "فرصة": "نشاط تجاري خدمي",
           "نوع": "خدمي",
           "ORIG_FID": 9
         }
@@ -2034,7 +1998,7 @@
         },
         "properties": {
           "FID": 14,
-          "اسم__12": "مرسي نجع حمادي السياحي",
+          "اسم__12": "مرسي نجع حمادي السياحi",
           "مساحة": 972,
           "عنوان": "محافظة قنا - مركز نجع حمادي",
           "فرصة": "مرسي سياحي",
@@ -2105,7 +2069,7 @@
           "اسم__12": "معمل التفريغ الجديد",
           "مساحة": 5746.5299999999997,
           "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "محطة تربية دواجن",
+          "فرصة": "محطة تربية دواجn",
           "نوع": "زراعي",
           "ORIG_FID": 20
         }
@@ -2206,7 +2170,7 @@
           "FID": 24,
           "اسم__12": "مشروعات انتاج داجني",
           "مساحة": 27723780,
-          "عنوان": "محافظة قna - مركز الوقف",
+          "عنوان": "محافظة قنا - مركز الوقف",
           "فرصة": "مشروعات انتاج داجني",
           "نوع": "زراعي",
           "ORIG_FID": 15
@@ -2293,542 +2257,812 @@
       updateActiveButton(this);
     });
     
-    // إضافة التحكم في قياس المسافات
-    document.getElementById('distanceBtn').addEventListener('click', startDistanceMeasurement);
-    document.getElementById('clearBtn').addEventListener('click', clearMeasurements);
-    document.getElementById('coordinateBtn').addEventListener('click', toggleCoordinateDisplay);
+    // إضافة شعار الخريطة
+    const mapLogo = L.control({position: 'bottomleft'});
+    mapLogo.onAdd = function() {
+      const div = L.DomUtil.create('div', 'map-logo');
+      div.innerHTML = '🌍 خريطة الفرص الاستثمارية';
+      div.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+      div.style.color = 'white';
+      div.style.padding = '5px 10px';
+      div.style.borderRadius = '5px';
+      div.style.fontSize = '14px';
+      return div;
+    };
+    mapLogo.addTo(map);
     
-    // إضافة التحكم في القائمة الجانبية
-    document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
-    document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
-    document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
+    // إضافة وظائف القياس
+    document.getElementById('distanceBtn').addEventListener('click', toggleDistance);
+    document.getElementById('coordinateBtn').addEventListener('click', toggleCoordinate);
+    document.getElementById('clearBtn').addEventListener('click', clearAll);
     
-    // إضافة التحكم في قائمة التحكم
-    document.getElementById('toggleControlsBtn').addEventListener('click', toggleMapControls);
-    
-    // إضافة التحكم في التصفية
+    // إضافة وظائف التصفية
     document.getElementById('filterToggle').addEventListener('click', toggleFilterControls);
     document.getElementById('applyFilters').addEventListener('click', applyFilters);
     document.getElementById('resetFilters').addEventListener('click', resetFilters);
     
-    // إضافة أحداث القائمة الجانبية
-    document.querySelectorAll('.sidebar-link[data-link]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const linkType = this.getAttribute('data-link');
-        if (linkType === 'favorites') {
-          showFavoritesModal();
-        } else if (linkType === 'opportunities') {
-          showOpportunitiesModal();
-        }
-      });
-    });
+    // تحديث التسميات عند تغيير مستوى التقريب
+    map.on('zoomend', updateLabelsVisibility);
+    map.on('zoomend', togglePointsPolygonsVisibility);
+    updateLabelsVisibility(); // تحديث التسميات عند التحميل الأولي
+    togglePointsPolygonsVisibility(); // تحديث النقاط والمضلعات عند التحميل الأولي
     
-    // إضافة حدث لتحديث التصفية عند تغيير مستوى التكبير/التصغير
-    map.on('zoomend', function() {
-      applyFilters(false); // false يعني لا تعيد رسم كل الطبقات، فقط تحديث الرؤية
-    });
-    
-    // إضافة حدث لتحديث التصفية عند تحريك الخريطة
-    map.on('moveend', function() {
-      applyFilters(false);
-    });
+    // تهيئة زر إخفاء/إظهار قائمة التحكم
+    document.getElementById('toggleControlsBtn').addEventListener('click', toggleMapControls);
   }
   
+  // إضافة المضلعات إلى الخريطة
   function addPolygonsToMap() {
-    // مسح المضلعات القديمة إذا وجدت
-    polygons.forEach(polygon => map.removeLayer(polygon));
-    polygons = [];
-    
-    // إضافة المضلعات الجديدة
     polygonsData.features.forEach(feature => {
-      const polygon = L.polygon(feature.geometry.coordinates, {
-        color: getColorByType(feature.properties.nوع),
-        weight: 2,
-        fillOpacity: 0.3,
-        className: 'opportunity-polygon'
+      // تحويل الإحداثيات إلى تنسيق Leaflet [lat, lng]
+      const coordinates = feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]);
+      
+      // إنشاء المضلع (فارغ مع إطار أحمر)
+      const polygon = L.polygon(coordinates, {
+        color: '#e53935',
+        fillColor: 'transparent',
+        fillOpacity: 0,
+        weight: 3,
+        dashArray: '5, 5'
       }).addTo(map);
       
-      // إضافة البوب أب للمضلع
+      // إضافة تسمية داخل المضلع
+      const centroid = getPolygonCentroid(coordinates);
+      const label = L.marker(centroid, {
+        icon: L.divIcon({
+          className: 'polygon-label',
+          html: feature.properties.اسم__12,
+          iconSize: [null, null],
+          iconAnchor: [0, 0]
+        })
+      }).addTo(map);
+      
+      // تخزين التسمية كخاصية للمضلع
+      polygon.label = label;
+      
+      // ربط المعلومات مع المضلع (باستخدام البوب أب الجديد)
       polygon.bindPopup(createPopupContent(feature.properties, 'polygon'));
       
-      // تخزين البيانات المرجعية
-      polygon.opportunityData = feature.properties;
-      polygon.opportunityData.type = 'polygon';
-      
+      // تخزين المضلع للإشارة إليه لاحقًا
+      polygon.feature = feature;
+      polygon.type = 'polygon';
       polygons.push(polygon);
+      
+      // إضافة إلى قائمة الفرص الاستثمارية
+      investmentOpportunities.push({
+        name: feature.properties.اسم__12,
+        area: `${feature.properties.مساحة} متر مربع`,
+        type: feature.properties.نوع,
+        center: extractCenterFromAddress(feature.properties.عنوان)
+      });
     });
-    
-    // إضافة المضلعات إلى القائمة المرشحة
-    filteredPolygons = [...polygons];
   }
   
+  // إضافة النقاط إلى الخريطة
   function addPointsToMap() {
-    // مسح النقاط القديمة إذا وجدت
-    points.forEach(point => map.removeLayer(point));
-    points = [];
-    
-    // إضافة النقاط الجديدة
     pointsData.features.forEach(feature => {
-      const point = L.circleMarker(feature.geometry.coordinates, {
+      // تحويل الإحداثيات إلى تنسيق Leaflet [lat, lng]
+      const coordinates = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+      
+      // تحديد لون النقطة بناءً على النوع
+      let markerColor = 'service-marker';
+      switch(feature.properties.نوع) {
+        case 'خدمي':
+          markerColor = 'service-marker';
+          break;
+        case 'سياحي':
+          markerColor = 'tourism-marker';
+          break;
+        case 'زراعي':
+          markerColor = 'agricultural-marker';
+          break;
+        case 'صناعي':
+          markerColor = 'industrial-marker';
+          break;
+      }
+      
+      // إنشاء النقطة
+      const point = L.circleMarker(coordinates, {
         radius: 8,
-        fillColor: getColorByType(feature.properties.nوع),
-        color: '#fff',
+        fillColor: getColorByType(feature.properties.نوع),
+        color: "#fff",
         weight: 2,
         opacity: 1,
-        fillOpacity: 0.8,
-        className: `opportunity-point ${getMarkerClassByType(feature.properties.nوع)}`
+        fillOpacity: 0.8
       }).addTo(map);
       
-      // إضافة البوب أب للنقطة
+      // ربط المعلومات مع النقطة
       point.bindPopup(createPopupContent(feature.properties, 'point'));
       
-      // تخزين البيانات المرجعية
-      point.opportunityData = feature.properties;
-      point.opportunityData.type = 'point';
-      
+      // تخزين النقطة للإشارة إليها لاحقًا
+      point.feature = feature;
+      point.type = 'point';
       points.push(point);
+      
+      // إضافة إلى قائمة الفرص الاستثمارية
+      investmentOpportunities.push({
+        name: feature.properties.اسم__12,
+        area: `${feature.properties.مساحة} متر مربع`,
+        type: feature.properties.نوع,
+        center: extractCenterFromAddress(feature.properties.عنوان)
+      });
     });
-    
-    // إضافة النقاط إلى القائمة المرشحة
-    filteredPoints = [...points];
   }
   
+  // استخراج اسم المركز من العنوان
+  function extractCenterFromAddress(address) {
+    if (!address) return 'غير محدد';
+    
+    const centers = ['ابوتشت', 'نجع حمادي', 'فرشوط', 'دشنا', 'الوقف', 'قنا', 'نقادة', 'قوص', 'قفط'];
+    
+    for (const center of centers) {
+      if (address.includes(center)) {
+        return center;
+      }
+    }
+    
+    return 'غير محدد';
+  }
+  
+  // إنشاء محتوى البوب أب الجديد
+  function createPopupContent(properties, type) {
+    const isFavorite = favorites.some(fav => fav.name === properties.اسم__12);
+    
+    return `
+      <div class="popup-header">
+        <h4>${properties.اسم__12}</h4>
+      </div>
+      <div class="popup-body">
+        <div class="popup-info">
+          <i class="bi bi-rulers"></i>
+          <span>${properties.مساحة} متر مربع</span>
+        </div>
+        <div class="popup-info">
+          <i class="bi bi-tag"></i>
+          <span>${properties.نوع || 'غير محدد'}</span>
+        </div>
+        <div class="popup-info">
+          <i class="bi bi-geo-alt"></i>
+          <span>${properties.عنوان || 'غير محدد'}</span>
+        </div>
+        <div class="popup-actions">
+          <button class="popup-btn popup-btn-favorite" onclick="toggleFavorite('${properties.اسم__12}', '${properties.مساحة}', '${properties.نوع || 'غير محدد'}', '${properties.عنوان || 'غير محدد'}', ${isFavorite})">
+            <i class="bi ${isFavorite ? 'bi-heart-fill' : 'bi-heart'}"></i> ${isFavorite ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة'}
+          </button>
+          <button class="popup-btn popup-btn-zoom" onclick="zoomToFeature('${properties.اسم__12}', '${type}')">
+            <i class="bi bi-zoom-in"></i> تكبير
+          </button>
+        </div>
+      </div>
+    `;
+  }
+  
+  // الحصول على اللون حسب النوع
   function getColorByType(type) {
     switch(type) {
       case 'خدمي': return '#1976d2'; // أزرق
       case 'سياحي': return '#ff9800'; // برتقالي ذهبي
       case 'زراعي': return '#4caf50'; // أخضر
       case 'صناعي': return '#607d8b'; // رمادي مزرق
-      default: return '#9e9e9e';
+      default: return '#9e9e9e'; // رمادي افتراضي
     }
   }
   
-  function getMarkerClassByType(type) {
-    switch(type) {
-      case 'خدمي': return 'service-marker';
-      case 'سياحي': return 'tourism-marker';
-      case 'زراعي': return 'agricultural-marker';
-      case 'صناعي': return 'industrial-marker';
-      default: return '';
+  // التكبير إلى عنصر محدد
+  function zoomToFeature(name, type) {
+    if (type === 'polygon') {
+      const polygon = polygons.find(p => p.feature.properties.اسم__12 === name);
+      if (polygon) {
+        map.fitBounds(polygon.getBounds());
+        polygon.openPopup();
+      }
+    } else if (type === 'point') {
+      const point = points.find(p => p.feature.properties.اسم__12 === name);
+      if (point) {
+        map.setView(point.getLatLng(), 15);
+        point.openPopup();
+      }
     }
   }
   
-  function createPopupContent(properties, layerType) {
-    const isFavorite = favorites.some(fav => 
-      fav.FID === properties.FID && fav.type === layerType
-    );
-    
-    return `
-      <div class="popup-header">
-        <h4>${properties.اسم__12 || 'فرصة استثمارية'}</h4>
-      </div>
-      <div class="popup-body">
-        <div class="popup-info">
-          <i class="bi bi-geo-alt"></i>
-          <span>${properties.عنوان || 'غير محدد'}</span>
-        </div>
-        <div class="popup-info">
-          <i class="bi bi-type"></i>
-          <span>${properties.nوع || 'غير محدد'}</span>
-        </div>
-        <div class="popup-info">
-          <i class="bi bi-rulers"></i>
-          <span>المساحة: ${properties.مساحة || 'غير محدد'} م²</span>
-        </div>
-        <div class="popup-info">
-          <i class="bi bi-briefcase"></i>
-          <span>${properties.فرصة || 'فرصة استثمارية'}</span>
-        </div>
-      </div>
-      <div class="popup-actions">
-        <button class="popup-btn popup-btn-favorite" onclick="toggleFavorite(${properties.FID}, '${layerType}')">
-          <i class="bi ${isFavorite ? 'bi-heart-fill' : 'bi-heart'}"></i>
-          ${isFavorite ? 'إزالة المفضلة' : 'إضافة للمفضلة'}
-        </button>
-        <button class="popup-btn popup-btn-zoom" onclick="zoomToOpportunity(${properties.FID}, '${layerType}')">
-          <i class="bi bi-zoom-in"></i> تكبير
-        </button>
-      </div>
-    `;
-  }
-  
-  function toggleFavorite(fid, layerType) {
-    const opportunity = findOpportunityById(fid, layerType);
-    if (!opportunity) return;
-    
-    const index = favorites.findIndex(fav => 
-      fav.FID === fid && fav.type === layerType
-    );
-    
-    if (index === -1) {
+  // إضافة/إزالة من المفضلة
+  function toggleFavorite(name, area, type, address, isCurrentlyFavorite) {
+    if (isCurrentlyFavorite) {
+      // إزالة من المفضلة
+      favorites = favorites.filter(fav => fav.name !== name);
+    } else {
       // إضافة إلى المفضلة
       favorites.push({
-        FID: fid,
-        type: layerType,
-        data: opportunity.opportunityData
+        name: name,
+        area: area,
+        type: type,
+        address: address
       });
-    } else {
-      // إزالة من المفضلة
-      favorites.splice(index, 1);
     }
     
     // حفظ في localStorage
     localStorage.setItem('favorites', JSON.stringify(favorites));
     
-    // إغلاق البوب أب الحالي وإعادة فتحه لتحديث حالة القلب
+    // تحديث القائمة
+    updateFavoritesList();
+    
+    // إغلاق البوب أب الحالي وفتحه مرة أخرى لتحديث حالة الزر
     map.closePopup();
     
-    // إعادة فتح البوب أب بعد تأخير بسيط
-    setTimeout(() => {
-      const layers = [...polygons, ...points];
-      const layer = layers.find(l => 
-        l.opportunityData.FID === fid && l.opportunityData.type === layerType
-      );
-      if (layer) {
-        layer.openPopup();
-      }
-    }, 100);
+    // البحث عن العنصر وفتح البوب أب مرة أخرى
+    let feature;
+    feature = polygons.find(p => p.feature.properties.اسم__12 === name);
+    if (!feature) {
+      feature = points.find(p => p.feature.properties.اسم__12 === name);
+    }
     
-    // تحديث قائمة المفضلة
-    updateFavoritesList();
-  }
-  
-  function findOpportunityById(fid, layerType) {
-    const layers = layerType === 'polygon' ? polygons : points;
-    return layers.find(layer => layer.opportunityData.FID === fid);
-  }
-  
-  function zoomToOpportunity(fid, layerType) {
-    const opportunity = findOpportunityById(fid, layerType);
-    if (!opportunity) return;
-    
-    if (layerType === 'polygon') {
-      map.fitBounds(opportunity.getBounds());
-    } else {
-      map.setView(opportunity.getLatLng(), 15);
+    if (feature) {
+      feature.openPopup();
     }
   }
   
+  // تحديث قائمة المفضلة
   function updateFavoritesList() {
-    const favoritesList = document.getElementById('favoritesList');
-    const favoritesCount = document.getElementById('favoritesCount');
+    const container = document.getElementById('favoritesList');
+    const countElement = document.getElementById('favoritesCount');
     
     if (favorites.length === 0) {
-      favoritesList.innerHTML = `
+      container.innerHTML = `
         <div class="no-favorites">
           <i class="bi bi-heart"></i>
-          <p>لا توجد فرص في المفضلة بعد</p>
+          <p>لا توجد فرص في المفضلة</p>
         </div>
       `;
-      favoritesCount.textContent = '0 عنصر';
+      countElement.textContent = '0 عنصر';
       return;
     }
     
-    favoritesCount.textContent = `${favorites.length} عنصر`;
-    
-    favoritesList.innerHTML = favorites.map(fav => `
-      <div class="favorite-item">
+    container.innerHTML = '';
+    favorites.forEach((favorite, index) => {
+      const item = document.createElement('div');
+      item.className = 'favorite-item fade-in';
+      item.innerHTML = `
         <div class="favorite-info">
-          <div class="favorite-name">${fav.data.اسم__12 || 'فرصة استثمارية'}</div>
-          <div class="favorite-area">${fav.data.مساحة || 'غير محدد'} م² - ${fav.data.nوع || 'غير محدد'}</div>
+          <div class="favorite-name">${favorite.name}</div>
+          <div class="favorite-area">${favorite.area} - ${favorite.type}</div>
         </div>
         <div class="favorite-actions">
-          <button class="favorite-btn" onclick="zoomToOpportunity(${fav.FID}, '${fav.type}')" title="تكبير">
-            <i class="bi bi-zoom-in"></i>
+          <button class="favorite-btn" onclick="zoomToFavorite('${favorite.name}')" title="عرض على الخريطة">
+            <i class="bi bi-eye"></i>
           </button>
-          <button class="favorite-btn" onclick="toggleFavorite(${fav.FID}, '${fav.type}')" title="إزالة">
+          <button class="favorite-btn" onclick="removeFavorite(${index})" title="حذف من المفضلة">
             <i class="bi bi-trash"></i>
           </button>
         </div>
-      </div>
-    `).join('');
+      `;
+      container.appendChild(item);
+    });
+    
+    countElement.textContent = `${favorites.length} عنصر`;
   }
   
+  // التكبير إلى عنصر في المفضلة
+  function zoomToFavorite(name) {
+    // البحث في المضلعات
+    let feature = polygons.find(p => p.feature.properties.اسم__12 === name);
+    if (feature) {
+      map.fitBounds(feature.getBounds());
+      feature.openPopup();
+      closeFavoritesModal();
+      return;
+    }
+    
+    // البحث في النقاط
+    feature = points.find(p => p.feature.properties.اسم__12 === name);
+    if (feature) {
+      map.setView(feature.getLatLng(), 15);
+      feature.openPopup();
+      closeFavoritesModal();
+    }
+  }
+  
+  // إزالة عنصر من المفضلة
+  function removeFavorite(index) {
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    updateFavoritesList();
+  }
+  
+  // حذف كل المفضلة
+  function clearAllFavorites() {
+    if (confirm('هل أنت متأكد من أنك تريد حذف كل العناصر من المفضلة؟')) {
+      favorites = [];
+      localStorage.removeItem('favorites');
+      updateFavoritesList();
+    }
+  }
+  
+  // فتح نافذة المفضلة
+  function openFavoritesModal() {
+    updateFavoritesList();
+    document.getElementById('favoritesModal').classList.add('show');
+  }
+  
+  // إغلاق نافذة المفضلة
+  function closeFavoritesModal() {
+    document.getElementById('favoritesModal').classList.remove('show');
+  }
+  
+  // تحديث الأزرار النشطة
+  function updateActiveButton(activeButton) {
+    // إزالة الفعالية من جميع الأزرار في نفس المجموعة
+    const buttons = activeButton.parentElement.parentElement.querySelectorAll('.layer-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // إضافة الفعالية للزر المضغوط
+    activeButton.classList.add('active');
+    
+    // إزالة التركيز بعد النقر
+    setTimeout(() => activeButton.blur(), 300);
+  }
+  
+  // حساب مركز المضلع
+  function getPolygonCentroid(coords) {
+    let x = 0, y = 0;
+    for (let i = 0; i < coords.length; i++) {
+      x += coords[i][0];
+      y += coords[i][1];
+    }
+    return [x / coords.length, y / coords.length];
+  }
+  
+  // إنشاء قائمة الفرص الاستثمارية
   function renderOpportunitiesList() {
-    const opportunitiesList = document.getElementById('opportunitiesList');
-    const opportunitiesCount = document.getElementById('opportunitiesCount');
+    const container = document.getElementById('opportunitiesList');
+    const countElement = document.getElementById('opportunitiesCount');
+    container.innerHTML = '';
     
-    // استخدام المضلعات فقط لتجنب التكرار (26 فرصة بدلاً من 52)
-    const uniqueOpportunities = polygons.map(polygon => polygon.opportunityData);
-    
-    opportunitiesCount.textContent = `${uniqueOpportunities.length} فرص`;
-    
-    opportunitiesList.innerHTML = uniqueOpportunities.map(opp => `
-      <div class="opportunity-item">
-        <div class="opportunity-info">
-          <div class="opportunity-name">${opp.اسم__12 || 'فرصة استثمارية'}</div>
-          <div class="opportunity-area">${opp.مساحة || 'غير محدد'} م² - ${opp.nوع || 'غير محدد'}</div>
+    investmentOpportunities.forEach((opportunity, index) => {
+      const isFavorite = favorites.some(fav => fav.name === opportunity.name);
+      
+      const item = document.createElement('div');
+      item.className = 'opportunity-item fade-in';
+      item.innerHTML = `
+        <div class="favorite-info">
+          <div class="opportunity-name">${opportunity.name}</div>
+          <div class="opportunity-area">${opportunity.area} - ${opportunity.type} - ${opportunity.center}</div>
         </div>
         <div class="opportunity-actions">
-          <button class="opportunity-btn" onclick="zoomToOpportunity(${opp.FID}, 'polygon')" title="تكبير">
-            <i class="bi bi-zoom-in"></i>
+          <button class="opportunity-btn" onclick="zoomToOpportunity('${opportunity.name}')" title="عرض على الخريطة">
+            <i class="bi bi-eye"></i>
           </button>
-          <button class="opportunity-btn" onclick="toggleFavorite(${opp.FID}, 'polygon')" title="إضافة للمفضلة">
-            <i class="bi bi-heart"></i>
+          <button class="opportunity-btn" onclick="toggleOpportunityFavorite(${index})" title="${isFavorite ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة'}">
+            <i class="bi ${isFavorite ? 'bi-heart-fill' : 'bi-heart'}"></i>
           </button>
         </div>
-      </div>
-    `).join('');
-  }
-  
-  function startDistanceMeasurement() {
-    if (distanceLine) {
-      clearMeasurements();
-    }
-    
-    distancePoints = [];
-    distanceLine = L.polyline([], {color: '#1976d2', weight: 3}).addTo(map);
-    
-    map.on('click', measureDistanceOnClick);
-    
-    document.getElementById('distanceDisplay').style.display = 'block';
-    updateDistanceDisplay();
-  }
-  
-  function measureDistanceOnClick(e) {
-    distancePoints.push(e.latlng);
-    distanceLine.setLatLngs(distancePoints);
-    
-    // إضافة علامة للنقطة
-    L.circleMarker(e.latlng, {
-      radius: 5,
-      fillColor: '#1976d2',
-      color: '#fff',
-      weight: 2,
-      opacity: 1,
-      fillOpacity: 1
-    }).addTo(map);
-    
-    // إضافة تسمية المسافة إذا كانت هناك أكثر من نقطة
-    if (distancePoints.length > 1) {
-      const lastPoint = distancePoints[distancePoints.length - 1];
-      const prevPoint = distancePoints[distancePoints.length - 2];
-      const distance = lastPoint.distanceTo(prevPoint);
-      
-      const label = L.divIcon({
-        html: `<div class="distance-label">${Math.round(distance)} م</div>`,
-        className: 'distance-label-container',
-        iconSize: [60, 20],
-        iconAnchor: [30, 10]
-      });
-      
-      const midLat = (lastPoint.lat + prevPoint.lat) / 2;
-      const midLng = (lastPoint.lng + prevPoint.lng) / 2;
-      
-      L.marker([midLat, midLng], {icon: label, interactive: false}).addTo(map);
-      distanceLabels.push(label);
-    }
-    
-    updateDistanceDisplay();
-  }
-  
-  function updateDistanceDisplay() {
-    let totalDistance = 0;
-    
-    for (let i = 1; i < distancePoints.length; i++) {
-      totalDistance += distancePoints[i].distanceTo(distancePoints[i - 1]);
-    }
-    
-    document.getElementById('distanceDisplay').innerHTML = `
-      <i class="bi bi-rulers"></i> المسافة الكلية: ${Math.round(totalDistance)} متر
-    `;
-  }
-  
-  function clearMeasurements() {
-    if (distanceLine) {
-      map.removeLayer(distanceLine);
-      distanceLine = null;
-    }
-    
-    distancePoints.forEach(point => {
-      map.eachLayer(layer => {
-        if (layer instanceof L.CircleMarker && layer.getLatLng().equals(point)) {
-          map.removeLayer(layer);
-        }
-      });
+      `;
+      container.appendChild(item);
     });
     
-    distancePoints = [];
-    
-    distanceLabels.forEach(label => {
-      map.eachLayer(layer => {
-        if (layer instanceof L.Marker && layer.getIcon() === label) {
-          map.removeLayer(layer);
-        }
-      });
-    });
-    
-    distanceLabels = [];
-    
-    document.getElementById('distanceDisplay').style.display = 'none';
-    map.off('click', measureDistanceOnClick);
+    countElement.textContent = `${investmentOpportunities.length} فرص`;
   }
   
-  function toggleCoordinateDisplay() {
-    coordinateMode = !coordinateMode;
-    const coordinateDisplay = document.querySelector('.coordinate-display');
+  // التكبير إلى فرصة محددة
+  function zoomToOpportunity(name) {
+    // البحث في المضلعات
+    let feature = polygons.find(p => p.feature.properties.اسم__12 === name);
+    if (feature) {
+      map.fitBounds(feature.getBounds());
+      feature.openPopup();
+      closeOpportunitiesModal();
+      return;
+    }
     
-    if (coordinateMode) {
-      coordinateDisplay.style.display = 'block';
+    // البحث في النقاط
+    feature = points.find(p => p.feature.properties.اسم__12 === name);
+    if (feature) {
+      map.setView(feature.getLatLng(), 15);
+      feature.openPopup();
+      closeOpportunitiesModal();
+    }
+  }
+  
+  // إضافة فرصة إلى المفضلة من القائمة
+  function toggleOpportunityFavorite(index) {
+    const opportunity = investmentOpportunities[index];
+    if (!opportunity) return;
+    
+    const isCurrentlyFavorite = favorites.some(fav => fav.name === opportunity.name);
+    
+    if (isCurrentlyFavorite) {
+      // إزالة من المفضلة
+      favorites = favorites.filter(fav => fav.name !== opportunity.name);
+    } else {
+      // إضافة إلى المفضلة
+      favorites.push({
+        name: opportunity.name,
+        area: opportunity.area,
+        type: opportunity.type,
+        address: opportunity.center
+      });
+    }
+    
+    // حفظ في localStorage
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    
+    // تحديث القائمة
+    updateFavoritesList();
+    renderOpportunitiesList();
+  }
+  
+  // فتح نافذة الفرص الاستثمارية
+  function openOpportunitiesModal() {
+    renderOpportunitiesList();
+    document.getElementById('opportunitiesModal').classList.add('show');
+  }
+  
+  // إغلاق نافذة الفرص الاستثمارية
+  function closeOpportunitiesModal() {
+    document.getElementById('opportunitiesModal').classList.remove('show');
+  }
+  
+  // وظائف قياس المسافة
+  function toggleDistance() {
+    if (window.distanceMode) {
+      window.distanceMode = false;
+      map.off('click', addDistancePoint);
+      document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i>';
+      document.getElementById('distanceDisplay').style.display = 'none';
+    } else {
+      window.distanceMode = true;
+      document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-stop-circle"></i>';
+      distancePoints = [];
+      distanceLine = L.polyline([], { color: '#1976d2', weight: 4, dashArray: '5, 10' }).addTo(map);
+      map.on('click', addDistancePoint);
       
-      if (coordinateMarker) {
-        map.removeLayer(coordinateMarker);
+      // إخفاء وضع الإحداثيات إذا كان نشطًا
+      if (coordinateMode) toggleCoordinate();
+    }
+  }
+  
+  function addDistancePoint(e) {
+    const latlngs = distanceLine.getLatLngs();
+    latlngs.push(e.latlng);
+    distanceLine.setLatLngs(latlngs);
+    
+    // إضافة علامة نقطة
+    L.circleMarker(e.latlng, { color: '#1976d2', fillColor: '#64b5f6', fillOpacity: 1, radius: 7 }).addTo(map);
+    
+    // إضافة تسميات المسافات
+    if (latlngs.length > 1) {
+      let total = 0;
+      
+      // إزالة التسميات القديمة
+      distanceLabels.forEach(label => map.removeLayer(label));
+      distanceLabels = [];
+      
+      // إضافة تسميات لكل قطعة
+      for (let i = 1; i < latlngs.length; i++) {
+        const p1 = latlngs[i - 1];
+        const p2 = latlngs[i];
+        const dist = map.distance(p1, p2);
+        total += dist;
+        
+        // نقطة المنتصف
+        const midLat = (p1.lat + p2.lat) / 2;
+        const midLng = (p1.lng + p2.lng) / 2;
+        const midPoint = L.latLng(midLat, midLng);
+        
+        // إنشاء التسمية
+        const label = L.marker(midPoint, {
+          icon: L.divIcon({
+            className: 'distance-label',
+            html: dist >= 1000 ? `${(dist / 1000).toFixed(2)} كم` : `${dist.toFixed(0)} م`,
+            iconSize: [null, null]
+          })
+        }).addTo(map);
+        
+        distanceLabels.push(label);
       }
       
-      coordinateMarker = L.marker([0, 0], {
-        icon: L.divIcon({
-          html: '<div style="background: #9c27b0; color: white; padding: 5px; border-radius: 5px;">الإحداثيات</div>',
-          className: 'coordinate-marker',
-          iconSize: [80, 30],
-          iconAnchor: [40, 15]
-        })
-      }).addTo(map);
+      // تحديث المسافة الإجمالية
+      const display = document.getElementById('distanceDisplay');
+      display.innerHTML = total >= 1000 ? `<i class="bi bi-rulers"></i> المسافة الكلية: ${(total / 1000).toFixed(2)} كم` : `<i class="bi bi-rulers"></i> المسافة الكلية: ${total.toFixed(0)} متر`;
+      display.style.display = 'block';
+    }
+  }
+  
+  // وظيفة عرض الإحداثيات
+  function toggleCoordinate() {
+    coordinateMode = !coordinateMode;
+    if (coordinateMode) {
+      // تغيير حالة الزر
+      document.getElementById('coordinateBtn').innerHTML = '<i class="bi bi-stop-circle"></i>';
+      document.querySelector('.coordinate-display').style.display = 'block';
       
-      map.on('mousemove', updateCoordinateDisplay);
+      // إضافة حدث النقر على الخريطة
+      map.on('click', showCoordinate);
+      
+      // إخفاء أوضاع القياس الأخرى إذا كانت نشطة
+      if (window.distanceMode) toggleDistance();
     } else {
-      coordinateDisplay.style.display = 'none';
+      document.getElementById('coordinateBtn').innerHTML = '<i class="bi bi-geo-alt"></i>';
+      document.querySelector('.coordinate-display').style.display = 'none';
+      
+      // إزالة حدث النقر على الخريطة
+      map.off('click', showCoordinate);
+      
+      // إزالة العلامة إذا كانت موجودة
+      if (coordinateMarker) {
+        map.removeLayer(coordinateMarker);
+        coordinateMarker = null;
+      }
+    }
+  }
+  
+  function showCoordinate(e) {
+    const { lat, lng } = e.latlng;
+    
+    // إزالة العلامة القديمة إذا كانت موجودة
+    if (coordinateMarker) {
+      map.removeLayer(coordinateMarker);
+    }
+    
+    // إنشاء علامة جديدة
+    coordinateMarker = L.marker(e.latlng, {
+      icon: L.divIcon({
+        className: 'coordinate-marker',
+        html: `<div>${lat.toFixed(6)}, ${lng.toFixed(6)}</div>`,
+        iconSize: [null, null]
+      })
+    }).addTo(map);
+    
+    // تحديث عرض الإحداثيات
+    document.querySelector('.coordinate-display').innerHTML = `<i class="bi bi-geo-alt"></i> الإحداثيات: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+  }
+  
+  function clearAll() {
+    // إزالة عناصر القياس
+    if (distanceLine) map.removeLayer(distanceLine);
+    
+    // إزالة تسميات المسافات
+    distanceLabels.forEach(label => map.removeLayer(label));
+    distanceLabels = [];
+    
+    // إزالة العلامات الدائرية
+    map.eachLayer(function(layer) {
+      if (layer instanceof L.CircleMarker) {
+        map.removeLayer(layer);
+      }
+    });
+    
+    // إعادة تعيين المتغيرات
+    distancePoints = [];
+    distanceLine = null;
+    window.distanceMode = false;
+    
+    // إعادة تعيين الأزرار
+    document.getElementById('distanceBtn').innerHTML = '<i class="bi bi-rulers"></i>';
+    document.getElementById('distanceDisplay').style.display = 'none';
+    
+    // إزالة أحداث الخريطة
+    map.off('click', addDistancePoint);
+    
+    // إزالة وضع الإcoordinates إذا كان نشطًا
+    if (coordinateMode) {
+      coordinateMode = false;
+      document.getElementById('coordinateBtn').innerHTML = '<i class="bi bi-geo-alt"></i>';
+      document.querySelector('.coordinate-display').style.display = 'none';
+      map.off('click', showCoordinate);
       
       if (coordinateMarker) {
         map.removeLayer(coordinateMarker);
         coordinateMarker = null;
       }
+    }
+  }
+  
+  // تحديث رؤية تسميات المضلعات حسب مستوى التقريب
+  function updateLabelsVisibility() {
+    const zoom = map.getZoom();
+    const minZoomForLabels = 14; // الحد الأدنى للتقريب لظهور التسميات
+    
+    polygons.forEach(polygon => {
+      if (zoom >= minZoomForLabels) {
+        if (!map.hasLayer(polygon.label)) {
+          polygon.label.addTo(map);
+        }
+      } else {
+        if (map.hasLayer(polygon.label)) {
+          map.removeLayer(polygon.label);
+        }
+      }
+    });
+  }
+  
+  // التحكم في إظهار النقاط والمضلعات حسب مستوى التقريب
+  function togglePointsPolygonsVisibility() {
+    const zoom = map.getZoom();
+    const minZoomForPolygons = 12; // الحد الأدنى للتقريب لظهور المضلعات
+    
+    // إظهار/إخفاء المضلعات
+    polygons.forEach(polygon => {
+      if (zoom >= minZoomForPolygons) {
+        if (!map.hasLayer(polygon)) {
+          polygon.addTo(map);
+          if (zoom >= 14 && !map.hasLayer(polygon.label)) {
+            polygon.label.addTo(map);
+          }
+        }
+      } else {
+        if (map.hasLayer(polygon)) {
+          map.removeLayer(polygon);
+        }
+        if (map.hasLayer(polygon.label)) {
+          map.removeLayer(polygon.label);
+        }
+      }
+    });
+    
+    // إظهار/إخفاء النقاط
+    points.forEach(point => {
+      if (zoom < minZoomForPolygons) {
+        if (!map.hasLayer(point)) {
+          point.addTo(map);
+        }
+      } else {
+        if (map.hasLayer(point)) {
+          map.removeLayer(point);
+        }
+      }
+    });
+  }
+  
+  // إظهار/إخفاء عناصر التحكم في التصفية
+  function toggleFilterControls() {
+    const filterControls = document.getElementById('filterControls');
+    if (filterControls.style.display === 'none') {
+      filterControls.style.display = 'block';
+    } else {
+      filterControls.style.display = 'none';
+    }
+  }
+  
+  // تطبيق التصفية
+  function applyFilters() {
+    // الحصول على أنواع الفرص المحددة
+    const selectedTypes = [];
+    document.querySelectorAll('input[name="type"]:checked').forEach(checkbox => {
+      selectedTypes.push(checkbox.value);
+    });
+    
+    // الحصول على المراكز المحددة
+    const selectedCenters = [];
+    document.querySelectorAll('input[name="center"]:checked').forEach(checkbox => {
+      selectedCenters.push(checkbox.value);
+    });
+    
+    // تصفية المضلعات
+    polygons.forEach(polygon => {
+      const type = polygon.feature.properties.نوع || 'غير محدد';
+      const center = extractCenterFromAddress(polygon.feature.properties.عنوان);
       
-      map.off('mousemove', updateCoordinateDisplay);
-    }
+      if ((selectedTypes.includes(type) || selectedTypes.length === 0) && 
+          (selectedCenters.includes(center) || selectedCenters.length === 0)) {
+        if (!map.hasLayer(polygon)) {
+          polygon.addTo(map);
+        }
+      } else {
+        if (map.hasLayer(polygon)) {
+          map.removeLayer(polygon);
+        }
+      }
+    });
+    
+    // تصفية النقاط
+    points.forEach(point => {
+      const type = point.feature.properties.نوع || 'غير محدد';
+      const center = extractCenterFromAddress(point.feature.properties.عنوان);
+      
+      if ((selectedTypes.includes(type) || selectedTypes.length === 0) && 
+          (selectedCenters.includes(center) || selectedCenters.length === 0)) {
+        if (!map.hasLayer(point)) {
+          point.addTo(map);
+        }
+      } else {
+        if (map.hasLayer(point)) {
+          map.removeLayer(point);
+        }
+      }
+    });
+    
+    // إخفاء عناصر التحكم بعد التطبيق
+    document.getElementById('filterControls').style.display = 'none';
   }
   
-  function updateCoordinateDisplay(e) {
-    const lat = e.latlng.lat.toFixed(6);
-    const lng = e.latlng.lng.toFixed(6);
+  // إعادة تعيين التصفية
+  function resetFilters() {
+    // تحديد كل خانات الاختيار
+    document.querySelectorAll('input[name="type"]').forEach(checkbox => {
+      checkbox.checked = true;
+    });
     
-    document.querySelector('.coordinate-display').innerHTML = `
-      <i class="bi bi-geo-alt"></i> الإحداثيات: ${lat}, ${lng}
-    `;
+    document.querySelectorAll('input[name="center"]').forEach(checkbox => {
+      checkbox.checked = true;
+    });
     
-    if (coordinateMarker) {
-      coordinateMarker.setLatLng(e.latlng);
-    }
+    // إعادة إضافة كل العناصر إلى الخريطة
+    polygons.forEach(polygon => {
+      if (!map.hasLayer(polygon)) {
+        polygon.addTo(map);
+      }
+    });
+    
+    points.forEach(point => {
+      if (!map.hasLayer(point)) {
+        point.addTo(map);
+      }
+    });
+    
+    // تحديث الرؤية حسب مستوى التقريب
+    togglePointsPolygonsVisibility();
   }
   
+  // وظائف القائمة الجانبية
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-    const isMobile = window.innerWidth < 992;
-    
-    if (isMobile) {
-      sidebar.classList.toggle('sidebar-visible');
-      overlay.style.display = sidebar.classList.contains('sidebar-visible') ? 'block' : 'none';
+    if (sidebar.classList.contains('sidebar-visible')) {
+      sidebar.classList.remove('sidebar-visible');
+      overlay.style.display = 'none';
     } else {
-      sidebar.classList.toggle('sidebar-hidden');
-      document.body.style.paddingRight = sidebar.classList.contains('sidebar-hidden') ? '0' : 'var(--sidebar-width)';
+      sidebar.classList.add('sidebar-visible');
+      overlay.style.display = 'block';
     }
   }
   
+  // إخفاء/إظهار قائمة التحكم في الخريطة
   function toggleMapControls() {
     const controls = document.getElementById('mapControls');
     const toggleBtn = document.getElementById('toggleControlsBtn');
     
-    controls.classList.toggle('hidden');
-    toggleBtn.innerHTML = controls.classList.contains('hidden') ? 
-      '<i class="bi bi-chevron-down"></i>' : '<i class="bi bi-chevron-up"></i>';
-  }
-  
-  function toggleFilterControls() {
-    const filterControls = document.getElementById('filterControls');
-    filterControls.style.display = filterControls.style.display === 'none' ? 'block' : 'none';
-  }
-  
-  function applyFilters(redrawAll = true) {
-    // جمع قيم التصفية المحددة
-    const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value);
-    const selectedCenters = Array.from(document.querySelectorAll('input[name="center"]:checked')).map(input => input.value);
-    
-    // حفظ الفلاتر النشطة
-    activeFilters.type = selectedTypes;
-    activeFilters.center = selectedCenters;
-    
-    if (redrawAll) {
-      // إعادة رسم جميع الطبقات مع التصفية
-      filteredPolygons = polygons.filter(polygon => {
-        const props = polygon.opportunityData;
-        return selectedTypes.includes(props.nوع) && 
-               selectedCenters.some(center => props.عنوان.includes(center));
-      });
-      
-      filteredPoints = points.filter(point => {
-        const props = point.opportunityData;
-        return selectedTypes.includes(props.nوع) && 
-               selectedCenters.some(center => props.عنوان.includes(center));
-      });
-      
-      // إخفاء جميع الطبقات أولاً
-      polygons.forEach(polygon => map.removeLayer(polygon));
-      points.forEach(point => map.removeLayer(point));
-      
-      // إضافة الطبقات المرشحة فقط
-      filteredPolygons.forEach(polygon => map.addLayer(polygon));
-      filteredPoints.forEach(point => map.addLayer(point));
+    if (controls.classList.contains('hidden')) {
+      controls.classList.remove('hidden');
+      toggleBtn.innerHTML = '<i class="bi bi-chevron-up"></i>';
     } else {
-      // فقط تحديث رؤية الطبقات بناءً على مستوى التكبير/التصغير
-      const zoomLevel = map.getZoom();
-      const showDetails = zoomLevel > 12;
-      
-      filteredPolygons.forEach(polygon => {
-        if (map.hasLayer(polygon)) {
-          // يمكنك هنا إضافة منطق لإظهار/إخفاء التفاصيل بناءً على مستوى التكبير
-        }
-      });
-      
-      filteredPoints.forEach(point => {
-        if (map.hasLayer(point)) {
-          // يمكنك هنا إضافة منطق لإظهار/إخفاء التفاصيل بناءً على مستوى التكبير
-        }
-      });
+      controls.classList.add('hidden');
+      toggleBtn.innerHTML = '<i class="bi bi-chevron-down"></i>';
     }
   }
   
-  function resetFilters() {
-    // تحديد جميع خانات الاختيار
-    document.querySelectorAll('input[name="type"]').forEach(input => input.checked = true);
-    document.querySelectorAll('input[name="center"]').forEach(input => input.checked = true);
-    
-    // تطبيق التصفية الافتراضية
-    applyFilters();
-  }
-  
-  function updateActiveButton(activeBtn) {
-    document.querySelectorAll('.layer-btn').forEach(btn => btn.classList.remove('active'));
-    activeBtn.classList.add('active');
-  }
-  
-  function showFavoritesModal() {
-    updateFavoritesList();
-    document.getElementById('favoritesModal').classList.add('show');
-  }
-  
-  function closeFavoritesModal() {
-    document.getElementById('favoritesModal').classList.remove('show');
-  }
-  
-  function clearAllFavorites() {
-    if (confirm('هل أنت متأكد من أنك تريد حذف جميع الفرص من المفضلة؟')) {
-      favorites = [];
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      updateFavoritesList();
+  function handleMenuLinks(event) {
+    const linkType = this.getAttribute('data-link');
+    if (linkType === 'favorites') {
+      event.preventDefault();
+      openFavoritesModal();
     }
-  }
-  
-  function showOpportunitiesModal() {
-    document.getElementById('opportunitiesModal').classList.add('show');
-  }
-  
-  function closeOpportunitiesModal() {
-    document.getElementById('opportunitiesModal').classList.remove('show');
+    if (linkType === 'opportunities') {
+      event.preventDefault();
+      openOpportunitiesModal();
+    }
+    if (window.innerWidth <= 992) {
+      toggleSidebar();
+    }
   }
   
   // تهيئة الخريطة عند تحميل الصفحة
-  window.onload = initMap;
+  document.addEventListener('DOMContentLoaded', function() {
+    initMap();
+    document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
+    document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
+    document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
+    const menuLinks = document.querySelectorAll('.sidebar-link');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', handleMenuLinks);
+    });
+    
+    // إضافة تأثيرات للعناصر
+    document.querySelectorAll('.map-controls, .measure-control').forEach(el => {
+      el.classList.add('fade-in');
+    });
+    
+    document.querySelector('header').classList.add('pulse');
+  });
 </script>
 </body>
 </html>
