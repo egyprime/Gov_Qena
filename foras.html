@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وحدة نظم المعلومات الجغرافية - محافظة قنا</title>
-    <!-- خط Google Fonts -->
+    <title>الفرص الاستثمارية - محافظة قنا</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- أيقونات Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -154,7 +152,7 @@
         .hero {
             background: linear-gradient(rgba(26, 43, 109, 0.8), rgba(26, 43, 109, 0.8)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3') no-repeat center center/cover;
             color: var(--white);
-            padding: 100px 0;
+            padding: 80px 0;
             text-align: center;
         }
         
@@ -173,8 +171,8 @@
             margin-bottom: 30px;
         }
         
-        /* قسم المميزات */
-        .features {
+        /* قسم الفرص الاستثمارية */
+        .opportunities {
             padding: 80px 0;
             background-color: var(--light-bg);
         }
@@ -196,223 +194,157 @@
             margin: 0 auto;
         }
         
-        .features-grid {
+        /* أنماط البطاقات */
+        .opportunities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
         
-        .feature-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
+        .opportunity-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: var(--box-shadow);
-            transition: transform 0.3s;
         }
         
-        .feature-card:hover {
+        .opportunity-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--accent-orange);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-blue);
-        }
-        
-        /* قسم كيفية العمل */
-        .how-it-works {
-            padding: 80px 0;
-        }
-        
-        .steps {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
-        
-        .step {
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-            padding: 20px;
+        .card-image {
+            height: 200px;
+            overflow: hidden;
             position: relative;
         }
         
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background-color: var(--accent-orange);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 20px;
-        }
-        
-        .step:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            top: 25px;
-            right: -30%;
-            width: 60%;
-            height: 2px;
-            background-color: var(--accent-orange);
-        }
-        
-        /* قسم المشاريع */
-        .projects {
-            padding: 80px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .project-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-        }
-        
-        .project-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .project-image img {
+        .card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
         
-        .project-card:hover .project-image img {
+        .opportunity-card:hover .card-image img {
             transform: scale(1.1);
         }
         
-        .project-details {
-            padding: 20px;
-        }
-        
-        .project-status {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background-color: var(--accent-orange);
-            border-radius: 5px;
-        }
-        
-        .project-info {
-            margin-top: 15px;
-        }
-        
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: var(--light-text);
-        }
-        
-        /* قسم التسجيل */
-        .cta {
-            padding: 80px 0;
-            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
-            color: var(--white);
-            text-align: center;
-        }
-        
-        .cta h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .cta p {
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-        
-        .close-modal {
+        .card-badge {
             position: absolute;
             top: 15px;
             left: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #888;
+            background: var(--accent-orange);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        .close-modal:hover {
-            color: #333;
+        .card-content {
+            padding: 20px;
         }
         
-        .modal-title {
-            color: var(--primary-blue);
-            text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-        }
-        
-        .faq-item h3 {
-            color: var(--accent-orange);
+        .card-content h3 {
+            font-size: 1.4rem;
             margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+        
+        .card-details {
+            margin: 15px 0;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .detail-item i {
+            width: 24px;
+            color: var(--accent-orange);
+            margin-left: 10px;
+        }
+        
+        .location {
+            color: #009688;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .location i {
+            margin-left: 8px;
+        }
+        
+        .view-opportunity {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .view-opportunity:hover {
+            background: var(--light-orange);
+        }
+        
+        .available-tag {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 150, 136, 0.15);
+            color: #009688;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+        
+        .available-tag i {
+            margin-right: 5px;
+        }
+        
+        /* فلتر الفرص */
+        .filter-container {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: var(--white);
+            border: 1px solid var(--primary-blue);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+        
+        /* تأثير الظهور */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
         }
         
         /* التذييل */
@@ -466,18 +398,19 @@
                 display: none;
             }
             
-            .steps {
-                flex-direction: column;
-            }
-            
-            .step:not(:last-child)::after {
-                display: none;
-            }
-            
             .top-bar-content {
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -512,214 +445,31 @@
     <!-- قسم الهيرو -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>فرص استثمارية مميزة في محافظة قنا</h1>
+            <h1>جميع الفرص الاستثمارية في محافظة قنا</h1>
             <p>اكتشف أفضل الفرص الاستثمارية المتاحة في أراضي محافظة قنا واستثمر في مستقبل مزدهر</p>
-            <button class="btn btn-primary" onclick="window.location.href='investment-opportunities.html'">استعرض الفرص الاستثمارية</button>
         </div>
     </section>
 
-    <!-- قسم المميزات -->
-    <section class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>لماذا تختار الاستثمار في قنا؟</h2>
-                <p>محافظة واعدة بفرص استثمارية متنوعة مع إمكانيات كبيرة للنمو والازدهار</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>موقع استراتيجي</h3>
-                    <p>موقع مميز في صعيد مصر يربط بين شمال وجنوب البلاد، مع إمكانيات لوجستية كبيرة</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                    <h3>فرص متنوعة</h3>
-                    <p>فرص استثمارية في مجالات متعددة تشمل الزراعة، السياحة، الصناعة، والخدمات</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>بيئة آمنة</h3>
-                    <p>بيئة استثمارية آمنة مع دعم حكومي كامل وتسهيلات للمستثمرين</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم كيفية العمل -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-title">
-                <h2>كيفية الاستثمار في محافظة قنا</h2>
-                <p>4 خطوات بسيطة تفصلك عن بدء رحلتك الاستثمارية</p>
-            </div>
-            
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>التواصل مع الوحدة</h3>
-                    <p>قم بزيارة مقرها للتعرف على الفرص المتاحة</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>اختر فرصتك</h3>
-                    <p>تصفح الفرص الاستثمارية المتاحة واختر ما يناسب أهدافك الاستثمارية</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>استثمر</h3>
-                    <p>استثمر في الفرصة التي تناسبك</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>ابدأ مشروعك</h3>
-                    <p>احصل على كافة التصاريح والتراخيص اللازمة وابدأ مشروعك الاستثماري</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم المشاريع -->
-    <section class="projects">
+    <!-- قسم الفرص الاستثمارية -->
+    <section class="opportunities">
         <div class="container">
             <div class="section-title">
                 <h2>الفرص الاستثمارية المتاحة</h2>
                 <p>اكتشف أفضل الفرص الاستثمارية في محافظة قنا</p>
             </div>
             
-            <div class="projects-grid">
-                <!-- فرصة 1 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://rassd.com/wp-content/uploads/%D9%85%D9%84%D8%A7%D9%87%D9%8A.jpg" alt="مدينة ترفيهية">
-                    </div>
-                    <div class="project-details">
-                        <h3>مدينة ترفيهية</h3>
-                        <div class="project-status">
-                            <span>المساحة: 16,304 م²</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 30%;"></div>
-                        </div>
-                        <div class="project-info">
-                            <p>فرصة استثمارية فريدة لإنشاء مدينة ترفيهية متكاملة تخدم سكان المحافظة والزوار.</p>
-                            <div class="project-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> مركز ومدينة قنا</span>
-                            </div>
-                        </div>
-                        <!-- تحت كل فرصة استثمارية، أضف هذا الزر -->
-
-<button class="btn btn-primary" style="margin-top: 15px; width: 100%;" 
-        onclick="window.location.href='investment-opportunities.html'">
-    استعرض الفرص الاستثمارية
-</button>
-                    </div>
-                </div>
-                
-                <!-- فرصة 2 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://modo3.com/thumbs/fit630x300/10605/1442077624/%D9%85%D8%B4%D8%B1%D9%88%D8%B9_%D8%AA%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A7%D9%84%D8%AF%D8%AC%D8%A7%D8%AC.jpg" alt="محطة تربية دواجن">
-                    </div>
-                    <div class="project-details">
-                        <h3>محطة تربية دواجن</h3>
-                        <div class="project-status">
-                            <span>المساحة: 5,746.53 م²</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 20%;"></div>
-                        </div>
-                        <div class="project-info">
-                            <p>إقامة مشروع متكامل لتربية الدواجن بإمكانيات كبيرة وتقنيات حديثة.</p>
-                            <div class="project-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> مركز ومدينة قنا</span>
-                            </div>
-                        </div>
-                        <!-- تحت كل فرصة استثمارية، أضف هذا الزر -->
-
-<button class="btn btn-primary" style="margin-top: 15px; width: 100%;" 
-        onclick="window.location.href='investment-opportunities.html'">
-    استعرض الفرص الاستثمارية
-</button>
-                    </div>
-                </div>
-                
-                <!-- فرصة 3 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="أرض استصلاح زراعي">
-                    </div>
-                    <div class="project-details">
-                        <h3>أرض استصلاح زراعي</h3>
-                        <div class="project-status">
-                            <span>المساحة: 1,638,000 м²</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 40%;"></div>
-                        </div>
-                        <div class="project-info">
-                            <p>أرض زراعية خصبة بمساحة كبيرة صالحة للاستصلاح والاستثمار الزراعي.</p>
-                            <div class="project-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> مركز نجع حمادي</span>
-                            </div>
-                        </div>
-                        <!-- تحت كل فرصة استثمارية، أضف هذا الزر -->
-
-<button class="btn btn-primary" style="margin-top: 15px; width: 100%;" 
-        onclick="window.location.href='investment-opportunities.html'">
-    استعرض الفرص الاستثمارية
-</button>
-                    </div>
-                </div>
-                
-                <!-- فرصة 4 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://shawatetravel.com/files/gallery_equatorial_hotel_melaka_2-58ee0e3c7d153.jpg?size=870,578&encode=jpg" alt="فندق سياحي وملحق">
-                    </div>
-                    <div class="project-details">
-                        <h3>فندق سياحي ملحق به مول تجاري</h3>
-                        <div class="project-status">
-                            <span>المساحة: 8,099.8 م²</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 25%;"></div>
-                        </div>
-                        <div class="project-info">
-                            <p>فرصة لإنشاء مجمع سياحي وتجاري متكامل في موقع استراتيجي.</p>
-                            <div class="project-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> مركز ومدينة قنا</span>
-                            </div>
-                        </div>
-                        <!-- تحت كل فرصة استثمارية، أضف هذا الزر -->
-
-<button class="btn btn-primary" style="margin-top: 15px; width: 100%;" 
-        onclick="window.location.href='investment-opportunities.html'">
-    استعرض الفرص الاستثمارية
-</button>
-                    </div>
-                </div>
+            <!-- فلتر الفرص حسب النوع -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">جميع الفرص</button>
+                <button class="filter-btn" data-filter="خدمي">فرص خدمية</button>
+                <button class="filter-btn" data-filter="سياحي">فرص سياحية</button>
+                <button class="filter-btn" data-filter="زراعي">فرص زراعية</button>
+                <button class="filter-btn" data-filter="صناعي">فرص صناعية</button>
             </div>
-        </div>
-    </section>
-
-    <!-- قسم التسجيل -->
-    <section class="cta">
-        <div class="container">
-            <h2>ابدأ رحلتك الاستثمارية اليوم</h2>
-            <p>انضم إلى المستثمرين في محافظة قنا واستفد من الفرص الاستثمارية الحصرية</p>
-            <button class="btn btn-primary" onclick="showModal('contactModal')">تواصل معنا</button>
+            
+            <div class="opportunities-grid" id="opportunities-container">
+                <!-- سيتم إضافة البطاقات هنا ديناميكيًا باستخدام JavaScript -->
+            </div>
         </div>
     </section>
 
@@ -810,8 +560,459 @@
         </div>
     </footer>
 
+    <!-- البيانات -->
     <script>
-        // Modal Functions
+        const opportunitiesData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "id": 0,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.238860343100818, 26.051727254172164]
+                    },
+                    "properties": {
+                        "FID": 0,
+                        "اسم__12": "اقامة مول تجاري",
+                        "مساحة": 2188,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مول تجاري",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 0
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 1,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.237542502462361, 26.05765616808976]
+                    },
+                    "properties": {
+                        "FID": 1,
+                        "اسم__12": "ارض فضاء بالترعة المضرانية",
+                        "مساحة": 4134.5,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مدارس خاصة",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 1
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 2,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.739121882074187, 26.204645144288097]
+                    },
+                    "properties": {
+                        "FID": 2,
+                        "اسم__12": "اقامة محطة وقود سيارات وخدم",
+                        "مساحة": 1975,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "محطة تموين سيارات",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 2
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 3,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.72133963523958, 26.15850229454394]
+                    },
+                    "properties": {
+                        "FID": 3,
+                        "اسم__12": "مول تجاري او مجمع طبي",
+                        "مساحة": 3500,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مول تجاري او مجمع طبي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 3
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 4,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.239662296675931, 26.056594583069902]
+                    },
+                    "properties": {
+                        "FID": 4,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 831.89999999999998,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 4
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 5,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240763872790339, 26.05595552372279]
+                    },
+                    "properties": {
+                        "FID": 5,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1995,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 5
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 6,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.239436221495673, 26.05653540367264]
+                    },
+                    "properties": {
+                        "FID": 6,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 340,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 6
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 7,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.23993359313328, 26.056235863298799]
+                    },
+                    "properties": {
+                        "FID": 7,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 575.5,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 7
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 8,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.241253044054019, 26.055625354694691]
+                    },
+                    "properties": {
+                        "FID": 8,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1602,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 8
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 9,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240584870760735, 26.055773389299194]
+                    },
+                    "properties": {
+                        "FID": 9,
+                        "اسم__12": "نشاط ادار وتجاري",
+                        "مساحة": 1970,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 9
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 10,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.755919834179849, 26.187720862979507]
+                    },
+                    "properties": {
+                        "FID": 10,
+                        "اسم__12": "حديقة المساكن",
+                        "مساحة": 16304,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مدينة ترفيهية",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 10
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 11,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.241589558844254, 26.055344663667718]
+                    },
+                    "properties": {
+                        "FID": 11,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1768,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 11
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 12,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240077674394094, 26.056412907037934]
+                    },
+                    "properties": {
+                        "FID": 12,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 609.10000000000002,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 12
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 13,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.701707462650091, 26.158364321573114]
+                    },
+                    "properties": {
+                        "FID": 13,
+                        "اسم__12": "اقامة محطة وقود وخدمات",
+                        "مساحة": 7494,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "موقع مقترح شل اوت",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 13
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 14,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.248692376548014, 26.039147278774486]
+                    },
+                    "properties": {
+                        "FID": 14,
+                        "اسم__12": "مرسي نجع حمادي السياحي",
+                        "مساحة": 972,
+                        "عنوان": "محافظة قna - مركز نجع حمادي",
+                        "فرصة": "مرسي سياحي",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 16
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 15,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240051284540513, 26.044359930695183]
+                    },
+                    "properties": {
+                        "FID": 15,
+                        "اسم__12": "اقامة فندق سياحي - 2",
+                        "مساحة": 1200,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "فندق سياحي",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 17
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 16,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.716556662575982, 26.155648920263435]
+                    },
+                    "properties": {
+                        "FID": 16,
+                        "اسم__12": "النادي الاجتماعي ومسرح",
+                        "مساحة": 8099.8000000000002,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "فندق سياحي ملحق به مول تجار",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 18
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 17,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.699253645830531, 26.154757763687861]
+                    },
+                    "properties": {
+                        "FID": 17,
+                        "اسم__12": "فندق سياحي",
+                        "مساحة": 7012,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "فندق سياحي ملحق به مول تجار",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 19
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 18,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.724746812158855, 26.187117524411377]
+                    },
+                    "properties": {
+                        "FID": 18,
+                        "اسم__12": "معمل التفريغ الجديد",
+                        "مساحة": 5746.5299999999997,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "محطة تربية دواجن",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 20
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 19,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.722086906054933, 26.191161693416209]
+                    },
+                    "properties": {
+                        "FID": 19,
+                        "اسم__12": "محطة تسمين العجول",
+                        "مساحة": 14583,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "محطة تسمين عجول",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 21
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 20,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.664490015210852, 26.122165792847078]
+                    },
+                    "properties": {
+                        "FID": 20,
+                        "اسم__12": "المنطقة الحرافية بالترامسة",
+                        "مساحة": 84000,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "المنطقة الحرفية بالترامسة",
+                        "نوع": "صناعي",
+                        "ORIG_FID": 22
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 21,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.396492739729851, 25.99126143142502]
+                    },
+                    "properties": {
+                        "FID": 21,
+                        "اسم__12": "مزرعة 390 فدان شيخ علي",
+                        "مساحة": 1638000,
+                        "عنوان": "محافظة قنا - مركز نجع حمadi",
+                        "فرصة": "استصلاح زراعي 390 فدان",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 23
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 22,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.69199588791917, 26.160587497798275]
+                    },
+                    "properties": {
+                        "FID": 22,
+                        "اسم__12": "منتجع سياحي",
+                        "مساحة": 18000,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "منتجع سياحي",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 24
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 23,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.73954851310036, 26.205339910257212]
+                    },
+                    "properties": {
+                        "FID": 23,
+                        "اسم__12": "مشروع خدمات طرق",
+                        "مساحة": 723.5,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مشروع خدمات طرق",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 25
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 24,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.490044648070281, 25.978859909191726]
+                    },
+                    "properties": {
+                        "FID": 24,
+                        "اسم__12": "مشروعات انتاج داجني",
+                        "مساحة": 27723780,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "مشروعات انتاج داجني",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 15
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 25,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.296348956391398, 25.564408175428756]
+                    },
+                    "properties": {
+                        "FID": 25,
+                        "اسم__12": "مشروعات انتاج داجني",
+                        "مساحة": 35352240,
+                        "عنوان": "مصر - محافظة قنا",
+                        "فرصة": "مشروعات انتاج داجني",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 14
+                    }
+                }
+            ]
+        };
+    </script>
+
+    <script>
+        // وظائف Modal
         function showModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
         }
@@ -837,9 +1038,94 @@
             }
         }
         
-        // إزالة العرض التلقائي للأسئلة الشائعة عند تحميل الصفحة
+        // وظائف عرض الفرص الاستثمارية
+        function getImageForOpportunity(type, title) {
+            // إرجاع صورة مناسبة حسب نوع الفرصة
+            const imageMap = {
+                'خدمي': 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'سياحي': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'زراعي': 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'صناعي': 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            };
+            
+            return imageMap[type] || 'https://images.unsplash.com/photo-1563013541-5a2c0e2517e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+        }
+        
+        function formatArea(area) {
+            // تنسيق المساحة بشكل مناسب
+            if (area >= 1000000) {
+                return (area / 1000000).toLocaleString('ar-EG', { maximumFractionDigits: 2 }) + ' كم²';
+            } else {
+                return area.toLocaleString('ar-EG') + ' م²';
+            }
+        }
+        
+        function renderOpportunities(filter = 'all') {
+            const container = document.getElementById('opportunities-container');
+            container.innerHTML = '';
+            
+            opportunitiesData.features.forEach(opportunity => {
+                if (filter !== 'all' && opportunity.properties.نوع !== filter) return;
+                
+                const opportunityCard = document.createElement('div');
+                opportunityCard.className = 'opportunity-card fade-in';
+                
+                const imageUrl = getImageForOpportunity(opportunity.properties.نوع, opportunity.properties.اسم__12);
+                const areaFormatted = formatArea(opportunity.properties.مساحة);
+                
+                opportunityCard.innerHTML = `
+                    <div class="card-image">
+                        <img src="${imageUrl}" alt="${opportunity.properties.اسم__12}">
+                        <div class="card-badge">${opportunity.properties.نوع}</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>${opportunity.properties.اسم__12}</h3>
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>المساحة: ${areaFormatted}</span>
+                            </div>
+                        </div>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${opportunity.properties.عنوان}</span>
+                        </div>
+                        <p>${opportunity.properties.فرصة}</p>
+                        <div class="available-tag">
+                            <i class="fas fa-check-circle"></i>
+                            <span>هذه الفرصة متاحة</span>
+                        </div>
+                        <a href="#" class="view-opportunity">استعرض الفرصة</a>
+                    </div>
+                `;
+                
+                container.appendChild(opportunityCard);
+            });
+        }
+        
+        // تهيئة الفلاتر
+        function initFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // إزالة النشط من جميع الأزرار
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // إضافة النشط للزر المحدد
+                    button.classList.add('active');
+                    
+                    // تصفية الفرص
+                    renderOpportunities(button.dataset.filter);
+                });
+            });
+        }
+        
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOpportunities();
+            initFilters();
+        });
     </script>
 </body>
 </html>
-
-
