@@ -17,6 +17,7 @@
             --light-text: #777777;
             --white: #ffffff;
             --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --modal-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         * {
@@ -152,7 +153,7 @@
         .hero {
             background: linear-gradient(rgba(26, 43, 109, 0.8), rgba(26, 43, 109, 0.8)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3') no-repeat center center/cover;
             color: var(--white);
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
         }
         
@@ -171,8 +172,8 @@
             margin-bottom: 30px;
         }
         
-        /* قسم الفرص الاستثمارية */
-        .opportunities {
+        /* قسم المميزات */
+        .features {
             padding: 80px 0;
             background-color: var(--light-bg);
         }
@@ -192,6 +193,86 @@
             color: var(--light-text);
             max-width: 600px;
             margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+        
+        /* قسم كيفية العمل */
+        .how-it-works {
+            padding: 80px 0;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            right: -30%;
+            width: 60%;
+            height: 2px;
+            background-color: var(--accent-orange);
+        }
+        
+        /* قسم الفرص الاستثمارية */
+        .opportunities {
+            padding: 80px 0;
+            background-color: var(--light-bg);
         }
         
         /* أنماط البطاقات */
@@ -282,6 +363,27 @@
             margin-left: 8px;
         }
         
+        .coordinates {
+            background-color: rgba(26, 43, 109, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .coordinate-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .coordinate-item i {
+            color: var(--primary-blue);
+            margin-left: 5px;
+        }
+        
         .view-opportunity {
             display: inline-block;
             background: var(--accent-orange);
@@ -337,6 +439,25 @@
             color: var(--white);
         }
         
+        /* قسم التسجيل */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
         /* تأثير الظهور */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -345,6 +466,124 @@
         
         .fade-in {
             animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* أنماط النوافذ المنبثقة المعدلة */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--modal-shadow);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal-header {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 20px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-item h3 {
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info-modal {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .contact-info-modal p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(26, 43, 109, 0.3);
+        }
+        
+        .map-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 43, 109, 0.4);
+        }
+        
+        .map-btn i {
+            margin-left: 8px;
         }
         
         /* التذييل */
@@ -398,6 +637,14 @@
                 display: none;
             }
             
+            .steps {
+                flex-direction: column;
+            }
+            
+            .step:not(:last-child)::after {
+                display: none;
+            }
+            
             .top-bar-content {
                 flex-direction: column;
                 align-items: center;
@@ -411,6 +658,16 @@
             .filter-container {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+            
+            .coordinates {
+                flex-direction: column;
+                gap: 5px;
             }
         }
     </style>
@@ -445,13 +702,86 @@
     <!-- قسم الهيرو -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>جميع الفرص الاستثمارية في محافظة قنا</h1>
+            <h1>فرص استثمارية مميزة في محافظة قنا</h1>
             <p>اكتشف أفضل الفرص الاستثمارية المتاحة في أراضي محافظة قنا واستثمر في مستقبل مزدهر</p>
+            <button class="btn btn-primary" onclick="window.location.href='#opportunities'">استعرض الفرص الاستثمارية</button>
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>لماذا تختار الاستثمار في قنا؟</h2>
+                <p>محافظة واعدة بفرص استثمارية متنوعة مع إمكانيات كبيرة للنمو والازدهار</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>موقع استراتيجي</h3>
+                    <p>موقع مميز في صعيد مصر يربط بين شمال وجنوب البلاد، مع إمكانيات لوجستية كبيرة</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>فرص متنوعة</h3>
+                    <p>فرص استثمارية في مجالات متعددة تشمل الزراعة، السياحة، الصناعة، والخدمات</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>بيئة آمنة</h3>
+                    <p>بيئة استثمارية آمنة مع دعم حكومي كامل وتسهيلات للمستثمرين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم كيفية العمل -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>كيفية الاستثمار في محافظة قنا</h2>
+                <p>4 خطوات بسيطة تفصلك عن بدء رحلتك الاستثمارية</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>التواصل مع الوحدة</h3>
+                    <p>قم بزيارة مقرها للتعرف على الفرص المتاحة</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>اختر فرصتك</h3>
+                    <p>تصفح الفرص الاستثمارية المتاحة واختر ما يناسب أهدافك الاستثمارية</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>استثمر</h3>
+                    <p>استثمر في الفرصة التي تناسبك</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>ابدأ مشروعك</h3>
+                    <p>احصل على كافة التصاريح والتراخيص اللازمة وابدأ مشروعك الاستثماري</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- قسم الفرص الاستثمارية -->
-    <section class="opportunities">
+    <section id="opportunities" class="opportunities">
         <div class="container">
             <div class="section-title">
                 <h2>الفرص الاستثمارية المتاحة</h2>
@@ -473,18 +803,31 @@
         </div>
     </section>
 
+    <!-- قسم التسجيل -->
+    <section class="cta">
+        <div class="container">
+            <h2>ابدأ رحلتك الاستثمارية اليوم</h2>
+            <p>انضم إلى المستثمرين في محافظة قنا واستفد من الفرص الاستثمارية الحصرية</p>
+            <button class="btn btn-primary" onclick="showModal('contactModal')">تواصل معنا</button>
+        </div>
+    </section>
+
     <!-- Modal للأسئلة الشائعة -->
     <div id="faqModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('faqModal')">&times;</span>
-            <h2 class="modal-title">الأسئلة الشائعة</h2>
-            <div class="faq-item">
-                <h3>ما هي إجراءات الاستثمار في أراضي محافظة قنا؟</h3>
-                <p>يمكنك التوجه إلى وحدة نظم المعلومات الجغرافية بديوان عام المحافظة أو الاتصال بنا لمعرفة الإجراءات المطلوبة وخطوات الاستثمار.</p>
+            <div class="modal-header">
+                <h2>الأسئلة الشائعة</h2>
+                <button class="close-modal" onclick="closeModal('faqModal')">&times;</button>
             </div>
-            <div class="faq-item">
-                <h3>هل تتوفر دعم فني للمستثمرين؟</h3>
-                <p>نعم، توفر المحافظة دعمًا فنيًا كاملاً للمستثمرين من خلال مكاتب الاستثمار المتخصصة ووحدة نظم المعلومات الجغرافية.</p>
+            <div class="modal-body">
+                <div class="faq-item">
+                    <h3>ما هي إجراءات الاستثمار في أراضي محافظة قنا؟</h3>
+                    <p>يمكنك التوجه إلى وحدة نظم المعلومات الجغرافية بديوان عام المحافظة أو الاتصال بنا لمعرفة الإجراءات المطلوبة وخطوات الاستثمار.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>هل تتوفر دعم فني للمستثمرين؟</h3>
+                    <p>نعم، توفر المحافظة دعمًا فنيًا كاملاً للمستثمرين من خلال مكاتب الاستثمار المتخصصة ووحدة نظم المعلومات الجغرافية.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -492,28 +835,57 @@
     <!-- Modal عن محافظة قنا -->
     <div id="aboutModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
-            <h2 class="modal-title">عن محافظة قنا</h2>
-            <p>محافظة قنا من المحافظات المصرية الواعدة بالعديد من الفرص الاستثمارية في مختلف المجالات، وتتميز بموقعها الاستراتيجي وثرواتها الطبيعية.</p>
+            <div class="modal-header">
+                <h2>عن محافظة قنا</h2>
+                <button class="close-modal" onclick="closeModal('aboutModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>محافظة قنا من المحافظات الم Egyptianية الواعدة بالعديد من الفرص الاستثمارية في مختلف المجالات، وتتميز بموقعها الاستراتيجي وثرواتها الطبيعية.</p>
+                <p>تقع محافظة قنا في صعيد مصر وتمتد على ضفاف نهر النيل، وتضم العديد من المعالم الأثرية والسياحية الهامة. تشتهر المحافظة بالزراعة والصناعات المرتبطة بها، بالإضافة إلى وجود فرص استثمارية واعدة في مجالات السياحة والخدمات.</p>
+            </div>
         </div>
     </div>
 
     <!-- Modal كيفية الاستثمار -->
     <div id="investmentModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('investmentModal')">&times;</span>
-            <h2 class="modal-title">كيفية الاستثمار</h2>
-            <p>قريبًا...</p>
+            <div class="modal-header">
+                <h2>كيفية الاستثمار</h2>
+                <button class="close-modal" onclick="closeModal('investmentModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>للاستثمار في محافظة قنا، يرجى اتباع الخطوات التالية:</p>
+                <ol>
+                    <li>التواصل مع وحدة نظم المعلومات الجغرافية بمحافظة قنا</li>
+                    <li>اختيار الفرصة الاستثمارية المناسبة من القائمة المتاحة</li>
+                    <li>تعبئة نموذج طلب الاستثمار وتقديم الأوراق المطلوبة</li>
+                    <li>انتظار الموافقة على الطلب من الجهات المختصة</li>
+                    <li>بدء تنفيذ المشروع بعد الحصول على الموافقات اللازمة</li>
+                </ol>
+                <p>للمزيد من المعلومات، يمكنكم التواصل معنا عبر النموذج المتاح في قسم "تواصل معنا".</p>
+            </div>
         </div>
     </div>
 
     <!-- Modal اتصل بنا -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('contactModal')">&times;</span>
-            <h2 class="modal-title">تواصل معنا</h2>
-            <p>التوجه الي ديوان عام محافظة قنا</p>
-            <button class="btn-map" onclick="openGoogleMaps()">اذهب الان</button>
+            <div class="modal-header">
+                <h2>تواصل معنا</h2>
+                <button class="close-modal" onclick="closeModal('contactModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info-modal">
+                    <p>للتواصل مع وحدة نظم المعلومات الجغرافية بمحافظة قنا:</p>
+                    <p><i class="fas fa-map-marker-alt"></i> العنوان: ديوان عام محافظة قنا</p>
+                    <p><i class="fas fa-phone"></i> الهاتف: 096 521 1234</p>
+                    <p><i class="fas fa-envelope"></i> البريد الإلكتروني: gis@qena.gov.eg</p>
+                    
+                    <a href="https://goo.gl/maps/3yfZjZJzH2W5ZJzW9" target="_blank" class="map-btn">
+                        <i class="fas fa-map-marked-alt"></i> اذهب إلى الموقع على الخريطة
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -550,6 +922,8 @@
                     <h3>معلومات الاتصال</h3>
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> ديوان عام محافظة قنا</li>
+                        <li><i class="fas fa-phone"></i> 096 521 1234</li>
+                        <li><i class="fas fa-envelope"></i> gis@qena.gov.eg</li>
                     </ul>
                 </div>
             </div>
@@ -593,7 +967,7 @@
                         "FID": 1,
                         "اسم__12": "ارض فضاء بالترعة المضرانية",
                         "مساحة": 4134.5,
-                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "عنوان": "محافظة قنا - مركز نجع حمadi",
                         "فرصة": "مدارس خاصة",
                         "نوع": "خدمي",
                         "ORIG_FID": 1
@@ -814,7 +1188,7 @@
                         "FID": 14,
                         "اسم__12": "مرسي نجع حمادي السياحي",
                         "مساحة": 972,
-                        "عنوان": "محافظة قna - مركز نجع حمادي",
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
                         "فرصة": "مرسي سياحي",
                         "نوع": "سياحي",
                         "ORIG_FID": 16
@@ -933,7 +1307,7 @@
                         "FID": 21,
                         "اسم__12": "مزرعة 390 فدان شيخ علي",
                         "مساحة": 1638000,
-                        "عنوان": "محافظة قنا - مركز نجع حمadi",
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
                         "فرصة": "استصلاح زراعي 390 فدان",
                         "نوع": "زراعي",
                         "ORIG_FID": 23
@@ -1014,18 +1388,19 @@
     <script>
         // وظائف Modal
         function showModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
         }
         
         function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-        
-        // فتح خرائط جوجل بالإحداثيات المحددة
-        function openGoogleMaps() {
-            const latitude = 26.155440411524786;
-            const longitude = 32.71584789974247;
-            window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_blank');
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
         }
         
         // Close modal when clicking outside of it
@@ -1033,7 +1408,7 @@
             let modals = document.getElementsByClassName('modal');
             for (let i = 0; i < modals.length; i++) {
                 if (event.target == modals[i]) {
-                    modals[i].style.display = 'none';
+                    closeModal(modals[i].id);
                 }
             }
         }
@@ -1060,6 +1435,13 @@
             }
         }
         
+        function formatCoordinates(coords) {
+            return {
+                longitude: coords[0].toFixed(6),
+                latitude: coords[1].toFixed(6)
+            };
+        }
+        
         function renderOpportunities(filter = 'all') {
             const container = document.getElementById('opportunities-container');
             container.innerHTML = '';
@@ -1072,6 +1454,7 @@
                 
                 const imageUrl = getImageForOpportunity(opportunity.properties.نوع, opportunity.properties.اسم__12);
                 const areaFormatted = formatArea(opportunity.properties.مساحة);
+                const coords = formatCoordinates(opportunity.geometry.coordinates);
                 
                 opportunityCard.innerHTML = `
                     <div class="card-image">
@@ -1089,6 +1472,16 @@
                         <div class="location">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>${opportunity.properties.عنوان}</span>
+                        </div>
+                        <div class="coordinates">
+                            <div class="coordinate-item">
+                                <i class="fas fa-longitude-alt"></i>
+                                <span>خط الطول: ${coords.longitude}</span>
+                            </div>
+                            <div class="coordinate-item">
+                                <i class="fas fa-latitude"></i>
+                                <span>خط العرض: ${coords.latitude}</span>
+                            </div>
                         </div>
                         <p>${opportunity.properties.فرصة}</p>
                         <div class="available-tag">
