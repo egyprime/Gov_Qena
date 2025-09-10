@@ -61,21 +61,20 @@ function initTranslation() {
     });
     
     // التحقق من حالة الترجمة المحفوظة
-const translationState = localStorage.getItem('translationState');
-if (translationState === 'en') {
-    // تأخير الترجمة حتى يتم تحميل الصفحة بالكامل بالعربية أولاً
-    setTimeout(() => {
-        translatePage();
-        
-        const translateOptions = document.querySelectorAll('.translate-option');
-        translateOptions.forEach(option => {
-            option.classList.remove('active');
-            if (option.getAttribute('data-lang') === 'en') {
-                option.classList.add('active');
-            }
-        });
-    }, 1000); // زيادة الوقت لضمان تحميل الصفحة أولاً
-}
+    const translationState = localStorage.getItem('translationState');
+    if (translationState === 'en') {
+        setTimeout(() => {
+            translatePage();
+            
+            const translateOptions = document.querySelectorAll('.translate-option');
+            translateOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === 'en') {
+                    option.classList.add('active');
+                }
+            });
+        }, 500);
+    }
 }
 
 // إنشاء زر الترجمة
@@ -244,19 +243,7 @@ function simulateAdvancedTranslation() {
     // إضافة فئة للجسم للتحكم في التنسيق
     document.body.classList.add('english-version');
     document.documentElement.setAttribute('lang', 'en');
-    
-    // إضافة تأخير بسيط للتأكد من تطبيق التنسيقات
-    setTimeout(() => {
-        // التأكد من أن العناصر في المنتصف تبقى في المنتصف
-        document.querySelectorAll('.text-center, .center, .align-center').forEach(el => {
-            el.style.textAlign = 'center';
-            el.style.marginLeft = 'auto';
-            el.style.marginRight = 'auto';
-        });
-    }, 100);
 }
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
-
-
