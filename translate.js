@@ -218,7 +218,7 @@ function simulateAdvancedTranslation() {
         "مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية": "Projects of the Decent Life Initiative for developing villages and rural areas",
         "عرض التفاصيل": "View Details",
         "نظرة عن قنا": "Overview of Qena",
-        "استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
+        " استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
         "ابدأ الاستكشاف": "Start Exploration",
         "البوابة الجغرافية لمحافظة قنا": "Geographic Portal of Qena Governorate",
         "نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين": "Advanced geographic information system serving citizens and investors",
