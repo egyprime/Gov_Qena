@@ -60,22 +60,8 @@ function initTranslation() {
         }
     });
     
-    // التحقق من حالة الترجمة المحفوظة - تم تعديل هذا الجزء
-    const translationState = localStorage.getItem('translationState');
-    if (translationState === 'en') {
-        // تأخير الترجمة حتى يتم تحميل الصفحة بالكامل بالعربية أولاً
-        setTimeout(() => {
-            translatePage();
-            
-            const translateOptions = document.querySelectorAll('.translate-option');
-            translateOptions.forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-lang') === 'en') {
-                    option.classList.add('active');
-                }
-            });
-        }, 1000); // زيادة الوقت لضمان تحميل الصفحة أولاً
-    }
+    // التأكد من أن الصفحة تفتح بالعربية أولاً - تم إزالة الترجمة التلقائية
+    // لا نقوم بأي ترجمة تلقائية عند تحميل الصفحة
 }
 
 // إنشاء زر الترجمة
