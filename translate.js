@@ -1,5 +1,5 @@
-// translate.js - نظام الترجمة المركزي
-console.log("تم تحميل نظام الترجمة بنجاح");
+// translate.js - نظام الترجمة التلقائي
+console.log("تم تحميل نظام الترجمة التلقائي بنجاح");
 
 let isTranslated = false;
 let translatePanelVisible = false;
@@ -59,6 +59,18 @@ function initTranslation() {
             translatePanelVisible = false;
         }
     });
+    
+    // استعادة حالة الترجمة السابقة إذا كانت موجودة
+    const savedTranslationState = localStorage.getItem('translationState');
+    if (savedTranslationState === 'en') {
+        // تفعيل خيار الإنجليزية
+        const enOption = document.querySelector('.translate-option[data-lang="en"]');
+        if (enOption) {
+            document.querySelectorAll('.translate-option').forEach(opt => opt.classList.remove('active'));
+            enOption.classList.add('active');
+            translatePage();
+        }
+    }
 }
 
 // إنشاء زر الترجمة
@@ -117,7 +129,7 @@ function toggleTranslatePanel(e) {
     }
 }
 
-// ترجمة الصفحة
+// ترجمة الصفحة باستخدام API
 function translatePage() {
     const loader = document.getElementById('googleTranslateLoader');
     const loaderText = document.getElementById('loaderText');
@@ -127,16 +139,21 @@ function translatePage() {
         loader.style.display = 'flex';
     }
     
-    setTimeout(() => {
-        simulateAdvancedTranslation();
-        
-        if (loader) loader.style.display = 'none';
-        const translateBtn = document.getElementById('translateBtn');
-        if (translateBtn) translateBtn.classList.add('active');
-        isTranslated = true;
-        
-        localStorage.setItem('translationState', 'en');
-    }, 1500);
+    // استخدام API للترجمة
+    translateAllText()
+        .then(() => {
+            if (loader) loader.style.display = 'none';
+            const translateBtn = document.getElementById('translateBtn');
+            if (translateBtn) translateBtn.classList.add('active');
+            isTranslated = true;
+            
+            localStorage.setItem('translationState', 'en');
+        })
+        .catch(error => {
+            console.error("خطأ في الترجمة:", error);
+            if (loader) loader.style.display = 'none';
+            alert("عذرًا، حدث خطأ أثناء الترجمة. يرجى المحاولة مرة أخرى.");
+        });
 }
 
 // استعادة الترجمة الأصلية
@@ -155,78 +172,133 @@ function revertTranslation() {
     }, 1000);
 }
 
-// محاكاة الترجمة المتقدمة (غير حرفية)
-function simulateAdvancedTranslation() {
-    const elementsToTranslate = [
+// ترجمة جميع النصوص باستخدام API
+async function translateAllText() {
+    try {
+        // جمع جميع النصوص العربية في الصفحة
+        const textElements = getTextElements();
+        const textsToTranslate = extractArabicTexts(textElements);
+        
+        if (textsToTranslate.length === 0) {
+            console.log("لا توجد نصوص عربية للترجمة");
+            return;
+        }
+        
+        // ترجمة النصوص باستخدام API
+        const translatedTexts = await translateTexts(textsToTranslate);
+        
+        // استبدال النصوص المترجمة
+        applyTranslations(textElements, translatedTexts);
+        
+        // إضافة فئة للجسم للتحكم في التنسيق
+        document.body.classList.add('english-version');
+        document.documentElement.setAttribute('lang', 'en');
+        
+    } catch (error) {
+        console.error("خطأ في ترجمة النصوص:", error);
+        throw error;
+    }
+}
+
+// جمع عناصر النص من الصفحة
+function getTextElements() {
+    const selectors = [
         'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
         'p', 'span', 'a', 'li', 'td', 'th',
-        '.header-title', '.welcome-title', '.welcome-subtitle',
-        '.card-title', '.card-description', '.card-button',
-        '.footer-content h4', '.footer-content p', '.credit-title',
-        '.credit-info span', '.modal-title', '.modal-description',
-        '.overview-title', '.overview-card-title', '.overview-card-description'
+        'button', 'label', 'figcaption', 'blockquote',
+        '[class*="title"]', '[class*="name"]', '[class*="label"]',
+        '[class*="text"]', '[class*="desc"]', '[class*="content"]'
     ];
     
-    const translatedTexts = {
-        "محافظة قنا": "Qena Governorate",
-        "مرحباً بكم في البوابة الجغرافية": "Welcome to the Geographic Portal",
-        "نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين": "Integrated system for providing geographic information and electronic services to citizens and investors",
-        "خريطة الأساس لمحافظة قنا": "Base Map of Qena Governorate",
-        "الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات": "The base map of Qena Governorate includes administrative boundaries, centers, villages, and districts",
-        "عرض الخريطة": "View Map",
-        "الفرص الاستثمارية": "Investment Opportunities",
-        "استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية": "Explore available investment opportunities in Qena Governorate with filtering, advanced search, and interactive map details",
-        "استكشف الفرص": "Explore Opportunities",
-        "الخدمات والمرافق العامة": "Public Services and Facilities",
-        "استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.": "Browse locations of government entities and public facilities in Qena Governorate to facilitate access to essential services",
-        "عرض الخدمات": "View Services",
-        "السياحة والآثار": "Tourism and Antiquities",
-        "اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة": "Discover important tourist and archaeological landmarks in Qena Governorate with detailed information and visiting hours",
-        "جولة سياحية": "Tourist Tour",
-        "حياة كريمة": "Decent Life Initiative",
-        "مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية": "Projects of the Decent Life Initiative for developing villages and rural areas",
-        "عرض التفاصيل": "View Details",
-        "نظرة عن قنا": "Overview of Qena",
-        "استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
-        "ابدأ الاستكشاف": "Start Exploration",
-        "البوابة الجغرافية لمحافظة قنا": "Geographic Portal of Qena Governorate",
-        "نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين": "Advanced geographic information system serving citizens and investors",
-        "إعداد": "Prepared by",
-        "وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "GIS Unit at the General Office of Qena Governorate",
-        "المناطق الصناعية": "Industrial Areas",
-        "المناطق الحرفية": "Craft Areas",
-        "المناطق الزراعية": "Agricultural Areas",
-        "مراكز الاستثمار": "Investment Centers",
-        "المثلث الذهبي": "Golden Triangle",
-        "إغلاق": "Close",
-        "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
-    };
-    
-    elementsToTranslate.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(element => {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'BUTTON') {
-                return;
-            }
-            
-            const originalText = element.textContent.trim();
-            if (translatedTexts[originalText]) {
-                element.textContent = translatedTexts[originalText];
-            }
-            
-            if (element.title && translatedTexts[element.title]) {
-                element.title = translatedTexts[element.title];
-            }
-            
-            if (element.placeholder && translatedTexts[element.placeholder]) {
-                element.placeholder = translatedTexts[element.placeholder];
+    const elements = [];
+    selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            // استبعاد العناصر المخفية والعناصر التي تحتوي على مدخلات
+            if (el.offsetParent !== null && 
+                !el.querySelector('input, textarea, select') &&
+                el.textContent.trim().length > 0) {
+                elements.push(el);
             }
         });
     });
     
-    // إضافة فئة للجسم للتحكم في التنسيق - بدون تغيير الاتجاه
-    document.body.classList.add('english-version');
-    document.documentElement.setAttribute('lang', 'en');
+    return elements;
+}
+
+// استخراج النصوص العربية من العناصر
+function extractArabicTexts(elements) {
+    const arabicTexts = [];
+    const arabicRegex = /[\u0600-\u06FF]/;
+    
+    elements.forEach(el => {
+        const text = el.textContent.trim();
+        if (text && arabicRegex.test(text)) {
+            arabicTexts.push({
+                element: el,
+                text: text
+            });
+        }
+    });
+    
+    return arabicTexts;
+}
+
+// ترجمة النصوص باستخدام API
+async function translateTexts(texts) {
+    // استخدام API مجاني للترجمة (مثال: MyMemory API)
+    const apiUrl = 'https://api.mymemory.translated.net/get';
+    const translatedTexts = [];
+    
+    for (const item of texts) {
+        try {
+            const response = await fetch(`${apiUrl}?q=${encodeURIComponent(item.text)}&langpair=ar|en`);
+            const data = await response.json();
+            
+            if (data.responseStatus === 200) {
+                translatedTexts.push({
+                    element: item.element,
+                    translatedText: data.responseData.translatedText
+                });
+            } else {
+                translatedTexts.push({
+                    element: item.element,
+                    translatedText: item.text // الاحتفاظ بالنص الأصلي في حالة الفشل
+                });
+            }
+            
+            // تأخير بين الطلبات لتجنب تجاوز حد API
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+        } catch (error) {
+            console.error(`خطأ في ترجمة النص: ${item.text}`, error);
+            translatedTexts.push({
+                element: item.element,
+                translatedText: item.text // الاحتفاظ بالنص الأصلي في حالة الخطأ
+            });
+        }
+    }
+    
+    return translatedTexts;
+}
+
+// تطبيق الترجمات على العناصر
+function applyTranslations(textElements, translatedTexts) {
+    translatedTexts.forEach(item => {
+        if (item.element && item.translatedText) {
+            item.element.textContent = item.translatedText;
+            
+            // الحفاظ على السمات المهمة مثل title و placeholder
+            if (item.element.title) {
+                item.element.setAttribute('data-original-title', item.element.title);
+                item.element.removeAttribute('title');
+            }
+            
+            if (item.element.placeholder) {
+                item.element.setAttribute('data-original-placeholder', item.element.placeholder);
+                item.element.removeAttribute('placeholder');
+            }
+        }
+    });
 }
 
 // بدء الترجمة عند تحميل الصفحة
