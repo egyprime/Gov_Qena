@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="translate.css">
   <style>
     :root {
       --primary: #004d40;
@@ -586,146 +587,6 @@
       color: #0d47a1;
     }
     
-    /* زر الترجمة العائم */
-    .translate-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      cursor: pointer;
-      z-index: 999;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .translate-btn:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-    
-    .translate-btn.active {
-      background: linear-gradient(135deg, #e64a19 0%, #ff7043 100%);
-    }
-    
-    .translate-panel {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      width: 300px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      z-index: 998;
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    .translate-panel.show {
-      display: flex;
-      animation: fadeInUp 0.3s ease-out;
-    }
-    
-    .translate-option {
-      display: flex;
-      align-items: center;
-      padding: 12px 15px;
-      background: rgba(13, 71, 161, 0.1);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .translate-option:hover {
-      background: rgba(13, 71, 161, 0.2);
-      transform: translateX(-5px);
-    }
-    
-    .translate-option.active {
-      background: rgba(13, 71, 161, 0.3);
-      border-left: 4px solid #0d47a1;
-    }
-    
-    .translate-option i {
-      margin-left: 10px;
-      font-size: 1.2rem;
-      color: #0d47a1;
-    }
-    
-    .google-translate-loader {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 10000;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
-    }
-    
-    .google-translate-loader .spinner {
-      width: 60px;
-      height: 60px;
-      border: 5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #42a5f5;
-      animation: spin 1s ease-in-out infinite;
-      margin-bottom: 20px;
-    }
-    
-    .google-translate-loader p {
-      font-size: 1.2rem;
-      text-align: center;
-      max-width: 80%;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* إخفاء عناصر واجهة جوجل للترجمة */
-    .goog-te-banner-frame, .goog-te-menu-value, .goog-te-ftab-link, .goog-te-gadget .goog-te-combo {
-      display: none !important;
-    }
-    
-    .goog-te-gadget {
-      color: transparent !important;
-      font-size: 0 !important;
-    }
-    
-    .goog-text-highlight {
-      background: none !important;
-      box-shadow: none !important;
-    }
-    
-    body {
-      top: 0 !important;
-    }
-    
-    .translation-quality {
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      font-size: 0.9rem;
-      color: #666;
-      text-align: center;
-    }
-    
     @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
@@ -771,18 +632,6 @@
         width: 100%;
         max-width: 300px;
       }
-      .translate-btn {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-      }
-      .translate-panel {
-        bottom: 90px;
-        right: 20px;
-        width: 280px;
-      }
     }
     @media (max-width: 480px) {
       .welcome-title {
@@ -806,10 +655,6 @@
       .investment-btn {
         padding: 10px 15px;
         font-size: 0.9rem;
-      }
-      .translate-panel {
-        width: 250px;
-        right: 10px;
       }
     }
   </style>
@@ -913,32 +758,6 @@
   </div>
 </div>
 
-<!-- زر الترجمة العائم -->
-<div class="translate-btn" id="translateBtn" title="ترجمة الصفحة">
-  <i class="bi bi-translate"></i>
-</div>
-
-<!-- لوحة خيارات الترجمة -->
-<div class="translate-panel" id="translatePanel">
-  <div class="translate-option active" data-lang="ar">
-    <i class="bi bi-translate"></i>
-    <span>العربية (اللغة الأصلية)</span>
-  </div>
-  <div class="translate-option" data-lang="en">
-    <i class="bi bi-globe"></i>
-    <span>English (Translated)</span>
-  </div>
-  <div class="translation-quality">
-    <small>جودة الترجمة: متقدمة (غير حرفية)</small>
-  </div>
-</div>
-
-<!-- شاشة التحميل -->
-<div class="google-translate-loader" id="googleTranslateLoader">
-  <div class="spinner"></div>
-  <p id="loaderText">جاري تحميل نظام الترجمة المتقدم...</p>
-</div>
-
 <!-- قسم نظرة عن قنا -->
 <div class="overview-container" id="overview-container">
   <div class="overview-content">
@@ -962,7 +781,7 @@
         <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
           <i class="bi bi-buildings"></i>
         </div>
-        <h4 class="overview-card-title">المناطق Industriales</h4>
+        <h4 class="overview-card-title">المناطق الصناعية</h4>
         <p class="overview-card-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية</p>
       </div>
       
@@ -1299,208 +1118,7 @@
     const url = `https://www.google.com/maps?q=${lat},${lng}`;
     window.open(url, '_blank');
   }
-  
-  // كود الترجمة المحسن
-  let isTranslated = false;
-  let translatePanelVisible = false;
-  
-  // عناصر الترجمة
-  const translateBtn = document.getElementById('translateBtn');
-  const translatePanel = document.getElementById('translatePanel');
-  const loader = document.getElementById('googleTranslateLoader');
-  const loaderText = document.getElementById('loaderText');
-  
-  // تهيئة الترجمة عند تحميل الصفحة
-  document.addEventListener('DOMContentLoaded', function() {
-    // إضافة مستمعي الأحداث
-    translateBtn.addEventListener('click', toggleTranslatePanel);
-    
-    // إضافة مستمعي الأحداث لخيارات الترجمة
-    const translateOptions = document.querySelectorAll('.translate-option');
-    translateOptions.forEach(option => {
-      option.addEventListener('click', function() {
-        const lang = this.getAttribute('data-lang');
-        translateOptions.forEach(opt => opt.classList.remove('active'));
-        this.classList.add('active');
-        
-        if (lang === 'en' && !isTranslated) {
-          translatePage();
-        } else if (lang === 'ar' && isTranslated) {
-          revertTranslation();
-        }
-        
-        // إخفاء لوحة الخيارات بعد الاختيار
-        translatePanel.classList.remove('show');
-        translatePanelVisible = false;
-      });
-    });
-    
-    // إخفاء لوحة الترجمة عند النقر خارجها
-    document.addEventListener('click', function(e) {
-      if (translatePanelVisible && !translateBtn.contains(e.target) && !translatePanel.contains(e.target)) {
-        translatePanel.classList.remove('show');
-        translatePanelVisible = false;
-      }
-    });
-  });
-  
-  // تبديل عرض لوحة الترجمة
-  function toggleTranslatePanel(e) {
-    e.stopPropagation();
-    translatePanelVisible = !translatePanelVisible;
-    if (translatePanelVisible) {
-      translatePanel.classList.add('show');
-    } else {
-      translatePanel.classList.remove('show');
-    }
-  }
-  
-  // ترجمة الصفحة
-  function translatePage() {
-    loaderText.textContent = "جاري الترجمة باستخدام نظام متقدم...";
-    loader.style.display = 'flex';
-    
-    // استخدام setTimeout لمحاكاة الترجمة (في الواقع سيكون اتصالاً بخدمة الترجمة)
-    setTimeout(() => {
-      // هنا سيتم استدعاء خدمة الترجمة الفعلية
-      simulateAdvancedTranslation();
-      
-      loader.style.display = 'none';
-      translateBtn.classList.add('active');
-      isTranslated = true;
-      
-      // حفظ حالة الترجمة في localStorage
-      localStorage.setItem('translationState', 'en');
-    }, 1500);
-  }
-  
-  // استعادة الترجمة الأصلية
-  function revertTranslation() {
-    loaderText.textContent = "جاري استعادة اللغة الأصلية...";
-    loader.style.display = 'flex';
-    
-    setTimeout(() => {
-      // إعادة تحميل الصفحة للعودة للغة الأصلية
-      location.reload();
-      
-      // أو يمكن استخدام:
-      // restoreOriginalContent();
-      
-      loader.style.display = 'none';
-      translateBtn.classList.remove('active');
-      isTranslated = false;
-      
-      // حفظ حالة الترجمة في localStorage
-      localStorage.setItem('translationState', 'ar');
-    }, 1000);
-  }
-  
-  // محاكاة الترجمة المتقدمة (غير حرفية)
-  function simulateAdvancedTranslation() {
-    // عناصر النص الرئيسية للترجمة
-    const elementsToTranslate = [
-      '.header-title',
-      '.welcome-title',
-      '.welcome-subtitle',
-      '.card-title',
-      '.card-description',
-      '.card-button',
-      '.footer-content h4',
-      '.footer-content p',
-      '.credit-title',
-      '.credit-info span',
-      '.modal-title',
-      '.modal-description',
-      '.overview-title',
-      '.overview-card-title',
-      '.overview-card-description'
-    ];
-    
-    // نصوص عينة مترجمة (غير حرفية)
-    const translatedTexts = {
-      "محافظة قنا": "Qena Governorate",
-      "مرحباً بكم في البوابة الجغرافية": "Welcome to the Geographic Portal",
-      "نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين": "Integrated system for providing geographic information and electronic services to citizens and investors",
-      "خريطة الأساس لمحافظة قنا": "Base Map of Qena Governorate",
-      "الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات": "The base map of Qena Governorate includes administrative boundaries, centers, villages, and districts",
-      "عرض الخريطة": "View Map",
-      "الفرص الاستثمارية": "Investment Opportunities",
-      "استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية": "Explore available investment opportunities in Qena Governorate with filtering, advanced search, and interactive map details",
-      "استكشف الفرص": "Explore Opportunities",
-      "الخدمات والمرافق العامة": "Public Services and Facilities",
-      "استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.": "Browse locations of government entities and public facilities in Qena Governorate to facilitate access to essential services",
-      "عرض الخدمات": "View Services",
-      "السياحة والآثار": "Tourism and Antiquities",
-      "اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة": "Discover important tourist and archaeological landmarks in Qena Governorate with detailed information and visiting hours",
-      "جولة سياحية": "Tourist Tour",
-      "حياة كريمة": "Decent Life Initiative",
-      "مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية": "Projects of the Decent Life Initiative for developing villages and rural areas",
-      "عرض التفاصيل": "View Details",
-      "نظرة عن قنا": "Overview of Qena",
-      "استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
-      "ابدأ الاستكشاف": "Start Exploration",
-      "البوابة الجغرافية لمحافظة قنا": "Geographic Portal of Qena Governorate",
-      "نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين": "Advanced geographic information system serving citizens and investors",
-      "إعداد": "Prepared by",
-      "وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "GIS Unit at the General Office of Qena Governorate",
-      "المناطق الصناعية": "Industrial Areas",
-      "خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.": "Maps of industrial locations, complexes, and infrastructure highlighting available lands and investment opportunities.",
-      "إغلاق": "Close",
-      "مشروعات حياة كريمة": "Decent Life Projects",
-      "الواقع العمراني": "Urban Reality",
-      "عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.": "Display of land uses, densities, and urban space to assess growth and urban planning.",
-      "المناطق الحرفية": "Craft Areas",
-      "توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.": "Distribution of markets, craft workshops, and their logistical connections to support projects and handicraft industries.",
-      "المناطق الزراعية": "Agricultural Areas",
-      "خرائط الأراضي المزروعة، أنظمة الري والمحاصيل السائدة لدعم التخطيط والإدارة الزراعية.": "Maps of cultivated lands, irrigation systems, and prevailing crops to support agricultural planning and management.",
-      "مراكز الاستثمار": "Investment Centers",
-      "مواقع الأولوية الاستثمارية، الحوافز والمساحات المتاحة لجذب المشروعات وتنميتها.": "Locations of investment priority areas, incentives, and available spaces to attract and develop projects.",
-      "المثلث الذهبي": "Golden Triangle",
-      "فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات": "Investment opportunities in mining, industry, agriculture, and services",
-      "نظرة شاملة عن محافظة قنا": "Comprehensive Overview of Qena Governorate"
-    };
-    
-    // تطبيق الترجمة على جميع العناصر
-    elementsToTranslate.forEach(selector => {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(element => {
-        const originalText = element.textContent.trim();
-        if (translatedTexts[originalText]) {
-          element.textContent = translatedTexts[originalText];
-        }
-      });
-    });
-    
-    // تغيير اتجاه الصفحة إلى LTR عند الترجمة للإنجليزية
-    document.documentElement.setAttribute('dir', 'ltr');
-    document.documentElement.setAttribute('lang', 'en');
-  }
-  
-  // استعادة المحتوى الأصلي (في حالة عدم الرغبة في إعادة تحميل الصفحة)
-  function restoreOriginalContent() {
-    // إعادة تحميل الصفحة هي أسهل طريقة لاستعادة المحتوى الأصلي
-    location.reload();
-  }
-  
-  // التحقق من حالة الترجمة المحفوظة
-  window.addEventListener('load', function() {
-    const translationState = localStorage.getItem('translationState');
-    if (translationState === 'en') {
-      // إذا كانت الصفحة مترجمة مسبقاً، نطبق الترجمة
-      setTimeout(() => {
-        translatePage();
-        
-        // تفعيل خيار الإنجليزية في لوحة الترجمة
-        const translateOptions = document.querySelectorAll('.translate-option');
-        translateOptions.forEach(option => {
-          option.classList.remove('active');
-          if (option.getAttribute('data-lang') === 'en') {
-            option.classList.add('active');
-          }
-        });
-      }, 500);
-    }
-  });
-</script>
+
+  <script src="translate.js"></script>
 </body>
 </html>
