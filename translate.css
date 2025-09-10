@@ -1,4 +1,3 @@
-/* translate.css - أنماط الترجمة */
 .translate-btn {
     position: fixed;
     bottom: 30px;
@@ -117,6 +116,25 @@
     font-size: 0.9rem;
     color: #666;
     text-align: center;
+}
+
+/* إخفاء عناصر واجهة جوجل للترجمة */
+.goog-te-banner-frame, .goog-te-menu-value, .goog-te-ftab-link, .goog-te-gadget .goog-te-combo {
+    display: none !important;
+}
+
+.goog-te-gadget {
+    color: transparent !important;
+    font-size: 0 !important;
+}
+
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+body {
+    top: 0 !important;
 }
 
 @media (max-width: 768px) {
