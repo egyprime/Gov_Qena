@@ -4,7 +4,7 @@ console.log("تم تحميل نظام الترجمة بنجاح");
 let isTranslated = false;
 let translatePanelVisible = false;
 
-// كائن النصوص المترجمة - أضف نصوصك الجديدة هنا
+// كائن النصوص المترجمة - يجب أن يكون في النطاق العام
 const translatedTexts = {
     "محافظة قنا": "Qena Governorate",
     "مرحباً بكم في البوابة الجغرافية": "Welcome to the Geographic Portal",
@@ -37,40 +37,7 @@ const translatedTexts = {
     "مراكز الاستثمار": "Investment Centers",
     "المثلث الذهبي": "Golden Triangle",
     "إغلاق": "Close",
-    "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved",
-    " الرجوع للصفحة السابقة": " Back to the previous page",
-    " خريطة الأساس - محافظة قنا": " Base Map - Qena Governorate",
-    " تحكم في الخريطة": " Control the Map",
-    " طبقات الخريطة:": " Map Layers:",
-    " صور الأقمار الصناعية": " Satellite Images",
-    " الخريطة الطبوغرافية": " Topographic Map",
-    " هجين (شارع + قمر صناعي)": " Hybrid (Street + Satellite)",
-    " تحكم في طبقات البيانات": " Control Data Layers",
-    " حدود المحافظة": " Governorate Boundaries",
-    " حدود المراكز": " Markaz Boundaries",
-    " حدود القرى والشياخات": " Village and Shiakha Boundaries",
-    " التقسيم الإداري لمحافظة قنا": " Administrative Division of Qena Governorate",
-    " م": " No.",
-    " اسم الموقع": " Location Name",
-    " عدد المدن": " Number of Cities",
-    " عدد الوحدات المحلية": " Number of Local Units",
-    " عدد القرى التوابع": " Number of Subordinate Villages",
-    " عدد كفور ونجوع وعزب": " Number of Hamlets and Small Settlements",
-    " ابو تشت": " Abu Tesht",
-    " فرشوط": " Farshut",
-    " نجع حمادى": " Nag Hammadi",
-    " دشنا": " Deshna",
-    " الوقف": " Al Waqf",
-    " قنا": " Qena",
-    " فقط": " Faqous",
-    " قوص": " Qus",
-    " نقادة": " Naqada",
-    " إجمالى المحافظة": " Governorate Total",
-    " جميع الحقوق محفوظة © 2025": " All Rights Reserved © 2025",
-    " اعداد: وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": " Prepared by: GIS Unit, General Office of Qena Governorate",
-    " حدود محافظة قنا": " Qena Governorate Boundaries",
-    " مراكز محافظة قنا": " Markaz of Qena Governorate",
-    " قرية في قنا": " Village in Qena"
+    "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
 };
 
 // تهيئة الترجمة عند تحميل الصفحة
@@ -303,4 +270,3 @@ function addTranslation(arabicText, englishText) {
         statsElement.textContent = `عدد النصوص المترجمة: ${Object.keys(translatedTexts).length}`;
     }
 }
-
