@@ -659,6 +659,68 @@
     }
 
     <style>
+    <style>
+/* تنسيقات إضافية لضمان بقاء العناصر في أماكنها */
+.english-version .position-center,
+.english-version .middle,
+.english-version .centered,
+.english-version [class*="mid"],
+.english-version [class*="center"],
+.english-version .align-center,
+.english-version .text-middle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+}
+
+.english-version .flex-center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.english-version .container,
+.english-version .main-container,
+.english-version .page-wrapper {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* تنسيقات للعناصر الشائعة التي يجب أن تبقى في المنتصف */
+.english-version h1,
+.english-version h2,
+.english-version h3,
+.english-version .title,
+.english-version .heading,
+.english-version .section-title,
+.english-version .card-title,
+.english-version .btn-center {
+    text-align: center !important;
+}
+
+/* تنسيقات للعناصر التي يجب أن تبقى على اليمين */
+.english-version .text-right,
+.english-version .align-right,
+.english-version .pull-right {
+    text-align: right !important;
+}
+
+/* منع العناصر من التحرك عند الترجمة */
+.english-version * {
+    position: relative !important;
+    float: none !important;
+}
+
+/* تنسيقات للشعارات والصور في المنتصف */
+.english-version .logo,
+.english-version .center-image,
+.english-version img.center {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+    
 /* تنسيقات خاصة للنسخة الإنجليزية */
 .english-version {
     direction: ltr !important;
@@ -1254,4 +1316,5 @@
 <script src="./translate.js"></script>
 </body>
 </html>
+
 
