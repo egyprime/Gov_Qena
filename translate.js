@@ -83,19 +83,196 @@ function initTranslation() {
     isTranslated = savedState === 'en';
     
     // إنشاء عناصر واجهة الترجمة إذا لم تكن موجودة
-    if (!document.getElementById('translateBtn')) {
-        createTranslateButton();
-    }
-    
-    if (!document.getElementById('translatePanel')) {
-        createTranslatePanel();
-    }
-    
-    if (!document.getElementById('googleTranslateLoader')) {
-        createLoader();
-    }
+    createTranslateUI();
     
     // إضافة مستمعي الأحداث
+    setupEventListeners();
+    
+    // تطبيق الترجمة إذا كانت مفعلة مسبقاً
+    if (isTranslated) {
+        applyTranslation();
+        updateUIForTranslation();
+    }
+}
+
+// إنشاء واجهة الترجمة
+function createTranslateUI() {
+    // إنشاء زر الترجمة إذا لم يكن موجوداً
+    if (!document.getElementById('translateBtn')) {
+        const translateBtn = document.createElement('div');
+        translateBtn.id = 'translateBtn';
+        translateBtn.className = 'translate-btn';
+        translateBtn.title = 'ترجمة الصفحة';
+        translateBtn.innerHTML = '<i class="bi bi-translate"></i>';
+        document.body.appendChild(translateBtn);
+    }
+    
+    // إنشاء لوحة الترجمة إذا لم تكن موجودة
+    if (!document.getElementById('translatePanel')) {
+        const translatePanel = document.createElement('div');
+        translatePanel.id = 'translatePanel';
+        translatePanel.className = 'translate-panel';
+        translatePanel.innerHTML = `
+            <div class="translate-option ${isTranslated ? '' : 'active'}" data-lang="ar">
+                <i class="bi bi-translate"></i>
+                <span>العربية (اللغة الأصلية)</span>
+            </div>
+            <div class="translate-option ${isTranslated ? 'active' : ''}" data-lang="en">
+                <i class="bi bi-globe"></i>
+                <span>English (Translated)</span>
+            </div>
+            <div class="translation-quality">
+                <small>جودة الترجمة: متقدمة (غير حرفية)</small>
+            </div>
+        `;
+        document.body.appendChild(translatePanel);
+    }
+    
+    // إنشاء شاشة التحميل إذا لم تكن موجودة
+    if (!document.getElementById('googleTranslateLoader')) {
+        const loader = document.createElement('div');
+        loader.id = 'googleTranslateLoader';
+        loader.className = 'google-translate-loader';
+        loader.innerHTML = `
+            <div class="spinner"></div>
+            <p id="loaderText">جاري تحميل نظام الترجمة المتقدم...</p>
+        `;
+        document.body.appendChild(loader);
+    }
+    
+    // إضافة أنماط الترجمة إذا لم تكن موجودة
+    if (!document.querySelector('#translateStyles')) {
+        addTranslationStyles();
+    }
+}
+
+// إضافة أنماط الترجمة
+function addTranslationStyles() {
+    const styles = document.createElement('style');
+    styles.id = 'translateStyles';
+    styles.textContent = `
+        .translate-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1a3a8f 0%, #2a56b6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transition: all 0.3s ease;
+            font-size: 24px;
+        }
+        
+        .translate-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .translate-btn.active {
+            background: linear-gradient(135deg, #2a56b6 0%, #3a76e0 100%);
+        }
+        
+        .translate-panel {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            z-index: 9999;
+            width: 280px;
+            opacity: 0;
+            transform: translateY(10px);
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .translate-panel.show {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        .translate-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .translate-option:hover {
+            background: #f5f7fa;
+        }
+        
+        .translate-option.active {
+            background: #e8effb;
+            color: #2a56b6;
+            font-weight: bold;
+        }
+        
+        .translate-option i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .translation-quality {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .google-translate-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2a56b6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .english-version * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+    `;
+    document.head.appendChild(styles);
+}
+
+// إعداد مستمعي الأحداث
+function setupEventListeners() {
     const translateBtn = document.getElementById('translateBtn');
     if (translateBtn) {
         translateBtn.addEventListener('click', toggleTranslatePanel);
@@ -133,190 +310,19 @@ function initTranslation() {
             translatePanelVisible = false;
         }
     });
+}
+
+// تحديث واجهة المستخدم بعد الترجمة
+function updateUIForTranslation() {
+    const translateBtn = document.getElementById('translateBtn');
+    if (translateBtn) translateBtn.classList.add('active');
     
-    // تطبيق الترجمة إذا كانت مفعلة مسبقاً
-    if (isTranslated) {
-        applyTranslation();
-        const translateBtn = document.getElementById('translateBtn');
-        if (translateBtn) translateBtn.classList.add('active');
-        
-        const enOption = document.querySelector('.translate-option[data-lang="en"]');
-        const arOption = document.querySelector('.translate-option[data-lang="ar"]');
-        if (enOption && arOption) {
-            enOption.classList.add('active');
-            arOption.classList.remove('active');
-        }
+    const enOption = document.querySelector('.translate-option[data-lang="en"]');
+    const arOption = document.querySelector('.translate-option[data-lang="ar"]');
+    if (enOption && arOption) {
+        enOption.classList.add('active');
+        arOption.classList.remove('active');
     }
-}
-
-// إنشاء زر الترجمة
-function createTranslateButton() {
-    const translateBtn = document.createElement('div');
-    translateBtn.id = 'translateBtn';
-    translateBtn.className = 'translate-btn';
-    translateBtn.title = 'ترجمة الصفحة';
-    translateBtn.innerHTML = '<i class="bi bi-translate"></i>';
-    document.body.appendChild(translateBtn);
-    
-    // إضافة أنماط زر الترجمة
-    if (!document.querySelector('#translateStyles')) {
-        const styles = document.createElement('style');
-        styles.id = 'translateStyles';
-        styles.textContent = `
-            .translate-btn {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                background: linear-gradient(135deg, #1a3a8f 0%, #2a56b6 100%);
-                color: white;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                z-index: 10000;
-                transition: all 0.3s ease;
-                font-size: 24px;
-            }
-            
-            .translate-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            }
-            
-            .translate-btn.active {
-                background: linear-gradient(135deg, #2a56b6 0%, #3a76e0 100%);
-            }
-            
-            .translate-panel {
-                position: fixed;
-                bottom: 80px;
-                right: 20px;
-                background: white;
-                border-radius: 10px;
-                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-                padding: 15px;
-                z-index: 9999;
-                width: 280px;
-                opacity: 0;
-                transform: translateY(10px);
-                visibility: hidden;
-                transition: all 0.3s ease;
-            }
-            
-            .translate-panel.show {
-                opacity: 1;
-                transform: translateY(0);
-                visibility: visible;
-            }
-            
-            .translate-option {
-                display: flex;
-                align-items: center;
-                padding: 12px;
-                margin-bottom: 8px;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background 0.2s ease;
-            }
-            
-            .translate-option:hover {
-                background: #f5f7fa;
-            }
-            
-            .translate-option.active {
-                background: #e8effb;
-                color: #2a56b6;
-                font-weight: bold;
-            }
-            
-            .translate-option i {
-                margin-right: 10px;
-                font-size: 18px;
-            }
-            
-            .translation-quality {
-                margin-top: 10px;
-                padding-top: 10px;
-                border-top: 1px solid #eee;
-                color: #666;
-                font-size: 12px;
-                text-align: center;
-            }
-            
-            .google-translate-loader {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(255, 255, 255, 0.95);
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                z-index: 10001;
-            }
-            
-            .spinner {
-                width: 50px;
-                height: 50px;
-                border: 5px solid #f3f3f3;
-                border-top: 5px solid #2a56b6;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-                margin-bottom: 20px;
-            }
-            
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-            
-            .english-version * {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            }
-        `;
-        document.head.appendChild(styles);
-    }
-    
-    console.log("تم إنشاء زر الترجمة");
-}
-
-// إنشاء لوحة الترجمة
-function createTranslatePanel() {
-    const translatePanel = document.createElement('div');
-    translatePanel.id = 'translatePanel';
-    translatePanel.className = 'translate-panel';
-    translatePanel.innerHTML = `
-        <div class="translate-option ${isTranslated ? '' : 'active'}" data-lang="ar">
-            <i class="bi bi-translate"></i>
-            <span>العربية (اللغة الأصلية)</span>
-        </div>
-        <div class="translate-option ${isTranslated ? 'active' : ''}" data-lang="en">
-            <i class="bi bi-globe"></i>
-            <span>English (Translated)</span>
-        </div>
-        <div class="translation-quality">
-            <small>جودة الترجمة: متقدمة (غير حرفية)</small>
-        </div>
-    `;
-    document.body.appendChild(translatePanel);
-}
-
-// إنشاء شاشة التحميل
-function createLoader() {
-    const loader = document.createElement('div');
-    loader.id = 'googleTranslateLoader';
-    loader.className = 'google-translate-loader';
-    loader.innerHTML = `
-        <div class="spinner"></div>
-        <p id="loaderText">جاري تحميل نظام الترجمة المتقدم...</p>
-    `;
-    document.body.appendChild(loader);
 }
 
 // تبديل عرض لوحة الترجمة
@@ -345,10 +351,9 @@ function translatePage() {
         applyTranslation();
         
         if (loader) loader.style.display = 'none';
-        const translateBtn = document.getElementById('translateBtn');
-        if (translateBtn) translateBtn.classList.add('active');
         isTranslated = true;
         
+        updateUIForTranslation();
         localStorage.setItem('translationState', 'en');
     }, 1500);
 }
@@ -379,7 +384,8 @@ function applyTranslation() {
         '.footer-content h4', '.footer-content p', '.credit-title',
         '.credit-info span', '.modal-title', '.modal-description',
         '.overview-title', '.overview-card-title', '.overview-card-description',
-        'label', 'figcaption', 'strong', 'b', 'i', 'em'
+        'label', 'figcaption', 'strong', 'b', 'i', 'em',
+        'caption', 'dt', 'dd', 'blockquote', 'q'
     ];
     
     elementsToTranslate.forEach(selector => {
@@ -406,10 +412,21 @@ function applyTranslation() {
             if (element.tagName === 'INPUT' && element.type === 'button' && translatedTexts[element.value]) {
                 element.value = translatedTexts[element.value];
             }
+            
+            // ترجمة محتوى data-attributes
+            if (element.hasAttributes()) {
+                const attributes = element.attributes;
+                for (let i = 0; i < attributes.length; i++) {
+                    const attr = attributes[i];
+                    if (attr.name.startsWith('data-') && translatedTexts[attr.value]) {
+                        element.setAttribute(attr.name, translatedTexts[attr.value]);
+                    }
+                }
+            }
         });
     });
     
-    // إضافة فئة للجسم للتحكم في التنسيق - بدون تغيير الاتجاه
+    // إضافة فئة للجسم للتحكم في التنسيق
     document.body.classList.add('english-version');
     document.documentElement.setAttribute('lang', 'en');
 }
@@ -417,7 +434,8 @@ function applyTranslation() {
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
 
-// دالة مساعدة للتحقق من وجود النص في الصفحة قبل الترجمة
-function isTextInPage(text) {
-    return document.body.textContent.includes(text);
+// تطبيق الترجمة فور تحميل الصفحة إذا كانت مفعلة مسبقاً
+if (localStorage.getItem('translationState') === 'en') {
+    // نستخدم setTimeout لضمان تنفيذ الترجمة بعد اكتمال تحميل DOM
+    setTimeout(initTranslation, 100);
 }
