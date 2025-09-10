@@ -1,1122 +1,1135 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>البوابة الجغرافية - محافظة قنا</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <style>
-    :root {
-      --primary: #004d40;
-      --primary-light: #39796b;
-      --secondary: #ffab00;
-      --accent: #e64a19;
-      --light: #f8f9fa;
-      --dark: #263238;
-      --glass: rgba(255, 255, 255, 0.1);
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-      --gradient-6: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-      --blue-gradient: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);
-      --light-blue-gradient: linear-gradient(135deg, #4fc3f7 0%, #b3e5fc 100%);
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      background-attachment: fixed;
-      color: var(--dark);
-      overflow-x: hidden;
-      transition: filter 0.3s ease;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
-      animation: float 20s ease-in-out infinite;
-      z-index: -1;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
-    .header {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      animation: slideDown 0.8s ease-out;
-    }
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-    .logo:hover {
-      transform: scale(1.1) rotate(5deg);
-      border-color: rgba(255, 255, 255, 0.6);
-    }
-    .header-title {
-      color: white;
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      margin: 0;
-    }
-    .main-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2rem;
-      min-height: calc(100vh - 120px);
-    }
-    .welcome-section {
-      text-align: center;
-      margin-bottom: 3rem;
-      animation: fadeInUp 1s ease-out;
-    }
-    .welcome-title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-      margin-bottom: 1rem;
-    }
-    .welcome-subtitle {
-      font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.9);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .menu-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      animation: fadeInUp 0.8s ease-out;
-      text-decoration: none;
-      display: block;
-    }
-    .menu-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .menu-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-    .menu-card:hover::before {
-      opacity: 1;
-    }
-    .card-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 1.5rem;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-    .card-icon::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-    .menu-card:hover .card-icon::after {
-      transform: translateX(0);
-    }
-    .card-icon i {
-      transition: transform 0.3s ease;
-      z-index: 1;
-      position: relative;
-    }
-    .menu-card:hover .card-icon i {
-      transform: scale(1.2) rotate(5deg);
-    }
-    .card-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: white;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .card-description {
-      color: rgba(255, 255, 255, 0.8);
-      text-align: center;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-    .card-button {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      width: 100%;
-      text-align: center;
-    }
-    .menu-card:hover .card-button {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
-      border-color: rgba(255, 255, 255, 0.6);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      color: white;
-    }
-    .card-1 .card-icon { background: var(--gradient-1); }
-    .card-2 .card-icon { background: var(--gradient-2); }
-    .card-3 .card-icon { background: var(--gradient-3); }
-    .card-4 .card-icon { background: var(--gradient-4); }
-    .card-5 .card-icon { background: var(--gradient-5); }
-    .card-6 .card-icon { background: var(--gradient-6); }
-    .card-7 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%); }
-    .card-8 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
-    .card-9 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
-    .card-10 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
-    .card-11 .card-icon { background: linear-gradient(135deg, #006064 0%, #4db6ac 100%); }
-    .card-12 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #7986cb 100%); }
-    .card-13 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%); }
-    .card-14 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
-    .card-15 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
-    .card-16 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
-    .footer-section {
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 2rem 0;
-      margin-top: 4rem;
-      text-align: center;
-    }
-    .footer-content {
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .social-link {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .social-link:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-      color: white;
-    }
-    .developer-credit {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.9rem;
-    }
-    .credit-title {
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .credit-info {
-      color: rgba(255, 255, 255, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-    }
-    .credit-info span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    .pulse {
-      animation: pulse 3s infinite;
-    }
-    
-    .modal-content {
-      background: linear-gradient(to bottom, #0d47a1, #1976d2, #42a5f5);
-      border-radius: 15px;
-      overflow: hidden;
-      border: none;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-    .modal-header {
-      background: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 15px 20px;
-      color: white;
-      font-weight: bold;
-    }
-    .modal-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-    .modal-body {
-      padding: 20px;
-      color: white;
-    }
-    .modal-img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-    }
-    .modal-description {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      border-left: 4px solid #42a5f5;
-    }
-    .modal-footer {
-      background: rgba(0, 0, 0, 0.2);
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 15px;
-    }
-    .btn-close {
-      filter: invert(1);
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-    
-    .modal-content::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    .watermark {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.3);
-      font-style: italic;
-    }
-    
-    .overview-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      z-index: 1050;
-      overflow-y: auto;
-      padding: 2rem;
-    }
-    .overview-content {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 2rem auto;
-      position: relative;
-      animation: fadeInUp 0.5s ease-out;
-    }
-    .overview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .overview-title {
-      color: white;
-      font-size: 2.5rem;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    .close-overview {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .close-overview:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: rotate(90deg);
-    }
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .overview-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .overview-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-    .overview-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 15px;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: white;
-    }
-    .overview-card-title {
-      color: white;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-    .overview-card-description {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-    
-    .coming-soon-modal .modal-content {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    }
-    .coming-soon-icon {
-      font-size: 5rem;
-      text-align: center;
-      margin: 1rem 0;
-      color: rgba(255, 255, 255, 0.8);
-      animation: pulse 2s infinite;
-    }
-    .coming-soon-title {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: white;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-    .coming-soon-text {
-      text-align: center;
-      font-size: 1.1rem;
-      padding: 0 1rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-    .progress-container {
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      margin: 1.5rem 0;
-      height: 20px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, #43e97b, #38f9d7);
-      border-radius: 10px;
-      width: 65%;
-      animation: progressAnimation 3s infinite alternate;
-    }
-    @keyframes progressAnimation {
-      0% { width: 65%; }
-      100% { width: 80%; }
-    }
-    
-    .backdrop-blur {
-      filter: blur(0) !important;
-    }
-    
-    /* أنماط جديدة للأزرار المضافة */
-    .investment-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 25px;
-      flex-wrap: wrap;
-    }
-    
-    .investment-btn {
-      display: flex;
-      align-items: center;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      min-width: 220px;
-      text-align: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .investment-btn i {
-      margin-left: 8px;
-      font-size: 1.2rem;
-    }
-    
-    .investment-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    .btn-investment {
-      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-      color: #004d40;
-    }
-    
-    .btn-qena-center {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: #0d47a1;
-    }
-    
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0 1rem;
-      }
-      .header-title {
-        font-size: 1.4rem;
-      }
-      .main-container {
-        padding: 1rem;
-      }
-      .welcome-title {
-        font-size: 2rem;
-      }
-      .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .menu-card {
-        padding: 1.5rem;
-      }
-      .card-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
-      }
-      .credit-info {
-        flex-direction: column;
-        gap: 8px;
-      }
-      .overview-title {
-        font-size: 1.8rem;
-      }
-      .overview-grid {
-        grid-template-columns: 1fr;
-      }
-      .investment-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      .investment-btn {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
-    @media (max-width: 480px) {
-      .welcome-title {
-        font-size: 1.5rem;
-      }
-      .welcome-subtitle {
-        font-size: 1rem;
-      }
-      .menu-card {
-        padding: 1rem;
-      }
-      .card-title {
-        font-size: 1.2rem;
-      }
-      .overview-content {
-        padding: 1rem;
-      }
-      .coming-soon-title {
-        font-size: 1.5rem;
-      }
-      .investment-btn {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البوابة الجغرافية - محافظة قنا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #004d40;
+            --primary-light: #39796b;
+            --secondary: #ffab00;
+            --accent: #e64a19;
+            --light: #f8f9fa;
+            --dark: #263238;
+            --glass: rgba(255, 255, 255, 0.1);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-6: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --blue-gradient: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);
+            --light-blue-gradient: linear-gradient(135deg, #4fc3f7 0%, #b3e5fc 100%);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+            color: var(--dark);
+            overflow-x: hidden;
+            transition: filter 0.3s ease;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .header-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 120px);
+        }
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+            text-decoration: none;
+            display: block;
+        }
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .menu-card:hover .card-icon::after {
+            transform: translateX(0);
+        }
+        .card-icon i {
+            transition: transform 0.3s ease;
+            z-index: 1;
+            position: relative;
+        }
+        .menu-card:hover .card-icon i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .card-button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            text-align: center;
+        }
+        .menu-card:hover .card-button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        .card-1 .card-icon { background: var(--gradient-1); }
+        .card-2 .card-icon { background: var(--gradient-2); }
+        .card-3 .card-icon { background: var(--gradient-3); }
+        .card-4 .card-icon { background: var(--gradient-4); }
+        .card-5 .card-icon { background: var(--gradient-5); }
+        .card-6 .card-icon { background: var(--gradient-6); }
+        .card-7 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%); }
+        .card-8 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
+        .card-9 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
+        .card-10 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
+        .card-11 .card-icon { background: linear-gradient(135deg, #006064 0%, #4db6ac 100%); }
+        .card-12 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #7986cb 100%); }
+        .card-13 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%); }
+        .card-14 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
+        .card-15 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
+        .card-16 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
+        .footer-section {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+        .footer-content {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            color: white;
+        }
+        .developer-credit {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .credit-title {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .credit-info {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .credit-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+        
+        .modal-content {
+            background: linear-gradient(to bottom, #0d47a1, #1976d2, #42a5f5);
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .modal-header {
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 20px;
+            color: white;
+            font-weight: bold;
+        }
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .modal-body {
+            padding: 20px;
+            color: white;
+        }
+        .modal-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #42a5f5;
+        }
+        .modal-footer {
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-style: italic;
+        }
+        
+        .overview-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1050;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        .overview-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            position: relative;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        .overview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .overview-title {
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .close-overview {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .close-overview:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .overview-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .overview-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .overview-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        .overview-card-title {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .overview-card-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .coming-soon-modal .modal-content {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+        .coming-soon-icon {
+            font-size: 5rem;
+            text-align: center;
+            margin: 1rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            animation: pulse 2s infinite;
+        }
+        .coming-soon-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .coming-soon-text {
+            text-align: center;
+            font-size: 1.1rem;
+            padding: 0 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            height: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #43e97b, #38f9d7);
+            border-radius: 10px;
+            width: 65%;
+            animation: progressAnimation 3s infinite alternate;
+        }
+        @keyframes progressAnimation {
+            0% { width: 65%; }
+            100% { width: 80%; }
+        }
+        
+        .backdrop-blur {
+            filter: blur(0) !important;
+        }
+        
+        /* أنماط جديدة للأزرار المضافة */
+        .investment-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .investment-btn {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            min-width: 220px;
+            text-align: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .investment-btn i {
+            margin-left: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .investment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-investment {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #004d40;
+        }
+        
+        .btn-qena-center {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #0d47a1;
+        }
+        
+        /* CSS for Google Translate floating button */
+        .google-translate-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px; /* Change to 'right' to move to the right side */
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .google-translate-button:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+            .header-title {
+                font-size: 1.4rem;
+            }
+            .main-container {
+                padding: 1rem;
+            }
+            .welcome-title {
+                font-size: 2rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .menu-card {
+                padding: 1.5rem;
+            }
+            .card-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            .credit-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .overview-title {
+                font-size: 1.8rem;
+            }
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+            .investment-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .investment-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+            .menu-card {
+                padding: 1rem;
+            }
+            .card-title {
+                font-size: 1.2rem;
+            }
+            .overview-content {
+                padding: 1rem;
+            }
+            .coming-soon-title {
+                font-size: 1.5rem;
+            }
+            .investment-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            .google-translate-button {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                left: 15px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<header class="header">
-  <div class="header-content">
-    <div class="logo-section">
-      <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" alt="شعار المحافظة" class="logo"
-           onerror="this.src='https://via.placeholder.com/60x60?text=Gov'">
-      <h1 class="header-title">محافظة قنا</h1>
-    </div>
-    <div class="logo-section">
-      <img src="https://i.ibb.co/SwgDZRWv/Logo-of-Gis-2.jpg" alt="شعار النظام" class="logo"
-           onerror="this.src='https://via.placeholder.com/60x60?text=GIS'">
-           <span style="color: white; font-weight: 700; font-size: 1.2rem; user-select: none;">GIS Unit</span>
-    </div>
-  </div>
-</header>
-<div class="main-container">
-  <div class="welcome-section">
-    <h1 class="welcome-title">مرحباً بكم في البوابة الجغرافية</h1>
-    <p class="welcome-subtitle">نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين</p>
-  </div>
-  <div class="menu-grid">
-    <a href="basemap.html" class="menu-card card-14" onclick="trackClick('خريطة الأساس لمحافظة قنا')">
-      <div class="card-icon">
-        <i class="bi bi-map"></i>
-      </div>
-      <h3 class="card-title">خريطة الأساس لمحافظة قنا</h3>
-      <p class="card-description">
-        الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> عرض الخريطة
-      </span>
-    </a>
-    <a href="foras.html" class="menu-card card-1" onclick="trackClick('الفرص الاستثمارية')">
-      <div class="card-icon pulse">
-        <i class="bi bi-graph-up-arrow"></i>
-      </div>
-      <h3 class="card-title">الفرص الاستثمارية</h3>
-      <p class="card-description">
-        استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> استكشف الفرص
-      </span>
-    </a>
-    <a href="government-services.html" class="menu-card card-2" onclick="trackClick('الخدمات والمرافق العامة')">
-      <div class="card-icon">
-        <i class="bi bi-shield-check"></i>
-      </div>
-      <h3 class="card-title">الخدمات والمرافق العامة</h3>
-      <p class="card-description">
-        استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> عرض الخدمات
-      </span>
-    <a href="tourism.html" class="menu-card card" onclick="trackClick('السياحة والآثار')">
-      <div class="card-icon">
-        <img src="https://i.ibb.co/W4xL5jXh/Chat-GPT-Image-5-2025-02-49-41.png" alt="السياحة والآثار" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
-      </div>
-      <h3 class="card-title">السياحة والآثار</h3>
-      <p class="card-description">
-        اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> جولة سياحية
-      </span>
-    </a>
-    
-    <a href="#" class="menu-card card" data-bs-toggle="modal" data-bs-target="#modal3">
-      <div class="card-icon">
-        <img src="https://i.ibb.co/Mks1MnCw/images.png" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
-      </div>
-      <h3 class="card-title">حياة كريمة</h3>
-      <p class="card-description">
-        مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية
-      </p>
-      <span class="card-button">
-        <i class="bi bi-image"></i> عرض التفاصيل
-      </span>
-    </a>
-    
-    <div class="menu-card card-3" id="overview-card">
-      <div class="card-icon">
-        <i class="bi bi-binoculars"></i>
-      </div>
-      <h3 class="card-title">نظرة عن قنا</h3>
-      <p class="card-description">
-        استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات
-      </p>
-      <span class="card-button">
-        <i class="bi bi-arrow-left"></i> ابدأ الاستكشاف
-      </span>
-    </div>
-    
-    <!-- تم حذف قسم وحدة نظم المعلومات الجغرافية -->
-  </div>
-</div>
-
-<!-- قسم نظرة عن قنا -->
-<div class="overview-container" id="overview-container">
-  <div class="overview-content">
-    <div class="overview-header">
-      <h2 class="overview-title">نظرة شاملة عن محافظة قنا</h2>
-      <button class="close-overview" id="close-overview">
-        <i class="bi bi-x-lg"></i>
-      </button>
-    </div>
-    
-    <div class="overview-grid">
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal9">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
-          <i class="bi bi-stars"></i>
-        </div>
-        <h4 class="overview-card-title">المثلث الذهبي</h4>
-        <p class="overview-card-description">فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal1">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
-          <i class="bi bi-buildings"></i>
-        </div>
-        <h4 class="overview-card-title">المناطق الصناعية</h4>
-        <p class="overview-card-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal4">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%);">
-          <i class="bi bi-building"></i>
-        </div>
-        <h4 class="overview-card-title">الواقع العمراني</h4>
-        <p class="overview-card-description">عرض استخدامات الأرض والتخطيط الحضري</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal5">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #006064 0%, #4db6ac 100%);">
-          <i class="bi bi-hammer"></i>
-        </div>
-        <h4 class="overview-card-title">المناطق الحرفية</h4>
-        <p class="overview-card-description">توزيع الأسواق والورش الحرفية</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal7">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
-          <i class="bi bi-tree"></i>
-        </div>
-        <h4 class="overview-card-title">المناطق الزراعية</h4>
-        <p class="overview-card-description">خرائط الأراضي المزروعة وأنظمة الري</p>
-      </div>
-      
-      <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal8">
-        <div class="overview-icon" style="background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%);">
-          <i class="bi bi-cash-coin"></i>
-        </div>
-        <h4 class="overview-card-title">مراكز الاستثمار</h4>
-        <p class="overview-card-description">مواقع الأولوية الاستثمارية والحوافز</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- النوافذ المنبثقة للخانات الثمانية -->
-<div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">المناطق الصناعية</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/FbTyH94v/image.jpg" alt="المناطق الصناعية" class="modal-img">
-        <p class="modal-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
-    </div>
-  </div>
-</div>
-
-<!-- نافذة حياة كريمة المعدلة -->
-<div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">مشروعات حياة كريمة</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/mFNzR165/image.jpg" alt="مشروعات حياة كريمة" class="modal-img rounded-3 mb-4">
-        
-        <!-- تصميم جديد للروابط -->
-        <div class="d-flex flex-column align-items-center gap-3">
-          <!-- روابط الخدمات -->
-          <div class="d-flex justify-content-center gap-3 flex-wrap w-100">
-            <!-- رابط الموقع الرسمي الجديد -->
-            <a href="https://www.hayakarima.com/" 
-               target="_blank" 
-               class="btn btn-primary btn-lg flex-grow-1" 
-               style="min-width: 250px;">
-              <i class="bi bi-globe me-2"></i> موقع حياة كريمة
-            </a>
-            
-            <!-- رابط الفيسبوك مع QR Code -->
-            <button id="showQR" class="btn btn-info btn-lg flex-grow-1" 
-                    style="min-width: 250px;">
-              <i class="bi bi-facebook me-2"></i> صفحة الفيسبوك
-            </button>
-            
-            <!-- رابط موقع المحافظة -->
-            <a href="http://qena.gov.eg/haiatkreamaa/default.aspx" 
-               target="_blank" 
-               class="btn btn-success btn-lg flex-grow-1" 
-               style="min-width: 250px;">
-              <i class="bi bi-building me-2"></i> موقع المحافظة صفحة حياة كريمة
-            </a>
-          </div>
-          
-          <!-- QR Code بتصميم جميل -->
-          <div id="qrContainer" class="bg-light p-4 rounded-3 text-center shadow-sm" 
-               style="display:none; max-width: 100%;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="mb-0 text-dark fw-bold">كود QR للصفحة</h6>
-              <button class="btn btn-sm btn-outline-danger" id="closeQR">
-                <i class="bi bi-x-lg"></i> إغلاق
-              </button>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" alt="شعار المحافظة" class="logo"
+                    onerror="this.src='https://via.placeholder.com/60x60?text=Gov'">
+                <h1 class="header-title">محافظة قنا</h1>
             </div>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fb.com/profile.php?id=100063948729691" 
-                 alt="QR Code للصفحة" 
-                 class="img-thumbnail border-primary" 
-                 style="width: 200px; height: 200px;">
-            <p class="mt-3 mb-0 text-muted">
-              <i class="bi bi-info-circle me-2"></i>
-              استخدم كاميرا هاتفك لمسح الكود للوصول مباشرة للصفحة
-            </p>
-          </div>
+            <div class="logo-section">
+                <img src="https://i.ibb.co/SwgDZRWv/Logo-of-Gis-2.jpg" alt="شعار النظام" class="logo"
+                    onerror="this.src='https://via.placeholder.com/60x60?text=GIS'">
+                <span style="color: white; font-weight: 700; font-size: 1.2rem; user-select: none;">GIS Unit</span>
+            </div>
         </div>
-        
-        <!-- معلومات إضافية -->
-        <div class="mt-4 p-3 bg-light rounded-3">
-          <h6 class="fw-bold text-dark mb-3">طرق متابعة مشروعات حياة كريمة:</h6>
-          <ul class="list-unstyled">
-            <li class="mb-2 text-dark">
-              <i class="bi bi-check-circle-fill text-success me-2"></i>
-              <strong>موقع حياة كريمة</strong>: لمتابعة كافة المشروعات والتطورات
-            </li>
-            <li class="mb-2 text-dark">
-              <i class="bi bi-check-circle-fill text-success me-2"></i>
-              <strong>صفحة الفيسبوك</strong>: لمتابعة آخر الأخبار والأنشطة
-            </li>
-            <li class="text-dark">
-              <i class="bi bi-check-circle-fill text-success me-2"></i>
-              <strong>موقع المحافظة صفحة حياة كريمة</strong>: لمتابعة التنفيذ المحلي للمشروعات
-            </li>
-          </ul>
+    </header>
+    <div class="main-container">
+        <div class="welcome-section">
+            <h1 class="welcome-title">مرحباً بكم في البوابة الجغرافية</h1>
+            <p class="welcome-subtitle">نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين</p>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          <i class="bi bi-x-circle me-2"></i> إغلاق النافذة
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">الواقع العمراني</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/21rgnvmb/image.jpg" alt="الواقع العمراني" class="modal-img">
-        <p class="modal-description">عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">المناطق الحرفية</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/PZKfCHrH/image.jpg" alt="المناطق الحرفية" class="modal-img">
-        <p class="modal-description">توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">المناطق الزراعية</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/0yGb0Jtk/image.jpg" alt="المناطق الزراعية" class="modal-img">
-        <p class="modal-description">خرائط الأراضي المزروعة، أنظمة الري والمحاصيل السائدة لدعم التخطيط والإدارة الزراعية.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
-    </div>
-  </div>
-</div>
-
-<!-- نافذة مراكز الاستثمار المعدلة -->
-<div class="modal fade" id="modal8" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">مراكز الاستثمار</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/YF5bmcC1/image.jpg" alt="مراكز الاستثمار" class="modal-img">
-        <p class="modal-description">مواقع الأولوية الاستثمارية، الحوافز والمساحات المتاحة لجذب المشروعات وتنميتها.</p>
-        
-        <!-- الأزرار المضافة -->
-        <div class="investment-buttons">
-          <!-- زر الهيئة العامة للاستثمار -->
-          <a href="https://www.investinegypt.gov.eg/Arabic/pages/wecanhelp.aspx#51" 
-             target="_blank" 
-             class="investment-btn btn-investment">
-            <i class="bi bi-building"></i> موقع الهيئة العامة للاستثمار
-          </a>
-          
-          <!-- زر مركز خدمات المستثمرين فرع قنا -->
-          <a href="#" 
-             class="investment-btn btn-qena-center"
-             onclick="openMap(26.171629, 32.689235)">
-            <i class="bi bi-geo-alt"></i> الذهاب الي مركز خدمات المستثمرين فرع قنا
-          </a>
+        <div class="menu-grid">
+            <a href="basemap.html" class="menu-card card-14" onclick="trackClick('خريطة الأساس لمحافظة قنا')">
+                <div class="card-icon">
+                    <i class="bi bi-map"></i>
+                </div>
+                <h3 class="card-title">خريطة الأساس لمحافظة قنا</h3>
+                <p class="card-description">
+                    الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات
+                </p>
+                <span class="card-button">
+                    <i class="bi bi-arrow-left"></i> عرض الخريطة
+                </span>
+            </a>
+            <a href="foras.html" class="menu-card card-1" onclick="trackClick('الفرص الاستثمارية')">
+                <div class="card-icon pulse">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+                <h3 class="card-title">الفرص الاستثمارية</h3>
+                <p class="card-description">
+                    استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية
+                </p>
+                <span class="card-button">
+                    <i class="bi bi-arrow-left"></i> استكشف الفرص
+                </span>
+            </a>
+            <a href="government-services.html" class="menu-card card-2" onclick="trackClick('الخدمات والمرافق العامة')">
+                <div class="card-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h3 class="card-title">الخدمات والمرافق العامة</h3>
+                <p class="card-description">
+                    استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.
+                </p>
+                <span class="card-button">
+                    <i class="bi bi-arrow-left"></i> عرض الخدمات
+                </span>
+            <a href="tourism.html" class="menu-card card" onclick="trackClick('السياحة والآثار')">
+                <div class="card-icon">
+                    <img src="https://i.ibb.co/W4xL5jXh/Chat-GPT-Image-5-2025-02-49-41.png" alt="السياحة والآثار" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
+                </div>
+                <h3 class="card-title">السياحة والآثار</h3>
+                <p class="card-description">
+                    اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة
+                </p>
+                <span class="card-button">
+                    <i class="bi bi-arrow-left"></i> جولة سياحية
+                </span>
+            </a>
+            
+            <a href="#" class="menu-card card" data-bs-toggle="modal" data-bs-target="#modal3">
+                <div class="card-icon">
+                    <img src="https://i.ibb.co/Mks1MnCw/images.png" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
+                </div>
+                <h3 class="card-title">حياة كريمة</h3>
+                <p class="card-description">
+                    مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية
+                </p>
+                <span class="card-button">
+                    <i class="bi bi-image"></i> عرض التفاصيل
+                </span>
+            </a>
+            
+            <div class="menu-card card-3" id="overview-card">
+                <div class="card-icon">
+                    <i class="bi bi-binoculars"></i>
+                </div>
+                <h3 class="card-title">نظرة عن قنا</h3>
+                <p class="card-description">
+                    استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات
+                </p>
+                <span class="card-button">
+                    <i class="bi bi-arrow-left"></i> ابدأ الاستكشاف
+                </span>
+            </div>
+            
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
     </div>
-  </div>
-</div>
 
-<!-- نافذة جديدة للمثلث الذهبي -->
-<div class="modal fade" id="modal9" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">المثلث الذهبي</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="https://i.ibb.co/NgV11HhX/image.jpg" alt="المثلث الذهبي" class="modal-img">
-        <p class="modal-description">فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات</p>
-        
-        <!-- معلومات إضافية -->
-        <div class="mt-4 p-3 bg-light rounded-3">
-          <h6 class="fw-bold text-dark mb-3">مجالات الاستثمار في المثلث الذهبي:</h6>
-          <ul class="list-unstyled">
-            <li class="mb-2 text-dark">
-              <i class="bi bi-geo-alt-fill text-primary me-2"></i>
-              <strong>التعدين</strong>: استخراج وتصنيع المعادن والثروات الطبيعية
-            </li>
-            <li class="mb-2 text-dark">
-              <i class="bi bi-gear-fill text-success me-2"></i>
-              <strong>الصناعة</strong>: مصانع ومنشآت صناعية متطورة
-            </li>
-            <li class="mb-2 text-dark">
-              <i class="bi bi-tree-fill text-warning me-2"></i>
-              <strong>الزراعة</strong>: مشاريع زراعية متطورة واستصلاح الأراضي
-            </li>
-            <li class="text-dark">
-              <i class="bi bi-briefcase-fill text-info me-2"></i>
-              <strong>الخدمات</strong>: خدمات لوجستية وتجارية متكاملة
-            </li>
-          </ul>
+    <div class="overview-container" id="overview-container">
+        <div class="overview-content">
+            <div class="overview-header">
+                <h2 class="overview-title">نظرة شاملة عن محافظة قنا</h2>
+                <button class="close-overview" id="close-overview">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            
+            <div class="overview-grid">
+                <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal9">
+                    <div class="overview-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+                        <i class="bi bi-stars"></i>
+                    </div>
+                    <h4 class="overview-card-title">المثلث الذهبي</h4>
+                    <p class="overview-card-description">فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات</p>
+                </div>
+                
+                <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal1">
+                    <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+                    <h4 class="overview-card-title">المناطق الصناعية</h4>
+                    <p class="overview-card-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية</p>
+                </div>
+                
+                <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal4">
+                    <div class="overview-icon" style="background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%);">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h4 class="overview-card-title">الواقع العمراني</h4>
+                    <p class="overview-card-description">عرض استخدامات الأرض والتخطيط الحضري</p>
+                </div>
+                
+                <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal5">
+                    <div class="overview-icon" style="background: linear-gradient(135deg, #006064 0%, #4db6ac 100%);">
+                        <i class="bi bi-hammer"></i>
+                    </div>
+                    <h4 class="overview-card-title">المناطق الحرفية</h4>
+                    <p class="overview-card-description">توزيع الأسواق والورش الحرفية</p>
+                </div>
+                
+                <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal7">
+                    <div class="overview-icon" style="background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);">
+                        <i class="bi bi-tree"></i>
+                    </div>
+                    <h4 class="overview-card-title">المناطق الزراعية</h4>
+                    <p class="overview-card-description">خرائط الأراضي المزروعة وأنظمة الري</p>
+                </div>
+                
+                <div class="overview-card" data-bs-toggle="modal" data-bs-target="#modal8">
+                    <div class="overview-icon" style="background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%);">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+                    <h4 class="overview-card-title">مراكز الاستثمار</h4>
+                    <p class="overview-card-description">مواقع الأولوية الاستثمارية والحوافز</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-      </div>
-      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
     </div>
-  </div>
-</div>
 
-<footer class="footer-section">
-  <div class="footer-content">
-    <h4>البوابة الجغرافية لمحافظة قنا</h4>
-    <p>نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين</p>
-    <div class="social-links">
-      <a href="http://qena.gov.eg/Default.aspx" class="social-link" title="موقع المحافظة صفحة حياة كريمة" target="_blank" rel="noopener">
+    <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">المناطق الصناعية</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/FbTyH94v/image.jpg" alt="المناطق الصناعية" class="modal-img">
+                    <p class="modal-description">خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+                <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">مشروعات حياة كريمة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/mFNzR165/image.jpg" alt="مشروعات حياة كريمة" class="modal-img rounded-3 mb-4">
+                    
+                    <div class="d-flex flex-column align-items-center gap-3">
+                        <div class="d-flex justify-content-center gap-3 flex-wrap w-100">
+                            <a href="https://www.hayakarima.com/" 
+                                target="_blank" 
+                                class="btn btn-primary btn-lg flex-grow-1" 
+                                style="min-width: 250px;">
+                                <i class="bi bi-globe me-2"></i> موقع حياة كريمة
+                            </a>
+                            
+                            <button id="showQR" class="btn btn-info btn-lg flex-grow-1" 
+                                    style="min-width: 250px;">
+                                <i class="bi bi-facebook me-2"></i> صفحة الفيسبوك
+                            </button>
+                            
+                            <a href="http://qena.gov.eg/haiatkreamaa/default.aspx" 
+                                target="_blank" 
+                                class="btn btn-success btn-lg flex-grow-1" 
+                                style="min-width: 250px;">
+                                <i class="bi bi-building me-2"></i> موقع المحافظة صفحة حياة كريمة
+                            </a>
+                        </div>
+                        
+                        <div id="qrContainer" class="bg-light p-4 rounded-3 text-center shadow-sm" 
+                            style="display:none; max-width: 100%;">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="mb-0 text-dark fw-bold">كود QR للصفحة</h6>
+                                <button class="btn btn-sm btn-outline-danger" id="closeQR">
+                                    <i class="bi bi-x-lg"></i> إغلاق
+                                </button>
+                            </div>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fb.com/profile.php?id=100063948729691" 
+                                    alt="QR Code للصفحة" 
+                                    class="img-thumbnail border-primary" 
+                                    style="width: 200px; height: 200px;">
+                            <p class="mt-3 mb-0 text-muted">
+                                <i class="bi bi-info-circle me-2"></i>
+                                استخدم كاميرا هاتفك لمسح الكود للوصول مباشرة للصفحة
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-light rounded-3">
+                        <h6 class="fw-bold text-dark mb-3">طرق متابعة مشروعات حياة كريمة:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 text-dark">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>موقع حياة كريمة</strong>: لمتابعة كافة المشروعات والتطورات
+                            </li>
+                            <li class="mb-2 text-dark">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>صفحة الفيسبوك</strong>: لمتابعة آخر الأخبار والأنشطة
+                            </li>
+                            <li class="text-dark">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>موقع المحافظة صفحة حياة كريمة</strong>: لمتابعة التنفيذ المحلي للمشروعات
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i> إغلاق النافذة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">الواقع العمراني</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/21rgnvmb/image.jpg" alt="الواقع العمراني" class="modal-img">
+                    <p class="modal-description">عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+                <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">المناطق الحرفية</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/PZKfCHrH/image.jpg" alt="المناطق الحرفية" class="modal-img">
+                    <p class="modal-description">توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+                <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">المناطق الزراعية</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/9V4cTq0p/image.jpg" alt="المناطق الزراعية" class="modal-img">
+                    <p class="modal-description">خرائط الأراضي المزروعة وأنظمة الري لمساعدة المزارعين والمستثمرين.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+                <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal8" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">مراكز الاستثمار</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/p0xXjY92/image.jpg" alt="مراكز الاستثمار" class="modal-img">
+                    <p class="modal-description">خرائط توضح المواقع ذات الأولوية الاستثمارية والحوافز المقدمة للمستثمرين في المحافظة.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+                <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal9" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">المثلث الذهبي</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/30dYt9s/image.jpg" alt="المثلث الذهبي" class="modal-img">
+                    <p class="modal-description">مشروع قومي يهدف لتنمية وتطوير المنطقة الاقتصادية بين قنا، سفاجا، والقصير، ويوفر فرصًا استثمارية في التعدين، الصناعة، الزراعة، والخدمات اللوجستية.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+                <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <p>&copy; 2024 البوابة الجغرافية - محافظة قنا. جميع الحقوق محفوظة.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100063948729691" class="social-link" target="_blank">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-instagram"></i>
+                </a>
+            </div>
+            <div class="developer-credit">
+                <h4 class="credit-title">تطوير بواسطة</h4>
+                <div class="credit-info">
+                    <span>
+                        <i class="bi bi-person-circle"></i>
+                        مهندس/ علي عبدالرحيم
+                    </span>
+                    <span>
+                        <i class="bi bi-geo-alt"></i>
+                        وحدة نظم المعلومات الجغرافية
+                    </span>
+                    <span>
+                        <i class="bi bi-telephone"></i>
+                        هاتف: 01026040182
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="google_translate_element" class="google-translate-button" title="Translate Page">
         <i class="bi bi-globe"></i>
-      </a>
     </div>
-    <div class="developer-credit">
-      <div class="credit-title">إعداد</div>
-      <div class="credit-info">
-        <span><i class="bi bi-gear"></i> وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا</span>
-      </div>
-    </div>
-    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-      <p>© 2025 محافظة قنا - جميع الحقوق محفوظة</p>
-    </div>
-  </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  function trackClick(sectionName) {
-    console.log('تم النقر على: ' + sectionName);
-  }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function trackClick(cardTitle) {
+            console.log("Card clicked: " + cardTitle);
+            // Here you can add code to send the click event to a tracking service
+        }
 
-  document.getElementById('overview-card').addEventListener('click', function() {
-    document.getElementById('overview-container').style.display = 'block';
-    trackClick('نظرة عن قنا');
-  });
-  
-  document.getElementById('close-overview').addEventListener('click', function() {
-    document.getElementById('overview-container').style.display = 'none';
-  });
-  
-  document.getElementById('overview-container').addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.style.display = 'none';
-    }
-  });
-  
-  document.getElementById('showQR').addEventListener('click', function() {
-    document.getElementById('qrContainer').style.display = 'block';
-  });
-  
-  document.getElementById('closeQR').addEventListener('click', function() {
-    document.getElementById('qrContainer').style.display = 'none';
-  });
-  
-  // دالة جديدة لفتح الخريطة بالإحداثيات
-  function openMap(lat, lng) {
-    const url = `https://www.google.com/maps?q=${lat},${lng}`;
-    window.open(url, '_blank');
-  }
-</script>
+        document.getElementById('overview-card').addEventListener('click', function() {
+            const overviewContainer = document.getElementById('overview-container');
+            overviewContainer.style.display = 'block';
+            document.body.classList.add('backdrop-blur');
+        });
+
+        document.getElementById('close-overview').addEventListener('click', function() {
+            const overviewContainer = document.getElementById('overview-container');
+            overviewContainer.style.display = 'none';
+            document.body.classList.remove('backdrop-blur');
+        });
+
+        document.getElementById('showQR').addEventListener('click', function() {
+            document.getElementById('qrContainer').style.display = 'block';
+            this.style.display = 'none'; // Optional: hide the button after showing QR
+        });
+
+        document.getElementById('closeQR').addEventListener('click', function() {
+            document.getElementById('qrContainer').style.display = 'none';
+            document.getElementById('showQR').style.display = 'block'; // Show the button again
+        });
+
+        // Google Translate functionality
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ar',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        const translateButton = document.getElementById('google_translate_element');
+        translateButton.addEventListener('click', () => {
+            // Check if the Google Translate popup is already open
+            const googlePopup = document.querySelector('.goog-te-combo');
+            if (!googlePopup) {
+                // Manually trigger the Google Translate script
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+                document.body.appendChild(script);
+            }
+        });
+
+    </script>
 </body>
 </html>
