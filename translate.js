@@ -73,6 +73,9 @@ function createTranslateButton() {
     translateBtn.innerHTML = '<i class="bi bi-translate"></i>';
     document.body.appendChild(translateBtn);
     console.log("تم إنشاء زر الترجمة");
+    
+    // التأكد من أن الزر في مكانه الصحيح
+    fixTranslateButtonPosition();
 }
 
 // إنشاء لوحة الترجمة
@@ -139,6 +142,9 @@ function translatePage() {
         isTranslated = true;
         
         localStorage.setItem('translationState', 'en');
+        
+        // التأكد من أن زر الترجمة يبقى في مكانه بعد الترجمة
+        fixTranslateButtonPosition();
     }, 1500);
 }
 
@@ -155,7 +161,31 @@ function revertTranslation() {
     setTimeout(() => {
         location.reload();
         localStorage.setItem('translationState', 'ar');
+        
+        // التأكد من أن زر الترجمة يبقى في مكانه بعد الاستعادة
+        fixTranslateButtonPosition();
     }, 1000);
+}
+
+// التأكد من أن زر الترجمة يبقى في مكانه الصحيح
+function fixTranslateButtonPosition() {
+    const translateBtn = document.getElementById('translateBtn');
+    if (translateBtn) {
+        translateBtn.style.position = 'fixed';
+        translateBtn.style.bottom = '30px';
+        translateBtn.style.right = '30px';
+        translateBtn.style.left = 'auto';
+        translateBtn.style.zIndex = '9999';
+    }
+    
+    const translatePanel = document.getElementById('translatePanel');
+    if (translatePanel) {
+        translatePanel.style.position = 'fixed';
+        translatePanel.style.bottom = '100px';
+        translatePanel.style.right = '30px';
+        translatePanel.style.left = 'auto';
+        translatePanel.style.zIndex = '9998';
+    }
 }
 
 // محاكاة الترجمة المتقدمة (غير حرفية)
@@ -239,49 +269,16 @@ function simulateAdvancedTranslation() {
             el.style.marginLeft = 'auto';
             el.style.marginRight = 'auto';
         });
-        
-        // التأكد من أن زر الترجمة يبقى في مكانه الصحيح
-        const translateBtn = document.getElementById('translateBtn');
-        if (translateBtn) {
-            translateBtn.style.right = '30px';
-            translateBtn.style.left = 'auto';
-        }
     }, 100);
 }
 
-// التأكد من أن زر الترجمة يبقى في مكانه بعد الترجمة
-function fixTranslateButtonPosition() {
-    const translateBtn = document.getElementById('translateBtn');
-    if (translateBtn) {
-        translateBtn.style.right = '30px';
-        translateBtn.style.left = 'auto';
-    }
-}
-
-// استعادة الترجمة الأصلية
-function revertTranslation() {
-    const loader = document.getElementById('googleTranslateLoader');
-    const loaderText = document.getElementById('loaderText');
-    
-    if (loader && loaderText) {
-        loaderText.textContent = "جاري استعادة اللغة الأصلية...";
-        loader.style.display = 'flex';
-    }
-    
-    setTimeout(() => {
-        location.reload();
-        localStorage.setItem('translationState', 'ar');
-        
-        // التأكد من أن زر الترجمة يبقى في مكانه بعد الاستعادة
-        fixTranslateButtonPosition();
-    }, 1000);
-}
+// بدء الترجمة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', initTranslation);
 
 // التأكد من أن زر الترجمة يبقى في مكانه عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(fixTranslateButtonPosition, 500);
 });
 
-// بدء الترجمة عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', initTranslation);
-
+// التأكد من أن زر الترجمة يبقى في مكانه عند تغيير حجم النافذة
+window.addEventListener('resize', fixTranslateButtonPosition);
