@@ -1253,10 +1253,8 @@
   
   // التأكد من أن الصفحة تفتح بالعربية أولاً
   document.addEventListener('DOMContentLoaded', function() {
-    // إزالة أي حالة ترجمة محفوظة إذا كانت الإنجليزية
-    if (localStorage.getItem('translationState') === 'en') {
-      localStorage.removeItem('translationState');
-    }
+    // إزالة أي حالة ترجمة محفوظة
+    localStorage.removeItem('translationState');
     
     // إضافة تأخير بسيط للتأكد من تحميل الصفحة بالعربية أولاً
     setTimeout(() => {
@@ -1273,3 +1271,4 @@
 <script src="./translate.js"></script>
 </body>
 </html>
+
