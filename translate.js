@@ -87,7 +87,7 @@ function createTranslatePanel() {
             <span>English (Translated)</span>
         </div>
         <div class="translation-quality">
-            <small>جودة الترجمة: متقدمة (غير حرفية)</small>
+            <small>Translated by Ali Allam</small>
         </div>
     `;
     document.body.appendChild(translatePanel);
@@ -231,3 +231,4 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
