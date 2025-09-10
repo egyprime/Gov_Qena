@@ -2,7 +2,6 @@
     position: fixed !important;
     bottom: 30px !important;
     right: 30px !important;
-    left: auto !important;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -32,7 +31,6 @@
     position: fixed !important;
     bottom: 100px !important;
     right: 30px !important;
-    left: auto !important;
     width: 300px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -139,98 +137,35 @@ body {
     top: 0 !important;
 }
 
-/* تنسيقات خاصة للنسخة الإنجليزية */
+/* منع أي تغيير في اتجاه الصفحة */
 .english-version {
-    direction: ltr !important;
+    direction: rtl !important; /* إجبار البقاء على RTL */
 }
 
 .english-version * {
-    text-align: left !important;
+    text-align: inherit !important; /* الحفاظ على المحاذاة الأصلية */
 }
 
-/* استثناءات للنصوص التي يجب أن تبقى في المنتصف */
+/* تثبيت جميع العناصر في أماكنها */
 .english-version .text-center,
 .english-version .center,
-.english-version h1.text-center,
-.english-version h2.text-center,
-.english-version .welcome-title,
-.english-version .welcome-subtitle,
-.english-version .card-title,
-.english-version .card-description,
-.english-version .card-button,
-.english-version .modal-title,
-.english-version .overview-title,
-.english-version .overview-card-title,
-.english-version .footer-content h4,
-.english-version .footer-content p,
-.english-version .credit-title {
+.english-version .align-center {
     text-align: center !important;
 }
 
-/* استثناءات للنصوص التي يجب أن تبقى على اليمين */
 .english-version .text-right,
 .english-version .text-end {
     text-align: right !important;
 }
 
-/* تنسيقات إضافية لضمان بقاء العناصر في أماكنها */
-.english-version .position-center,
-.english-version .middle,
-.english-version .centered,
-.english-version [class*="mid"],
-.english-version [class*="center"],
-.english-version .align-center,
-.english-version .text-middle {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    display: block !important;
-}
-
-.english-version .flex-center {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-.english-version .container,
-.english-version .main-container,
-.english-version .page-wrapper {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* منع العناصر من التحرك عند الترجمة */
-.english-version * {
-    position: relative !important;
-    float: none !important;
-}
-
-/* تنسيقات للشعارات والصور في المنتصف */
-.english-version .logo,
-.english-version .center-image,
-.english-version img.center {
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* تأكد من أن زر الترجمة يبقى في مكانه بعد الترجمة */
-.english-version .translate-btn {
-    right: 30px !important;
-    left: auto !important;
-}
-
-.english-version .translate-panel {
-    right: 30px !important;
-    left: auto !important;
+.english-version .text-left {
+    text-align: left !important;
 }
 
 @media (max-width: 768px) {
     .translate-btn {
         bottom: 20px !important;
         right: 20px !important;
-        left: auto !important;
         width: 50px;
         height: 50px;
         font-size: 1.2rem;
@@ -238,7 +173,6 @@ body {
     .translate-panel {
         bottom: 90px !important;
         right: 20px !important;
-        left: auto !important;
         width: 280px;
     }
 }
@@ -247,6 +181,5 @@ body {
     .translate-panel {
         width: 250px;
         right: 10px !important;
-        left: auto !important;
     }
 }
