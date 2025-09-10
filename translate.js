@@ -200,7 +200,6 @@ function simulateAdvancedTranslation() {
         "المثلث الذهبي": "Golden Triangle",
         "إغلاق": "Close",
         "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
-        "الرجوع للصفحة السابقة": "Back to the previous page",
     };
     
     elementsToTranslate.forEach(selector => {
