@@ -1255,28 +1255,12 @@
   document.addEventListener('DOMContentLoaded', function() {
     // إزالة أي حالة ترجمة محفوظة
     localStorage.removeItem('translationState');
-    
-    // إضافة تأخير بسيط للتأكد من تحميل الصفحة بالعربية أولاً
-    setTimeout(() => {
-      // التأكد من أن النصوص في المنتصف تبقى في المنتصف
-      document.querySelectorAll('.text-center, .center, .align-center').forEach(el => {
-        el.style.textAlign = 'center';
-        el.style.marginLeft = 'auto';
-        el.style.marginRight = 'auto';
-      });
-      
-      // التأكد من أن زر الترجمة في مكانه الصحيح
-      const translateBtn = document.getElementById('translateBtn');
-      if (translateBtn) {
-        translateBtn.style.right = '30px';
-        translateBtn.style.left = 'auto';
-      }
-    }, 500);
   });
 </script>
 
 <script src="./translate.js"></script>
 </body>
 </html>
+
 
 
