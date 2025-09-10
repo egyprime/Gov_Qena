@@ -1,0 +1,282 @@
+// translate.js - كود الترجمة المركزي
+
+// حالة الترجمة
+let isTranslated = false;
+let translatePanelVisible = false;
+
+// تهيئة الترجمة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    initTranslation();
+});
+
+// تهيئة نظام الترجمة
+function initTranslation() {
+    // إنشاء زر الترجمة إذا لم يكن موجوداً
+    if (!document.getElementById('translateBtn')) {
+        createTranslateButton();
+    }
+    
+    // إنشاء لوحة الترجمة إذا لم تكن موجودة
+    if (!document.getElementById('translatePanel')) {
+        createTranslatePanel();
+    }
+    
+    // إنشاء شاشة التحميل إذا لم تكن موجودة
+    if (!document.getElementById('googleTranslateLoader')) {
+        createLoader();
+    }
+    
+    // إضافة مستمعي الأحداث
+    const translateBtn = document.getElementById('translateBtn');
+    translateBtn.addEventListener('click', toggleTranslatePanel);
+    
+    // إضافة مستمعي الأحداث لخيارات الترجمة
+    const translateOptions = document.querySelectorAll('.translate-option');
+    translateOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            translateOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            
+            if (lang === 'en' && !isTranslated) {
+                translatePage();
+            } else if (lang === 'ar' && isTranslated) {
+                revertTranslation();
+            }
+            
+            // إخفاء لوحة الخيارات بعد الاختيار
+            document.getElementById('translatePanel').classList.remove('show');
+            translatePanelVisible = false;
+        });
+    });
+    
+    // إخفاء لوحة الترجمة عند النقر خارجها
+    document.addEventListener('click', function(e) {
+        const translateBtn = document.getElementById('translateBtn');
+        const translatePanel = document.getElementById('translatePanel');
+        
+        if (translatePanelVisible && !translateBtn.contains(e.target) && !translatePanel.contains(e.target)) {
+            translatePanel.classList.remove('show');
+            translatePanelVisible = false;
+        }
+    });
+    
+    // التحقق من حالة الترجمة المحفوظة
+    const translationState = localStorage.getItem('translationState');
+    if (translationState === 'en') {
+        // إذا كانت الصفحة مترجمة مسبقاً، نطبق الترجمة
+        setTimeout(() => {
+            translatePage();
+            
+            // تفعيل خيار الإنجليزية في لوحة الترجمة
+            const translateOptions = document.querySelectorAll('.translate-option');
+            translateOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === 'en') {
+                    option.classList.add('active');
+                }
+            });
+        }, 500);
+    }
+}
+
+// إنشاء زر الترجمة
+function createTranslateButton() {
+    const translateBtn = document.createElement('div');
+    translateBtn.id = 'translateBtn';
+    translateBtn.className = 'translate-btn';
+    translateBtn.title = 'ترجمة الصفحة';
+    translateBtn.innerHTML = '<i class="bi bi-translate"></i>';
+    document.body.appendChild(translateBtn);
+}
+
+// إنشاء لوحة الترجمة
+function createTranslatePanel() {
+    const translatePanel = document.createElement('div');
+    translatePanel.id = 'translatePanel';
+    translatePanel.className = 'translate-panel';
+    translatePanel.innerHTML = `
+        <div class="translate-option active" data-lang="ar">
+            <i class="bi bi-translate"></i>
+            <span>العربية (اللغة الأصلية)</span>
+        </div>
+        <div class="translate-option" data-lang="en">
+            <i class="bi bi-globe"></i>
+            <span>English (Translated)</span>
+        </div>
+        <div class="translation-quality">
+            <small>جودة الترجمة: متقدمة (غير حرفية)</small>
+        </div>
+    `;
+    document.body.appendChild(translatePanel);
+}
+
+// إنشاء شاشة التحميل
+function createLoader() {
+    const loader = document.createElement('div');
+    loader.id = 'googleTranslateLoader';
+    loader.className = 'google-translate-loader';
+    loader.innerHTML = `
+        <div class="spinner"></div>
+        <p id="loaderText">جاري تحميل نظام الترجمة المتقدم...</p>
+    `;
+    document.body.appendChild(loader);
+}
+
+// تبديل عرض لوحة الترجمة
+function toggleTranslatePanel(e) {
+    e.stopPropagation();
+    const translatePanel = document.getElementById('translatePanel');
+    translatePanelVisible = !translatePanelVisible;
+    if (translatePanelVisible) {
+        translatePanel.classList.add('show');
+    } else {
+        translatePanel.classList.remove('show');
+    }
+}
+
+// ترجمة الصفحة
+function translatePage() {
+    const loader = document.getElementById('googleTranslateLoader');
+    const loaderText = document.getElementById('loaderText');
+    
+    loaderText.textContent = "جاري الترجمة باستخدام نظام متقدم...";
+    loader.style.display = 'flex';
+    
+    // استخدام setTimeout لمحاكاة الترجمة
+    setTimeout(() => {
+        // هنا سيتم استدعاء خدمة الترجمة الفعلية
+        simulateAdvancedTranslation();
+        
+        loader.style.display = 'none';
+        document.getElementById('translateBtn').classList.add('active');
+        isTranslated = true;
+        
+        // حفظ حالة الترجمة في localStorage
+        localStorage.setItem('translationState', 'en');
+    }, 1500);
+}
+
+// استعادة الترجمة الأصلية
+function revertTranslation() {
+    const loader = document.getElementById('googleTranslateLoader');
+    const loaderText = document.getElementById('loaderText');
+    
+    loaderText.textContent = "جاري استعادة اللغة الأصلية...";
+    loader.style.display = 'flex';
+    
+    setTimeout(() => {
+        // إعادة تحميل الصفحة للعودة للغة الأصلية
+        location.reload();
+        
+        // حفظ حالة الترجمة في localStorage
+        localStorage.setItem('translationState', 'ar');
+    }, 1000);
+}
+
+// محاكاة الترجمة المتقدمة (غير حرفية)
+function simulateAdvancedTranslation() {
+    // عناصر النص الرئيسية للترجمة
+    const elementsToTranslate = [
+        '.header-title',
+        '.welcome-title',
+        '.welcome-subtitle',
+        '.card-title',
+        '.card-description',
+        '.card-button',
+        '.footer-content h4',
+        '.footer-content p',
+        '.credit-title',
+        '.credit-info span',
+        '.modal-title',
+        '.modal-description',
+        '.overview-title',
+        '.overview-card-title',
+        '.overview-card-description',
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'p', 'span', 'a', 'li', 'td', 'th'
+    ];
+    
+    // نصوص عينة مترجمة (غير حرفية)
+    const translatedTexts = {
+        "محافظة قنا": "Qena Governorate",
+        "مرحباً بكم في البوابة الجغرافية": "Welcome to the Geographic Portal",
+        "نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين": "Integrated system for providing geographic information and electronic services to citizens and investors",
+        "خريطة الأساس لمحافظة قنا": "Base Map of Qena Governorate",
+        "الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات": "The base map of Qena Governorate includes administrative boundaries, centers, villages, and districts",
+        "عرض الخريطة": "View Map",
+        "الفرص الاستثمارية": "Investment Opportunities",
+        "استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية": "Explore available investment opportunities in Qena Governorate with filtering, advanced search, and interactive map details",
+        "استكشف الفرص": "Explore Opportunities",
+        "الخدمات والمرافق العامة": "Public Services and Facilities",
+        "استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.": "Browse locations of government entities and public facilities in Qena Governorate to facilitate access to essential services",
+        "عرض الخدمات": "View Services",
+        "السياحة والآثار": "Tourism and Antiquities",
+        "اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة": "Discover important tourist and archaeological landmarks in Qena Governorate with detailed information and visiting hours",
+        "جولة سياحية": "Tourist Tour",
+        "حياة كريمة": "Decent Life Initiative",
+        "مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية": "Projects of the Decent Life Initiative for developing villages and rural areas",
+        "عرض التفاصيل": "View Details",
+        "نظرة عن قنا": "Overview of Qena",
+        "استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
+        "ابدأ الاستكشاف": "Start Exploration",
+        "البوابة الجغرافية لمحافظة قنا": "Geographic Portal of Qena Governorate",
+        "نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين": "Advanced geographic information system serving citizens and investors",
+        "إعداد": "Prepared by",
+        "وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "GIS Unit at the General Office of Qena Governorate",
+        "المناطق الصناعية": "Industrial Areas",
+        "خرائط للمواقع والمجمعات الصناعية والبنية التحتية تُبرز الأراضي المتاحة وفرص الاستثمار.": "Maps of industrial locations, complexes, and infrastructure highlighting available lands and investment opportunities.",
+        "إغلاق": "Close",
+        "مشروعات حياة كريمة": "Decent Life Projects",
+        "الواقع العمراني": "Urban Reality",
+        "عرض استخدامات الأرض، الكثافات والحيز العمراني لتقييم النمو والتخطيط الحضري.": "Display of land uses, densities, and urban space to assess growth and urban planning.",
+        "المناطق الحرفية": "Craft Areas",
+        "توزيع الأسواق والورش الحرفية وروابطها اللوجستية لدعم المشروعات والصناعات اليدوية.": "Distribution of markets, craft workshops, and their logistical connections to support projects and handicraft industries.",
+        "المناطق الزراعية": "Agricultural Areas",
+        "خرائط الأراضي المزروعة، أنظمة الري والمحاصيل السائدة لدعم التخطيط والإدارة الزراعية.": "Maps of cultivated lands, irrigation systems, and prevailing crops to support agricultural planning and management.",
+        "مراكز الاستثمار": "Investment Centers",
+        "مواقع الأولوية الاستثمارية، الحوافز والمساحات المتاحة لجذب المشروعات وتنميتها.": "Locations of investment priority areas, incentives, and available spaces to attract and develop projects.",
+        "المثلث الذهبي": "Golden Triangle",
+        "فرص استثمارية في التعدين - الصناعة - الزراعة - الخدمات": "Investment opportunities in mining, industry, agriculture, and services",
+        "نظرة شاملة عن محافظة قنا": "Comprehensive Overview of Qena Governorate",
+        "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
+    };
+    
+    // تطبيق الترجمة على جميع العناصر
+    elementsToTranslate.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            // تجنب العناصر التي تحتوي على مدخلات أو أزرار
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'BUTTON') {
+                return;
+            }
+            
+            const originalText = element.textContent.trim();
+            if (translatedTexts[originalText]) {
+                element.textContent = translatedTexts[originalText];
+            }
+            
+            // ترجمة خاصية title إذا كانت موجودة
+            if (element.title && translatedTexts[element.title]) {
+                element.title = translatedTexts[element.title];
+            }
+            
+            // ترجمة نصوص الplaceholder إذا كانت موجودة
+            if (element.placeholder && translatedTexts[element.placeholder]) {
+                element.placeholder = translatedTexts[element.placeholder];
+            }
+        });
+    });
+    
+    // تغيير اتجاه الصفحة إلى LTR عند الترجمة للإنجليزية
+    document.documentElement.setAttribute('dir', 'ltr');
+    document.documentElement.setAttribute('lang', 'en');
+    
+    // تغيير اتجاه جميع العناصر النصية
+    document.querySelectorAll('p, span, h1, h2, h3, h4, h5, h6, div').forEach(el => {
+        if (!el.closest('.modal') && !el.closest('.translate-panel')) {
+            el.style.direction = 'ltr';
+            el.style.textAlign = 'left';
+        }
+    });
+}
