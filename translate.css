@@ -213,6 +213,12 @@ body {
     margin-right: auto !important;
 }
 
+/* تأكد من أن زر الترجمة يبقى في مكانه بعد الترجمة */
+.english-version .translate-btn {
+    right: 30px !important;
+    left: auto !important;
+}
+
 @media (max-width: 768px) {
     .translate-btn {
         bottom: 20px;
