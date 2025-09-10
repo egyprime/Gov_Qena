@@ -145,6 +145,9 @@ function translatePage() {
         
         // التأكد من أن زر الترجمة يبقى في مكانه بعد الترجمة
         fixTranslateButtonPosition();
+        
+        // إضافة تأخير إضافي للتأكد من بقاء الزر في مكانه
+        setTimeout(fixTranslateButtonPosition, 300);
     }, 1500);
 }
 
@@ -163,19 +166,23 @@ function revertTranslation() {
         localStorage.setItem('translationState', 'ar');
         
         // التأكد من أن زر الترجمة يبقى في مكانه بعد الاستعادة
-        fixTranslateButtonPosition();
+        setTimeout(fixTranslateButtonPosition, 500);
     }, 1000);
 }
 
-// التأكد من أن زر الترجمة يبقى في مكانه الصحيح
+// التأكد من أن زر الترجمة يبقى في مكانه الصحيح رغم تغيير الاتجاه
 function fixTranslateButtonPosition() {
     const translateBtn = document.getElementById('translateBtn');
     if (translateBtn) {
         translateBtn.style.position = 'fixed';
         translateBtn.style.bottom = '30px';
         translateBtn.style.right = '30px';
-        translateBtn.style.left = 'auto';
+        translateBtn.style.left = 'auto'; // إجبار الزر على البقاء على اليمين
         translateBtn.style.zIndex = '9999';
+        
+        // إجبار التنسيقات رغم تغيير اتجاه الصفحة
+        translateBtn.style.setProperty('right', '30px', 'important');
+        translateBtn.style.setProperty('left', 'auto', 'important');
     }
     
     const translatePanel = document.getElementById('translatePanel');
@@ -185,6 +192,10 @@ function fixTranslateButtonPosition() {
         translatePanel.style.right = '30px';
         translatePanel.style.left = 'auto';
         translatePanel.style.zIndex = '9998';
+        
+        // إجبار التنسيقات رغم تغيير اتجاه الصفحة
+        translatePanel.style.setProperty('right', '30px', 'important');
+        translatePanel.style.setProperty('left', 'auto', 'important');
     }
 }
 
@@ -269,7 +280,33 @@ function simulateAdvancedTranslation() {
             el.style.marginLeft = 'auto';
             el.style.marginRight = 'auto';
         });
+        
+        // التأكد من أن زر الترجمة يبقى في مكانه الصحيح رغم تغيير الاتجاه
+        fixTranslateButtonPosition();
     }, 100);
+}
+
+// التأكد من أن زر الترجمة يبقى في مكانه عند تغيير اتجاه الصفحة
+function observeDirectionChange() {
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'dir' || mutation.attributeName === 'class') {
+                fixTranslateButtonPosition();
+            }
+        });
+    });
+    
+    // مراقبة تغييرات في عنصر body
+    observer.observe(document.body, { 
+        attributes: true,
+        attributeFilter: ['dir', 'class']
+    });
+    
+    // مراقبة تغييرات في عنصر html
+    observer.observe(document.documentElement, { 
+        attributes: true,
+        attributeFilter: ['dir', 'lang']
+    });
 }
 
 // بدء الترجمة عند تحميل الصفحة
@@ -278,6 +315,7 @@ document.addEventListener('DOMContentLoaded', initTranslation);
 // التأكد من أن زر الترجمة يبقى في مكانه عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(fixTranslateButtonPosition, 500);
+    setTimeout(observeDirectionChange, 1000);
 });
 
 // التأكد من أن زر الترجمة يبقى في مكانه عند تغيير حجم النافذة
