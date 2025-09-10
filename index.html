@@ -1264,6 +1264,13 @@
         el.style.marginLeft = 'auto';
         el.style.marginRight = 'auto';
       });
+      
+      // التأكد من أن زر الترجمة في مكانه الصحيح
+      const translateBtn = document.getElementById('translateBtn');
+      if (translateBtn) {
+        translateBtn.style.right = '30px';
+        translateBtn.style.left = 'auto';
+      }
     }, 500);
   });
 </script>
@@ -1271,4 +1278,5 @@
 <script src="./translate.js"></script>
 </body>
 </html>
+
 
