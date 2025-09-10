@@ -1,6 +1,3 @@
-// translate.js - كود الترجمة المركزي
-
-// حالة الترجمة
 let isTranslated = false;
 let translatePanelVisible = false;
 
@@ -280,3 +277,4 @@ function simulateAdvancedTranslation() {
         }
     });
 }
+
