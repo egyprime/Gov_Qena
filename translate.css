@@ -12,7 +12,7 @@
     justify-content: center;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 999;
+    z-index: 9999; /* زيادة قيمة z-index ليكون فوق كل العناصر */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
@@ -37,7 +37,7 @@
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 998;
+    z-index: 9998; /* أقل من زر الترجمة بقليل */
     display: none;
     flex-direction: column;
     gap: 15px;
