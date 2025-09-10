@@ -239,8 +239,49 @@ function simulateAdvancedTranslation() {
             el.style.marginLeft = 'auto';
             el.style.marginRight = 'auto';
         });
+        
+        // التأكد من أن زر الترجمة يبقى في مكانه الصحيح
+        const translateBtn = document.getElementById('translateBtn');
+        if (translateBtn) {
+            translateBtn.style.right = '30px';
+            translateBtn.style.left = 'auto';
+        }
     }, 100);
 }
 
+// التأكد من أن زر الترجمة يبقى في مكانه بعد الترجمة
+function fixTranslateButtonPosition() {
+    const translateBtn = document.getElementById('translateBtn');
+    if (translateBtn) {
+        translateBtn.style.right = '30px';
+        translateBtn.style.left = 'auto';
+    }
+}
+
+// استعادة الترجمة الأصلية
+function revertTranslation() {
+    const loader = document.getElementById('googleTranslateLoader');
+    const loaderText = document.getElementById('loaderText');
+    
+    if (loader && loaderText) {
+        loaderText.textContent = "جاري استعادة اللغة الأصلية...";
+        loader.style.display = 'flex';
+    }
+    
+    setTimeout(() => {
+        location.reload();
+        localStorage.setItem('translationState', 'ar');
+        
+        // التأكد من أن زر الترجمة يبقى في مكانه بعد الاستعادة
+        fixTranslateButtonPosition();
+    }, 1000);
+}
+
+// التأكد من أن زر الترجمة يبقى في مكانه عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(fixTranslateButtonPosition, 500);
+});
+
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
