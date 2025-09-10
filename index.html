@@ -1217,6 +1217,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  <script>
   function trackClick(sectionName) {
     console.log('تم النقر على: ' + sectionName);
   }
@@ -1249,6 +1250,24 @@
     const url = `https://www.google.com/maps?q=${lat},${lng}`;
     window.open(url, '_blank');
   }
+  
+  // التأكد من أن الصفحة تفتح بالعربية أولاً
+  document.addEventListener('DOMContentLoaded', function() {
+    // إزالة أي حالة ترجمة محفوظة إذا كانت الإنجليزية
+    if (localStorage.getItem('translationState') === 'en') {
+      localStorage.removeItem('translationState');
+    }
+    
+    // إضافة تأخير بسيط للتأكد من تحميل الصفحة بالعربية أولاً
+    setTimeout(() => {
+      // التأكد من أن النصوص في المنتصف تبقى في المنتصف
+      document.querySelectorAll('.text-center, .center, .align-center').forEach(el => {
+        el.style.textAlign = 'center';
+        el.style.marginLeft = 'auto';
+        el.style.marginRight = 'auto';
+      });
+    }, 500);
+  });
 </script>
 
 <script src="./translate.js"></script>
