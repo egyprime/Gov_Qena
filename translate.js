@@ -1,8 +1,117 @@
-// translate.js - نظام الترجمة المركزي
-console.log("تم تحميل نظام الترجمة بنجاح");
+// translate.js - نظام الترجمة التلقائي
+console.log("تم تحميل نظام الترجمة التلقائي بنجاح");
 
 let isTranslated = false;
 let translatePanelVisible = false;
+
+// قائمة النصوص العربية وترجمتها الإنجليزية
+const translatedTexts = {
+    // النصوص الأساسية
+    "محافظة قنا": "Qena Governorate",
+    "مرحباً بكم في البوابة الجغرافية": "Welcome to the Geographic Portal",
+    "نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين": "Integrated system for providing geographic information and electronic services to citizens and investors",
+    "خريطة الأساس لمحافظة قنا": "Base Map of Qena Governorate",
+    "الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات": "The base map of Qena Governorate includes administrative boundaries, centers, villages, and districts",
+    "عرض الخريطة": "View Map",
+    "الفرص الاستثمارية": "Investment Opportunities",
+    "استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية": "Explore available investment opportunities in Qena Governorate with filtering, advanced search, and interactive map details",
+    "استكشف الفرص": "Explore Opportunities",
+    "الخدمات والمرافق العامة": "Public Services and Facilities",
+    "استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.": "Browse locations of government entities and public facilities in Qena Governorate to facilitate access to essential services",
+    "عرض الخدمات": "View Services",
+    "السياحة والآثار": "Tourism and Antiquities",
+    "اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة": "Discover important tourist and archaeological landmarks in Qena Governorate with detailed information and visiting hours",
+    "جولة سياحية": "Tourist Tour",
+    "حياة كريمة": "Decent Life Initiative",
+    "مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية": "Projects of the Decent Life Initiative for developing villages and rural areas",
+    "عرض التفاصيل": "View Details",
+    "نظرة عن قنا": "Overview of Qena",
+    "استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
+    "ابدأ الاستكشاف": "Start Exploration",
+    "البوابة الجغرافية لمحافظة قنا": "Geographic Portal of Qena Governorate",
+    "نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين": "Advanced geographic information system serving citizens and investors",
+    "إعداد": "Prepared by",
+    "وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "GIS Unit at the General Office of Qena Governorate",
+    "المناطق الصناعية": "Industrial Areas",
+    "المناطق الحرفية": "Craft Areas",
+    "المناطق الزراعية": "Agricultural Areas",
+    "مراكز الاستثمار": "Investment Centers",
+    "المثلث الذهبي": "Golden Triangle",
+    "إغلاق": "Close",
+    "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved",
+    
+    // نصوص إضافية عامة
+    "خدماتنا": "Our Services",
+    "اتصل بنا": "Contact Us",
+    "عنواننا": "Our Address",
+    "هاتف": "Phone",
+    "البريد الإلكتروني": "Email",
+    "الاسم": "Name",
+    "رسالتك": "Your Message",
+    "إرسال": "Send",
+    "مشاريعنا": "Our Projects",
+    "فريق العمل": "Our Team",
+    "الرئيسية": "Home",
+    "عن الشركة": "About Us",
+    "المزيد": "More",
+    "اقرأ المزيد": "Read More",
+    "تحميل المزيد": "Load More",
+    "الكل": "All",
+    "التفاصيل": "Details",
+    "عرض الكل": "View All",
+    "التالي": "Next",
+    "السابق": "Previous",
+    "الأول": "First",
+    "الأخير": "Last",
+    "بحث": "Search",
+    "نتائج البحث": "Search Results",
+    " Filter": "Filter",
+    "ترتيب حسب": "Sort By",
+    "الأحدث": "Newest",
+    "الأقدم": "Oldest",
+    "التصنيفات": "Categories",
+    "التاريخ": "Date",
+    "الكاتب": "Author",
+    "المشاهدات": "Views",
+    "مشاركة": "Share",
+    "تعليقات": "Comments",
+    " اترك تعليقًا": "Leave a Comment",
+    "التعليق": "Comment",
+    "إضافة تعليق": "Add Comment",
+    "تسجيل الدخول": "Login",
+    "تسجيل الخروج": "Logout",
+    "إنشاء حساب": "Create Account",
+    "كلمة المرور": "Password",
+    "تذكرني": "Remember Me",
+    "نسيت كلمة المرور": "Forgot Password",
+    "التسجيل": "Register",
+    "المستخدم": "User",
+    "الإعدادات": "Settings",
+    "حسابي": "My Account",
+    "الملف الشخصي": "Profile",
+    "الخصوصية": "Privacy",
+    "مساعدة": "Help",
+    "الدعم": "Support",
+    "الشروط والأحكام": "Terms and Conditions",
+    "سياسة الخصوصية": "Privacy Policy",
+    "خريطة الموقع": "Site Map",
+    "أسئلة شائعة": "FAQ",
+    "مركز المساعدة": "Help Center",
+    "تواصل معنا": "Contact Us",
+    "العنوان": "Address",
+    "رقم الهاتف": "Phone Number",
+    "ساعات العمل": "Working Hours",
+    "من يوم الأحد إلى يوم الخميس": "From Sunday to Thursday",
+    "صباحاً": "AM",
+    "مساءً": "PM",
+    "تابعنا على": "Follow us on",
+    "اشترك في النشرة الإخبارية": "Subscribe to Newsletter",
+    "اشترك": "Subscribe",
+    "بريدك الإلكتروني": "Your Email",
+    "جميع الحقوق محفوظة": "All Rights Reserved",
+    "تصميم وتطوير": "Designed and Developed by",
+    "Made with ❤️": "Made with ❤️"
+};
 
 // تهيئة الترجمة عند تحميل الصفحة
 function initTranslation() {
@@ -59,6 +168,22 @@ function initTranslation() {
             translatePanelVisible = false;
         }
     });
+    
+    // التحقق من حالة الترجمة المحفوظة
+    const translationState = localStorage.getItem('translationState');
+    if (translationState === 'en') {
+        setTimeout(() => {
+            translatePage();
+            
+            const translateOptions = document.querySelectorAll('.translate-option');
+            translateOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === 'en') {
+                    option.classList.add('active');
+                }
+            });
+        }, 500);
+    }
 }
 
 // إنشاء زر الترجمة
@@ -128,7 +253,7 @@ function translatePage() {
     }
     
     setTimeout(() => {
-        simulateAdvancedTranslation();
+        translateAllText();
         
         if (loader) loader.style.display = 'none';
         const translateBtn = document.getElementById('translateBtn');
@@ -155,8 +280,21 @@ function revertTranslation() {
     }, 1000);
 }
 
-// محاكاة الترجمة المتقدمة (غير حرفية)
-function simulateAdvancedTranslation() {
+// ترجمة كل النصوص في الصفحة
+function translateAllText() {
+    // ترجمة النصوص المعرفة مسبقاً
+    translateDefinedTexts();
+    
+    // ترجمة النصوص الأخرى تلقائياً
+    autoTranslateOtherTexts();
+    
+    // إضافة فئة للجسم للتحكم في التنسيق
+    document.body.classList.add('english-version');
+    document.documentElement.setAttribute('lang', 'en');
+}
+
+// ترجمة النصوص المعرفة مسبقاً
+function translateDefinedTexts() {
     const elementsToTranslate = [
         'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
         'p', 'span', 'a', 'li', 'td', 'th',
@@ -164,48 +302,14 @@ function simulateAdvancedTranslation() {
         '.card-title', '.card-description', '.card-button',
         '.footer-content h4', '.footer-content p', '.credit-title',
         '.credit-info span', '.modal-title', '.modal-description',
-        '.overview-title', '.overview-card-title', '.overview-card-description'
+        '.overview-title', '.overview-card-title', '.overview-card-description',
+        'button', 'label', 'figcaption', 'blockquote', 'q', 'cite'
     ];
-    
-    const translatedTexts = {
-        "محافظة قنا": "Qena Governorate",
-        "مرحباً بكم في البوابة الجغرافية": "Welcome to the Geographic Portal",
-        "نظام متكامل لتقديم المعلومات الجغرافية والخدمات الإلكترونية للمواطنين والمستثمرين": "Integrated system for providing geographic information and electronic services to citizens and investors",
-        "خريطة الأساس لمحافظة قنا": "Base Map of Qena Governorate",
-        "الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات": "The base map of Qena Governorate includes administrative boundaries, centers, villages, and districts",
-        "عرض الخريطة": "View Map",
-        "الفرص الاستثمارية": "Investment Opportunities",
-        "استكشف الفرص الاستثمارية المتاحة في محافظة قنا مع إمكانية التصفية والبحث المتقدم وعرض التفاصيل على الخريطة التفاعلية": "Explore available investment opportunities in Qena Governorate with filtering, advanced search, and interactive map details",
-        "استكشف الفرص": "Explore Opportunities",
-        "الخدمات والمرافق العامة": "Public Services and Facilities",
-        "استعرض مواقع الجهات الحكومية والمرافق العامة في محافظة قنا، لتسهيل وصولك إلى كل ما تحتاجه من خدمات أساسية.": "Browse locations of government entities and public facilities in Qena Governorate to facilitate access to essential services",
-        "عرض الخدمات": "View Services",
-        "السياحة والآثار": "Tourism and Antiquities",
-        "اكتشف المعالم السياحية والأثرية الهامة في محافظة قنا مع معلومات تفصيلية ومواعيد الزيارة": "Discover important tourist and archaeological landmarks in Qena Governorate with detailed information and visiting hours",
-        "جولة سياحية": "Tourist Tour",
-        "حياة كريمة": "Decent Life Initiative",
-        "مشروعات مبادرة حياة كريمة لتطوير القرى والمناطق الريفية": "Projects of the Decent Life Initiative for developing villages and rural areas",
-        "عرض التفاصيل": "View Details",
-        "نظرة عن قنا": "Overview of Qena",
-        "استكشف محافظة قنا من خلال نظرة شاملة على أهم المناطق والخدمات والمشروعات": "Explore Qena Governorate through a comprehensive overview of the most important areas, services, and projects",
-        "ابدأ الاستكشاف": "Start Exploration",
-        "البوابة الجغرافية لمحافظة قنا": "Geographic Portal of Qena Governorate",
-        "نظام معلومات جغرافي متطور لخدمة المواطنين والمستثمرين": "Advanced geographic information system serving citizens and investors",
-        "إعداد": "Prepared by",
-        "وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "GIS Unit at the General Office of Qena Governorate",
-        "المناطق الصناعية": "Industrial Areas",
-        "المناطق الحرفية": "Craft Areas",
-        "المناطق الزراعية": "Agricultural Areas",
-        "مراكز الاستثمار": "Investment Centers",
-        "المثلث الذهبي": "Golden Triangle",
-        "إغلاق": "Close",
-        "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
-    };
     
     elementsToTranslate.forEach(selector => {
         const elements = document.querySelectorAll(selector);
         elements.forEach(element => {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'BUTTON') {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
                 return;
             }
             
@@ -221,12 +325,35 @@ function simulateAdvancedTranslation() {
             if (element.placeholder && translatedTexts[element.placeholder]) {
                 element.placeholder = translatedTexts[element.placeholder];
             }
+            
+            if (element.alt && translatedTexts[element.alt]) {
+                element.alt = translatedTexts[element.alt];
+            }
         });
     });
+}
+
+// ترجمة النصوص الأخرى تلقائياً
+function autoTranslateOtherTexts() {
+    // ترجمة النصوص في عناصر أخرى
+    const otherElements = document.querySelectorAll('div, section, article, header, footer, aside, nav, main');
     
-    // إضافة فئة للجسم للتحكم في التنسيق - بدون تغيير الاتجاه
-    document.body.classList.add('english-version');
-    document.documentElement.setAttribute('lang', 'en');
+    otherElements.forEach(element => {
+        if (element.children.length === 0 && element.textContent.trim() !== '') {
+            const originalText = element.textContent.trim();
+            if (translatedTexts[originalText]) {
+                element.textContent = translatedTexts[originalText];
+            }
+        }
+    });
+    
+    // ترجمة نصوص أزرار الإدخال
+    const inputButtons = document.querySelectorAll('input[type="button"], input[type="submit"]');
+    inputButtons.forEach(input => {
+        if (input.value && translatedTexts[input.value]) {
+            input.value = translatedTexts[input.value];
+        }
+    });
 }
 
 // بدء الترجمة عند تحميل الصفحة
