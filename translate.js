@@ -240,15 +240,9 @@ function simulateAdvancedTranslation() {
         });
     });
     
-    document.documentElement.setAttribute('dir', 'ltr');
+    // إضافة فئة للجسم للتحكم في التنسيق
+    document.body.classList.add('english-version');
     document.documentElement.setAttribute('lang', 'en');
-    
-    document.querySelectorAll('p, span, h1, h2, h3, h4, h5, h6, div').forEach(el => {
-        if (!el.closest('.modal') && !el.closest('.translate-panel')) {
-            el.style.direction = 'ltr';
-            el.style.textAlign = 'left';
-        }
-    });
 }
 
 // بدء الترجمة عند تحميل الصفحة
