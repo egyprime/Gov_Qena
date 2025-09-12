@@ -227,16 +227,6 @@ function simulateAdvancedTranslation() {
         "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved",
         "خريطة الأساس - محافظة قنا": "Base Map - Qena Governorate",
         "الرجوع للصفحة السابقة": "Back to Previous Page",
-        "تحكم في الخريطة": "Map Control",
-        "طبقات الخريطة": "Map Layers",
-        "صور الأقمار الصناعية": "Satellite Imagery",
-        "الخريطة الطبوغرافية": "Topographic Map",
-        "هجين (شارع + قمر صناعي)": "Hybrid (Street + Satellite)",
-        "تحكم في طبقات البيانات": "Data Layers Control",
-        "حدود المحافظة": "Governorate Boundaries",
-        "حدود المراكز": "Markaz Boundaries",
-        "حدود القرى والشياخات": "Villages and Sheyakhas Boundaries",
-        "التقسيم الإداري لمحافظة قنا": "Administrative Division of Qena Governorate",
         "اسم الموقع": "Location Name",
         "عدد المدن": "Number of Cities",
         "عدد الوحدات المحلية": "Number of Local Units",
@@ -257,21 +247,17 @@ function simulateAdvancedTranslation() {
         "تم تحميل ${url} بنجاح": "Successfully loaded ${url}",
         "تعذر تحميل ملف ${url}. يرجى التحقق من وجود الملف.": "Failed to load file ${url}. Please check if the file exists.",
         "خطأ HTTP! الحالة: ${response.status}": "HTTP Error! Status: ${response.status}",
+        "حدود القرى": "Villages Boundaries",
         "🏛️ حدود المحافظة": "🏛️ Governorate Boundaries",
         "🏙️ حدود المراكز": "🏙️ Markaz Boundaries",
         "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries",
-        "جاري تحميل بيانات الخريطة...": "Loading map data...",
-        "تحكم في الخريطة": "Map Control",
-        "تحكم في طبقات البيانات": "Data Layers Control",
-        "طبقات الخريطة": "Map Layers",
+        "التقسيم الإداري لمحافظة قنا": "Administrative Division of Qena Governorate",
         "🛰️ صور الأقمار الصناعية": "🛰️ Satellite Imagery",
         "🗺️ الخريطة الطبوغرافية": "🗺️ Topographic Map",
         "🌆 هجين (شارع + قمر صناعي)": "🌆 Hybrid (Street + Satellite)",
-        "🏛️ حدود المحافظة": "🏛️ Governorate Boundaries",
-        "🏙️ حدود المراكز": "🏙️ Markaz Boundaries",
-        "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries",
         "👆 تحكم في الخريطة": "👆 Map Control",
-        "👆 تحكم في طبقات البيانات": "👆 Data Layers Control"
+        "👆 تحكم في طبقات البيانات": "👆 Data Layers Control",
+        "جاري تحميل بيانات الخريطة...": "Loading map data..."
     };
     
     elementsToTranslate.forEach(selector => {
@@ -310,6 +296,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
