@@ -480,6 +480,64 @@
             border-color: var(--black);
         }
 
+        /* Popup Styles */
+        .custom-popup {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            min-width: 250px;
+        }
+
+        .popup-title {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 5px;
+        }
+
+        .popup-description {
+            color: var(--black);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .popup-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .popup-coordinates {
+            color: var(--blue-nile);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .popup-navigation-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 15px;
+            background: linear-gradient(45deg, var(--blue-nile), var(--blue-dark));
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup-navigation-btn:hover {
+            background: linear-gradient(45deg, var(--blue-dark), var(--blue-nile));
+            transform: translateY(-2px);
+        }
+
         /* About Section */
         .about-section {
             padding: 100px 0;
@@ -608,7 +666,7 @@
         @keyframes pulse {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+           100% { transform: scale(1); opacity: 1; }
         }
 
         /* Responsive Design */
@@ -770,7 +828,7 @@
                 </div>
             </div>
             <div class="copyright">
-                © 2023 كنوز قنا - جميع الحقوق محفوظة | تم التصميم بحب لصعيد مصر
+                © 2025 كنوز قنا - جميع الحقوق محفوظة | تم التصميم بحب لصعيد مصر
             </div>
         </div>
     </footer>
@@ -779,9 +837,10 @@
         // Initialize the map
         const map = L.map('qena-map').setView([26.0, 32.5], 9);
         
-        // Add tile layer (using OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        // Add tile layer (using Google Satellite)
+        L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: 'Google Satellite'
         }).addTo(map);
         
         // Define custom icons
@@ -828,15 +887,17 @@
                 type: "temple",
                 description: "مجمع معابد بطلمي روماني مخصص لعبادة الإلهة حتحور، يعد من أفضل المعابد المحفوظة في مصر.",
                 icon: "𓉐",
-                image: "https://i.ibb.co/m5N4rJsD/image.png"
+                image: "https://i.ibb.co/m5N4rJsD/image.png",
+                address: "دندرة، قنا، مصر"
             },
             {
-                name: "معبد شنهор",
+                name: "معبد شنهور",
                 coords: [25.861108, 32.776861],
                 type: "temple",
                 description: "معبد صغير مخصص للإله مين وعبادة الثالوث المقدس (إيزيس وحورس وأوزوريس).",
                 icon: "𓉐",
-                image: "https://i.ibb.co/pjsYNrMV/image.jpg"
+                image: "https://i.ibb.co/pjsYNrMV/image.jpg",
+                address: "شنهور، قنا، مصر"
             },
             {
                 name: "مسجد سيدي عبد الرحيم القنائي",
@@ -844,7 +905,8 @@
                 type: "mosque",
                 description: "أحد أهم المساجد التاريخية في قنا، بني في القرن السابع الهجري ويتميز بعمارة إسلامية فريدة.",
                 icon: "🕌",
-                image: "https://i.ibb.co/yFsWkj5S/image.jpg"
+                image: "https://i.ibb.co/yFsWkj5S/image.jpg",
+                address: "مدينة قنا، مصر"
             },
             {
                 name: "دير الأنبا بلامون",
@@ -852,7 +914,8 @@
                 type: "church",
                 description: "دير قبطي أثري يعود للقرن الرابع الميلادي، يعد من أقدم الأديرة في صعيد مصر.",
                 icon: "⛪",
-                image: "https://i.ibb.co/cpjsNKN/image.jpg"
+                image: "https://i.ibb.co/cpjsNKN/image.jpg",
+                address: "نجع حمادي، قنا، مصر"
             },
             {
                 name: "قصر الأمير يوسف كمال",
@@ -860,7 +923,8 @@
                 type: "palace",
                 description: "قصر تاريخي بني في أوائل القرن العشرين، يجمع بين الطرازين الإسلامي والأوروبي.",
                 icon: "🏰",
-                image: "https://i.ibb.co/BVC29gFb/image.webp"
+                image: "https://i.ibb.co/BVC29gFb/image.webp",
+                address: "نجع حمادي، قنا، مصر"
             },
             {
                 name: "قناطر نجع حمادي",
@@ -868,7 +932,8 @@
                 type: "nature",
                 description: "نظام قناطر مائية مبهر بني على النيل في العصر الحديث، يوفر مناظر طبيعية رائعة.",
                 icon: "🌊",
-                image: "https://i.ibb.co/qFPr0RTj/image.jpg"
+                image: "https://i.ibb.co/qFPr0RTj/image.jpg",
+                address: "نجع حمادي، قنا، مصر"
             },
             {
                 name: "المسجد العمرى (قوص)",
@@ -876,7 +941,8 @@
                 type: "mosque",
                 description: "المسجد العمرى من أشهر مساجد مدينة قوص وأقدمها المسجد المعروف يالعمرى",
                 icon: "🕌",
-                image: "https://img.youm7.com/large/202305110317261726.jpg"
+                image: "https://img.youm7.com/large/202305110317261726.jpg",
+                address: "مدينة قوص، قنا، مصر"
             }
         ];
         
@@ -895,9 +961,40 @@
             }
             
             const marker = L.marker(site.coords, {icon: icon, siteIndex: index}).addTo(map);
-            marker.bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            
+            // Create popup content (always show both image and address)
+            const popupContent = createPopupContent(site);
+            
+            marker.bindPopup(popupContent, {
+                className: 'custom-popup',
+                maxWidth: 300
+            });
+            
             markers.push(marker);
         });
+        
+        // Function to create popup content (always show both)
+        function createPopupContent(site) {
+            // Generate Google Maps navigation URL
+            const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${site.coords[0]},${site.coords[1]}`;
+            
+            return `<div class="custom-popup">
+                <h3 class="popup-title">${site.name}</h3>
+                <img src="${site.image}" alt="${site.name}" class="popup-image">
+                <p class="popup-description">${site.description}</p>
+                <div class="popup-coordinates">
+                    <span>📍</span>
+                    <span>${site.address}</span>
+                </div>
+                <div class="popup-coordinates">
+                    <span>🌍</span>
+                    <span>${site.coords[0].toFixed(6)}°N, ${site.coords[1].toFixed(6)}°E</span>
+                </div>
+                <a href="${googleMapsUrl}" target="_blank" class="popup-navigation-btn">
+                    التوجه الآن عبر خرائط جوجل
+                </a>
+            </div>`;
+        }
         
         // Add sites to the grid
         const sitesGrid = document.querySelector('.sites-grid');
@@ -914,6 +1011,10 @@
                 <div class="site-content">
                     <h3>${site.name}</h3>
                     <p>${site.description}</p>
+                    <div class="site-coordinates">
+                        <span>📍</span>
+                        <span>${site.address}</span>
+                    </div>
                     <div class="site-coordinates">
                         <span>🌍</span>
                         <span>${site.coords[0].toFixed(6)}°N, ${site.coords[1].toFixed(6)}°E</span>
