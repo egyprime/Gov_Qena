@@ -248,7 +248,7 @@ function simulateAdvancedTranslation() {
         "عدد المدن": "Number of Cities",
         "عدد الوحدات المحلية": "Number of Local Units",
         "عدد القرى التوابع": "Number of Affiliated Villages",
-        "عدد كفور ونجوع وعزب": "Number of Hamlets, Hamlets & Small Villages",
+        "عدد كفور ونجوع وعزب": "Number of Hamlets & Small Villages",
         "ابو تشت": "Abu Tesht",
         "فرشوط": "Farshut",
         "نجع حمادى": "Nag Hammadi",
@@ -299,5 +299,6 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
