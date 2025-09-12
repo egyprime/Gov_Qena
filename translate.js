@@ -62,11 +62,11 @@ function createTranslatePanel() {
     translatePanel.innerHTML = `
         <div class="translate-option" data-lang="ar">
             <i class="bi bi-translate"></i>
-            <span>العربية (اللغة الأصلية)</span>
+            <span>العربية</span>
         </div>
         <div class="translate-option" data-lang="en">
             <i class="bi bi-globe"></i>
-            <span>English (Translated)</span>
+            <span>English</span>
         </div>
         <div class="translation-quality">
             <small>Translated by Ali Allam</small>
@@ -269,7 +269,9 @@ function simulateAdvancedTranslation() {
         "🌆 هجين (شارع + قمر صناعي)": "🌆 Hybrid (Street + Satellite)",
         "🏛️ حدود المحافظة": "🏛️ Governorate Boundaries",
         "🏙️ حدود المراكز": "🏙️ Markaz Boundaries",
-        "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries"
+        "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries",
+        "👆 تحكم في الخريطة": "👆 Map Control",
+        "👆 تحكم في طبقات البيانات": "👆 Data Layers Control"
     };
     
     elementsToTranslate.forEach(selector => {
@@ -308,6 +310,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
