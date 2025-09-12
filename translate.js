@@ -257,7 +257,12 @@ function simulateAdvancedTranslation() {
         "🌆 هجين (شارع + قمر صناعي)": "🌆 Hybrid (Street + Satellite)",
         "👆 تحكم في الخريطة": "👆 Map Control",
         "👆 تحكم في طبقات البيانات": "👆 Data Layers Control",
-        "جاري تحميل بيانات الخريطة...": "Loading map data..."
+        "جاري تحميل بيانات الخريطة...": "Loading map data...",
+        "طبقات الخريطة:": "Map Layers:",
+        "🌍 خريطة محافظة قنا": "🌍 Qena Governorate Map",
+        "مفتاح الخريطة": "Map Legend",
+        "حدود المحافظة": "Governorate Boundaries",
+        "حدود المراكز": "Markaz Boundaries"
     };
     
     elementsToTranslate.forEach(selector => {
@@ -296,6 +301,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
