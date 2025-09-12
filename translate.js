@@ -156,7 +156,7 @@ function translatePage() {
         updateTranslateOptions();
         
         localStorage.setItem('translationState', 'en');
-    }, 1500);
+    }, 500);
 }
 
 // استعادة الترجمة الأصلية
@@ -172,7 +172,7 @@ function revertTranslation() {
     setTimeout(() => {
         location.reload();
         localStorage.setItem('translationState', 'ar');
-    }, 1000);
+    }, 500);
 }
 
 // محاكاة الترجمة المتقدمة (غير حرفية)
@@ -416,6 +416,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
