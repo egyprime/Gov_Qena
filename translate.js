@@ -69,7 +69,7 @@ function createTranslatePanel() {
             <span>English (Translated)</span>
         </div>
         <div class="translation-quality">
-            <small>جودة الترجمة: متقدمة (غير حرفية)</small>
+            <small>Translated by Ali Allam</small>
         </div>
     `;
     document.body.appendChild(translatePanel);
@@ -260,7 +260,16 @@ function simulateAdvancedTranslation() {
         "🏛️ حدود المحافظة": "🏛️ Governorate Boundaries",
         "🏙️ حدود المراكز": "🏙️ Markaz Boundaries",
         "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries",
-        "جاري تحميل بيانات الخريطة...": "Loading map data..."
+        "جاري تحميل بيانات الخريطة...": "Loading map data...",
+        "تحكم في الخريطة": "Map Control",
+        "تحكم في طبقات البيانات": "Data Layers Control",
+        "طبقات الخريطة": "Map Layers",
+        "🛰️ صور الأقمار الصناعية": "🛰️ Satellite Imagery",
+        "🗺️ الخريطة الطبوغرافية": "🗺️ Topographic Map",
+        "🌆 هجين (شارع + قمر صناعي)": "🌆 Hybrid (Street + Satellite)",
+        "🏛️ حدود المحافظة": "🏛️ Governorate Boundaries",
+        "🏙️ حدود المراكز": "🏙️ Markaz Boundaries",
+        "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries"
     };
     
     elementsToTranslate.forEach(selector => {
@@ -299,6 +308,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
