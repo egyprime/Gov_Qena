@@ -6,6 +6,13 @@ let translatePanelVisible = false;
 
 // تهيئة الترجمة عند تحميل الصفحة
 function initTranslation() {
+    // التحقق من حالة الترجمة السابقة
+    const savedState = localStorage.getItem('translationState');
+    if (savedState === 'en') {
+        isTranslated = true;
+        setTimeout(translatePage, 500);
+    }
+    
     // إنشاء زر الترجمة إذا لم يكن موجوداً
     if (!document.getElementById('translateBtn')) {
         createTranslateButton();
@@ -27,26 +34,8 @@ function initTranslation() {
         translateBtn.addEventListener('click', toggleTranslatePanel);
     }
     
-    // إضافة مستمعي الأحداث لخيارات الترجمة
-    const translateOptions = document.querySelectorAll('.translate-option');
-    translateOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            translateOptions.forEach(opt => opt.classList.remove('active'));
-            this.classList.add('active');
-            
-            if (lang === 'en' && !isTranslated) {
-                translatePage();
-            } else if (lang === 'ar' && isTranslated) {
-                revertTranslation();
-            }
-            
-            // إخفاء لوحة الخيارات بعد الاختيار
-            const panel = document.getElementById('translatePanel');
-            if (panel) panel.classList.remove('show');
-            translatePanelVisible = false;
-        });
-    });
+    // تحديث حالة خيارات الترجمة
+    updateTranslateOptions();
     
     // إخفاء لوحة الترجمة عند النقر خارجها
     document.addEventListener('click', function(e) {
@@ -78,7 +67,7 @@ function createTranslatePanel() {
     translatePanel.id = 'translatePanel';
     translatePanel.className = 'translate-panel';
     translatePanel.innerHTML = `
-        <div class="translate-option active" data-lang="ar">
+        <div class="translate-option" data-lang="ar">
             <i class="bi bi-translate"></i>
             <span>العربية (اللغة الأصلية)</span>
         </div>
@@ -91,6 +80,41 @@ function createTranslatePanel() {
         </div>
     `;
     document.body.appendChild(translatePanel);
+    
+    // إضافة مستمعي الأحداث لخيارات الترجمة
+    const translateOptions = document.querySelectorAll('.translate-option');
+    translateOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            
+            if (lang === 'en' && !isTranslated) {
+                translatePage();
+            } else if (lang === 'ar' && isTranslated) {
+                revertTranslation();
+            }
+            
+            // إخفاء لوحة الخيارات بعد الاختيار
+            const panel = document.getElementById('translatePanel');
+            if (panel) panel.classList.remove('show');
+            translatePanelVisible = false;
+        });
+    });
+}
+
+// تحديث خيارات الترجمة بناءً على الحالة الحالية
+function updateTranslateOptions() {
+    const arOption = document.querySelector('.translate-option[data-lang="ar"]');
+    const enOption = document.querySelector('.translate-option[data-lang="en"]');
+    
+    if (arOption && enOption) {
+        if (isTranslated) {
+            arOption.classList.remove('active');
+            enOption.classList.add('active');
+        } else {
+            arOption.classList.add('active');
+            enOption.classList.remove('active');
+        }
+    }
 }
 
 // إنشاء شاشة التحميل
@@ -135,6 +159,9 @@ function translatePage() {
         if (translateBtn) translateBtn.classList.add('active');
         isTranslated = true;
         
+        // تحديث خيارات الترجمة
+        updateTranslateOptions();
+        
         localStorage.setItem('translationState', 'en');
     }, 1500);
 }
@@ -164,7 +191,8 @@ function simulateAdvancedTranslation() {
         '.card-title', '.card-description', '.card-button',
         '.footer-content h4', '.footer-content p', '.credit-title',
         '.credit-info span', '.modal-title', '.modal-description',
-        '.overview-title', '.overview-card-title', '.overview-card-description'
+        '.overview-title', '.overview-card-title', '.overview-card-description',
+        'button', 'label', 'div[title]', 'a[title]'
     ];
     
     const translatedTexts = {
@@ -199,32 +227,43 @@ function simulateAdvancedTranslation() {
         "مراكز الاستثمار": "Investment Centers",
         "المثلث الذهبي": "Golden Triangle",
         "إغلاق": "Close",
+        "بحث": "Search",
+        "تصفية": "Filter",
+        "تفاصيل": "Details",
+        "عرض الكل": "Show All",
         "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
     };
     
     elementsToTranslate.forEach(selector => {
         const elements = document.querySelectorAll(selector);
         elements.forEach(element => {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'BUTTON') {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                // معالجة الحقول النصية
+                if (element.placeholder && translatedTexts[element.placeholder]) {
+                    element.placeholder = translatedTexts[element.placeholder];
+                }
                 return;
             }
             
+            // معالجة النصوص العادية
             const originalText = element.textContent.trim();
-            if (translatedTexts[originalText]) {
+            if (originalText && translatedTexts[originalText]) {
                 element.textContent = translatedTexts[originalText];
             }
             
+            // معالجة عناوين العناصر
             if (element.title && translatedTexts[element.title]) {
                 element.title = translatedTexts[element.title];
             }
             
-            if (element.placeholder && translatedTexts[element.placeholder]) {
-                element.placeholder = translatedTexts[element.placeholder];
+            // معالجة نصوص الأزرار
+            if (element.tagName === 'BUTTON' && originalText && translatedTexts[originalText]) {
+                element.textContent = translatedTexts[originalText];
             }
         });
     });
     
-    // إضافة فئة للجسم للتحكم في التنسيق - بدون تغيير الاتجاه
+    // إضافة فئة للجسم للتحكم في التنسيق
     document.body.classList.add('english-version');
     document.documentElement.setAttribute('lang', 'en');
 }
