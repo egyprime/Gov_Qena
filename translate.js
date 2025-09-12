@@ -270,7 +270,7 @@ function simulateAdvancedTranslation() {
         "الأسئلة الشائعة": "Frequently Asked Questions",
         "تواصل معنا": "Contact Us",
         "الرئيسية": "Home",
-        "الفرص الاستثمارية مميزة في محافظة قنا": "Featured Investment Opportunities in Qena Governorate",
+        "فرص استثمارية مميزة في محافظة قنا": "Featured Investment Opportunities in Qena Governorate",
         "اكتشف أفضل الفرص الاستثمارية المتاحة في أراضي محافظة قنا واستثمر في مستقبل مزدهر": "Discover the best available investment opportunities in Qena Governorate and invest in a prosperous future",
         "استعرض الفرص الاستثمارية": "Explore Investment Opportunities",
         "لماذا تختار الاستثمار في قنا؟": "Why Choose to Invest in Qena?",
@@ -377,7 +377,34 @@ function simulateAdvancedTranslation() {
         "خدمي": "Service",
         "سياحي": "Tourism",
         "زراعي": "Agricultural",
-        "صناعي": "Industrial"
+        "صناعي": "Industrial",
+        "اقامة مول تجاري": "Establish a Commercial Mall",
+        "ارض فضاء بالترعة المضرانية": "Open Land at Al-Mudarana Canal",
+        "اقامة محطة وقود سيارات وخدمات": "Establish a Car Fuel Station and Services",
+        "مول تجاري او مجمع طبي": "Commercial Mall or Medical Complex",
+        "نشاط اداري وتجاري": "Administrative and Commercial Activity",
+        "حديقة المساكن": "Residential Park",
+        "مرسي نجع حمادي السياحي": "Naj' Hammadi Tourist Marina",
+        "اقامة فندق سياحي - 2": "Establish a Tourist Hotel - 2",
+        "النادي الاجتماعي ومسرح": "Social Club and Theater",
+        "فندق سياحي": "Tourist Hotel",
+        "معمل التفريغ الجديد": "New Discharge Plant",
+        "محطة تسمين العجول": "Cattle Fattening Station",
+        "المنطقة الحرافية بالترامسة": "Al-Tramsa Artisanal Zone",
+        "مزرعة 390 فدان شيخ علي": "Sheikh Ali 390-Feddan Farm",
+        "منتجع سياحي": "Tourist Resort",
+        "مشروع خدمات طرق": "Road Services Project",
+        "مشروعات انتاج داجني": "Poultry Production Projects",
+        "محافظة قنا - مركز نجع حمادي": "Qena Governorate - Naj' Hammadi Center",
+        "محافظة قنا - مركز قنا": "Qena Governorate - Qena Center",
+        "مصر - محافظة قنا": "Egypt - Qena Governorate",
+        "مدينة ترفيهية": "Entertainment City",
+        "مدارس خاصة": "Private Schools",
+        "محطة تموين سيارات": "Car Fuel Station",
+        "نشاط تجاري خدمي": "Commercial Service Activity",
+        "مرسي سياحي": "Tourist Marina",
+        "فندق سياحي ملحق به مول تجار": "Tourist Hotel with Commercial Mall",
+        "استصلاح زراعي 390 فدان": "Agricultural Reclamation 390 Feddan"
     };
     
     elementsToTranslate.forEach(selector => {
@@ -416,6 +443,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
