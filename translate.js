@@ -232,7 +232,35 @@ function simulateAdvancedTranslation() {
         "تفاصيل": "Details",
         "عرض الكل": "Show All",
         "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved",
-        "خريطة الأساس - محافظة قنا": "Show All",
+        "خريطة الأساس - محافظة قنا": "Base Map - Qena Governorate",
+        "الرجوع للصفحة السابقة": "Back to Previous Page",
+        "تحكم في الخريطة": "Map Control",
+        "طبقات الخريطة": "Map Layers",
+        "صور الأقمار الصناعية": "Satellite Imagery",
+        "الخريطة الطبوغرافية": "Topographic Map",
+        "هجين (شارع + قمر صناعي)": "Hybrid (Street + Satellite)",
+        "تحكم في طبقات البيانات": "Data Layers Control",
+        "حدود المحافظة": "Governorate Boundaries",
+        "حدود المراكز": "Markaz Boundaries",
+        "حدود القرى والشياخات": "Villages and Sheyakhas Boundaries",
+        "التقسيم الإداري لمحافظة قنا": "Administrative Division of Qena Governorate",
+        "اسم الموقع": "Location Name",
+        "عدد المدن": "Number of Cities",
+        "عدد الوحدات المحلية": "Number of Local Units",
+        "عدد القرى التوابع": "Number of Affiliated Villages",
+        "عدد كفور ونجوع وعزب": "Number of Hamlets, Hamlets & Small Villages",
+        "ابو تشت": "Abu Tesht",
+        "فرشوط": "Farshut",
+        "نجع حمادى": "Nag Hammadi",
+        "دشنا": "Deshna",
+        "الوقف": "Al Waqf",
+        "قنا": "Qena",
+        "فقط": "Faqous",
+        "قوص": "Qus",
+        "نقادة": "Naqada",
+        "إجمالى المحافظة": "Governorate Total",
+        "جميع الحقوق محفوظة © 2025": "All Rights Reserved © 2025",
+        "اعداد: وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "Prepared by: GIS Unit - Qena Governorate"
     };
     
     elementsToTranslate.forEach(selector => {
@@ -271,4 +299,5 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
