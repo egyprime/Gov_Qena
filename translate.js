@@ -261,6 +261,18 @@ function simulateAdvancedTranslation() {
         "إجمالى المحافظة": "Governorate Total",
         "جميع الحقوق محفوظة © 2025": "All Rights Reserved © 2025",
         "اعداد: وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا": "Prepared by: GIS Unit - Qena Governorate"
+        "تم تحميل ${url} بنجاح": "Successfully loaded ${url}",
+        "تعذر تحميل ملف ${url}. يرجى التحقق من وجود الملف.": "Failed to load file ${url}. Please check if the file exists.",
+        "خطأ HTTP! الحالة: ${response.status}": "HTTP Error! Status: ${response.status}",
+        "تحكم في الخريطة": "Map Control",
+        "تحكم في طبقات البيانات": "Data Layers Control",
+        "🏛️ حدود المحافظة": "🏛️ Governorate Boundaries",
+        "🏙️ حدود المراكز": "🏙️ Markaz Boundaries",
+        "🏡 حدود القرى والشياخات": "🏡 Villages and Sheyakhas Boundaries",
+        "التقسيم الإداري لمحافظة قنا": "Administrative Division of Qena Governorate",
+        "عدد القرى التوابع": "Number of Affiliated Villages",
+        "عدد كفور ونجوع وعزب": "Number of Hamlets, Clusters & Small Villages",
+        "جاري تحميل بيانات الخريطة...": "Loading map data...",
     };
     
     elementsToTranslate.forEach(selector => {
@@ -299,6 +311,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
