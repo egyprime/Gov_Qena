@@ -6,13 +6,6 @@ let translatePanelVisible = false;
 
 // تهيئة الترجمة عند تحميل الصفحة
 function initTranslation() {
-    // التحقق من حالة الترجمة السابقة
-    const savedState = localStorage.getItem('translationState');
-    if (savedState === 'en') {
-        isTranslated = true;
-        setTimeout(translatePage, 500);
-    }
-    
     // إنشاء زر الترجمة إذا لم يكن موجوداً
     if (!document.getElementById('translateBtn')) {
         createTranslateButton();
