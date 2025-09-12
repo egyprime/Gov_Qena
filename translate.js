@@ -231,7 +231,8 @@ function simulateAdvancedTranslation() {
         "تصفية": "Filter",
         "تفاصيل": "Details",
         "عرض الكل": "Show All",
-        "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved"
+        "© 2025 محافظة قنا - جميع الحقوق محفوظة": "© 2025 Qena Governorate - All rights reserved",
+        "خريطة الأساس - محافظة قنا": "Show All",
     };
     
     elementsToTranslate.forEach(selector => {
@@ -270,3 +271,4 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
