@@ -340,6 +340,12 @@ function simulateAdvancedTranslation() {
         "اقامة مول تجاري": "Establish a Commercial Mall",
         "ارض فضاء بالترعة المضرانية": "Open Land at Al-Mudarana Canal",
         "اقامة محطة وقود سيارات وخدمات": "Establish a Car Fuel Station and Services",
+        "اقامة محطة وقود وخدمات": "Establish a Fuel Station and Services",
+        "خدمي": "Service",
+        "سياحي": "Tourism",
+        "زراعي": "Agricultural",
+        "صناعي": "Industrial",
+        "محافظة قنا - مركز الوقف": "Qena Governorate - Al-Waqf Center",
         "مول تجاري او مجمع طبي": "Commercial Mall or Medical Complex",
         "نشاط اداري وتجاري": "Administrative and Commercial Activity",
         "حديقة المساكن": "Residential Park",
@@ -442,21 +448,3 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
