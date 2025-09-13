@@ -134,14 +134,6 @@ function toggleTranslatePanel(e) {
     }
 }
 
-function translate(text) {
-    if (text.includes("المساحة: ${areaFormatted}")) {
-        return "Area: ${areaFormatted}";
-    }
-    // باقي الترجمات...
-    return text;
-}
-
 // ترجمة الصفحة
 function translatePage() {
     const loader = document.getElementById('googleTranslateLoader');
@@ -340,8 +332,6 @@ function simulateAdvancedTranslation() {
         "معلومات الاتصال": "Contact Information",
         "ديوان عام محافظة قنا": "Qena Governorate General Office",
         "© 2025 وحدة نظم المعلومات الجغرافية - محافظة قنا. جميع الحقوق محفوظة": "© 2025 Geographic Information Systems Unit - Qena Governorate. All rights reserved.",
-        "المساحة: %AREA%": "Area: %AREA%",
-        "المساحة: ${area}": "Area: ${area}",
         "خط الطول: ${coords.longitude}": "Longitude: ",
         "خط العرض: ": "Latitude: ",
         "هذه الفرصة متاحة": "This opportunity is available",
@@ -452,6 +442,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
