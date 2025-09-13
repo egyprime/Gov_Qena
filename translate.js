@@ -134,6 +134,19 @@ function toggleTranslatePanel(e) {
     }
 }
 
+function translate(text) {
+    // استبدل المتغير الحقيقي بـ placeholder مؤقت
+    let tempText = text.replace(/\${areaFormatted}/g, '%AREA_PLACEHOLDER%');
+    
+    // ابحث عن الترجمة
+    let translated = translations[tempText] || tempText;
+    
+    // استرجع المتغير الحقيقي
+    translated = translated.replace(/%AREA_PLACEHOLDER%/g, '${areaFormatted}');
+    
+    return translated;
+}
+
 // ترجمة الصفحة
 function translatePage() {
     const loader = document.getElementById('googleTranslateLoader');
@@ -332,7 +345,8 @@ function simulateAdvancedTranslation() {
         "معلومات الاتصال": "Contact Information",
         "ديوان عام محافظة قنا": "Qena Governorate General Office",
         "© 2025 وحدة نظم المعلومات الجغرافية - محافظة قنا. جميع الحقوق محفوظة": "© 2025 Geographic Information Systems Unit - Qena Governorate. All rights reserved.",
-        "المساحة: (.+)": "Area: $1",
+        "المساحة: %AREA%": "Area: %AREA%",
+        "المساحة: ${area}": "Area: ${area}",
         "خط الطول: ${coords.longitude}": "Longitude: ",
         "خط العرض: ": "Latitude: ",
         "هذه الفرصة متاحة": "This opportunity is available",
@@ -443,6 +457,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
