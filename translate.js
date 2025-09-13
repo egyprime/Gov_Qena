@@ -409,6 +409,8 @@ function simulateAdvancedTranslation() {
         "نشاط تجاري خدمي": "Commercial Service Activity",
         "مرسي سياحي": "Tourist Marina",
         "فندق سياحي ملحق به مول تجار": "Tourist Hotel with Commercial Mall",
+        "الواقع العمراني": "Urban Reality",
+        "موقع مقترح شل اوت": "Proposed Chill Out Location",
         "استصلاح زراعي 390 فدان": "Agricultural Reclamation 390 Feddan"
     };
     
@@ -448,3 +450,4 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
