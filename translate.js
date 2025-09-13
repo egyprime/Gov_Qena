@@ -135,16 +135,11 @@ function toggleTranslatePanel(e) {
 }
 
 function translate(text) {
-    // استبدل المتغير الحقيقي بـ placeholder مؤقت
-    let tempText = text.replace(/\${areaFormatted}/g, '%AREA_PLACEHOLDER%');
-    
-    // ابحث عن الترجمة
-    let translated = translations[tempText] || tempText;
-    
-    // استرجع المتغير الحقيقي
-    translated = translated.replace(/%AREA_PLACEHOLDER%/g, '${areaFormatted}');
-    
-    return translated;
+    if (text.includes("المساحة: ${areaFormatted}")) {
+        return "Area: ${areaFormatted}";
+    }
+    // باقي الترجمات...
+    return text;
 }
 
 // ترجمة الصفحة
@@ -457,6 +452,7 @@ function simulateAdvancedTranslation() {
 
 // بدء الترجمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initTranslation);
+
 
 
 
