@@ -2349,9 +2349,9 @@
                     // إنشاء المضلع
                     const polygon = L.polygon(coordinates, {
                         color: color,
-                        weight: 2,
-                        opacity: 1,
-                        fillOpacity: 0.8
+                        weight: 4,        // زيادة سماكة الحدود
+                        opacity: 1.5,     // زيادة وضوح الحدود
+                        fillOpacity: 0.4  // زيادة الشفافية
                     }).addTo(map);
                     
                     // إضافة تسمية داخل المضلع
