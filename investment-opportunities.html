@@ -456,6 +456,11 @@
             color: var(--primary);
         }
         
+        .popup-btn-navigate {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
         .popup-btn-favorite:hover {
             background: #ffcdd2;
             transform: translateY(-2px);
@@ -466,6 +471,12 @@
             background: #bbdefb;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+        }
+        
+        .popup-btn-navigate:hover {
+            background: #c8e6c9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
         }
         
         @keyframes popupFadeIn {
@@ -644,12 +655,21 @@
             color: #d32f2f;
         }
         
+        .opportunity-btn-navigate {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
         .opportunity-btn-view:hover {
             background: #bbdefb;
         }
         
         .opportunity-btn-favorite:hover {
             background: #ffcdd2;
+        }
+        
+        .opportunity-btn-navigate:hover {
+            background: #c8e6c9;
         }
         
         .favorite-list {
@@ -865,6 +885,10 @@
             
             .type-filters {
                 grid-template-columns: 1fr;
+            }
+            
+            .popup-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -1762,7 +1786,7 @@
           "مساحة": 4134.5,
           "عنوان": "محافظة قنا - مركز نجع حمادي",
           "فرصة": "مدارس خاصة",
-          "نوع": "خدمي",
+          "نوع": "خدمi",
           "ORIG_FID": 1
         }
       },
@@ -2438,9 +2462,29 @@
             return [x / coords.length, y / coords.length];
         }
         
-        // إنشاء محتوى البوب أب الجديد
+        // إنشاء محتوى البوب أب الجديد مع زر التوجه الآن
         function createPopupContent(properties, type) {
             const isFavorite = favorites.some(fav => fav.name === properties.اسم__12);
+            
+            // الحصول على إحداثيات النقطة
+            let lat, lng;
+            if (type === 'point') {
+                // للنقاط: استخدم إحداثيات النقطة مباشرة
+                const pointFeature = pointsData.features.find(f => f.properties.اسم__12 === properties.اسم__12);
+                if (pointFeature) {
+                    lat = pointFeature.geometry.coordinates[1];
+                    lng = pointFeature.geometry.coordinates[0];
+                }
+            } else {
+                // للمضلعات: استخدم المركز الهندسي
+                const polygonFeature = polygonsData.features.find(f => f.properties.اسم__12 === properties.اسم__12);
+                if (polygonFeature) {
+                    const centroid = getPolygonCentroid(polygonFeature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]));
+                    lat = centroid[0];
+                    lng = centroid[1];
+                }
+            }
+            
             return `
                 <div class="popup-container">
                     <div class="popup-header">
@@ -2467,10 +2511,24 @@
                             <button class="popup-btn popup-btn-zoom" onclick="zoomToFeature('${properties.اسم__12}')">
                                 <i class="bi bi-search"></i> استكشاف
                             </button>
+                            <button class="popup-btn popup-btn-navigate" onclick="navigateToLocation(${lat}, ${lng})">
+                                <i class="bi bi-geo-alt"></i> التوجه الآن
+                            </button>
                         </div>
                     </div>
                 </div>
             `;
+        }
+        
+        // وظيفة التوجه إلى الموقع في خرائط جوجل
+        function navigateToLocation(lat, lng) {
+            if (lat && lng) {
+                // فتح خرائط جوجل في نافذة جديدة مع الإحداثيات
+                const url = `https://www.google.com/maps?q=${lat},${lng}`;
+                window.open(url, '_blank');
+            } else {
+                alert('لا تتوفر إحداثيات لهذا الموقع');
+            }
         }
         
         // تكبير الخريطة إلى العنصر
@@ -2587,7 +2645,7 @@
             applyFilters();
         }
         
-        // عرض قائمة الفرص الاستثمارية
+        // عرض قائمة الفرص الاستثمارية مع زر التوجه الآن
         function renderOpportunitiesList() {
             const container = document.getElementById('opportunitiesList');
             const countElement = document.getElementById('opportunitiesCount');
@@ -2624,6 +2682,19 @@
             
             investmentOpportunities.forEach((opportunity, index) => {
                 const isFavorite = favorites.some(fav => fav.name === opportunity.properties.اسم__12);
+                
+                // الحصول على إحداثيات النقطة
+                let lat, lng;
+                if (opportunity.geometry.type === 'Point') {
+                    lat = opportunity.geometry.coordinates[1];
+                    lng = opportunity.geometry.coordinates[0];
+                } else {
+                    // للمضلعات: استخدام المركز الهندسي
+                    const centroid = getPolygonCentroid(opportunity.geometry.coordinates[0].map(coord => [coord[1], coord[0]]));
+                    lat = centroid[0];
+                    lng = centroid[1];
+                }
+                
                 const item = document.createElement('div');
                 item.className = 'opportunity-item';
                 item.innerHTML = `
@@ -2645,6 +2716,9 @@
                         </button>
                         <button class="opportunity-btn opportunity-btn-favorite" onclick="toggleFavorite('${opportunity.properties.اسم__12}', '${opportunity.properties.مساحة}', '${opportunity.properties.نوع}', '${opportunity.properties.عنوان}')">
                             <i class="bi ${isFavorite ? 'bi-heart-fill' : 'bi-heart'}"></i> ${isFavorite ? 'مفضلة' : 'مفضلة'}
+                        </button>
+                        <button class="opportunity-btn opportunity-btn-navigate" onclick="navigateToLocation(${lat}, ${lng})">
+                            <i class="bi bi-geo-alt"></i> التوجه الآن
                         </button>
                     </div>
                 `;
@@ -2702,6 +2776,21 @@
                 `;
             } else {
                 favorites.forEach(fav => {
+                    // البحث عن الإحداثيات للفرصة المفضلة
+                    let lat, lng;
+                    const pointFeature = pointsData.features.find(f => f.properties.اسم__12 === fav.name);
+                    if (pointFeature) {
+                        lat = pointFeature.geometry.coordinates[1];
+                        lng = pointFeature.geometry.coordinates[0];
+                    } else {
+                        const polygonFeature = polygonsData.features.find(f => f.properties.اسم__12 === fav.name);
+                        if (polygonFeature) {
+                            const centroid = getPolygonCentroid(polygonFeature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]));
+                            lat = centroid[0];
+                            lng = centroid[1];
+                        }
+                    }
+                    
                     const item = document.createElement('div');
                     item.className = 'favorite-item';
                     item.innerHTML = `
@@ -2720,6 +2809,9 @@
                             <button class="favorite-btn" onclick="zoomToFeature('${fav.name}')">
                                 <i class="bi bi-search"></i>
                             </button>
+                            ${lat && lng ? `<button class="favorite-btn" onclick="navigateToLocation(${lat}, ${lng})">
+                                <i class="bi bi-geo-alt"></i>
+                            </button>` : ''}
                             <button class="favorite-btn" onclick="toggleFavorite('${fav.name}', '${fav.area}', '${fav.type}', '${fav.address}')">
                                 <i class="bi bi-trash"></i>
                             </button>
