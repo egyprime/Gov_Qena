@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="./translate.css">
   <style>
+    /* أنماط CSS السابقة تبقى كما هي */
     :root {
       --primary: #004d40;
       --primary-light: #39796b;
@@ -264,6 +265,48 @@
     .card-14 .card-icon { background: linear-gradient(135deg, #1a237e 0%, #4fc3f7 100%); }
     .card-15 .card-icon { background: linear-gradient(135deg, #0d47a1 0%, #64b5f6 100%); }
     .card-16 .card-icon { background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%); }
+    
+    /* أنماط خاصة بالخانة الجديدة */
+    .qena-cluster-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .qena-cluster-card .card-icon {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 1rem;
+      background-image: url('https://i.ibb.co/PGN9cB31/11.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .qena-cluster-card .card-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(13, 71, 161, 0.4) 0%, rgba(66, 165, 245, 0.4) 100%);
+      border-radius: 15px;
+      z-index: 1;
+    }
+    
+    .qena-cluster-card .card-icon i {
+      position: relative;
+      z-index: 2;
+      font-size: 3rem;
+    }
+    
+    .qena-cluster-card:hover .card-icon {
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: scale(1.02);
+    }
+    
     .footer-section {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(20px);
@@ -775,6 +818,11 @@
         width: 100%;
         max-width: 300px;
       }
+      
+      /* تعديلات خاصة بالخانة الجديدة على الأجهزة المحمولة */
+      .qena-cluster-card .card-icon {
+        height: 150px;
+      }
     }
     @media (max-width: 480px) {
       .welcome-title {
@@ -798,6 +846,11 @@
       .investment-btn {
         padding: 10px 15px;
         font-size: 0.9rem;
+      }
+      
+      /* تعديلات خاصة بالخانة الجديدة على الشاشات الصغيرة */
+      .qena-cluster-card .card-icon {
+        height: 120px;
       }
     }
   </style>
@@ -895,6 +948,20 @@
       </p>
       <span class="card-button">
         <i class="bi bi-arrow-left"></i> ابدأ الاستكشاف
+      </span>
+    </div>
+    
+    <!-- الخانة الجديدة: تكتل قنا كبري -->
+    <div class="menu-card card-16 qena-cluster-card" data-bs-toggle="modal" data-bs-target="#modal16">
+      <div class="card-icon">
+        <i class="bi bi-building"></i>
+      </div>
+      <h3 class="card-title">تكتل قنا كبري</h3>
+      <p class="card-description">
+        تعرف على تكتل قنا كبري وأهميته الاستراتيجية في دفع عجلة التنمية بالمحافظة
+      </p>
+      <span class="card-button">
+        <i class="bi bi-arrow-left"></i> عرض التفاصيل
       </span>
     </div>
     
@@ -1197,6 +1264,37 @@
               <strong>الخدمات</strong>: خدمات لوجستية وتجارية متكاملة
             </li>
           </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+      <div class="watermark">محافظة قنا - البوابة الجغرافية</div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة جديدة لتكتل قنا كبري -->
+<div class="modal fade" id="modal16" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">تكتل قنا كبري</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.ibb.co/LzyhB91s/gov.jpg" alt="تكتل قنا كبري" class="modal-img">
+        <p class="modal-description">
+          يطيب لنا أن نعبر عن خالص الشكر والتقدير لسعادة الدكتور خالد عبد الحليم محافظ قنا، على دعمه المتواصل وقيادته الحكيمة التي تسهم في دفع عجلة التنمية بالمحافظة. نحن فخورون بأن نعمل تحت رعايته الكريمة لتحقيق رؤية المحافظة في التطوير والازدهار.
+          <br><br>
+          إن تكتل قنا كبري يمثل نقلة نوعية في مسيرة التنمية بالمحافظة، حيث يجمع بين مختلف القطاعات والجهات لتحقيق التكامل والتناغم في العمل التنموي. نحن نؤمن بأن هذا التكتل سيكون نواة لتحقيق طموحات أبناء المحافظة وبناء مستقبل أفضل للأجيال القادمة.
+        </p>
+        
+        <!-- قسم المطور -->
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+          <img src="https://i.ibb.co/LDqsRwkv/me.jpg" alt="المطور" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #42a5f5; margin-bottom: 1rem;">
+          <p style="font-weight: bold; color: white; margin-bottom: 0.5rem;">م.علي علام</p>
+          <p style="color: rgba(255, 255, 255, 0.8);">بوحدة نظم المعلومات الجغرافية</p>
         </div>
       </div>
       <div class="modal-footer">
