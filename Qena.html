@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خريطة محافظة قنا التفاعلية</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #0a1a3a, #1a3a5f, #2a5a8f); color: #fff; overflow: hidden; height: 100vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .container { display: flex; height: 100vh; }
+        .info-section { flex: 3; background: rgba(10, 26, 58, 0.85); padding: 20px; overflow-y: auto; border-left: 2px solid rgba(100, 180, 255, 0.3); }
+        .map-section { flex: 7; position: relative; }
+        
+        /* زر الرجوع للصفحة الرئيسية */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: linear-gradient(135deg, #1a5ca8, #64b4ff);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 180, 255, 0.5);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse-home 2s infinite;
+            overflow: hidden;
+        }
+        
+        .home-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .home-button:hover::before {
+            left: 100%;
+        }
+        
+        .home-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 30px rgba(100, 180, 255, 0.7);
+            background: linear-gradient(135deg, #64b4ff, #1a5ca8);
+        }
+        
+        .home-button:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(100, 180, 255, 0.5);
+        }
+        
+        .home-button i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .home-button:hover i {
+            transform: scale(1.2) rotate(-10deg);
+        }
+        
+        @keyframes pulse-home {
+            0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 180, 255, 0.5); }
+            50% { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(100, 180, 255, 0.7); }
+            100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 180, 255, 0.5); }
+        }
+        
+        header { text-align: center; padding: 15px 0; margin-bottom: 20px; border-bottom: 2px solid rgba(100, 180, 255, 0.3); }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); 
+             background: linear-gradient(to right, #64b4ff, #a6d0ff, #64b4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.1rem; color: #c0d8ff; margin-bottom: 15px; }
+        .logos { display: flex; justify-content: center; gap: 20px; margin: 15px 0; }
+        .logo { width: 70px; height: 70px; border-radius: 50%; border: 2px solid #64b4ff; box-shadow: 0 0 15px rgba(100, 180, 255, 0.7); }
+        #satelliteMap { width: 100%; height: 100%; }
+        .landmarks-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .landmark-item { background: rgba(100, 180, 255, 0.1); border-radius: 10px; padding: 15px; transition: all 0.3s ease; 
+                    border: 1px solid rgba(100, 180, 255, 0.2); cursor: pointer; }
+        .landmark-item:hover { transform: translateY(-3px); background: rgba(100, 180, 255, 0.15); box-shadow: 0 5px 15px rgba(100, 180, 255, 0.2); }
+        .landmark-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .landmark-icon { font-size: 1.5rem; }
+        .landmark-name { font-size: 1.1rem; color: #a6d0ff; font-weight: bold; }
+        .landmark-details { display: flex; flex-direction: column; gap: 5px; font-size: 0.9rem; color: #c0d8ff; }
+        .landmark-detail { display: flex; align-items: center; gap: 5px; }
+        .map-controls { position: absolute; top: 20px; right: 20px; z-index: 1000; background: rgba(10, 26, 58, 0.8); 
+                      border-radius: 10px; padding: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); 
+                      border: 1px solid rgba(100, 180, 255, 0.3); backdrop-filter: blur(5px); }
+        .map-controls h3 { color: #64b4ff; margin-bottom: 10px; font-size: 1.1rem; text-align: center; }
+        .control-btn { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: rgba(100, 180, 255, 0.2); 
+                      border: 1px solid rgba(100, 180, 255, 0.4); color: white; border-radius: 5px; cursor: pointer; 
+                      transition: all 0.3s ease; text-align: center; }
+        .control-btn:hover { background: rgba(100, 180, 255, 0.4); transform: translateY(-2px); }
+        .legend { position: absolute; bottom: 20px; left: 20px; z-index: 1000; background: rgba(10, 26, 58, 0.8); 
+                 border-radius: 10px; padding: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); 
+                 border: 1px solid rgba(100, 180, 255, 0.3); backdrop-filter: blur(5px); color: white; }
+        .legend h3 { color: #64b4ff; margin-bottom: 10px; font-size: 1.1rem; text-align: center; }
+        .legend-item { display: flex; align-items: center; margin-bottom: 8px; }
+        .legend-color { width: 20px; height: 20px; border-radius: 50%; margin-left: 10px; border: 1px solid white; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(100, 180, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(100, 180, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(100, 180, 255, 0); } }
+        .floating-panel { position: absolute; top: 20px; left: 20px; z-index: 1000; background: rgba(10, 26, 58, 0.8); 
+                         border-radius: 10px; padding: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); 
+                         border: 1px solid rgba(100, 180, 255, 0.3); backdrop-filter: blur(5px); color: white; max-width: 300px; }
+        .floating-panel h3 { color: #64b4ff; margin-bottom: 10px; font-size: 1.1rem; text-align: center; }
+        .location-btn { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: rgba(100, 180, 255, 0.2); 
+                       border: 1px solid rgba(100, 180, 255, 0.4); color: white; border-radius: 5px; cursor: pointer; 
+                       transition: all 0.3s ease; text-align: center; }
+        .location-btn:hover { background: rgba(100, 180, 255, 0.4); transform: translateY(-2px); }
+        .signature { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(100, 180, 255, 0.3); text-align: center; }
+        .signature-name { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1.2rem; color: #a6d0ff; margin-bottom: 5px; font-weight: bold; }
+        .signature-title { font-size: 0.9rem; color: #c0d8ff; }
+        .custom-icon { background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+                      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); border: 2px solid white; }
+        .custom-popup { background: rgba(10, 26, 58, 0.95); color: white; border-radius: 10px; padding: 15px; 
+                       border: 1px solid rgba(100, 180, 255, 0.5); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
+        .popup-header { border-bottom: 1px solid rgba(100, 180, 255, 0.3); padding-bottom: 10px; margin-bottom: 10px; }
+        .popup-title { font-size: 1.3rem; color: #64b4ff; margin-bottom: 5px; }
+        .popup-details { display: flex; flex-direction: column; gap: 8px; }
+        .popup-detail { display: flex; align-items: center; gap: 8px; }
+        .popup-icon { width: 20px; text-align: center; }
+        .search-box { margin: 15px 0; position: relative; }
+        .search-box input { width: 100%; padding: 10px 15px; border-radius: 25px; border: 1px solid rgba(100, 180, 255, 0.4); 
+                          background: rgba(100, 180, 255, 0.1); color: white; outline: none; }
+        .search-box input::placeholder { color: #c0d8ff; }
+        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #c0d8ff; }
+        @media (max-width: 1100px) {
+            .container { flex-direction: column; }
+            .map-section { flex: 6; }
+            .info-section { flex: 4; }
+        }
+        @media (max-width: 768px) { 
+            h1 { font-size: 1.8rem; } 
+            .map-controls, .legend, .floating-panel { position: relative; margin-bottom: 15px; }
+            .logos { flex-direction: column; align-items: center; }
+            .home-button {
+                top: 10px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الرجوع للصفحة الرئيسية -->
+    <button class="home-button" onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i>
+        الصفحة الرئيسية
+    </button>
+    
+    <div class="container">
+        <div class="info-section">
+            <header>
+                <h1>خريطة محافظة قنا التفاعلية</h1>
+                <p class="subtitle">استكشف معالم محافظة قنا وفرصها الاستثمارية</p>
+                <div class="logos">
+                    <img src="https://i.ibb.co/4wRT2xZD/Coat-of-arms-of-Qena-Governorate.jpg" alt="شعار محافظة قنا" class="logo">
+                    <img src="https://i.ibb.co/B564sKGR/logo-of-Gis-2.jpg" alt="شعار وحدة نظم المعلومات الجغرافية" class="logo">
+                </div>
+            </header>
+            
+            <div class="search-box">
+                <i>🔍</i>
+                <input type="text" id="landmarkSearch" placeholder="ابحث عن معلم أو فرصة استثمارية...">
+            </div>
+            
+            <div class="landmarks-list" id="landmarksList">
+                <!-- سيتم تعبئتها ديناميكيًا -->
+            </div>
+            
+            <div class="signature">
+                <p class="signature-name">اعداد:</p>
+                <p class="signature-name">مدير وحدة نظم المعلومات الجغرافية: م.حسام الدين طه</p>
+                <p class="signature-name">م.علي علام</p>
+            </div>
+        </div>
+        
+        <div class="map-section">
+            <div id="satelliteMap"></div>
+            
+            <div class="map-controls">
+                <h3>التحكم في الخريطة</h3>
+                <button class="control-btn" id="zoomInBtn">تكبير +</button>
+                <button class="control-btn" id="zoomOutBtn">تصغير -</button>
+                <button class="control-btn" id="resetViewBtn">العودة للوضع الافتراضي</button>
+                <button class="control-btn" id="toggleSatelliteBtn">تبديل نوع الخريطة</button>
+            </div>
+            
+            <div class="floating-panel">
+                <h3>المواقع المهمة</h3>
+                <button class="location-btn" data-lat="26.1667" data-lng="32.7167" data-zoom="13">مركز محافظة قنا</button>
+                <button class="location-btn" data-lat="26.046348" data-lng="32.242729" data-zoom="14">مدينة نجع حمادي</button>
+                <button class="location-btn" data-lat=" 26.141989" data-lng=" 32.670099" data-zoom="14">معبد دندرة</button>
+                <button class="location-btn" data-lat=" 26.189259" data-lng=" 32.744699" data-zoom="15">جامعة جنوب الوادي</button>
+                <button class="location-btn" data-lat=" 26.162202" data-lng="32.727254" data-zoom="16">محطة قطار قنا</button>
+            </div>
+            
+            <div class="legend">
+                <h3>وسيلة الإيضاح</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #1a5ca8;"></div>
+                    <span>مناطق خدمية</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4caf50;"></div>
+                    <span>مناطق زراعية</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff9800;"></div>
+                    <span>مناطق سياحية</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #607d8b;"></div>
+                    <span>مناطق صناعية</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // البيانات الحقيقية
+        const polygonsData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "id": 0,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.238692508000042,26.052069169000053],[32.238695533000055,26.051355349000062],[32.239186989000075,26.051674722000033],[32.238750416000073,26.052110284000026],[32.238692508000042,26.052069169000053]]]
+                    },
+                    "properties": {"FID":0,"اسم__12":"اقامة مول تجاري","مساحة":2188,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مول تجاري","نوع":"خدمي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 1,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.238000837000101,26.057456129000027],[32.23781622894461,26.057549315911352],[32.237926061000074,26.057725635000089],[32.237385339000049,26.058069936000088],[32.237223332000049,26.057848599000121],[32.237044766000089,26.057649368000099],[32.237805107000064,26.057259082000012],[32.238000837000101,26.057456129000027]]]
+                    },
+                    "properties": {"FID":1,"اسم__12":"ارض فضاء بالترعة المضرانية","مساحة":4134.5,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مدارس خاصة","نوع":"خدمي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 2,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.73934286322482,26.205153146158008],[32.738757233000086,26.20421757400004],[32.738920247000095,26.204151098000079],[32.739488643224746,26.205093679991876],[32.73934286322482,26.205153146158008]]]
+                    },
+                    "properties": {"FID":2,"اسم__12":"اقامة محطة وقود سيارات وخدم","مساحة":1975,"عنوان":"محافظة قنا - مركز قنا","فرصة":"محطة تموين سيارات","نوع":"خدمي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 3,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.721003645000053,26.158707134000039],[32.721026879000078,26.158231417000021],[32.721686878000071,26.15834973800003],[32.721699795000063,26.158719291000079],[32.721003645000053,26.158707134000039]]]
+                    },
+                    "properties": {"FID":3,"اسم__12":"مول تجاري او مجمع طبي","مساحة":3500,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مول تجاري او مجمع طبي","نوع":"خدمي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 16,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.248578269000063,26.039487559000058],[32.248694257000068,26.038790519000031],[32.248808343000064,26.038809312000069],[32.248686651000071,26.039511477000072],[32.248578269000063,26.039487559000058]]]
+                    },
+                    "properties": {"FID":16,"اسم__12":"مرسي نجع حمادي السياحي","مساحة":972,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مرسي سياحي","نوع":"سياحي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 17,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.240012368000066,26.044118165000032],[32.24025922900006,26.044201506000032],[32.240078198000049,26.044603422000019],[32.23985078700008,26.044528147000047],[32.240012368000066,26.044118165000032]]]
+                    },
+                    "properties": {"FID":17,"اسم__12":"اقامة فندق سياحي - 2","مساحة":1200,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"فندق سياحي","نوع":"سياحي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 18,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.716651429000024,26.156010593000069],[32.716211730000055,26.156114847000023],[32.716054953000025,26.155264023000029],[32.716658789000064,26.155155314000062],[32.717207722000069,26.155858785000078],[32.716682977000062,26.156101440000036],[32.716651429000024,26.156010593000069]]]
+                    },
+                    "properties": {"FID":18,"اسم__12":"النادي الاجتماعي ومسرح","مساحة":8099.8,"عنوان":"محافظة قنا - مركز قنا","فرصة":"فندق سياحي ملحق به مول تجاري","نوع":"سياحي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 19,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.699318776000041,26.155335410000077],[32.698669524000024,26.154528234000054],[32.699197137000056,26.15418082900003],[32.699833905000048,26.154991190000029],[32.699318776000041,26.155335410000077]]]
+                    },
+                    "properties": {"FID":19,"اسم__12":"فندق سياحي","مساحة":7012,"عنوان":"محافظة قنا - مركز قنا","فرصة":"فندق سياحي ملحق به مول تجاري","نوع":"سياحي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 22,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.662412040000049,26.121917630000024],[32.664135100000067,26.120289746000029],[32.666572149000046,26.122399387000019],[32.664832333000049,26.124047906000047],[32.662412040000049,26.121917630000024]]]
+                    },
+                    "properties": {"FID":22,"اسم__12":"المنطقة الحرفية بالترامسة","مساحة":84000,"عنوان":"محافظة قنا - مركز قنا","فرصة":"المنطقة الحرفية بالترامسة","نوع":"صناعي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 23,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.39323517400004,25.977370832000073],[32.396613197000079,25.981661440000025],[32.393940678000035,25.985017859000038],[32.393942817000038,25.98505503500007],[32.406444153000052,26.002986914000054],[32.403372499000056,26.005933013000043],[32.403358238000067,26.005933013000043],[32.403338273000031,26.005930450000051],[32.40331688200007,26.005922759000018],[32.403296917000034,26.005903534000023],[32.392432909000036,25.990118165000059],[32.390807180000024,25.987823616000064],[32.39013514100003,25.986959302000052],[32.389464884000063,25.986305535000028],[32.388480890000039,25.985497935000069],[32.387454113000047,25.984792883000072],[32.388804134000054,25.982831534000066],[32.389517173000058,25.981844438000039],[32.39323517400004,25.977370832000073]]]
+                    },
+                    "properties": {"FID":23,"اسم__12":"مزرعة 390 فدان شيخ علي","مساحة":1638000,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"استصلاح زراعي 390 فدان","نوع":"زراعي"}
+                },
+                {
+                    "type": "Feature",
+                    "id": 24,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[[32.692391417255884,26.159728309004709],[32.693137731600558,26.160338442161809],[32.692495996336028,26.160876039361696],[32.691540523831002,26.161437100463679],[32.690841745431761,26.160784306681471],[32.692391417255884,26.159728309004709]]]
+                    },
+                    "properties": {"FID":24,"اسم__12":"منتجع سياحي","مساحة":18000,"عنوان":"محافظة قنا - مركز قنا","فرصة":"منتجع سياحي","نوع":"سياحي"}
+                }
+            ]
+        };
+
+        const pointsData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "id": 0,
+                    "geometry": {"type": "Point", "coordinates": [32.238860343100818,26.051727254172164]},
+                    "properties": {"FID":0,"اسم__12":"اقامة مول تجاري","مساحة":2188,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مول تجاري","نوع":"خدمي","ORIG_FID":0}
+                },
+                {
+                    "type": "Feature",
+                    "id": 1,
+                    "geometry": {"type": "Point", "coordinates": [32.237542502462361,26.05765616808976]},
+                    "properties": {"FID":1,"اسم__12":"ارض فضاء بالترعة المضرانية","مساحة":4134.5,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مدارس خاصة","نوع":"خدمي","ORIG_FID":1}
+                },
+                {
+                    "type": "Feature",
+                    "id": 2,
+                    "geometry": {"type": "Point", "coordinates": [32.739121882074187,26.204645144288097]},
+                    "properties": {"FID":2,"اسم__12":"اقامة محطة وقود سيارات وخدم","مساحة":1975,"عنوان":"محافظة قنا - مركز قنا","فرصة":"محطة تموين سيارات","نوع":"خدمي","ORIG_FID":2}
+                },
+                {
+                    "type": "Feature",
+                    "id": 14,
+                    "geometry": {"type": "Point", "coordinates": [32.248692376548014,26.039147278774486]},
+                    "properties": {"FID":14,"اسم__12":"مرسي نجع حمادي السياحي","مساحة":972,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"مرسي سياحي","نوع":"سياحي","ORIG_FID":16}
+                },
+                {
+                    "type": "Feature",
+                    "id": 15,
+                    "geometry": {"type": "Point", "coordinates": [32.240051284540513,26.044359930695183]},
+                    "properties": {"FID":15,"اسم__12":"اقامة فندق سياحي - 2","مساحة":1200,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"فندق سياحي","نوع":"سياحي","ORIG_FID":17}
+                },
+                {
+                    "type": "Feature",
+                    "id": 20,
+                    "geometry": {"type": "Point", "coordinates": [32.664490015210852,26.122165792847078]},
+                    "properties": {"FID":20,"اسم__12":"المنطقة الحرفية بالترامسة","مساحة":84000,"عنوان":"محافظة قنا - مركز قنا","فرصة":"المنطقة الحرفية بالترامسة","نوع":"صناعي","ORIG_FID":22}
+                },
+                {
+                    "type": "Feature",
+                    "id": 21,
+                    "geometry": {"type": "Point", "coordinates": [32.396492739729851,25.99126143142502]},
+                    "properties": {"FID":21,"اسم__12":"مزرعة 390 فدان شيخ علي","مساحة":1638000,"عنوان":"محافظة قنا - مركز نجع حمادي","فرصة":"استصلاح زراعي 390 فدان","نوع":"زراعي","ORIG_FID":23}
+                },
+                {
+                    "type": "Feature",
+                    "id": 22,
+                    "geometry": {"type": "Point", "coordinates": [32.69199588791917,26.160587497798275]},
+                    "properties": {"FID":22,"اسم__12":"منتجع سياحي","مساحة":18000,"عنوان":"محافظة قنا - مركز قنا","فرصة":"منتجع سياحي","نوع":"سياحي","ORIG_FID":24}
+                }
+            ]
+        };
+
+        // إعداد الخريطة
+        const map = L.map('satelliteMap').setView([26.155, 32.716], 10);
+        
+        // إضافة طبقة الخريطة الفضائية من Google
+        const satelliteLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: 'Google Satellite'
+        }).addTo(map);
+        
+        // إضافة طبقة الخريطة الهجينة
+        const hybridLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: 'Google Hybrid'
+        });
+        
+        // إضافة طبقة الطرق
+        const roadLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: 'Google Roads'
+        });
+        
+        // إضافة عناصر تحكم الطبقات
+        const baseMaps = {
+            "الخريطة الفضائية": satelliteLayer,
+            "الخريطة الهجينة": hybridLayer,
+            "خريطة الطرق": roadLayer
+        };
+        
+        L.control.layers(baseMaps).addTo(map);
+
+        // إنشاء أيقونات مخصصة
+        function createCustomIcon(type, isPulsing = false) {
+            let iconHtml, iconColor;
+            
+            switch(type) {
+                case 'خدمي':
+                    iconHtml = '🏢';
+                    iconColor = '#1a5ca8';
+                    break;
+                case 'سياحي':
+                    iconHtml = '🏨';
+                    iconColor = '#ff9800';
+                    break;
+                case 'زراعي':
+                    iconHtml = '🌾';
+                    iconColor = '#4caf50';
+                    break;
+                case 'صناعي':
+                    iconHtml = '🏭';
+                    iconColor = '#607d8b';
+                    break;
+                default:
+                    iconHtml = '📍';
+                    iconColor = '#9e9e9e';
+            }
+            
+            const className = isPulsing ? 'custom-icon pulse' : 'custom-icon';
+            
+            return L.divIcon({
+                className: className,
+                html: `<div style="background: ${iconColor}; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; box-shadow: 0 0 10px ${iconColor};">${iconHtml}</div>`,
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
+            });
+        }
+
+        // إضافة المضلعات إلى الخريطة
+        const polygons = [];
+        polygonsData.features.forEach(feature => {
+            try {
+                const coordinates = feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]);
+                
+                if (coordinates.length < 3) {
+                    console.error('Not enough coordinates to form a polygon', feature);
+                    return;
+                }
+                
+                const color = getColorByType(feature.properties.نوع);
+                
+                const polygon = L.polygon(coordinates, {
+                    color: color,
+                    fillColor: color,
+                    fillOpacity: 0.3,
+                    weight: 2
+                }).addTo(map);
+                
+                // إضافة تسمية
+                const centroid = getPolygonCentroid(coordinates);
+                const label = L.marker(centroid, {
+                    icon: L.divIcon({
+                        className: 'polygon-label',
+                        html: `<div style="background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; white-space: nowrap;">${feature.properties.اسم__12}</div>`,
+                        iconSize: [null, null],
+                        iconAnchor: [0, 0]
+                    })
+                }).addTo(map);
+                
+                polygon.label = label;
+                
+                // ربط المعلومات مع المضلع
+                polygon.bindPopup(createPopupContent(feature.properties));
+                
+                polygon.feature = feature;
+                polygon.type = 'polygon';
+                polygons.push(polygon);
+                
+                // إضافة تأثيرات تفاعلية
+                polygon.on('mouseover', function() {
+                    this.setStyle({fillOpacity: 0.6, weight: 4});
+                });
+                
+                polygon.on('mouseout', function() {
+                    this.setStyle({fillOpacity: 0.3, weight: 2});
+                });
+                
+            } catch (error) {
+                console.error('Error adding polygon:', error, feature);
+            }
+        });
+        
+        // إضافة النقاط إلى الخريطة
+        const points = [];
+        pointsData.features.forEach(feature => {
+            try {
+                const coordinates = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+                
+                const isPulsing = Math.random() > 0.5; // بعض النقاط تنبض
+                const icon = createCustomIcon(feature.properties.نوع, isPulsing);
+                
+                const point = L.marker(coordinates, {icon: icon}).addTo(map);
+                
+                // ربط المعلومات مع النقطة
+                point.bindPopup(createPopupContent(feature.properties));
+                
+                point.feature = feature;
+                point.type = 'point';
+                points.push(point);
+                
+            } catch (error) {
+                console.error('Error adding point:', error, feature);
+            }
+        });
+        
+        // تحديد لون العنصر بناءً على نوعه
+        function getColorByType(type) {
+            switch(type) {
+                case 'خدمي': return '#1a5ca8';
+                case 'سياحي': return '#ff9800';
+                case 'زراعي': return '#4caf50';
+                case 'صناعي': return '#607d8b';
+                default: return '#9e9e9e';
+            }
+        }
+        
+        // حساب المركز الهندسي للمضلع
+        function getPolygonCentroid(coords) {
+            let x = 0, y = 0;
+            for (let i = 0; i < coords.length; i++) {
+                x += coords[i][0];
+                y += coords[i][1];
+            }
+            return [x / coords.length, y / coords.length];
+        }
+        
+        // إنشاء محتوى البوب أب
+        function createPopupContent(properties) {
+            return `
+                <div class="custom-popup">
+                    <div class="popup-header">
+                        <div class="popup-title">${properties.اسم__12}</div>
+                    </div>
+                    <div class="popup-details">
+                        <div class="popup-detail">
+                            <span class="popup-icon">📏</span>
+                            <span>${properties.مساحة} متر مربع</span>
+                        </div>
+                        <div class="popup-detail">
+                            <span class="popup-icon">📍</span>
+                            <span>${properties.عنوان}</span>
+                        </div>
+                        <div class="popup-detail">
+                            <span class="popup-icon">🏷️</span>
+                            <span>${properties.نوع}</span>
+                        </div>
+                        <div class="popup-detail">
+                            <span class="popup-icon">💼</span>
+                            <span>${properties.فرصة}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // إنشاء قائمة المعالم
+        function createLandmarksList() {
+            const landmarksList = document.getElementById('landmarksList');
+            landmarksList.innerHTML = '';
+            
+            // دمج النقاط والمضلعات في قائمة واحدة
+            const allLandmarks = [...points, ...polygons];
+            
+            allLandmarks.forEach(landmark => {
+                const feature = landmark.feature;
+                const properties = feature.properties;
+                
+                const landmarkItem = document.createElement('div');
+                landmarkItem.className = 'landmark-item';
+                landmarkItem.setAttribute('data-lat', landmark.type === 'point' ? 
+                    feature.geometry.coordinates[1] : getPolygonCentroid(feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]))[0]);
+                landmarkItem.setAttribute('data-lng', landmark.type === 'point' ? 
+                    feature.geometry.coordinates[0] : getPolygonCentroid(feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]))[1]);
+                
+                let icon;
+                switch(properties.نوع) {
+                    case 'خدمي': icon = '🏢'; break;
+                    case 'سياحي': icon = '🏨'; break;
+                    case 'زراعي': icon = '🌾'; break;
+                    case 'صناعي': icon = '🏭'; break;
+                    default: icon = '📍';
+                }
+                
+                landmarkItem.innerHTML = `
+                    <div class="landmark-header">
+                        <span class="landmark-icon">${icon}</span>
+                        <span class="landmark-name">${properties.اسم__12}</span>
+                    </div>
+                    <div class="landmark-details">
+                        <div class="landmark-detail">
+                            <span>${properties.فرصة}</span>
+                        </div>
+                        <div class="landmark-detail">
+                            <span>${properties.مساحة} م²</span>
+                        </div>
+                        <div class="landmark-detail">
+                            <span>${properties.عنوان}</span>
+                        </div>
+                    </div>
+                `;
+                
+                landmarkItem.addEventListener('click', function() {
+                    const lat = parseFloat(this.getAttribute('data-lat'));
+                    const lng = parseFloat(this.getAttribute('data-lng'));
+                    map.setView([lat, lng], 16);
+                    
+                    // فتح البوب أب للمعلم
+                    if (landmark.type === 'point') {
+                        landmark.openPopup();
+                    } else {
+                        // للمضلعات، نفتح البوب أب في المركز الهندسي
+                        const centroid = getPolygonCentroid(feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]));
+                        map.setView(centroid, 16);
+                        setTimeout(() => {
+                            landmark.openPopup();
+                        }, 500);
+                    }
+                });
+                
+                landmarksList.appendChild(landmarkItem);
+            });
+        }
+        
+        // إضافة وظيفة البحث
+        function setupSearch() {
+            const searchInput = document.getElementById('landmarkSearch');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const landmarks = document.querySelectorAll('.landmark-item');
+                
+                landmarks.forEach(landmark => {
+                    const name = landmark.querySelector('.landmark-name').textContent.toLowerCase();
+                    const details = landmark.querySelector('.landmark-details').textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || details.includes(searchTerm)) {
+                        landmark.style.display = 'block';
+                    } else {
+                        landmark.style.display = 'none';
+                    }
+                });
+            });
+        }
+        
+        // إضافة وظائف التحكم في الخريطة
+        document.getElementById('zoomInBtn').addEventListener('click', function() {
+            map.zoomIn();
+        });
+        
+        document.getElementById('zoomOutBtn').addEventListener('click', function() {
+            map.zoomOut();
+        });
+        
+        document.getElementById('resetViewBtn').addEventListener('click', function() {
+            map.setView([26.155, 32.716], 10);
+        });
+        
+        document.getElementById('toggleSatelliteBtn').addEventListener('click', function() {
+            if (map.hasLayer(satelliteLayer)) {
+                map.removeLayer(satelliteLayer);
+                hybridLayer.addTo(map);
+            } else if (map.hasLayer(hybridLayer)) {
+                map.removeLayer(hybridLayer);
+                roadLayer.addTo(map);
+            } else {
+                map.removeLayer(roadLayer);
+                satelliteLayer.addTo(map);
+            }
+        });
+        
+        // إضافة وظائف الانتقال للمواقع
+        document.querySelectorAll('.location-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lat = parseFloat(this.getAttribute('data-lat'));
+                const lng = parseFloat(this.getAttribute('data-lng'));
+                const zoom = parseInt(this.getAttribute('data-zoom'));
+                map.setView([lat, lng], zoom);
+            });
+        });
+        
+        // تهيئة القائمة والبحث
+        createLandmarksList();
+        setupSearch();
+    </script>
+</body>
+</html>
