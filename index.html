@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>البوابة الجغرافية - محافظة قنا</title>
-  <title>البوابة الجغرافية - محافظة قنا</title>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RY2MPEWXRK"></script>
@@ -730,6 +729,153 @@
         100% { transform: rotate(360deg); }
     }
     
+    /* أنماط جديدة للنافذة المنبثقة للفرص الاستثمارية */
+    .investment-choice-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .investment-choice-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .investment-icon-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .investment-icon-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+    }
+    
+    .investment-choice-title {
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .investment-choice-description {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    
+    .investment-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+    
+    .feature-badge {
+      background: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.9);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .investment-choice-arrow {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .investment-choice-card:hover .investment-choice-arrow {
+      color: white;
+      transform: translateY(-50%) translateX(-5px);
+    }
+    
+    .investment-choice-content {
+      margin-right: 2.5rem;
+    }
+    
+    /* نافذة شركة المياه */
+    .water-company-modal .modal-content {
+      background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    }
+    
+    .water-company-icon {
+      font-size: 4rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+    
+    .water-company-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 1.5rem;
+    }
+    
+    .water-company-feature {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: 8px;
+      border-right: 4px solid #4fc3f7;
+    }
+    
+    .water-company-feature i {
+      margin-left: 10px;
+      font-size: 1.2rem;
+      color: #4fc3f7;
+    }
+    
+    .contact-water-company {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    
+    .contact-water-company:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      color: white;
+    }
+    
     @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
@@ -775,6 +921,12 @@
         width: 100%;
         max-width: 300px;
       }
+      .investment-choice-title {
+        font-size: 1.1rem;
+      }
+      .investment-choice-description {
+        font-size: 0.85rem;
+      }
     }
     @media (max-width: 480px) {
       .welcome-title {
@@ -798,6 +950,14 @@
       .investment-btn {
         padding: 10px 15px;
         font-size: 0.9rem;
+      }
+      .investment-choice-card {
+        padding: 1rem;
+      }
+      .investment-icon-container {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -835,7 +995,9 @@
         <i class="bi bi-arrow-left"></i> عرض الخريطة
       </span>
     </a>
-    <a href="foras.html" class="menu-card card-1" onclick="trackClick('الفرص الاستثمارية')">
+    
+    <!-- تم تعديل هذا القسم للفرص الاستثمارية -->
+    <a href="#" class="menu-card card-1" onclick="openInvestmentModal()" data-bs-toggle="modal" data-bs-target="#investmentModal">
       <div class="card-icon pulse">
         <i class="bi bi-graph-up-arrow"></i>
       </div>
@@ -847,6 +1009,7 @@
         <i class="bi bi-arrow-left"></i> استكشف الفرص
       </span>
     </a>
+    
     <a href="government-services.html" class="menu-card card-2" onclick="trackClick('الخدمات والمرافق العامة')">
       <div class="card-icon">
         <i class="bi bi-shield-check"></i>
@@ -859,6 +1022,7 @@
         <i class="bi bi-arrow-left"></i> عرض الخدمات
       </span>
     </a>
+    
     <a href="tourism.html" class="menu-card card" onclick="trackClick('السياحة والآثار')">
       <div class="card-icon">
         <img src="https://i.ibb.co/W4xL5jXh/Chat-GPT-Image-5-2025-02-49-41.png" alt="السياحة والآثار" style="width: 4.5rem; height: 4.5rem; object-fit: contain;">
@@ -897,8 +1061,6 @@
         <i class="bi bi-arrow-left"></i> ابدأ الاستكشاف
       </span>
     </div>
-    
-    <!-- تم حذف قسم وحدة نظم المعلومات الجغرافية -->
   </div>
 </div>
 
@@ -1207,6 +1369,155 @@
   </div>
 </div>
 
+<!-- نافذة الفرص الاستثمارية الجديدة -->
+<div class="modal fade" id="investmentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; overflow: hidden; border: none; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);">
+      <div class="modal-header" style="background: rgba(0, 0, 0, 0.2); border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding: 20px;">
+        <h5 class="modal-title" style="color: white; font-size: 1.8rem; font-weight: 700;">
+          <i class="bi bi-graph-up-arrow me-2"></i> اختر نوع الفرص الاستثمارية
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body p-4" style="color: white;">
+        <div class="text-center mb-4">
+          <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">
+            اختر نوع الفرص الاستثمارية التي ترغب في استكشافها بمحافظة قنا
+          </p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- الخيار الأول: فرص استثمارية ولاية محافظة قنا -->
+          <div class="col-lg-6">
+            <div class="investment-choice-card" onclick="window.location.href='government-services.html'">
+              <div class="investment-icon-container" style="background: linear-gradient(135deg, #ff9a00 0%, #ff5e00 100%);">
+                <i class="bi bi-buildings"></i>
+              </div>
+              <div class="investment-choice-content">
+                <h4 class="investment-choice-title">
+                  فرص استثمارية ولاية محافظة قنا
+                </h4>
+                <p class="investment-choice-description">
+                  استكشف الفرص الاستثمارية المتاحة في مختلف المجالات بمحافظة قنا مع خرائط تفاعلية ومعلومات مفصلة
+                </p>
+                <div class="investment-features">
+                  <span class="feature-badge">مجالات متنوعة</span>
+                  <span class="feature-badge">خرائط تفاعلية</span>
+                  <span class="feature-badge">بيانات محدثة</span>
+                </div>
+              </div>
+              <div class="investment-choice-arrow">
+                <i class="bi bi-arrow-left-circle-fill"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- الخيار الثاني: فرص استثمارية ولاية شركة مياه الشرب والصرف الصحي بقنا -->
+          <div class="col-lg-6">
+            <div class="investment-choice-card" onclick="openWaterCompanyModal()">
+              <div class="investment-icon-container" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">
+                <i class="bi bi-droplet"></i>
+              </div>
+              <div class="investment-choice-content">
+                <h4 class="investment-choice-title">
+                  فرص استثمارية ولاية شركة مياه الشرب والصرف الصحي بقنا
+                </h4>
+                <p class="investment-choice-description">
+                  فرص استثمارية في مشاريع المياه والصرف الصحي بمحافظة قنا لضمان توفير خدمات مستدامة
+                </p>
+                <div class="investment-features">
+                  <span class="feature-badge">مشاريع مياه</span>
+                  <span class="feature-badge">صرف صحي</span>
+                  <span class="feature-badge">استدامة</span>
+                </div>
+              </div>
+              <div class="investment-choice-arrow">
+                <i class="bi bi-arrow-left-circle-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-5 text-center">
+          <p style="opacity: 0.8; font-size: 0.9rem;">
+            <i class="bi bi-info-circle me-1"></i>
+            يمكنك دائمًا العودة لتغيير اختيارك أو استكشاف كلا الخيارين
+          </p>
+        </div>
+      </div>
+      
+      <div class="modal-footer" style="background: rgba(0, 0, 0, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.2);">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle me-2"></i> إغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة شركة المياه -->
+<div class="modal fade water-company-modal" id="waterCompanyModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">شركة مياه الشرب والصرف الصحي بقنا</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="water-company-icon">
+          <i class="bi bi-droplet"></i>
+        </div>
+        
+        <div class="text-center mb-4">
+          <h4 style="color: white; font-weight: 700;">فرص استثمارية في مجال المياه</h4>
+          <p style="color: rgba(255, 255, 255, 0.9);">
+            نعمل حاليًا على تطوير بوابة فرص الاستثمار الخاصة بشركة مياه الشرب والصرف الصحي بمحافظة قنا.
+          </p>
+        </div>
+        
+        <div class="water-company-features">
+          <div class="water-company-feature">
+            <i class="bi bi-check-circle"></i>
+            <span>مشاريع تطوير شبكات المياه</span>
+          </div>
+          <div class="water-company-feature">
+            <i class="bi bi-check-circle"></i>
+            <span>مشاريع الصرف الصحي المستدام</span>
+          </div>
+          <div class="water-company-feature">
+            <i class="bi bi-check-circle"></i>
+            <span>شراكات استثمارية في القطاع المائي</span>
+          </div>
+          <div class="water-company-feature">
+            <i class="bi bi-check-circle"></i>
+            <span>تحديث وتطوير المحطات والمعالجة</span>
+          </div>
+        </div>
+        
+        <div class="progress-container mt-4">
+          <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+        
+        <p class="text-center mt-3" style="color: rgba(255, 255, 255, 0.8);">
+          قيد التطوير - سيتم الإعلان قريبًا
+        </p>
+        
+        <div class="text-center mt-4">
+          <a href="http://qena.gov.eg/Default.aspx" target="_blank" class="contact-water-company">
+            <i class="bi bi-globe me-2"></i> زيارة موقع المحافظة
+          </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle me-2"></i> إغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer-section">
   <div class="footer-content">
     <h4>البوابة الجغرافية لمحافظة قنا</h4>
@@ -1232,6 +1543,29 @@
 <script>
   function trackClick(sectionName) {
     console.log('تم النقر على: ' + sectionName);
+    gtag('event', 'click', {
+      'event_category': 'Menu',
+      'event_label': sectionName
+    });
+  }
+
+  function openInvestmentModal() {
+    trackClick('الفرص الاستثمارية');
+    // يتم فتح النافذة عبر data-bs-toggle في الرابط
+  }
+
+  function openWaterCompanyModal() {
+    // إغلاق النافذة الحالية
+    const investmentModal = bootstrap.Modal.getInstance(document.getElementById('investmentModal'));
+    if (investmentModal) {
+      investmentModal.hide();
+    }
+    
+    // فتح نافذة شركة المياه بعد تأخير بسيط
+    setTimeout(() => {
+      const waterModal = new bootstrap.Modal(document.getElementById('waterCompanyModal'));
+      waterModal.show();
+    }, 300);
   }
 
   document.addEventListener('DOMContentLoaded', function() {
