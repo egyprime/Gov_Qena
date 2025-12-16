@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تحليل المنطقة العازلة - محافظة قنا</title>
+    <style>
+        /* ============ RESET & BASE STYLES ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f2ff 0%, #cce5ff 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* ============ HEADER ============ */
+        .header {
+            background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #3182ce;
+            box-shadow: 0 4px 20px rgba(66, 153, 225, 0.2);
+        }
+        
+        .logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-img {
+            height: 70px;
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            background: white;
+            padding: 5px;
+        }
+        
+        .title {
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        h2 {
+            color: #ebf8ff;
+            font-size: 1.3rem;
+            font-weight: normal;
+        }
+        
+        /* ============ MAIN CONTAINER ============ */
+        .container {
+            display: flex;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            height: calc(100vh - 180px);
+        }
+        
+        /* ============ SIDEBAR ============ */
+        .sidebar {
+            width: 400px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(66, 153, 225, 0.1);
+            border: 2px solid #bee3f8;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .data-source-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .data-source-section h3 {
+            color: #2b6cb0;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .data-source-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .source-btn {
+            padding: 12px;
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .source-btn:hover {
+            background: #e2e8f0;
+            border-color: #a0aec0;
+        }
+        
+        .source-btn.active {
+            background: #4299e1;
+            color: white;
+            border-color: #3182ce;
+        }
+        
+        .data-stats {
+            background: #f0fff4;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 1px solid #c6f6d5;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        /* ============ POINTS LIST ============ */
+        .points-list {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            background: #f8fafc;
+        }
+        
+        .points-list h3 {
+            color: #2b6cb0;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            background: #f8fafc;
+            padding: 5px 0;
+            z-index: 10;
+        }
+        
+        .points-list-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .point-item {
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .point-item:hover {
+            background: #ebf8ff;
+            border-color: #90cdf4;
+            transform: translateX(-3px);
+        }
+        
+        .point-item.selected {
+            background: #4299e1;
+            color: white;
+            border-color: #3182ce;
+        }
+        
+        .point-icon {
+            width: 36px;
+            height: 36px;
+            background: #4299e1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .point-item.selected .point-icon {
+            background: white;
+            color: #4299e1;
+        }
+        
+        .point-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .point-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .point-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+        
+        .point-type {
+            color: #718096;
+            background: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .point-coords {
+            color: #a0aec0;
+        }
+        
+        .point-item.selected .point-type,
+        .point-item.selected .point-coords {
+            color: #ebf8ff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ============ BUFFER BUTTON ============ */
+        .buffer-btn {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(237, 137, 54, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .buffer-btn:hover {
+            background: linear-gradient(135deg, #dd6b20 0%, #c05621 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(237, 137, 54, 0.3);
+        }
+        
+        .buffer-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* ============ MAP CONTAINER ============ */
+        .map-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #map {
+            flex: 1;
+            border-radius: 15px;
+            border: 3px solid #90cdf4;
+            box-shadow: 0 5px 20px rgba(66, 153, 225, 0.15);
+        }
+        
+        /* ============ BUFFER MODAL ============ */
+        .buffer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(2px);
+        }
+        
+        .buffer-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .buffer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .buffer-title {
+            color: #2b6cb0;
+            font-size: 1.5rem;
+        }
+        
+        .close-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            background: #c53030;
+            transform: rotate(90deg);
+        }
+        
+        .buffer-controls {
+            margin: 20px 0;
+        }
+        
+        .buffer-controls label {
+            display: block;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .buffer-slider {
+            width: 100%;
+            margin: 15px 0;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+        }
+        
+        .buffer-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #4299e1;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .buffer-value {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2b6cb0;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background: #ebf8ff;
+            border-radius: 10px;
+            border: 2px solid #bee3f8;
+        }
+        
+        .buffer-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .buffer-option {
+            padding: 12px;
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .buffer-option:hover {
+            background: #e2e8f0;
+        }
+        
+        .buffer-option.active {
+            background: #4299e1;
+            color: white;
+            border-color: #3182ce;
+        }
+        
+        /* ============ RESULTS PANEL ============ */
+        .results-panel {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 400px;
+            max-height: calc(100vh - 150px);
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+            border: 3px solid #38a169;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .results-title {
+            color: #2f855a;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .results-summary {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #c6f6d5;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #2d3748;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        
+        .features-list {
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            padding: 15px;
+            background: #f8fbff;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            background: #ebf8ff;
+            border-color: #90cdf4;
+        }
+        
+        .feature-name {
+            color: #2c5282;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-details {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        
+        .feature-detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        
+        /* ============ LOADING OVERLAY ============ */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #e2e8f0;
+            border-top: 6px solid #4299e1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ============ TOAST NOTIFICATIONS ============ */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 2001;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            max-width: 350px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .toast-success {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            border-left: 5px solid #276749;
+        }
+        
+        .toast-error {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            border-left: 5px solid #9b2c2c;
+        }
+        
+        .toast-info {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            border-left: 5px solid #2b6cb0;
+        }
+        
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: calc(100vh - 180px);
+            }
+            
+            .sidebar {
+                width: 100%;
+                max-height: 500px;
+            }
+            
+            .results-panel {
+                width: 90%;
+                left: 5%;
+                top: 120px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logos {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            h2 {
+                font-size: 1.1rem;
+            }
+            
+            .buffer-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .data-source-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .sidebar {
+                padding: 15px;
+            }
+            
+            .buffer-content {
+                padding: 20px;
+            }
+        }
+    </style>
+    
+    <!-- مكتبة Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- الهيدر -->
+    <div class="header">
+        <div class="logos">
+            <img src="https://i.ibb.co/4wRT2xZD/Coat-of-arms-of-Qena-Governorate.jpg" alt="شعار محافظة قنا" class="logo-img">
+            
+            <div class="title">
+                <h1>نظام تحليل المنطقة العازلة (Buffer)</h1>
+                <h2>محافظة قنا - نظام متكامل للتحليل الجغرافي</h2>
+            </div>
+            
+            <img src="https://i.ibb.co/B564sKGR/logo-of-Gis-2.jpg" alt="شعار وحدة GIS" class="logo-img">
+        </div>
+    </div>
+    
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <!-- الشريط الجانبي -->
+        <div class="sidebar">
+            <!-- قسم مصدر البيانات -->
+            <div class="data-source-section">
+                <h3><i class="fas fa-database"></i> مصدر البيانات</h3>
+                <p style="color: #718096; margin-bottom: 15px; font-size: 0.95rem;">
+                    اختر مصدر البيانات الجغرافية لمحافظة قنا:
+                </p>
+                
+                <div class="data-source-buttons">
+                    <button class="source-btn active" onclick="loadData('geojson')">
+                        <i class="fas fa-layer-group"></i>
+                        GeoJSON (qq.geojson)
+                    </button>
+                    <button class="source-btn" onclick="loadData('json')">
+                        <i class="fas fa-file-code"></i>
+                        JSON (qq.json)
+                    </button>
+                </div>
+                
+                <div class="data-stats" id="data-stats" style="display: none;">
+                    <div class="stat-item">
+                        <span>عدد العناصر:</span>
+                        <span id="stat-total">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>النقاط:</span>
+                        <span id="stat-points">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>الخطوط:</span>
+                        <span id="stat-lines">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>المضلعات:</span>
+                        <span id="stat-polygons">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قائمة النقاط -->
+            <div class="points-list">
+                <h3><i class="fas fa-map-marker-alt"></i> العناصر الجغرافية</h3>
+                <div class="points-list-container" id="points-container">
+                    <div style="text-align: center; padding: 40px 20px; color: #a0aec0;">
+                        <i class="fas fa-database" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p style="margin-bottom: 10px;">لم يتم تحميل البيانات بعد</p>
+                        <p style="font-size: 0.9rem;">اختر مصدر البيانات لبدء التحميل</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- زر إنشاء Buffer -->
+            <button id="buffer-button" class="buffer-btn" onclick="openBufferModal()" disabled>
+                <i class="fas fa-draw-circle"></i>
+                إنشاء منطقة عازلة (Buffer)
+            </button>
+        </div>
+        
+        <!-- الخريطة -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+    
+    <!-- نافذة Buffer -->
+    <div id="buffer-modal" class="buffer-modal">
+        <div class="buffer-content">
+            <div class="buffer-header">
+                <h3 class="buffer-title"><i class="fas fa-draw-circle"></i> إنشاء منطقة عازلة</h3>
+                <button class="close-btn" onclick="closeBufferModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="buffer-selected-point" style="background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%); padding: 15px; border-radius: 10px; margin-bottom: 20px; display: none; border: 2px solid #90cdf4;">
+                <p style="color: #2c5282; margin: 0; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="selected-point-name">النقطة المحددة</span>
+                </p>
+            </div>
+            
+            <div class="buffer-controls">
+                <label><i class="fas fa-ruler"></i> حدد نصف قطر المنطقة العازلة:</label>
+                
+                <div class="buffer-options">
+                    <button class="buffer-option" onclick="setBufferSize(0.5)">500 م</button>
+                    <button class="buffer-option" onclick="setBufferSize(1)">1 كم</button>
+                    <button class="buffer-option active" onclick="setBufferSize(2)">2 كم</button>
+                    <button class="buffer-option" onclick="setBufferSize(5)">5 كم</button>
+                </div>
+                
+                <input type="range" id="buffer-size" class="buffer-slider" min="0.1" max="20" step="0.1" value="2" oninput="updateBufferValue(this.value)">
+                
+                <div class="buffer-value">
+                    <span id="buffer-display-value">2</span> كيلومتر
+                    <div style="font-size: 0.9rem; color: #718096; margin-top: 5px;">
+                        ≈ <span id="buffer-display-meters">2000</span> متر
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #fffaf0; border-radius: 8px; border: 2px solid #fed7d7;">
+                    <p style="color: #c05621; margin: 0; font-size: 0.9rem; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-lightbulb" style="margin-top: 2px;"></i>
+                        سيتم تحليل جميع العناصر داخل دائرة نصف قطر <span id="buffer-info-radius">2</span> كم حول النقطة المحددة
+                    </p>
+                </div>
+            </div>
+            
+            <button onclick="createBuffer()" style="width: 100%; margin-top: 20px; padding: 18px; font-size: 1.1rem;" class="buffer-btn">
+                <i class="fas fa-play-circle"></i>
+                إنشاء وتحليل المنطقة العازلة
+            </button>
+        </div>
+    </div>
+    
+    <!-- نتائج التحليل -->
+    <div id="results-panel" class="results-panel">
+        <div class="results-header">
+            <h3 class="results-title"><i class="fas fa-chart-pie"></i> نتائج تحليل Buffer</h3>
+            <button onclick="closeResultsPanel()" class="close-btn" style="background: #718096; width: 30px; height: 30px; font-size: 1rem;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="results-summary">
+            <h4 style="color: #2f855a; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-info-circle"></i>
+                ملخص النتائج
+            </h4>
+            <div class="summary-item">
+                <span>نصف قطر المنطقة:</span>
+                <span id="summary-radius" style="font-weight: 600; color: #2b6cb0;">-</span>
+            </div>
+            <div class="summary-item">
+                <span>مساحة المنطقة:</span>
+                <span id="summary-area" style="font-weight: 600; color: #2b6cb0;">-</span>
+            </div>
+            <div class="summary-item">
+                <span>العناصر داخل المنطقة:</span>
+                <span id="summary-points" style="font-weight: 600; color: #2b6cb0;">-</span>
+            </div>
+            <div class="summary-item">
+                <span>نسبة التغطية:</span>
+                <span id="summary-coverage" style="font-weight: 600; color: #2b6cb0;">-</span>
+            </div>
+        </div>
+        
+        <div class="features-list">
+            <h4 style="color: #2c5282; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-layer-group"></i>
+                العناصر داخل المنطقة
+            </h4>
+            <div id="features-container">
+                <div style="text-align: center; padding: 30px 20px; color: #a0aec0;">
+                    <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <p>لم يتم إجراء تحليل بعد</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">اختر نقطة وأنشئ منطقة عازلة لعرض النتائج</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- شاشة التحميل -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text" style="font-size: 1.2rem; color: #4a5568; font-weight: 600;">
+            جاري تحميل الخرائط الفضائية...
+        </div>
+        <div id="loading-details" style="margin-top: 10px; color: #718096; font-size: 0.9rem;">
+            جوجل ساتلايت - صور فضائية عالية الدقة
+        </div>
+    </div>
+    
+    <!-- رسائل الـ Toast -->
+    <div id="toast-container"></div>
+
+    <!-- جميع الأكواد الجافاسكريبت -->
+    <script>
+        // ============================================
+        // المتغيرات الأساسية
+        // ============================================
+        let map;
+        let uploadedFeatures = [];
+        let selectedPoint = null;
+        let currentBuffer = null;
+        let bufferRadius = 2;
+        let currentDataSource = null;
+        
+        // إحداثيات مركز قنا
+        const center = [26.1644, 32.7267];
+        
+        // ============================================
+        // تهيئة الخريطة (Google Satellite)
+        // ============================================
+        function initMap() {
+            try {
+                // إنشاء الخريطة
+                map = L.map('map').setView(center, 12);
+                
+                // إضافة خرائط Google Satellite
+                L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+                    attribution: '© Google Satellite'
+                }).addTo(map);
+                
+                // إضافة التحكم في التكبير
+                L.control.zoom({
+                    position: 'topright'
+                }).addTo(map);
+                
+                // إضافة شعار
+                L.control.attribution({
+                    position: 'bottomleft'
+                }).addTo(map).addAttribution('© Google Satellite Imagery');
+                
+                console.log('✅ تم تحميل خرائط Google Satellite');
+                
+            } catch (error) {
+                console.error('❌ خطأ في تحميل الخرائط:', error);
+                showToast('خطأ في تحميل الخرائط الفضائية', 'error');
+            }
+        }
+        
+        // ============================================
+        // تحميل البيانات
+        // ============================================
+        async function loadData(sourceType) {
+            try {
+                // تحديث واجهة الأزرار
+                document.querySelectorAll('.source-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // إظهار شاشة التحميل
+                document.getElementById('loading-overlay').style.display = 'flex';
+                document.getElementById('loading-text').textContent = 'جاري تحميل البيانات...';
+                
+                // مسح البيانات السابقة
+                uploadedFeatures = [];
+                selectedPoint = null;
+                
+                // مسح القائمة
+                document.getElementById('points-container').innerHTML = `
+                    <div style="text-align: center; padding: 30px 20px; color: #a0aec0;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
+                        <p>جاري تحميل البيانات...</p>
+                    </div>
+                `;
+                
+                // مسح الخريطة
+                map.eachLayer(layer => {
+                    if (!(layer instanceof L.TileLayer)) {
+                        map.removeLayer(layer);
+                    }
+                });
+                
+                let data;
+                
+                if (sourceType === 'geojson') {
+                    data = await loadGeoJSON();
+                } else if (sourceType === 'json') {
+                    data = await loadJSON();
+                }
+                
+                if (data) {
+                    processData(data, sourceType);
+                    showToast(`تم تحميل ${uploadedFeatures.length} عنصر`, 'success');
+                }
+                
+                // إخفاء شاشة التحميل
+                document.getElementById('loading-overlay').style.display = 'none';
+                
+            } catch (error) {
+                console.error('❌ خطأ في تحميل البيانات:', error);
+                showToast('خطأ في تحميل البيانات', 'error');
+                document.getElementById('loading-overlay').style.display = 'none';
+            }
+        }
+        
+        async function loadGeoJSON() {
+            try {
+                const response = await fetch('qq.geojson');
+                if (!response.ok) throw new Error('ملف غير موجود');
+                return await response.json();
+            } catch (error) {
+                console.error('❌ خطأ في تحميل GeoJSON:', error);
+                return null;
+            }
+        }
+        
+        async function loadJSON() {
+            try {
+                const response = await fetch('qq.json');
+                if (!response.ok) throw new Error('ملف غير موجود');
+                return await response.json();
+            } catch (error) {
+                console.error('❌ خطأ في تحميل JSON:', error);
+                return null;
+            }
+        }
+        
+        // ============================================
+        // معالجة البيانات
+        // ============================================
+        function processData(data, sourceType) {
+            try {
+                let features = [];
+                
+                if (data.type === 'FeatureCollection') {
+                    features = data.features;
+                } else if (Array.isArray(data)) {
+                    features = data;
+                }
+                
+                // استخراج الميزات
+                let pointsCount = 0, linesCount = 0, polygonsCount = 0;
+                
+                features.forEach((feature, index) => {
+                    const element = extractFeature(feature, index);
+                    if (element) {
+                        uploadedFeatures.push(element);
+                        addPointToList(element);
+                        addFeatureToMap(element);
+                        
+                        if (element.geometryType === 'Point') pointsCount++;
+                        else if (element.geometryType === 'LineString') linesCount++;
+                        else if (element.geometryType.includes('Polygon')) polygonsCount++;
+                    }
+                });
+                
+                // تحديث الإحصائيات
+                document.getElementById('stat-total').textContent = uploadedFeatures.length;
+                document.getElementById('stat-points').textContent = pointsCount;
+                document.getElementById('stat-lines').textContent = linesCount;
+                document.getElementById('stat-polygons').textContent = polygonsCount;
+                document.getElementById('data-stats').style.display = 'block';
+                
+                // تفعيل زر Buffer
+                document.getElementById('buffer-button').disabled = uploadedFeatures.length === 0;
+                
+                // تكبير الخريطة
+                if (uploadedFeatures.length > 0) {
+                    const bounds = L.latLngBounds(uploadedFeatures.map(f => f.center));
+                    map.fitBounds(bounds.pad(0.1));
+                }
+                
+                currentDataSource = sourceType;
+                
+            } catch (error) {
+                console.error('❌ خطأ في معالجة البيانات:', error);
+                throw error;
+            }
+        }
+        
+        function extractFeature(feature, index) {
+            try {
+                const properties = feature.properties || feature || {};
+                const geometry = feature.geometry || {};
+                
+                // استخراج الاسم
+                let name = properties.name || 
+                          properties.NAME || 
+                          `عنصر ${index + 1}`;
+                
+                // استخراج النوع
+                let type = properties.type || 
+                          'نقطة';
+                
+                // استخراج الإحداثيات
+                let coordinates = [];
+                let centerCoords = [];
+                
+                if (geometry.type === 'Point') {
+                    const [lng, lat] = geometry.coordinates;
+                    coordinates = [[lat, lng]];
+                    centerCoords = [lat, lng];
+                } else if (geometry.type === 'LineString') {
+                    coordinates = geometry.coordinates.map(coord => [coord[1], coord[0]]);
+                    centerCoords = getCenter(coordinates);
+                } else if (geometry.type === 'Polygon') {
+                    const exteriorRing = geometry.coordinates[0];
+                    coordinates = exteriorRing.map(coord => [coord[1], coord[0]]);
+                    centerCoords = getCenter(coordinates);
+                } else if (properties.lat && properties.lng) {
+                    // للبيانات البسيطة
+                    coordinates = [[properties.lat, properties.lng]];
+                    centerCoords = [properties.lat, properties.lng];
+                } else {
+                    return null;
+                }
+                
+                return {
+                    id: `feature_${index}_${Date.now()}`,
+                    name: name,
+                    type: type,
+                    geometryType: geometry.type || 'Point',
+                    coordinates: coordinates,
+                    center: centerCoords,
+                    properties: properties
+                };
+                
+            } catch (error) {
+                console.warn(`⚠️ تخطي عنصر ${index}:`, error);
+                return null;
+            }
+        }
+        
+        function getCenter(coordinates) {
+            if (!coordinates || coordinates.length === 0) return [0, 0];
+            let sumLat = 0, sumLng = 0;
+            coordinates.forEach(coord => {
+                sumLat += coord[0];
+                sumLng += coord[1];
+            });
+            return [sumLat / coordinates.length, sumLng / coordinates.length];
+        }
+        
+        // ============================================
+        // عرض النقاط على القائمة والخريطة
+        // ============================================
+        function addPointToList(feature) {
+            const container = document.getElementById('points-container');
+            
+            // إذا كانت أول نقطة، تنظيف الحاوية
+            if (uploadedFeatures.length === 1) {
+                container.innerHTML = '';
+            }
+            
+            const pointItem = document.createElement('div');
+            pointItem.className = 'point-item';
+            pointItem.dataset.id = feature.id;
+            pointItem.onclick = () => selectPoint(feature);
+            
+            const [lat, lng] = feature.center;
+            
+            let iconClass = 'fa-map-marker-alt';
+            if (feature.geometryType === 'LineString') iconClass = 'fa-route';
+            else if (feature.geometryType.includes('Polygon')) iconClass = 'fa-draw-polygon';
+            
+            pointItem.innerHTML = `
+                <div class="point-icon">
+                    <i class="fas ${iconClass}"></i>
+                </div>
+                <div class="point-info">
+                    <div class="point-name">${feature.name}</div>
+                    <div class="point-details">
+                        <span class="point-type">${feature.type}</span>
+                        <span class="point-coords">${lat.toFixed(4)}°, ${lng.toFixed(4)}°</span>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(pointItem);
+        }
+        
+        function addFeatureToMap(feature) {
+            let layer;
+            const [lat, lng] = feature.center;
+            
+            // تحديد الألوان حسب النوع
+            let color = '#3182ce';
+            let fillColor = '#4299e1';
+            
+            if (feature.geometryType === 'LineString') {
+                color = '#e53e3e';
+                layer = L.polyline(feature.coordinates, {
+                    color: color,
+                    weight: 3,
+                    opacity: 0.8
+                });
+            } else if (feature.geometryType.includes('Polygon')) {
+                color = '#38a169';
+                fillColor = '#48bb78';
+                layer = L.polygon(feature.coordinates, {
+                    fillColor: fillColor,
+                    color: color,
+                    weight: 2,
+                    opacity: 0.8,
+                    fillOpacity: 0.3
+                });
+            } else {
+                layer = L.circleMarker([lat, lng], {
+                    radius: 8,
+                    fillColor: fillColor,
+                    color: color,
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                });
+            }
+            
+            // تخزين بيانات الميزة
+            layer.featureData = feature;
+            
+            // إضافة أحداث
+            layer.on('click', function(e) {
+                e.originalEvent.stopPropagation();
+                selectPoint(feature);
+            });
+            
+            // إضافة معلومات
+            layer.bindTooltip(feature.name, {
+                direction: 'top',
+                opacity: 0.9
+            });
+            
+            // نافذة منبثقة
+            let popupContent = `
+                <div style="padding: 10px; min-width: 200px;">
+                    <h4 style="color: #2b6cb0; margin-bottom: 8px;">${feature.name}</h4>
+                    <p style="color: #4a5568; margin-bottom: 5px;">
+                        <strong>النوع:</strong> ${feature.type}<br>
+                        <strong>الإحداثيات:</strong> ${lat.toFixed(6)}°, ${lng.toFixed(6)}°
+                    </p>
+            `;
+            
+            // إضافة خصائص إضافية
+            Object.entries(feature.properties).forEach(([key, value]) => {
+                if (!['name', 'type'].includes(key) && value) {
+                    popupContent += `<p style="color: #4a5568; margin: 3px 0;">
+                        <strong>${key}:</strong> ${value}
+                    </p>`;
+                }
+            });
+            
+            popupContent += '</div>';
+            layer.bindPopup(popupContent);
+            
+            // إضافة إلى الخريطة
+            layer.addTo(map);
+            feature.layer = layer;
+        }
+        
+        // ============================================
+        // إدارة التحديد
+        // ============================================
+        function selectPoint(feature) {
+            // إلغاء التحديد السابق
+            if (selectedPoint) {
+                const prevItem = document.querySelector(`.point-item[data-id="${selectedPoint.id}"]`);
+                if (prevItem) prevItem.classList.remove('selected');
+                
+                if (selectedPoint.layer) {
+                    if (selectedPoint.geometryType === 'Point') {
+                        selectedPoint.layer.setStyle({
+                            fillColor: '#4299e1',
+                            color: '#3182ce'
+                        });
+                    } else if (selectedPoint.geometryType === 'LineString') {
+                        selectedPoint.layer.setStyle({
+                            color: '#e53e3e'
+                        });
+                    } else {
+                        selectedPoint.layer.setStyle({
+                            fillColor: '#48bb78',
+                            color: '#38a169'
+                        });
+                    }
+                }
+            }
+            
+            // تحديد العنصر الجديد
+            selectedPoint = feature;
+            
+            const pointItem = document.querySelector(`.point-item[data-id="${feature.id}"]`);
+            if (pointItem) {
+                pointItem.classList.add('selected');
+                pointItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            if (feature.layer) {
+                // تسليط الضوء
+                if (feature.geometryType === 'Point') {
+                    feature.layer.setStyle({
+                        fillColor: '#ed8936',
+                        color: '#dd6b20',
+                        fillOpacity: 1,
+                        weight: 3
+                    });
+                } else if (feature.geometryType === 'LineString') {
+                    feature.layer.setStyle({
+                        color: '#ed8936',
+                        weight: 5,
+                        opacity: 1
+                    });
+                } else {
+                    feature.layer.setStyle({
+                        fillColor: '#ed8936',
+                        color: '#dd6b20',
+                        fillOpacity: 0.6,
+                        weight: 3
+                    });
+                }
+                
+                feature.layer.openPopup();
+            }
+            
+            // التمرير إلى المركز
+            map.setView(feature.center, 14, {
+                animate: true
+            });
+            
+            // تفعيل زر Buffer
+            document.getElementById('buffer-button').disabled = false;
+            
+            // تحديث معلومات النقطة المحددة
+            document.getElementById('selected-point-name').textContent = feature.name;
+        }
+        
+        // ============================================
+        // دوال Buffer
+        // ============================================
+        function openBufferModal() {
+            if (!selectedPoint) {
+                showToast('الرجاء تحديد نقطة أولاً', 'error');
+                return;
+            }
+            
+            document.getElementById('buffer-selected-point').style.display = 'block';
+            document.getElementById('buffer-modal').style.display = 'flex';
+        }
+        
+        function closeBufferModal() {
+            document.getElementById('buffer-modal').style.display = 'none';
+        }
+        
+        function setBufferSize(size) {
+            bufferRadius = size;
+            document.getElementById('buffer-size').value = size;
+            updateBufferValue(size);
+            
+            document.querySelectorAll('.buffer-option').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(`${size} ${size >= 1 ? 'كم' : ''}`)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function updateBufferValue(value) {
+            bufferRadius = parseFloat(value);
+            document.getElementById('buffer-display-value').textContent = value.toFixed(1);
+            document.getElementById('buffer-display-meters').textContent = Math.round(value * 1000);
+            document.getElementById('buffer-info-radius').textContent = value;
+        }
+        
+        function createBuffer() {
+            if (!selectedPoint) return;
+            
+            closeBufferModal();
+            
+            // إزالة Buffer السابق
+            if (currentBuffer) {
+                map.removeLayer(currentBuffer);
+            }
+            
+            // إنشاء Buffer جديد
+            const radiusMeters = bufferRadius * 1000;
+            currentBuffer = L.circle(selectedPoint.center, {
+                radius: radiusMeters,
+                color: '#ed8936',
+                fillColor: '#f6ad55',
+                fillOpacity: 0.3,
+                weight: 3
+            }).addTo(map);
+            
+            // تحليل الميزات داخل Buffer
+            const featuresInside = analyzeBufferFeatures();
+            
+            // تكبير الخريطة
+            const bounds = currentBuffer.getBounds();
+            map.fitBounds(bounds.pad(0.1));
+            
+            // إظهار النتائج
+            showResultsPanel(featuresInside);
+            
+            showToast(`تم إنشاء منطقة عازلة بنصف قطر ${bufferRadius} كم`, 'success');
+        }
+        
+        function analyzeBufferFeatures() {
+            const featuresInside = [];
+            
+            uploadedFeatures.forEach(feature => {
+                const distance = calculateDistance(
+                    selectedPoint.center[0], selectedPoint.center[1],
+                    feature.center[0], feature.center[1]
+                );
+                
+                if (distance <= bufferRadius) {
+                    featuresInside.push({
+                        feature: feature,
+                        distance: distance
+                    });
+                }
+            });
+            
+            return featuresInside;
+        }
+        
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        // ============================================
+        // عرض النتائج
+        // ============================================
+        function showResultsPanel(featuresInside) {
+            // تحديث الملخص
+            const area = Math.PI * Math.pow(bufferRadius, 2);
+            const coverage = uploadedFeatures.length > 0 ? 
+                ((featuresInside.length / uploadedFeatures.length) * 100).toFixed(1) : 0;
+            
+            document.getElementById('summary-radius').textContent = `${bufferRadius.toFixed(1)} كم`;
+            document.getElementById('summary-area').textContent = `${area.toFixed(2)} كم²`;
+            document.getElementById('summary-points').textContent = `${featuresInside.length} عنصر`;
+            document.getElementById('summary-coverage').textContent = `${coverage}%`;
+            
+            // تحديث القائمة
+            const container = document.getElementById('features-container');
+            container.innerHTML = '';
+            
+            if (featuresInside.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px 20px; color: #a0aec0;">
+                        <i class="fas fa-search"></i>
+                        <p>لا توجد عناصر داخل المنطقة</p>
+                    </div>
+                `;
+            } else {
+                featuresInside.sort((a, b) => a.distance - b.distance).forEach(item => {
+                    const feature = item.feature;
+                    const [lat, lng] = feature.center;
+                    
+                    const div = document.createElement('div');
+                    div.className = 'feature-item';
+                    div.onclick = () => {
+                        selectPoint(feature);
+                        closeResultsPanel();
+                    };
+                    
+                    div.innerHTML = `
+                        <div class="feature-name">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${feature.name}
+                        </div>
+                        <div class="feature-details">
+                            <div class="feature-detail-row">
+                                <span>النوع:</span>
+                                <span>${feature.type}</span>
+                            </div>
+                            <div class="feature-detail-row">
+                                <span>المسافة:</span>
+                                <span style="color: #2b6cb0;">${item.distance.toFixed(2)} كم</span>
+                            </div>
+                            <div class="feature-detail-row">
+                                <span>الإحداثيات:</span>
+                                <span>${lat.toFixed(4)}°, ${lng.toFixed(4)}°</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(div);
+                });
+            }
+            
+            document.getElementById('results-panel').style.display = 'block';
+        }
+        
+        function closeResultsPanel() {
+            document.getElementById('results-panel').style.display = 'none';
+            
+            if (currentBuffer) {
+                map.removeLayer(currentBuffer);
+                currentBuffer = null;
+            }
+        }
+        
+        // ============================================
+        // نظام الرسائل
+        // ============================================
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()" style="margin-right: auto; background: none; border: none; color: white; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 4000);
+        }
+        
+        // ============================================
+        // تهيئة النظام
+        // ============================================
+        window.onload = function() {
+            try {
+                // تهيئة الخريطة
+                initMap();
+                
+                // تحميل البيانات تلقائياً
+                setTimeout(() => {
+                    loadData('geojson');
+                }, 1000);
+                
+                console.log('🚀 النظام جاهز');
+                
+            } catch (error) {
+                console.error('❌ خطأ في التحميل:', error);
+            }
+        };
+    </script>
+</body>
+</html>
