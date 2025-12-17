@@ -30,7 +30,7 @@
         
         .header-top {
             display: flex;
-            justify-content: flex-start; /* تغيير من space-between إلى flex-start */
+            justify-content: flex-start;
             align-items: center;
             margin-bottom: 15px;
         }
@@ -247,6 +247,7 @@
             margin: 0 auto;
             gap: 20px;
             height: calc(100vh - 250px);
+            min-height: 600px; /* ارتفاع أدنى مناسب للويندوز */
         }
         
         /* ============ SIDEBAR ============ */
@@ -259,34 +260,60 @@
             border: 2px solid #bee3f8;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* يبقى hidden للعناصر الداخلية */
+            overflow: hidden;
+            position: relative;
         }
         
         .sidebar-content {
             flex: 1;
-            overflow-y: auto; /* إضافة scroll للجانب بالكامل */
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            padding-right: 5px; /* مسافة لشريط التمرير */
+            padding-right: 5px;
+            min-height: 0; /* مهم لتفعيل التمرير */
         }
         
         /* تخصيص شريط التمرير للجانب بالكامل */
         .sidebar-content::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
         
         .sidebar-content::-webkit-scrollbar-track {
-            background: #edf2f7;
+            background: #f1f5f9;
             border-radius: 10px;
         }
         
         .sidebar-content::-webkit-scrollbar-thumb {
-            background: #4299e1;
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
             border-radius: 10px;
+            border: 2px solid #f1f5f9;
         }
         
         .sidebar-content::-webkit-scrollbar-thumb:hover {
-            background: #3182ce;
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+        }
+        
+        .sidebar-scroll-indicator {
+            position: absolute;
+            bottom: 15px;
+            right: 50%;
+            transform: translateX(50%);
+            background: rgba(66, 153, 225, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: bounce 2s infinite;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(50%) translateY(0); }
+            50% { transform: translateX(50%) translateY(-5px); }
         }
         
         /* ============ DATA FILES SECTION ============ */
@@ -294,6 +321,7 @@
             margin-bottom: 25px;
             padding-bottom: 20px;
             border-bottom: 2px solid #e2e8f0;
+            flex-shrink: 0; /* منع الانكماش */
         }
         
         .data-files-section h3 {
@@ -391,6 +419,7 @@
             background: #f8fafc;
             display: flex;
             flex-direction: column;
+            min-height: 300px; /* ارتفاع أدنى */
         }
         
         .points-list h3 {
@@ -410,8 +439,8 @@
         .points-list-container {
             flex: 1;
             overflow-y: auto;
-            max-height: 400px;
             padding-right: 5px;
+            min-height: 200px;
         }
         
         /* تخصيص شريط التمرير لقائمة النقاط */
@@ -521,6 +550,7 @@
             border: 2px solid #e2e8f0;
             position: relative;
             overflow: visible;
+            flex-shrink: 0;
         }
         
         .manual-point-section h4 {
@@ -608,7 +638,7 @@
             gap: 10px;
             width: 100%;
             margin-top: 10px;
-            flex-shrink: 0; /* لمنع الضغط */
+            flex-shrink: 0;
         }
         
         .buffer-btn:hover {
@@ -946,145 +976,266 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* ============ POINT DETAILS MODAL ============ */
-        .point-details-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2002;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(2px);
-        }
-        
-        .point-details-content {
+        /* ============ POINT DETAILS POPUP ============ */
+        .point-details-popup {
+            position: absolute;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            max-height: 80vh;
-            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 1001;
+            width: 350px;
+            max-width: 90vw;
+            display: none;
+            overflow: hidden;
+            border: 2px solid #4299e1;
+            animation: popupFadeIn 0.3s ease;
         }
         
-        .point-details-header {
+        @keyframes popupFadeIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .point-details-popup-header {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            padding: 15px 20px;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
         }
         
-        .point-details-title {
-            color: #2b6cb0;
-            font-size: 1.5rem;
+        .point-details-popup-title {
+            font-size: 1.1rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .point-details-body {
-            margin-top: 20px;
+        .point-details-popup-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
         }
         
-        .point-detail-row {
-            display: flex;
+        .point-details-popup-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+        
+        .point-details-popup-body {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .point-details-popup-item {
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid #e2e8f0;
         }
         
-        .point-detail-label {
-            font-weight: 600;
-            color: #4a5568;
-            width: 140px;
-            flex-shrink: 0;
+        .point-details-popup-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
         }
         
-        .point-detail-value {
+        .point-details-popup-label {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .point-details-popup-value {
             color: #2d3748;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        .point-details-popup-actions {
+            padding: 15px 20px;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .popup-action-btn {
             flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .popup-action-btn.analyze {
+            background: #38a169;
+            color: white;
+        }
+        
+        .popup-action-btn.analyze:hover {
+            background: #2f855a;
+        }
+        
+        .popup-action-btn.close {
+            background: #cbd5e0;
+            color: #4a5568;
+        }
+        
+        .popup-action-btn.close:hover {
+            background: #a0aec0;
         }
         
         /* ============ PERIODIC NOTIFICATION ============ */
         .periodic-notification {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             z-index: 1500;
-            max-width: 350px;
+            width: 280px;
+            max-width: 90vw;
             display: none;
-            animation: slideInUp 0.5s ease;
-            border-right: 5px solid #4299e1;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            animation: slideInLeft 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: left bottom;
         }
         
-        @keyframes slideInUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .notification-content {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-right: 10px;
-        }
-        
-        .notification-content p {
-            margin-bottom: 8px;
-        }
-        
-        .notification-content strong {
-            color: #63b3ed;
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px) scale(0.8); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
         }
         
         .notification-header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            padding: 20px;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .notification-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 40px;
+            width: 20px;
+            height: 20px;
+            background: #2d3748;
+            transform: rotate(45deg);
         }
         
         .notification-title {
-            font-weight: 600;
-            color: #63b3ed;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+        }
+        
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .notification-title-text {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .notification-timer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .notification-timer-label {
+            font-size: 0.8rem;
+            color: #a0aec0;
         }
         
         .notification-timer {
-            font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 3px 8px;
-            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
             font-family: monospace;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 12px;
+            border-radius: 8px;
+            min-width: 50px;
+            text-align: center;
         }
         
-        .notification-close {
-            background: none;
+        .notification-content {
+            padding: 15px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        }
+        
+        .notification-message {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        
+        .notification-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .notification-close-btn {
+            background: #e53e3e;
+            color: white;
             border: none;
-            color: #a0aec0;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
-            padding: 2px 6px;
-            border-radius: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: all 0.3s;
         }
         
-        .notification-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+        .notification-close-btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+        
+        .notification-credits {
+            font-size: 0.85rem;
+            color: #718096;
+            text-align: left;
+            flex: 1;
+            margin-right: 15px;
         }
         
         /* ============ TEAM MODAL ============ */
@@ -1198,6 +1349,17 @@
         }
         
         /* ============ RESPONSIVE ============ */
+        @media (max-width: 1200px) {
+            .container {
+                height: calc(100vh - 220px);
+                min-height: 500px;
+            }
+            
+            .sidebar {
+                width: 350px;
+            }
+        }
+        
         @media (max-width: 1024px) {
             .container {
                 flex-direction: column;
@@ -1221,9 +1383,9 @@
             }
             
             .periodic-notification {
-                max-width: 300px;
-                left: 10px;
-                bottom: 10px;
+                width: 350px;
+                left: 20px;
+                bottom: 20px;
             }
         }
         
@@ -1275,6 +1437,16 @@
             .search-results-dropdown {
                 max-height: 200px;
             }
+            
+            .point-details-popup {
+                width: 300px;
+            }
+            
+            .periodic-notification {
+                width: 320px;
+                left: 15px;
+                bottom: 15px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1294,16 +1466,22 @@
                 flex-direction: column;
             }
             
-            .point-details-content,
             .team-content {
                 padding: 20px;
             }
             
+            .point-details-popup {
+                width: 280px;
+            }
+            
             .periodic-notification {
-                max-width: 280px;
-                padding: 12px 15px;
+                width: 300px;
                 left: 10px;
                 bottom: 10px;
+            }
+            
+            .notification-content {
+                padding: 20px;
             }
         }
     </style>
@@ -1426,6 +1604,10 @@
                     المنطقة المحيطة للحدث
                 </button>
             </div>
+            <div class="sidebar-scroll-indicator" id="scroll-indicator" style="display: none;">
+                <i class="fas fa-chevron-down"></i>
+                تمرير لأسفل
+            </div>
         </div>
         
         <!-- الخريطة -->
@@ -1544,19 +1726,31 @@
         </div>
     </div>
     
-    <!-- نافذة عرض بيانات النقطة المحددة -->
-    <div id="point-details-modal" class="point-details-modal">
-        <div class="point-details-content">
-            <div class="point-details-header">
-                <h3 class="point-details-title"><i class="fas fa-info-circle"></i> تفاصيل النقطة</h3>
-                <button class="close-btn" onclick="closePointDetailsModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+    <!-- نافذة عرض بيانات النقطة المحددة (Popup فوق النقطة) -->
+    <div id="point-details-popup" class="point-details-popup">
+        <div class="point-details-popup-header">
+            <div class="point-details-popup-title">
+                <i class="fas fa-info-circle"></i>
+                <span id="popup-point-name">تفاصيل النقطة</span>
             </div>
-            
-            <div id="point-details-body" class="point-details-body">
-                <!-- سيتم ملؤها ديناميكياً -->
-            </div>
+            <button class="point-details-popup-close" onclick="closePointDetailsPopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="point-details-popup-body" id="popup-point-body">
+            <!-- سيتم ملؤها ديناميكياً -->
+        </div>
+        
+        <div class="point-details-popup-actions">
+            <button class="popup-action-btn analyze" onclick="openBufferFromPopup()">
+                <i class="fas fa-draw-circle"></i>
+                تحليل المنطقة المحيطة
+            </button>
+            <button class="popup-action-btn close" onclick="closePointDetailsPopup()">
+                <i class="fas fa-times"></i>
+                إغلاق
+            </button>
         </div>
     </div>
     
@@ -1601,18 +1795,32 @@
     <div id="periodic-notification" class="periodic-notification">
         <div class="notification-header">
             <div class="notification-title">
-                <i class="fas fa-info-circle"></i>
-                إشعار النظام
+                <div class="notification-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="notification-title-text">
+                    تطوير النظام
+                </div>
             </div>
-            <div class="notification-timer" id="notification-timer">10</div>
+            <div class="notification-timer-container">
+                <div class="notification-timer-label">يغلق بعد</div>
+                <div class="notification-timer" id="notification-timer">10</div>
+            </div>
         </div>
+        
         <div class="notification-content">
-            <p><strong>© تصميم وتنفيذ:</strong> علي علام</p>
-            <p>البيانات الجغرافية مقدّمة من وحدة نظم المعلومات الجغرافية والشبكة الوطنية للطوارئ والسلامة العامة.</p>
+            <div class="notification-message">
+                <p><strong>© تصميم وتنفيذ:</strong> علي علام</p>
+                <p>البيانات الجغرافية مقدّمة من وحدة نظم المعلومات الجغرافية والشبكة الوطنية للطوارئ والسلامة العامة.</p>
+            </div>
         </div>
-        <button class="notification-close" onclick="closePeriodicNotification()">
-            <i class="fas fa-times"></i>
-        </button>
+        
+        <div class="notification-footer">
+            <button class="notification-close-btn" onclick="closePeriodicNotification()">
+                <i class="fas fa-times"></i>
+                إغلاق
+            </button>
+        </div>
     </div>
     
     <!-- شاشة التحميل -->
@@ -1648,6 +1856,7 @@
         let searchResults = [];
         let notificationTimer = null;
         let timerCountdown = 10;
+        let currentPopup = null;
         
         // إحداثيات مركز قنا
         const center = [26.1644, 32.7267];
@@ -1800,6 +2009,10 @@
                     } else {
                         // نقر عادي
                         clickTimeout = setTimeout(() => {
+                            // إغلاق الـ popup إذا كان مفتوحاً
+                            if (currentPopup) {
+                                closePointDetailsPopup();
+                            }
                             // إلغاء التحديد
                             if (selectedPoint) {
                                 deselectPoint();
@@ -1808,6 +2021,13 @@
                     }
                     
                     lastClickTime = currentTime;
+                });
+                
+                // عند تحريك الخريطة، إغلاق الـ popup
+                map.on('movestart', function() {
+                    if (currentPopup) {
+                        closePointDetailsPopup();
+                    }
                 });
                 
                 // إضافة شعار
@@ -2186,11 +2406,11 @@
             // إنشاء علامة مع أيقونة مناسبة
             const icon = L.divIcon({
                 className: 'custom-marker',
-                html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">
+                html: `<div style="background: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; cursor: pointer;">
                     <i class="fas ${getFileIcon(feature.fileId)}"></i>
                 </div>`,
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
             });
             
             const marker = L.marker([lat, lng], { icon: icon });
@@ -2201,7 +2421,7 @@
             // إضافة أحداث
             marker.on('click', function(e) {
                 e.originalEvent.stopPropagation();
-                selectPoint(feature);
+                showPointDetailsPopup(feature, e.latlng);
             });
             
             // إضافة معلومات
@@ -2210,36 +2430,6 @@
                 opacity: 0.9,
                 className: 'custom-tooltip'
             });
-            
-            // نافذة منبثقة
-            let popupContent = `
-                <div style="padding: 10px; min-width: 250px;">
-                    <h4 style="color: ${color}; margin-bottom: 8px;">${feature.name}</h4>
-                    <p style="color: #4a5568; margin-bottom: 5px;">
-                        <strong>النوع:</strong> ${feature.type}<br>
-                        <strong>الإحداثيات:</strong> ${lat.toFixed(6)}°, ${lng.toFixed(6)}°<br>
-                        <strong>الملف:</strong> ${getFileName(feature.fileId)}
-                    </p>
-            `;
-            
-            // إضافة خصائص إضافية
-            Object.entries(feature.properties).forEach(([key, value]) => {
-                if (!['name', 'type', 'NAME', 'Type', 'lat', 'lng', 'latitude', 'longitude', 'x', 'y'].includes(key) && value) {
-                    popupContent += `<p style="color: #4a5568; margin: 3px 0;">
-                        <strong>${key}:</strong> ${value}
-                    </p>`;
-                }
-            });
-            
-            popupContent += `
-                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
-                    <button onclick="selectPointFromPopup('${feature.id}')" style="background: ${color}; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">
-                        تحديد النقطة
-                    </button>
-                </div>
-            </div>`;
-            
-            marker.bindPopup(popupContent);
             
             // إضافة إلى طبقة العلامات
             marker.addTo(markersLayer);
@@ -2524,6 +2714,11 @@
         // إدارة التحديد
         // ============================================
         function selectPoint(feature) {
+            // إغلاق أي popup مفتوح
+            if (currentPopup) {
+                closePointDetailsPopup();
+            }
+            
             // إلغاء التحديد السابق
             deselectPoint();
             
@@ -2549,7 +2744,6 @@
                 });
                 
                 feature.marker.setIcon(icon);
-                feature.marker.openPopup();
             }
             
             // التمرير إلى المركز
@@ -2563,11 +2757,8 @@
             // تحديث معلومات النقطة المحددة
             document.getElementById('selected-point-name').textContent = feature.name;
             
-            // عرض نافذة تفاصيل النقطة
-            showPointDetailsModal(feature);
-            
-            // عدم إغلاق نافذة النتائج
-            // نتائج التحليل تبقى مفتوحة حتى يغلقها المستخدم يدوياً
+            // عرض نافذة تفاصيل النقطة كـ popup
+            showPointDetailsPopup(feature, L.latLng(feature.center));
         }
         
         function deselectPoint() {
@@ -2580,71 +2771,65 @@
                 const color = getFileColor(selectedPoint.fileId);
                 const icon = L.divIcon({
                     className: 'custom-marker',
-                    html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">
+                    html: `<div style="background: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">
                         <i class="fas ${getFileIcon(selectedPoint.fileId)}"></i>
                     </div>`,
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
                 });
                 
                 selectedPoint.marker.setIcon(icon);
-                selectedPoint.marker.closePopup();
             }
             
             selectedPoint = null;
         }
         
-        function selectPointFromPopup(featureId) {
-            const feature = uploadedFeatures.find(f => f.id === featureId);
-            if (feature) {
-                selectPoint(feature);
-            }
-        }
-        
         // ============================================
-        // عرض تفاصيل النقطة
+        // عرض تفاصيل النقطة كـ Popup
         // ============================================
-        function showPointDetailsModal(feature) {
-            const modal = document.getElementById('point-details-modal');
-            const body = document.getElementById('point-details-body');
+        function showPointDetailsPopup(feature, latlng) {
+            // إغلاق أي popup مفتوح سابقاً
+            closePointDetailsPopup();
+            
+            const popup = document.getElementById('point-details-popup');
+            const body = document.getElementById('popup-point-body');
             const color = getFileColor(feature.fileId);
             const [lat, lng] = feature.center;
             
+            // تحديث العنوان
+            document.getElementById('popup-point-name').textContent = feature.name;
+            
+            // إنشاء محتوى الـ popup
             let detailsHTML = `
-                <div class="point-detail-row">
-                    <div class="point-detail-label">الاسم:</div>
-                    <div class="point-detail-value" style="color: ${color}; font-weight: 600;">${feature.name}</div>
+                <div class="point-details-popup-item">
+                    <div class="point-details-popup-label">الاسم</div>
+                    <div class="point-details-popup-value" style="color: ${color}; font-weight: 600;">${feature.name}</div>
                 </div>
                 
-                <div class="point-detail-row">
-                    <div class="point-detail-label">النوع:</div>
-                    <div class="point-detail-value">${feature.type}</div>
+                <div class="point-details-popup-item">
+                    <div class="point-details-popup-label">النوع</div>
+                    <div class="point-details-popup-value">${feature.type}</div>
                 </div>
                 
-                <div class="point-detail-row">
-                    <div class="point-detail-label">الملف:</div>
-                    <div class="point-detail-value">${getFileName(feature.fileId)}</div>
+                <div class="point-details-popup-item">
+                    <div class="point-details-popup-label">الملف</div>
+                    <div class="point-details-popup-value">${getFileName(feature.fileId)}</div>
                 </div>
                 
-                <div class="point-detail-row">
-                    <div class="point-detail-label">الإحداثيات:</div>
-                    <div class="point-detail-value">${lat.toFixed(6)}°, ${lng.toFixed(6)}°</div>
-                </div>
-                
-                <div class="point-detail-row">
-                    <div class="point-detail-label">نوع الهندسة:</div>
-                    <div class="point-detail-value">${feature.geometryType || 'غير محدد'}</div>
+                <div class="point-details-popup-item">
+                    <div class="point-details-popup-label">الإحداثيات</div>
+                    <div class="point-details-popup-value">${lat.toFixed(6)}°, ${lng.toFixed(6)}°</div>
                 </div>
             `;
             
             // إضافة الخصائص الإضافية
             let propertyCount = 0;
             Object.entries(feature.properties).forEach(([key, value]) => {
-                if (!['name', 'type', 'NAME', 'Type', 'lat', 'lng', 'latitude', 'longitude', 'x', 'y'].includes(key) && value && propertyCount < 10) {
+                if (!['name', 'type', 'NAME', 'Type', 'lat', 'lng', 'latitude', 'longitude', 'x', 'y'].includes(key) && value && propertyCount < 5) {
                     detailsHTML += `
-                        <div class="point-detail-row">
-                            <div class="point-detail-label">${key}:</div>
-                            <div class="point-detail-value">${value}</div>
+                        <div class="point-details-popup-item">
+                            <div class="point-details-popup-label">${key}</div>
+                            <div class="point-details-popup-value">${value}</div>
                         </div>
                     `;
                     propertyCount++;
@@ -2652,11 +2837,55 @@
             });
             
             body.innerHTML = detailsHTML;
-            modal.style.display = 'flex';
+            
+            // عرض الـ popup في مكان النقطة
+            const point = map.latLngToContainerPoint(latlng);
+            popup.style.left = (point.x - 175) + 'px'; // وسط الـ popup فوق النقطة
+            popup.style.top = (point.y - 250) + 'px'; // فوق النقطة
+            popup.style.display = 'block';
+            
+            // حفظ المرجع للـ popup الحالي
+            currentPopup = {
+                element: popup,
+                feature: feature,
+                latlng: latlng
+            };
+            
+            // إضافة حدث لإغلاق الـ popup عند النقر خارجها
+            setTimeout(() => {
+                document.addEventListener('click', closePopupOnClickOutside);
+            }, 100);
         }
         
-        function closePointDetailsModal() {
-            document.getElementById('point-details-modal').style.display = 'none';
+        function closePopupOnClickOutside(e) {
+            const popup = document.getElementById('point-details-popup');
+            if (popup && !popup.contains(e.target)) {
+                // التحقق مما إذا كان النقر على علامة الخريطة
+                const isMarkerClick = e.target.closest('.leaflet-marker-icon') || 
+                                     e.target.closest('.leaflet-popup');
+                if (!isMarkerClick) {
+                    closePointDetailsPopup();
+                }
+            }
+        }
+        
+        function closePointDetailsPopup() {
+            const popup = document.getElementById('point-details-popup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+            currentPopup = null;
+            document.removeEventListener('click', closePopupOnClickOutside);
+        }
+        
+        function openBufferFromPopup() {
+            if (currentPopup && currentPopup.feature) {
+                selectPoint(currentPopup.feature);
+                closePointDetailsPopup();
+                setTimeout(() => {
+                    openBufferModal();
+                }, 300);
+            }
         }
         
         // ============================================
@@ -2856,6 +3085,36 @@
         }
         
         // ============================================
+        // إدارة شريط التمرير في الجانب
+        // ============================================
+        function initSidebarScroll() {
+            const sidebarContent = document.querySelector('.sidebar-content');
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            
+            if (sidebarContent) {
+                // التحقق مما إذا كان هناك محتوى يتطلب التمرير
+                const checkScroll = () => {
+                    const hasScroll = sidebarContent.scrollHeight > sidebarContent.clientHeight;
+                    scrollIndicator.style.display = hasScroll ? 'flex' : 'none';
+                };
+                
+                // التحقق عند تحميل المحتوى
+                checkScroll();
+                
+                // إخفاء المؤشر عند التمرير
+                sidebarContent.addEventListener('scroll', () => {
+                    if (sidebarContent.scrollTop > 50) {
+                        scrollIndicator.style.display = 'none';
+                    }
+                });
+                
+                // إعادة التحقق عند تغيير المحتوى
+                const observer = new MutationObserver(checkScroll);
+                observer.observe(sidebarContent, { childList: true, subtree: true });
+            }
+        }
+        
+        // ============================================
         // فريق العمل والإشعارات الدورية
         // ============================================
         function showTeamModal() {
@@ -2967,6 +3226,9 @@
                 setTimeout(() => {
                     loadDataFile('mostashfayat');
                 }, 1000);
+                
+                // تهيئة إدارة شريط التمرير
+                initSidebarScroll();
                 
                 // بدء الإشعارات الدورية
                 initPeriodicNotification();
