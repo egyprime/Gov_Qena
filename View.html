@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام تحليل المنطقة العازلة - محافظة قنا</title>
+    <title>نظام تحليل المنطقة المحيطة للحدث - محافظة قنا</title>
     <style>
         /* ============ RESET & BASE STYLES ============ */
         * {
@@ -23,17 +23,38 @@
         /* ============ HEADER ============ */
         .header {
             background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
-            padding: 20px;
-            text-align: center;
+            padding: 15px 20px;
             border-bottom: 4px solid #3182ce;
             box-shadow: 0 4px 20px rgba(66, 153, 225, 0.2);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
         
         .logos {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .logo-left {
+            order: 1;
+        }
+        
+        .logo-right {
+            order: 3;
+        }
+        
+        .title {
+            order: 2;
+            flex-grow: 1;
+            padding: 0 20px;
+            text-align: center;
         }
         
         .logo-img {
@@ -45,22 +66,85 @@
             padding: 5px;
         }
         
-        .title {
-            flex-grow: 1;
-            padding: 0 20px;
-        }
-        
         h1 {
             color: white;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 8px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
         
         h2 {
             color: #ebf8ff;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: normal;
+        }
+        
+        .home-btn {
+            background: #ed8936;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .home-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-2px);
+        }
+        
+        /* ============ SEARCH BAR ============ */
+        .search-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+        
+        .search-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #3182ce;
         }
         
         /* ============ MAIN CONTAINER ============ */
@@ -70,7 +154,7 @@
             max-width: 1400px;
             margin: 0 auto;
             gap: 20px;
-            height: calc(100vh - 180px);
+            height: calc(100vh - 250px);
         }
         
         /* ============ SIDEBAR ============ */
@@ -86,13 +170,14 @@
             overflow: hidden;
         }
         
-        .data-source-section {
+        /* ============ DATA FILES SECTION ============ */
+        .data-files-section {
             margin-bottom: 25px;
             padding-bottom: 20px;
             border-bottom: 2px solid #e2e8f0;
         }
         
-        .data-source-section h3 {
+        .data-files-section h3 {
             color: #2b6cb0;
             margin-bottom: 15px;
             font-size: 1.3rem;
@@ -101,14 +186,14 @@
             gap: 10px;
         }
         
-        .data-source-buttons {
+        .files-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 15px;
         }
         
-        .source-btn {
+        .file-btn {
             padding: 12px;
             background: #edf2f7;
             border: 2px solid #cbd5e0;
@@ -117,21 +202,30 @@
             font-weight: 600;
             color: #4a5568;
             transition: all 0.3s;
-            text-align: center;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
         }
         
-        .source-btn:hover {
+        .file-btn:hover {
             background: #e2e8f0;
             border-color: #a0aec0;
         }
         
-        .source-btn.active {
+        .file-btn.active {
             background: #4299e1;
             color: white;
             border-color: #3182ce;
         }
         
-        .data-stats {
+        .file-icon {
+            font-size: 1.2rem;
+            color: inherit;
+        }
+        
+        .file-stats {
             background: #f0fff4;
             padding: 15px;
             border-radius: 10px;
@@ -255,6 +349,80 @@
             background: rgba(255, 255, 255, 0.2);
         }
         
+        /* ============ MANUAL POINT SECTION ============ */
+        .manual-point-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .manual-point-section h4 {
+            color: #2b6cb0;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .coord-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .coord-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .coord-input-group label {
+            font-size: 0.9rem;
+            color: #4a5568;
+            font-weight: 600;
+        }
+        
+        .coord-input {
+            padding: 10px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .coord-input:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+        
+        .manual-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .add-point-btn {
+            flex: 1;
+            padding: 10px;
+            background: #38a169;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .add-point-btn:hover {
+            background: #2f855a;
+        }
+        
         /* ============ BUFFER BUTTON ============ */
         .buffer-btn {
             background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
@@ -300,6 +468,30 @@
             border-radius: 15px;
             border: 3px solid #90cdf4;
             box-shadow: 0 5px 20px rgba(66, 153, 225, 0.15);
+        }
+        
+        .map-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .map-controls h3 {
+            color: #2b6cb0;
+            font-size: 1.2rem;
+        }
+        
+        .zoom-info {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 600;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         /* ============ BUFFER MODAL ============ */
@@ -432,6 +624,35 @@
             border-color: #3182ce;
         }
         
+        .manual-buffer-input {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .manual-buffer-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .manual-buffer-input button {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .manual-buffer-input button:hover {
+            background: #2f855a;
+        }
+        
         /* ============ RESULTS PANEL ============ */
         .results-panel {
             position: fixed;
@@ -498,6 +719,7 @@
             margin-bottom: 12px;
             border: 2px solid #e2e8f0;
             transition: all 0.3s;
+            cursor: pointer;
         }
         
         .feature-item:hover {
@@ -599,7 +821,7 @@
             .container {
                 flex-direction: column;
                 height: auto;
-                min-height: calc(100vh - 180px);
+                min-height: calc(100vh - 250px);
             }
             
             .sidebar {
@@ -612,6 +834,10 @@
                 left: 5%;
                 top: 120px;
             }
+            
+            .files-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -620,23 +846,31 @@
                 gap: 15px;
             }
             
+            .logo-left, .logo-right {
+                order: initial;
+            }
+            
+            .title {
+                order: initial;
+            }
+            
             .logo-img {
                 height: 60px;
             }
             
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
             
             h2 {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .buffer-options {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .data-source-buttons {
+            .coord-inputs {
                 grid-template-columns: 1fr;
             }
         }
@@ -653,6 +887,10 @@
             .buffer-content {
                 padding: 20px;
             }
+            
+            .manual-btns {
+                flex-direction: column;
+            }
         }
     </style>
     
@@ -665,15 +903,36 @@
 <body>
     <!-- الهيدر -->
     <div class="header">
+        <div class="header-top">
+            <a href="index.html" class="home-btn">
+                <i class="fas fa-home"></i>
+                الرئيسية
+            </a>
+        </div>
+        
         <div class="logos">
-            <img src="https://i.ibb.co/4wRT2xZD/Coat-of-arms-of-Qena-Governorate.jpg" alt="شعار محافظة قنا" class="logo-img">
+            <div class="logo-left">
+                <img src="https://i.ibb.co/39snq7d1/nas.jpg" alt="شعار محافظة قنا" class="logo-img">
+            </div>
             
             <div class="title">
-                <h1>نظام تحليل المنطقة العازلة (Buffer)</h1>
+                <h1>نظام تحليل المنطقة المحيطة للحدث</h1>
                 <h2>محافظة قنا - نظام متكامل للتحليل الجغرافي</h2>
             </div>
             
-            <img src="https://i.ibb.co/B564sKGR/logo-of-Gis-2.jpg" alt="شعار وحدة GIS" class="logo-img">
+            <div class="logo-right">
+                <img src="https://i.ibb.co/B564sKGR/logo-of-Gis-2.jpg" alt="شعار وحدة GIS" class="logo-img">
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" placeholder="ابحث في البيانات الجغرافية (الاسم أو النوع أو الموقع)">
+                <button id="search-btn" class="search-btn">
+                    <i class="fas fa-search"></i>
+                    بحث
+                </button>
+            </div>
         </div>
     </div>
     
@@ -681,41 +940,43 @@
     <div class="container">
         <!-- الشريط الجانبي -->
         <div class="sidebar">
-            <!-- قسم مصدر البيانات -->
-            <div class="data-source-section">
-                <h3><i class="fas fa-database"></i> مصدر البيانات</h3>
-                <p style="color: #718096; margin-bottom: 15px; font-size: 0.95rem;">
-                    اختر مصدر البيانات الجغرافية لمحافظة قنا:
-                </p>
-                
-                <div class="data-source-buttons">
-                    <button class="source-btn active" onclick="loadData('geojson')">
-                        <i class="fas fa-layer-group"></i>
-                        GeoJSON (qq.geojson)
-                    </button>
-                    <button class="source-btn" onclick="loadData('json')">
-                        <i class="fas fa-file-code"></i>
-                        JSON (qq.json)
-                    </button>
+            <!-- قسم ملفات البيانات -->
+            <div class="data-files-section">
+                <h3><i class="fas fa-folder-open"></i> ملفات البيانات الجغرافية</h3>
+                <div class="files-grid" id="files-grid">
+                    <!-- سيتم ملؤها ديناميكياً -->
                 </div>
                 
-                <div class="data-stats" id="data-stats" style="display: none;">
+                <div class="file-stats" id="data-stats" style="display: none;">
                     <div class="stat-item">
-                        <span>عدد العناصر:</span>
+                        <span>عدد العناصر المعروضة:</span>
                         <span id="stat-total">0</span>
                     </div>
                     <div class="stat-item">
-                        <span>النقاط:</span>
-                        <span id="stat-points">0</span>
+                        <span>مستوى التقريب:</span>
+                        <span id="stat-zoom">0</span>
                     </div>
-                    <div class="stat-item">
-                        <span>الخطوط:</span>
-                        <span id="stat-lines">0</span>
+                </div>
+            </div>
+            
+            <!-- قسم إضافة نقطة يدوياً -->
+            <div class="manual-point-section">
+                <h4><i class="fas fa-plus-circle"></i> إضافة نقطة جديدة</h4>
+                <div class="coord-inputs">
+                    <div class="coord-input-group">
+                        <label>X (خط الطول)</label>
+                        <input type="text" id="coord-x" class="coord-input" placeholder="مثال: 32.7267">
                     </div>
-                    <div class="stat-item">
-                        <span>المضلعات:</span>
-                        <span id="stat-polygons">0</span>
+                    <div class="coord-input-group">
+                        <label>Y (خط العرض)</label>
+                        <input type="text" id="coord-y" class="coord-input" placeholder="مثال: 26.1644">
                     </div>
+                </div>
+                <div class="manual-btns">
+                    <button id="add-point-btn" class="add-point-btn">
+                        <i class="fas fa-map-marker-alt"></i>
+                        إضافة نقطة
+                    </button>
                 </div>
             </div>
             
@@ -726,29 +987,36 @@
                     <div style="text-align: center; padding: 40px 20px; color: #a0aec0;">
                         <i class="fas fa-database" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5;"></i>
                         <p style="margin-bottom: 10px;">لم يتم تحميل البيانات بعد</p>
-                        <p style="font-size: 0.9rem;">اختر مصدر البيانات لبدء التحميل</p>
+                        <p style="font-size: 0.9rem;">اختر ملف البيانات لبدء التحميل</p>
                     </div>
                 </div>
             </div>
             
-            <!-- زر إنشاء Buffer -->
+            <!-- زر إنشاء المنطقة المحيطة -->
             <button id="buffer-button" class="buffer-btn" onclick="openBufferModal()" disabled>
                 <i class="fas fa-draw-circle"></i>
-                إنشاء منطقة عازلة (Buffer)
+                المنطقة المحيطة للحدث
             </button>
         </div>
         
         <!-- الخريطة -->
         <div class="map-container">
+            <div class="map-controls">
+                <h3><i class="fas fa-map"></i> الخريطة التفاعلية</h3>
+                <div class="zoom-info">
+                    <i class="fas fa-search-plus"></i>
+                    مستوى التقريب: <span id="zoom-level">12</span>
+                </div>
+            </div>
             <div id="map"></div>
         </div>
     </div>
     
-    <!-- نافذة Buffer -->
+    <!-- نافذة المنطقة المحيطة -->
     <div id="buffer-modal" class="buffer-modal">
         <div class="buffer-content">
             <div class="buffer-header">
-                <h3 class="buffer-title"><i class="fas fa-draw-circle"></i> إنشاء منطقة عازلة</h3>
+                <h3 class="buffer-title"><i class="fas fa-draw-circle"></i> إنشاء منطقة محيطة</h3>
                 <button class="close-btn" onclick="closeBufferModal()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -762,13 +1030,18 @@
             </div>
             
             <div class="buffer-controls">
-                <label><i class="fas fa-ruler"></i> حدد نصف قطر المنطقة العازلة:</label>
+                <label><i class="fas fa-ruler"></i> حدد نصف قطر المنطقة المحيطة:</label>
                 
                 <div class="buffer-options">
                     <button class="buffer-option" onclick="setBufferSize(0.5)">500 م</button>
                     <button class="buffer-option" onclick="setBufferSize(1)">1 كم</button>
                     <button class="buffer-option active" onclick="setBufferSize(2)">2 كم</button>
                     <button class="buffer-option" onclick="setBufferSize(5)">5 كم</button>
+                </div>
+                
+                <div class="manual-buffer-input">
+                    <input type="number" id="manual-buffer-input" placeholder="أدخل قيمة يدوياً (بالكيلومتر)" step="0.1" min="0.1" max="100">
+                    <button onclick="applyManualBuffer()">تطبيق</button>
                 </div>
                 
                 <input type="range" id="buffer-size" class="buffer-slider" min="0.1" max="20" step="0.1" value="2" oninput="updateBufferValue(this.value)">
@@ -790,7 +1063,7 @@
             
             <button onclick="createBuffer()" style="width: 100%; margin-top: 20px; padding: 18px; font-size: 1.1rem;" class="buffer-btn">
                 <i class="fas fa-play-circle"></i>
-                إنشاء وتحليل المنطقة العازلة
+                إنشاء وتحليل المنطقة المحيطة
             </button>
         </div>
     </div>
@@ -798,7 +1071,7 @@
     <!-- نتائج التحليل -->
     <div id="results-panel" class="results-panel">
         <div class="results-header">
-            <h3 class="results-title"><i class="fas fa-chart-pie"></i> نتائج تحليل Buffer</h3>
+            <h3 class="results-title"><i class="fas fa-chart-pie"></i> نتائج تحليل المنطقة المحيطة</h3>
             <button onclick="closeResultsPanel()" class="close-btn" style="background: #718096; width: 30px; height: 30px; font-size: 1rem;">
                 <i class="fas fa-times"></i>
             </button>
@@ -819,7 +1092,7 @@
             </div>
             <div class="summary-item">
                 <span>العناصر داخل المنطقة:</span>
-                <span id="summary-points" style="font-weight: 600; color: #2b6cb0;">-</span>
+                <span id="summary-points" style="font-weight: 600; color: #2b6cb0;">   -</span>
             </div>
             <div class="summary-item">
                 <span>نسبة التغطية:</span>
@@ -836,7 +1109,7 @@
                 <div style="text-align: center; padding: 30px 20px; color: #a0aec0;">
                     <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 15px; opacity: 0.5;"></i>
                     <p>لم يتم إجراء تحليل بعد</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">اختر نقطة وأنشئ منطقة عازلة لعرض النتائج</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">اختر نقطة وأنشئ منطقة محيطة لعرض النتائج</p>
                 </div>
             </div>
         </div>
@@ -866,10 +1139,119 @@
         let selectedPoint = null;
         let currentBuffer = null;
         let bufferRadius = 2;
-        let currentDataSource = null;
+        let currentDataFile = null;
+        let markersLayer = L.layerGroup();
+        let lastClickTime = 0;
+        let clickTimeout;
         
         // إحداثيات مركز قنا
         const center = [26.1644, 32.7267];
+        
+        // تعريف ملفات البيانات مع أيقوناتها
+        const dataFiles = [
+            { 
+                id: 'hamla_senario', 
+                name: 'حملة سناريو', 
+                icon: 'fa-flag',
+                color: '#e53e3e'
+            },
+            { 
+                id: 'es3af', 
+                name: 'الإسعاف', 
+                icon: 'fa-ambulance',
+                color: '#e53e3e'
+            },
+            { 
+                id: 'al_amaken_al3ashwa2ya', 
+                name: 'الأماكن العشوائية', 
+                icon: 'fa-map-marked-alt',
+                color: '#805ad5'
+            },
+            { 
+                id: 'al_tamween', 
+                name: 'التموين', 
+                icon: 'fa-utensils',
+                color: '#3182ce'
+            },
+            { 
+                id: 'al_shu2on', 
+                name: 'الشؤون', 
+                icon: 'fa-users',
+                color: '#38a169'
+            },
+            { 
+                id: 'al_sarf_al_se7i', 
+                name: 'الصرف الصحي', 
+                icon: 'fa-toilet',
+                color: '#4a5568'
+            },
+            { 
+                id: 'al_makhabaz', 
+                name: 'المخابز', 
+                icon: 'fa-bread-slice',
+                color: '#d69e2e'
+            },
+            { 
+                id: 'al_madaris', 
+                name: 'المدارس', 
+                icon: 'fa-school',
+                color: '#4299e1'
+            },
+            { 
+                id: 'al_matahin', 
+                name: 'المطاحن', 
+                icon: 'fa-industry',
+                color: '#a0aec0'
+            },
+            { 
+                id: 'ma7atat_al_woqood', 
+                name: 'محطات الوقود', 
+                icon: 'fa-gas-pump',
+                color: '#c05621'
+            },
+            { 
+                id: 'ma7atat_kahraba', 
+                name: 'محطات الكهرباء', 
+                icon: 'fa-bolt',
+                color: '#f6e05e'
+            },
+            { 
+                id: 'markaz_al_shabab', 
+                name: 'مركز الشباب', 
+                icon: 'fa-running',
+                color: '#68d391'
+            },
+            { 
+                id: 'mostashfayat', 
+                name: 'المستشفيات', 
+                icon: 'fa-hospital',
+                color: '#fc8181'
+            },
+            { 
+                id: 'mostowda3at_al_botagaz', 
+                name: 'مستودعات البوتاجاز', 
+                icon: 'fa-fire',
+                color: '#ed8936'
+            },
+            { 
+                id: 'mashare3_tatweer_al3ashwa2yat', 
+                name: 'مشاريع تطوير العشوائيات', 
+                icon: 'fa-hammer',
+                color: '#667eea'
+            },
+            { 
+                id: 'miyah_al_shorb', 
+                name: 'مياه الشرب', 
+                icon: 'fa-tint',
+                color: '#4299e1'
+            },
+            { 
+                id: 'naqaat_al_e3tfa2', 
+                name: 'نقاط الاعتكاف', 
+                icon: 'fa-mosque',
+                color: '#9f7aea'
+            }
+        ];
         
         // ============================================
         // تهيئة الخريطة (Google Satellite)
@@ -891,10 +1273,45 @@
                     position: 'topright'
                 }).addTo(map);
                 
+                // تحديث مستوى التقريب عند التغيير
+                map.on('zoomend', function() {
+                    document.getElementById('zoom-level').textContent = map.getZoom();
+                    updateVisibleFeatures();
+                });
+                
+                // إضافة حدث النقر المزدوج لإضافة نقطة
+                map.on('dblclick', function(e) {
+                    addManualPointFromMap(e.latlng.lat, e.latlng.lng);
+                });
+                
+                // إضافة حدث النقر للكشف عن النقر المزدوج
+                map.on('click', function(e) {
+                    const currentTime = new Date().getTime();
+                    
+                    if (currentTime - lastClickTime < 300) {
+                        // نقر مزدوج - إضافة نقطة
+                        clearTimeout(clickTimeout);
+                        addManualPointFromMap(e.latlng.lat, e.latlng.lng);
+                    } else {
+                        // نقر عادي
+                        clickTimeout = setTimeout(() => {
+                            // إلغاء التحديد
+                            if (selectedPoint) {
+                                deselectPoint();
+                            }
+                        }, 300);
+                    }
+                    
+                    lastClickTime = currentTime;
+                });
+                
                 // إضافة شعار
                 L.control.attribution({
                     position: 'bottomleft'
                 }).addTo(map).addAttribution('© Google Satellite Imagery');
+                
+                // إضافة طبقة العلامات
+                markersLayer.addTo(map);
                 
                 console.log('✅ تم تحميل خرائط Google Satellite');
                 
@@ -905,21 +1322,41 @@
         }
         
         // ============================================
-        // تحميل البيانات
+        // تحميل ملفات البيانات
         // ============================================
-        async function loadData(sourceType) {
+        function loadDataFiles() {
+            const filesGrid = document.getElementById('files-grid');
+            filesGrid.innerHTML = '';
+            
+            dataFiles.forEach(file => {
+                const fileBtn = document.createElement('button');
+                fileBtn.className = 'file-btn';
+                fileBtn.dataset.fileId = file.id;
+                fileBtn.onclick = () => loadDataFile(file.id);
+                
+                fileBtn.innerHTML = `
+                    <i class="fas ${file.icon} file-icon"></i>
+                    <span>${file.name}</span>
+                `;
+                
+                filesGrid.appendChild(fileBtn);
+            });
+        }
+        
+        async function loadDataFile(fileId) {
             try {
                 // تحديث واجهة الأزرار
-                document.querySelectorAll('.source-btn').forEach(btn => btn.classList.remove('active'));
-                event.target.classList.add('active');
+                document.querySelectorAll('.file-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`.file-btn[data-file-id="${fileId}"]`).classList.add('active');
                 
                 // إظهار شاشة التحميل
                 document.getElementById('loading-overlay').style.display = 'flex';
-                document.getElementById('loading-text').textContent = 'جاري تحميل البيانات...';
+                document.getElementById('loading-text').textContent = `جاري تحميل ${getFileName(fileId)}...`;
                 
                 // مسح البيانات السابقة
                 uploadedFeatures = [];
                 selectedPoint = null;
+                markersLayer.clearLayers();
                 
                 // مسح القائمة
                 document.getElementById('points-container').innerHTML = `
@@ -929,54 +1366,47 @@
                     </div>
                 `;
                 
-                // مسح الخريطة
-                map.eachLayer(layer => {
-                    if (!(layer instanceof L.TileLayer)) {
-                        map.removeLayer(layer);
-                    }
-                });
+                // تحميل ملف البيانات
+                const fileData = await loadFile(`Data_json/${fileId}.json`);
                 
-                let data;
-                
-                if (sourceType === 'geojson') {
-                    data = await loadGeoJSON();
-                } else if (sourceType === 'json') {
-                    data = await loadJSON();
-                }
-                
-                if (data) {
-                    processData(data, sourceType);
-                    showToast(`تم تحميل ${uploadedFeatures.length} عنصر`, 'success');
+                if (fileData) {
+                    processData(fileData, fileId);
+                    showToast(`تم تحميل ${uploadedFeatures.length} عنصر من ${getFileName(fileId)}`, 'success');
                 }
                 
                 // إخفاء شاشة التحميل
                 document.getElementById('loading-overlay').style.display = 'none';
+                currentDataFile = fileId;
                 
             } catch (error) {
                 console.error('❌ خطأ في تحميل البيانات:', error);
-                showToast('خطأ في تحميل البيانات', 'error');
+                showToast(`خطأ في تحميل ملف ${getFileName(fileId)}`, 'error');
                 document.getElementById('loading-overlay').style.display = 'none';
             }
         }
         
-        async function loadGeoJSON() {
-            try {
-                const response = await fetch('qq.geojson');
-                if (!response.ok) throw new Error('ملف غير موجود');
-                return await response.json();
-            } catch (error) {
-                console.error('❌ خطأ في تحميل GeoJSON:', error);
-                return null;
-            }
+        function getFileName(fileId) {
+            const file = dataFiles.find(f => f.id === fileId);
+            return file ? file.name : fileId;
         }
         
-        async function loadJSON() {
+        function getFileColor(fileId) {
+            const file = dataFiles.find(f => f.id === fileId);
+            return file ? file.color : '#3182ce';
+        }
+        
+        function getFileIcon(fileId) {
+            const file = dataFiles.find(f => f.id === fileId);
+            return file ? file.icon : 'fa-map-marker-alt';
+        }
+        
+        async function loadFile(filePath) {
             try {
-                const response = await fetch('qq.json');
+                const response = await fetch(filePath);
                 if (!response.ok) throw new Error('ملف غير موجود');
                 return await response.json();
             } catch (error) {
-                console.error('❌ خطأ في تحميل JSON:', error);
+                console.error('❌ خطأ في تحميل الملف:', error);
                 return null;
             }
         }
@@ -984,7 +1414,7 @@
         // ============================================
         // معالجة البيانات
         // ============================================
-        function processData(data, sourceType) {
+        function processData(data, fileId) {
             try {
                 let features = [];
                 
@@ -992,32 +1422,26 @@
                     features = data.features;
                 } else if (Array.isArray(data)) {
                     features = data;
+                } else if (data.features && Array.isArray(data.features)) {
+                    features = data.features;
                 }
                 
                 // استخراج الميزات
-                let pointsCount = 0, linesCount = 0, polygonsCount = 0;
-                
                 features.forEach((feature, index) => {
-                    const element = extractFeature(feature, index);
+                    const element = extractFeature(feature, index, fileId);
                     if (element) {
                         uploadedFeatures.push(element);
                         addPointToList(element);
-                        addFeatureToMap(element);
-                        
-                        if (element.geometryType === 'Point') pointsCount++;
-                        else if (element.geometryType === 'LineString') linesCount++;
-                        else if (element.geometryType.includes('Polygon')) polygonsCount++;
                     }
                 });
                 
-                // تحديث الإحصائيات
-                document.getElementById('stat-total').textContent = uploadedFeatures.length;
-                document.getElementById('stat-points').textContent = pointsCount;
-                document.getElementById('stat-lines').textContent = linesCount;
-                document.getElementById('stat-polygons').textContent = polygonsCount;
-                document.getElementById('data-stats').style.display = 'block';
+                // عرض الميزات على الخريطة بناءً على مستوى التقريب
+                updateVisibleFeatures();
                 
-                // تفعيل زر Buffer
+                // تحديث الإحصائيات
+                updateStatistics();
+                
+                // تفعيل زر المنطقة المحيطة
                 document.getElementById('buffer-button').disabled = uploadedFeatures.length === 0;
                 
                 // تكبير الخريطة
@@ -1026,15 +1450,13 @@
                     map.fitBounds(bounds.pad(0.1));
                 }
                 
-                currentDataSource = sourceType;
-                
             } catch (error) {
                 console.error('❌ خطأ في معالجة البيانات:', error);
                 throw error;
             }
         }
         
-        function extractFeature(feature, index) {
+        function extractFeature(feature, index, fileId) {
             try {
                 const properties = feature.properties || feature || {};
                 const geometry = feature.geometry || {};
@@ -1042,11 +1464,15 @@
                 // استخراج الاسم
                 let name = properties.name || 
                           properties.NAME || 
+                          properties.Name ||
+                          properties.title ||
                           `عنصر ${index + 1}`;
                 
                 // استخراج النوع
                 let type = properties.type || 
-                          'نقطة';
+                          properties.Type ||
+                          properties.category ||
+                          getFileName(fileId);
                 
                 // استخراج الإحداثيات
                 let coordinates = [];
@@ -1064,21 +1490,27 @@
                     coordinates = exteriorRing.map(coord => [coord[1], coord[0]]);
                     centerCoords = getCenter(coordinates);
                 } else if (properties.lat && properties.lng) {
-                    // للبيانات البسيطة
-                    coordinates = [[properties.lat, properties.lng]];
-                    centerCoords = [properties.lat, properties.lng];
+                    coordinates = [[parseFloat(properties.lat), parseFloat(properties.lng)]];
+                    centerCoords = [parseFloat(properties.lat), parseFloat(properties.lng)];
+                } else if (properties.latitude && properties.longitude) {
+                    coordinates = [[parseFloat(properties.latitude), parseFloat(properties.longitude)]];
+                    centerCoords = [parseFloat(properties.latitude), parseFloat(properties.longitude)];
+                } else if (properties.y && properties.x) {
+                    coordinates = [[parseFloat(properties.y), parseFloat(properties.x)]];
+                    centerCoords = [parseFloat(properties.y), parseFloat(properties.x)];
                 } else {
                     return null;
                 }
                 
                 return {
-                    id: `feature_${index}_${Date.now()}`,
+                    id: `feature_${fileId}_${index}_${Date.now()}`,
                     name: name,
                     type: type,
                     geometryType: geometry.type || 'Point',
                     coordinates: coordinates,
                     center: centerCoords,
-                    properties: properties
+                    properties: properties,
+                    fileId: fileId
                 };
                 
             } catch (error) {
@@ -1115,13 +1547,9 @@
             
             const [lat, lng] = feature.center;
             
-            let iconClass = 'fa-map-marker-alt';
-            if (feature.geometryType === 'LineString') iconClass = 'fa-route';
-            else if (feature.geometryType.includes('Polygon')) iconClass = 'fa-draw-polygon';
-            
             pointItem.innerHTML = `
-                <div class="point-icon">
-                    <i class="fas ${iconClass}"></i>
+                <div class="point-icon" style="background: ${getFileColor(feature.fileId)};">
+                    <i class="fas ${getFileIcon(feature.fileId)}"></i>
                 </div>
                 <div class="point-info">
                     <div class="point-name">${feature.name}</div>
@@ -1136,81 +1564,255 @@
         }
         
         function addFeatureToMap(feature) {
-            let layer;
             const [lat, lng] = feature.center;
+            const color = getFileColor(feature.fileId);
             
-            // تحديد الألوان حسب النوع
-            let color = '#3182ce';
-            let fillColor = '#4299e1';
+            // إنشاء علامة مع أيقونة مناسبة
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">
+                    <i class="fas ${getFileIcon(feature.fileId)}"></i>
+                </div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
             
-            if (feature.geometryType === 'LineString') {
-                color = '#e53e3e';
-                layer = L.polyline(feature.coordinates, {
-                    color: color,
-                    weight: 3,
-                    opacity: 0.8
-                });
-            } else if (feature.geometryType.includes('Polygon')) {
-                color = '#38a169';
-                fillColor = '#48bb78';
-                layer = L.polygon(feature.coordinates, {
-                    fillColor: fillColor,
-                    color: color,
-                    weight: 2,
-                    opacity: 0.8,
-                    fillOpacity: 0.3
-                });
-            } else {
-                layer = L.circleMarker([lat, lng], {
-                    radius: 8,
-                    fillColor: fillColor,
-                    color: color,
-                    weight: 2,
-                    opacity: 1,
-                    fillOpacity: 0.8
-                });
-            }
+            const marker = L.marker([lat, lng], { icon: icon });
             
             // تخزين بيانات الميزة
-            layer.featureData = feature;
+            marker.featureData = feature;
             
             // إضافة أحداث
-            layer.on('click', function(e) {
+            marker.on('click', function(e) {
                 e.originalEvent.stopPropagation();
                 selectPoint(feature);
             });
             
             // إضافة معلومات
-            layer.bindTooltip(feature.name, {
+            marker.bindTooltip(feature.name, {
                 direction: 'top',
-                opacity: 0.9
+                opacity: 0.9,
+                className: 'custom-tooltip'
             });
             
             // نافذة منبثقة
             let popupContent = `
-                <div style="padding: 10px; min-width: 200px;">
-                    <h4 style="color: #2b6cb0; margin-bottom: 8px;">${feature.name}</h4>
+                <div style="padding: 10px; min-width: 250px;">
+                    <h4 style="color: ${color}; margin-bottom: 8px;">${feature.name}</h4>
                     <p style="color: #4a5568; margin-bottom: 5px;">
                         <strong>النوع:</strong> ${feature.type}<br>
-                        <strong>الإحداثيات:</strong> ${lat.toFixed(6)}°, ${lng.toFixed(6)}°
+                        <strong>الإحداثيات:</strong> ${lat.toFixed(6)}°, ${lng.toFixed(6)}°<br>
+                        <strong>الملف:</strong> ${getFileName(feature.fileId)}
                     </p>
             `;
             
             // إضافة خصائص إضافية
             Object.entries(feature.properties).forEach(([key, value]) => {
-                if (!['name', 'type'].includes(key) && value) {
+                if (!['name', 'type', 'NAME', 'Type', 'lat', 'lng', 'latitude', 'longitude', 'x', 'y'].includes(key) && value) {
                     popupContent += `<p style="color: #4a5568; margin: 3px 0;">
                         <strong>${key}:</strong> ${value}
                     </p>`;
                 }
             });
             
-            popupContent += '</div>';
-            layer.bindPopup(popupContent);
+            popupContent += `
+                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                    <button onclick="selectPointFromPopup('${feature.id}')" style="background: ${color}; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        تحديد النقطة
+                    </button>
+                </div>
+            </div>`;
             
-            // إضافة إلى الخريطة
-            layer.addTo(map);
-            feature.layer = layer;
+            marker.bindPopup(popupContent);
+            
+            // إضافة إلى طبقة العلامات
+            marker.addTo(markersLayer);
+            feature.marker = marker;
+        }
+        
+        function updateVisibleFeatures() {
+            const zoom = map.getZoom();
+            
+            // مسح العلامات الحالية
+            markersLayer.clearLayers();
+            
+            // تحديد عدد الميزات التي يجب عرضها بناءً على مستوى التقريب
+            let maxFeatures = 0;
+            
+            if (zoom < 10) {
+                maxFeatures = 50; // مستوى تكبير منخفض
+            } else if (zoom < 13) {
+                maxFeatures = 200; // مستوى تكبير متوسط
+            } else {
+                maxFeatures = uploadedFeatures.length; // مستوى تكبير عالي
+            }
+            
+            // عرض الميزات
+            const featuresToShow = uploadedFeatures.slice(0, Math.min(maxFeatures, uploadedFeatures.length));
+            
+            featuresToShow.forEach(feature => {
+                addFeatureToMap(feature);
+            });
+            
+            // تحديث الإحصائيات
+            updateStatistics();
+        }
+        
+        function updateStatistics() {
+            const zoom = map.getZoom();
+            const visibleFeatures = markersLayer.getLayers().length;
+            
+            document.getElementById('stat-total').textContent = `${visibleFeatures} / ${uploadedFeatures.length}`;
+            document.getElementById('stat-zoom').textContent = zoom;
+            document.getElementById('data-stats').style.display = 'block';
+        }
+        
+        // ============================================
+        // البحث في البيانات
+        // ============================================
+        function initSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchBtn = document.getElementById('search-btn');
+            
+            searchBtn.onclick = performSearch;
+            searchInput.onkeyup = function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            };
+        }
+        
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.trim().toLowerCase();
+            
+            if (!searchTerm) {
+                showToast('الرجاء إدخال مصطلح البحث', 'info');
+                return;
+            }
+            
+            if (uploadedFeatures.length === 0) {
+                showToast('لا توجد بيانات للبحث', 'error');
+                return;
+            }
+            
+            const results = uploadedFeatures.filter(feature => {
+                // البحث في الاسم
+                if (feature.name && feature.name.toLowerCase().includes(searchTerm)) {
+                    return true;
+                }
+                
+                // البحث في النوع
+                if (feature.type && feature.type.toLowerCase().includes(searchTerm)) {
+                    return true;
+                }
+                
+                // البحث في الخصائص
+                for (const [key, value] of Object.entries(feature.properties)) {
+                    if (String(value).toLowerCase().includes(searchTerm)) {
+                        return true;
+                    }
+                }
+                
+                return false;
+            });
+            
+            if (results.length === 0) {
+                showToast('لم يتم العثور على نتائج', 'info');
+                return;
+            }
+            
+            // تنسيق النتائج
+            const container = document.getElementById('points-container');
+            container.innerHTML = '';
+            
+            results.forEach(feature => {
+                const pointItem = document.createElement('div');
+                pointItem.className = 'point-item';
+                pointItem.dataset.id = feature.id;
+                pointItem.onclick = () => selectPoint(feature);
+                
+                const [lat, lng] = feature.center;
+                
+                pointItem.innerHTML = `
+                    <div class="point-icon" style="background: ${getFileColor(feature.fileId)};">
+                        <i class="fas ${getFileIcon(feature.fileId)}"></i>
+                    </div>
+                    <div class="point-info">
+                        <div class="point-name">${feature.name}</div>
+                        <div class="point-details">
+                            <span class="point-type">${feature.type}</span>
+                            <span class="point-coords">${lat.toFixed(4)}°, ${lng.toFixed(4)}°</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(pointItem);
+            });
+            
+            // التمرير إلى أول نتيجة
+            if (results.length > 0) {
+                selectPoint(results[0]);
+                showToast(`تم العثور على ${results.length} نتيجة`, 'success');
+            }
+        }
+        
+        // ============================================
+        // إضافة نقطة يدوياً
+        // ============================================
+        function initManualPoint() {
+            const addPointBtn = document.getElementById('add-point-btn');
+            addPointBtn.onclick = addManualPoint;
+        }
+        
+        function addManualPoint() {
+            const xInput = document.getElementById('coord-x');
+            const yInput = document.getElementById('coord-y');
+            
+            const x = parseFloat(xInput.value);
+            const y = parseFloat(yInput.value);
+            
+            if (isNaN(x) || isNaN(y)) {
+                showToast('الرجاء إدخال إحداثيات صحيحة', 'error');
+                return;
+            }
+            
+            if (x < -180 || x > 180 || y < -90 || y > 90) {
+                showToast('الإحداثيات خارج النطاق المسموح', 'error');
+                return;
+            }
+            
+            addManualPointFromMap(y, x);
+            
+            // مسح الحقول
+            xInput.value = '';
+            yInput.value = '';
+        }
+        
+        function addManualPointFromMap(lat, lng) {
+            const feature = {
+                id: `manual_${Date.now()}`,
+                name: `نقطة يدوية ${new Date().toLocaleTimeString()}`,
+                type: 'نقطة يدوية',
+                geometryType: 'Point',
+                coordinates: [[lat, lng]],
+                center: [lat, lng],
+                properties: {
+                    lat: lat,
+                    lng: lng,
+                    created: new Date().toISOString(),
+                    source: 'يدوي'
+                },
+                fileId: 'manual'
+            };
+            
+            uploadedFeatures.push(feature);
+            addPointToList(feature);
+            addFeatureToMap(feature);
+            
+            // التمرير إلى النقطة
+            selectPoint(feature);
+            
+            showToast('تم إضافة النقطة بنجاح', 'success');
         }
         
         // ============================================
@@ -1218,28 +1820,7 @@
         // ============================================
         function selectPoint(feature) {
             // إلغاء التحديد السابق
-            if (selectedPoint) {
-                const prevItem = document.querySelector(`.point-item[data-id="${selectedPoint.id}"]`);
-                if (prevItem) prevItem.classList.remove('selected');
-                
-                if (selectedPoint.layer) {
-                    if (selectedPoint.geometryType === 'Point') {
-                        selectedPoint.layer.setStyle({
-                            fillColor: '#4299e1',
-                            color: '#3182ce'
-                        });
-                    } else if (selectedPoint.geometryType === 'LineString') {
-                        selectedPoint.layer.setStyle({
-                            color: '#e53e3e'
-                        });
-                    } else {
-                        selectedPoint.layer.setStyle({
-                            fillColor: '#48bb78',
-                            color: '#38a169'
-                        });
-                    }
-                }
-            }
+            deselectPoint();
             
             // تحديد العنصر الجديد
             selectedPoint = feature;
@@ -1250,47 +1831,67 @@
                 pointItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
             
-            if (feature.layer) {
+            if (feature.marker) {
                 // تسليط الضوء
-                if (feature.geometryType === 'Point') {
-                    feature.layer.setStyle({
-                        fillColor: '#ed8936',
-                        color: '#dd6b20',
-                        fillOpacity: 1,
-                        weight: 3
-                    });
-                } else if (feature.geometryType === 'LineString') {
-                    feature.layer.setStyle({
-                        color: '#ed8936',
-                        weight: 5,
-                        opacity: 1
-                    });
-                } else {
-                    feature.layer.setStyle({
-                        fillColor: '#ed8936',
-                        color: '#dd6b20',
-                        fillOpacity: 0.6,
-                        weight: 3
-                    });
-                }
+                const color = getFileColor(feature.fileId);
+                const icon = L.divIcon({
+                    className: 'custom-marker-selected',
+                    html: `<div style="background: ${color}; width: 30px; height: 30px; border-radius: 50%; border: 3px solid #ed8936; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">
+                        <i class="fas ${getFileIcon(feature.fileId)}"></i>
+                    </div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                });
                 
-                feature.layer.openPopup();
+                feature.marker.setIcon(icon);
+                feature.marker.openPopup();
             }
             
             // التمرير إلى المركز
-            map.setView(feature.center, 14, {
+            map.setView(feature.center, Math.max(map.getZoom(), 14), {
                 animate: true
             });
             
-            // تفعيل زر Buffer
+            // تفعيل زر المنطقة المحيطة
             document.getElementById('buffer-button').disabled = false;
             
             // تحديث معلومات النقطة المحددة
             document.getElementById('selected-point-name').textContent = feature.name;
         }
         
+        function deselectPoint() {
+            if (!selectedPoint) return;
+            
+            const prevItem = document.querySelector(`.point-item[data-id="${selectedPoint.id}"]`);
+            if (prevItem) prevItem.classList.remove('selected');
+            
+            if (selectedPoint.marker) {
+                const color = getFileColor(selectedPoint.fileId);
+                const icon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">
+                        <i class="fas ${getFileIcon(selectedPoint.fileId)}"></i>
+                    </div>`,
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 10]
+                });
+                
+                selectedPoint.marker.setIcon(icon);
+                selectedPoint.marker.closePopup();
+            }
+            
+            selectedPoint = null;
+        }
+        
+        function selectPointFromPopup(featureId) {
+            const feature = uploadedFeatures.find(f => f.id === featureId);
+            if (feature) {
+                selectPoint(feature);
+            }
+        }
+        
         // ============================================
-        // دوال Buffer
+        // دوال المنطقة المحيطة
         // ============================================
         function openBufferModal() {
             if (!selectedPoint) {
@@ -1319,6 +1920,19 @@
             });
         }
         
+        function applyManualBuffer() {
+            const input = document.getElementById('manual-buffer-input');
+            const value = parseFloat(input.value);
+            
+            if (isNaN(value) || value < 0.1 || value > 100) {
+                showToast('الرجاء إدخال قيمة بين 0.1 و 100 كيلومتر', 'error');
+                return;
+            }
+            
+            setBufferSize(value);
+            input.value = '';
+        }
+        
         function updateBufferValue(value) {
             bufferRadius = parseFloat(value);
             document.getElementById('buffer-display-value').textContent = value.toFixed(1);
@@ -1331,12 +1945,12 @@
             
             closeBufferModal();
             
-            // إزالة Buffer السابق
+            // إزالة المنطقة المحيطة السابقة
             if (currentBuffer) {
                 map.removeLayer(currentBuffer);
             }
             
-            // إنشاء Buffer جديد
+            // إنشاء منطقة محيطة جديدة
             const radiusMeters = bufferRadius * 1000;
             currentBuffer = L.circle(selectedPoint.center, {
                 radius: radiusMeters,
@@ -1346,7 +1960,7 @@
                 weight: 3
             }).addTo(map);
             
-            // تحليل الميزات داخل Buffer
+            // تحليل الميزات داخل المنطقة المحيطة
             const featuresInside = analyzeBufferFeatures();
             
             // تكبير الخريطة
@@ -1356,7 +1970,7 @@
             // إظهار النتائج
             showResultsPanel(featuresInside);
             
-            showToast(`تم إنشاء منطقة عازلة بنصف قطر ${bufferRadius} كم`, 'success');
+            showToast(`تم إنشاء منطقة محيطة بنصف قطر ${bufferRadius} كم`, 'success');
         }
         
         function analyzeBufferFeatures() {
@@ -1422,6 +2036,7 @@
                 featuresInside.sort((a, b) => a.distance - b.distance).forEach(item => {
                     const feature = item.feature;
                     const [lat, lng] = feature.center;
+                    const color = getFileColor(feature.fileId);
                     
                     const div = document.createElement('div');
                     div.className = 'feature-item';
@@ -1432,13 +2047,17 @@
                     
                     div.innerHTML = `
                         <div class="feature-name">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas ${getFileIcon(feature.fileId)}" style="color: ${color};"></i>
                             ${feature.name}
                         </div>
                         <div class="feature-details">
                             <div class="feature-detail-row">
                                 <span>النوع:</span>
                                 <span>${feature.type}</span>
+                            </div>
+                            <div class="feature-detail-row">
+                                <span>الملف:</span>
+                                <span>${getFileName(feature.fileId)}</span>
                             </div>
                             <div class="feature-detail-row">
                                 <span>المسافة:</span>
@@ -1499,9 +2118,18 @@
                 // تهيئة الخريطة
                 initMap();
                 
-                // تحميل البيانات تلقائياً
+                // تحميل ملفات البيانات
+                loadDataFiles();
+                
+                // تهيئة البحث
+                initSearch();
+                
+                // تهيئة إضافة النقاط اليدوية
+                initManualPoint();
+                
+                // تحميل أول ملف بيانات تلقائياً
                 setTimeout(() => {
-                    loadData('geojson');
+                    loadDataFile('mostashfayat');
                 }, 1000);
                 
                 console.log('🚀 النظام جاهز');
