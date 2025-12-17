@@ -1,0 +1,1429 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.30865012000004,
+                    26.01166141400006
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "محطة نجع حمادي السطحية",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75201829900004,
+                    25.92221305100003
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "محطة قوص السطحيه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72882819800003,
+                    25.878180171000054
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "محطة جزيره مطيرة السطحيه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78934087700003,
+                    25.989157395000063
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "محطة البارودالسطحية الكبرى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.715070113000024,
+                    26.147889314000054
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "محطة الحميدات السطحيه والمدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75676828500008,
+                    26.158342557000026
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "محطة الصالحية السطحية",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.13761698300004,
+                    26.17531966300004
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "محطة النجمه والحميران المرشحه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.10490548900003,
+                    26.134789824000052
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "محطة الزرايب سطحيه صغرى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.421028087000025,
+                    26.050683712000023
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "محطة مياه الوقف السطحية الكبرى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.44407341200008,
+                    26.11660951600004
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "محطة دشنا السطحية",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.170672317000026,
+                    26.127335670000036
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "بخانس النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.05309673900007,
+                    26.161665175000053
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "الرواتب النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.076073837000024,
+                    26.167856734000054
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "المخلبطيه النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.021097962000056,
+                    26.168669883000064
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Name": "ابوشوشه المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.29827220200008,
+                    26.006758555000033
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Name": "حاجر هو النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.387530011000024,
+                    26.05991146100007
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Name": "الحلفاية قبلي النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.37150775400005,
+                    26.05785592600006
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Name": "الرئيسية النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.30874541700007,
+                    26.058735954000042
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Name": "القصر والصياد 1و2و3و4 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 18,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.25005535400004,
+                    26.06409983800006
+                ]
+            },
+            "properties": {
+                "FID": 18,
+                "Name": "السلامية 1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 19,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.251929493000034,
+                    26.044659941000077
+                ]
+            },
+            "properties": {
+                "FID": 19,
+                "Name": "السلامية المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 20,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.401772925000046,
+                    26.075212130000068
+                ]
+            },
+            "properties": {
+                "FID": 20,
+                "Name": "محطة الوقف النقالي 1و2",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 21,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.40148561600006,
+                    26.074920115000054
+                ]
+            },
+            "properties": {
+                "FID": 21,
+                "Name": "محطة السماينة النقالي(الوقف3)",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 22,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.32784022300007,
+                    26.081812305000028
+                ]
+            },
+            "properties": {
+                "FID": 22,
+                "Name": "الشعانية المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 23,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.489632553000035,
+                    26.10973629500006
+                ]
+            },
+            "properties": {
+                "FID": 23,
+                "Name": "محطة العرب والنجاجرة المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 24,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.43617962800005,
+                    26.10911543900005
+                ]
+            },
+            "properties": {
+                "FID": 24,
+                "Name": "محطة القلمينا النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 25,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.37072523900002,
+                    26.07647139200003
+                ]
+            },
+            "properties": {
+                "FID": 25,
+                "Name": "محطة جزيرة الحمودي النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 26,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.49834703800008,
+                    26.119466034000027
+                ]
+            },
+            "properties": {
+                "FID": 26,
+                "Name": "السمطا النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 27,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.61901083200007,
+                    26.174115074000042
+                ]
+            },
+            "properties": {
+                "FID": 27,
+                "Name": "محطة القيناوية المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 28,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.79894503200006,
+                    26.076229218000037
+                ]
+            },
+            "properties": {
+                "FID": 28,
+                "Name": "محطة كرم عمران النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 29,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77220353600006,
+                    26.070343637000065
+                ]
+            },
+            "properties": {
+                "FID": 29,
+                "Name": "محطة الاشراف العسيلية النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 30,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.56386297800003,
+                    26.160555429000055
+                ]
+            },
+            "properties": {
+                "FID": 30,
+                "Name": "محطة الحجيرات1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 31,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76476189400006,
+                    26.098137559000065
+                ]
+            },
+            "properties": {
+                "FID": 31,
+                "Name": "محطة النوابعه المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 32,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.63769093600007,
+                    26.18294284600006
+                ]
+            },
+            "properties": {
+                "FID": 32,
+                "Name": "محطة المخادمه المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 33,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.594108833000064,
+                    26.172293782000054
+                ]
+            },
+            "properties": {
+                "FID": 33,
+                "Name": "محطة مياه الغوصة النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 34,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.67512312900004,
+                    26.160979293000025
+                ]
+            },
+            "properties": {
+                "FID": 34,
+                "Name": "محطة عزبة يوسف النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 35,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.643916051000076,
+                    26.18134102600004
+                ]
+            },
+            "properties": {
+                "FID": 35,
+                "Name": "محطة الشيخ عيسى النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 36,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.61096373700008,
+                    26.153556382000033
+                ]
+            },
+            "properties": {
+                "FID": 36,
+                "Name": "محطة اولاد عمرو النوايتة النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 37,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.66837880600008,
+                    26.164605417000075
+                ]
+            },
+            "properties": {
+                "FID": 37,
+                "Name": "محطة دندرة النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 38,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76197196500004,
+                    26.108635519000075
+                ]
+            },
+            "properties": {
+                "FID": 38,
+                "Name": "محطة الاشراف القبلية النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 39,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.620923247000064,
+                    26.16003217000008
+                ]
+            },
+            "properties": {
+                "FID": 39,
+                "Name": "محطة الجبيل النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 40,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.673620579000044,
+                    26.185440691000053
+                ]
+            },
+            "properties": {
+                "FID": 40,
+                "Name": "محطة الجزيرية المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 41,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78402062500004,
+                    26.02496254700003
+                ]
+            },
+            "properties": {
+                "FID": 41,
+                "Name": "محطة كلاحين ابنود المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 42,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.87559744500004,
+                    25.98062449100007
+                ]
+            },
+            "properties": {
+                "FID": 42,
+                "Name": "محطة المدينة الصناعية المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 43,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70672110000004,
+                    26.143116056000054
+                ]
+            },
+            "properties": {
+                "FID": 43,
+                "Name": "محطة الترامسة1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 44,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.759821068000065,
+                    26.07991129800007
+                ]
+            },
+            "properties": {
+                "FID": 44,
+                "Name": "محطة الدير الشرقي النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 45,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.787471967000045,
+                    25.995184761000075
+                ]
+            },
+            "properties": {
+                "FID": 45,
+                "Name": "محطة نجع ال عليقى المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 46,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78838500400008,
+                    25.98894572000006
+                ]
+            },
+            "properties": {
+                "FID": 46,
+                "Name": "محطة البارود النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 47,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74597193300008,
+                    26.117248121000046
+                ]
+            },
+            "properties": {
+                "FID": 47,
+                "Name": "محطة الطويرات النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 48,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73809222800003,
+                    26.110538229000042
+                ]
+            },
+            "properties": {
+                "FID": 48,
+                "Name": "محطة الطويرات المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 49,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73949257600003,
+                    25.909659954000062
+                ]
+            },
+            "properties": {
+                "FID": 49,
+                "Name": "الحلة المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 50,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78939580200006,
+                    25.872989473000075
+                ]
+            },
+            "properties": {
+                "FID": 50,
+                "Name": "المعرى المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 51,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.79960864200007,
+                    25.89158403600004
+                ]
+            },
+            "properties": {
+                "FID": 51,
+                "Name": "المسيد المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 52,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.805833162000056,
+                    25.936834051000062
+                ]
+            },
+            "properties": {
+                "FID": 52,
+                "Name": "كوم سخين 2النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 53,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.80587411500005,
+                    25.937075419000053
+                ]
+            },
+            "properties": {
+                "FID": 53,
+                "Name": "كوم سخين 1النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 54,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.761520071000064,
+                    25.93703503000006
+                ]
+            },
+            "properties": {
+                "FID": 54,
+                "Name": "الحمر والجعافرة 1و2 النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 55,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.778665508000074,
+                    25.954291485000056
+                ]
+            },
+            "properties": {
+                "FID": 55,
+                "Name": "محطه الكراتيه الجديده النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 56,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77694831300005,
+                    25.822664324000073
+                ]
+            },
+            "properties": {
+                "FID": 56,
+                "Name": "العيايشا المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 57,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.759199746000036,
+                    25.840159432000064
+                ]
+            },
+            "properties": {
+                "FID": 57,
+                "Name": "الجماليه النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 58,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77172919700007,
+                    25.79417740300005
+                ]
+            },
+            "properties": {
+                "FID": 58,
+                "Name": "خزام (الظهير الصحراوى)المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 59,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76207611900003,
+                    25.78226941300005
+                ]
+            },
+            "properties": {
+                "FID": 59,
+                "Name": "خزام النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 60,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.79536752300004,
+                    25.801816932000065
+                ]
+            },
+            "properties": {
+                "FID": 60,
+                "Name": "محطه حجازة الجديده 1و2 النقالى بالعقب",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 61,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.771554467000044,
+                    25.79381634300006
+                ]
+            },
+            "properties": {
+                "FID": 61,
+                "Name": "الظهير الصحراوى النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 62,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72858708700005,
+                    25.87891694700005
+                ]
+            },
+            "properties": {
+                "FID": 62,
+                "Name": "جزيره مطيرة المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 63,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.725159086000076,
+                    25.867182015000026
+                ]
+            },
+            "properties": {
+                "FID": 63,
+                "Name": "محطة دنفيق 1و2 النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 64,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73242916300006,
+                    25.80389526400006
+                ]
+            },
+            "properties": {
+                "FID": 64,
+                "Name": "محطة اسمنت 1و2 النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 65,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74968701700004,
+                    25.839055818000077
+                ]
+            },
+            "properties": {
+                "FID": 65,
+                "Name": "محطة العربات المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 66,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72179111300005,
+                    25.897103048000076
+                ]
+            },
+            "properties": {
+                "FID": 66,
+                "Name": "محطة مدينة نقادة النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 67,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72196178300004,
+                    25.897348710000074
+                ]
+            },
+            "properties": {
+                "FID": 67,
+                "Name": "محطة مدينة نقادة المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 68,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73201221700003,
+                    25.91664649200004
+                ]
+            },
+            "properties": {
+                "FID": 68,
+                "Name": "محطة الخطارة النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 69,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.752109345000065,
+                    25.935722723000026
+                ]
+            },
+            "properties": {
+                "FID": 69,
+                "Name": "محطة طوخ 1و2 النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 70,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.743673079000075,
+                    25.92888666300007
+                ]
+            },
+            "properties": {
+                "FID": 70,
+                "Name": "محطة كوم الضبع النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 71,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77081203300003,
+                    25.966584814000043
+                ]
+            },
+            "properties": {
+                "FID": 71,
+                "Name": "محطة الزوايدة المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 72,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73185873800003,
+                    25.917226795000033
+                ]
+            },
+            "properties": {
+                "FID": 72,
+                "Name": "محطة الخطارة المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 73,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.22033333200005,
+                    26.100843913000062
+                ]
+            },
+            "properties": {
+                "FID": 73,
+                "Name": "الكلح 1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 74,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.19975121900006,
+                    26.114275320000047
+                ]
+            },
+            "properties": {
+                "FID": 74,
+                "Name": "ساحل البقيلي النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 75,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.715070113000024,
+                    26.147889314000054
+                ]
+            },
+            "properties": {
+                "FID": 75,
+                "Name": "محطة الحميدات السطحيه والمدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 76,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.713130955000054,
+                    26.147135603000038
+                ]
+            },
+            "properties": {
+                "FID": 76,
+                "Name": "المسطحات المائية بالحميدات النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 77,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77678272300005,
+                    26.025764182000046
+                ]
+            },
+            "properties": {
+                "FID": 77,
+                "Name": "محطة المحروسة المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 78,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.190674553000065,
+                    26.117753742000048
+                ]
+            },
+            "properties": {
+                "FID": 78,
+                "Name": "الشيخ على بخانس النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 79,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.10586862700006,
+                    26.13395640600004
+                ]
+            },
+            "properties": {
+                "FID": 79,
+                "Name": "نجع سباق الزرايب النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 80,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.776437971000064,
+                    26.025613073000045
+                ]
+            },
+            "properties": {
+                "FID": 80,
+                "Name": "محطة المحروسة1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 81,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.578819020000026,
+                    26.124554998000065
+                ]
+            },
+            "properties": {
+                "FID": 81,
+                "Name": "محطة جزيرة الطوابية 1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 82,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.607941366000034,
+                    26.131125091000058
+                ]
+            },
+            "properties": {
+                "FID": 82,
+                "Name": "محطة دندرة الجبيل المدمجه",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 83,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.27739736900003,
+                    26.026259684000024
+                ]
+            },
+            "properties": {
+                "FID": 83,
+                "Name": "النجاحية 1و2 النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 84,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.46236488100004,
+                    26.117172271000072
+                ]
+            },
+            "properties": {
+                "FID": 84,
+                "Name": "العزازية النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 85,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24345922600003,
+                    26.054221794000057
+                ]
+            },
+            "properties": {
+                "FID": 85,
+                "Name": "الحلمية النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 86,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.03277927400006,
+                    26.16751872100008
+                ]
+            },
+            "properties": {
+                "FID": 86,
+                "Name": "ابوشوشه  العضاضيه النقالى",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 87,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.62009778400005,
+                    26.17360053400006
+                ]
+            },
+            "properties": {
+                "FID": 87,
+                "Name": "محطة القيناوية النقالي",
+                "Name_1": "مياه_الشرب"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 88,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.391310377000025,
+                    26.07703514600007
+                ]
+            },
+            "properties": {
+                "FID": 88,
+                "Name": "محطة فاو المدمجة",
+                "Name_1": "مياه_الشرب"
+            }
+        }
+    ]
+}

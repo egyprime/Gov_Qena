@@ -1,0 +1,885 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76688090000005,
+                    25.784598800000026
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "خزام",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77439190000007,
+                    25.839161400000023
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "السبع عيون",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.83234960000004,
+                    25.843525400000033
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "حجازة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.867849000000035,
+                    26.082422000000065
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "كرم عمران",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76171990000006,
+                    25.919848100000024
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "قوص الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76873020000005,
+                    26.11496130000006
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "الأشراف القبلية",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.29086100000006,
+                    26.06916700000005
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "الرحمانية",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.313256100000046,
+                    26.927609000000075
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "الشعانية",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70836430000003,
+                    26.17483290000007
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "المعني",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76596370000004,
+                    25.91074640000005
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "الطواب",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.37040440000004,
+                    26.148519100000044
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "الشيخ علي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.18122110000007,
+                    26.12123370000006
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "بخانس",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24229840000004,
+                    26.019537400000047
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "القمانة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76414760000006,
+                    26.024834700000042
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Name": "المحروسة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81248780000004,
+                    26.28901140000005
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Name": "قنا الجديدة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.79163100000005,
+                    26.05031180000003
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Name": "ابنود",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.848520300000075,
+                    25.978416200000026
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Name": "الكلاحين",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.686637000000076,
+                    26.129904000000067
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Name": "الترامسة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 18,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.61431600000003,
+                    26.134683000000052
+                ]
+            },
+            "properties": {
+                "FID": 18,
+                "Name": "الجبيل",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 19,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.740570700000035,
+                    25.949045500000068
+                ]
+            },
+            "properties": {
+                "FID": 19,
+                "Name": "كوم بلال",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 20,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.36729260000004,
+                    26.02366500000005
+                ]
+            },
+            "properties": {
+                "FID": 20,
+                "Name": "الحلفايا",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 21,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.18632300000007,
+                    26.05681320000008
+                ]
+            },
+            "properties": {
+                "FID": 21,
+                "Name": "القبيبة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 22,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.03526910000005,
+                    26.164176500000053
+                ]
+            },
+            "properties": {
+                "FID": 22,
+                "Name": "الخوالد",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 23,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.22071770000008,
+                    26.098559000000023
+                ]
+            },
+            "properties": {
+                "FID": 23,
+                "Name": "الشرقي بهجورة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 24,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81218110000003,
+                    26.288737300000037
+                ]
+            },
+            "properties": {
+                "FID": 24,
+                "Name": "ك 19 قنا –سفاجا",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 25,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.14342870000007,
+                    26.44404090000006
+                ]
+            },
+            "properties": {
+                "FID": 25,
+                "Name": "ك59 قنا – سفاجا",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 26,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.791201200000046,
+                    26.37940640000005
+                ]
+            },
+            "properties": {
+                "FID": 26,
+                "Name": "ك15 قنا – سوهاج",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 27,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73608290000004,
+                    26.201628000000028
+                ]
+            },
+            "properties": {
+                "FID": 27,
+                "Name": "ك6 قنا –سوهاج",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 28,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.069475400000044,
+                    26.07692380000003
+                ]
+            },
+            "properties": {
+                "FID": 28,
+                "Name": "القارة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 29,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73724900000008,
+                    26.17841500000003
+                ]
+            },
+            "properties": {
+                "FID": 29,
+                "Name": "الكنوز",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 30,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.86745490000004,
+                    25.980688900000075
+                ]
+            },
+            "properties": {
+                "FID": 30,
+                "Name": "ك6 قفط – القصير",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 31,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.13301810000007,
+                    25.892083600000035
+                ]
+            },
+            "properties": {
+                "FID": 31,
+                "Name": "ك45 قفط – القصير",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 32,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.20849690000006,
+                    26.062005800000065
+                ]
+            },
+            "properties": {
+                "FID": 32,
+                "Name": "بهجورة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 33,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.791757000000075,
+                    26.092196000000058
+                ]
+            },
+            "properties": {
+                "FID": 33,
+                "Name": "الأشراف الشرقية",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 34,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.53297300000003,
+                    26.096145000000035
+                ]
+            },
+            "properties": {
+                "FID": 34,
+                "Name": "المراشدة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 35,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.62924310000005,
+                    26.188378200000045
+                ]
+            },
+            "properties": {
+                "FID": 35,
+                "Name": "السمطا",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 36,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42534630000006,
+                    26.14729680000005
+                ]
+            },
+            "properties": {
+                "FID": 36,
+                "Name": "أبو مناع",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 37,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.67904600000003,
+                    26.18292400000007
+                ]
+            },
+            "properties": {
+                "FID": 37,
+                "Name": "الجزيرية",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 38,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.07754570000003,
+                    26.13325700000007
+                ]
+            },
+            "properties": {
+                "FID": 38,
+                "Name": "الجبلاو",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 39,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.672558700000025,
+                    26.144359700000052
+                ]
+            },
+            "properties": {
+                "FID": 39,
+                "Name": "دندرة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 40,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.58776800000004,
+                    26.156704900000022
+                ]
+            },
+            "properties": {
+                "FID": 40,
+                "Name": "أولاد عمرو",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 41,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73100670000008,
+                    25.825198300000068
+                ]
+            },
+            "properties": {
+                "FID": 41,
+                "Name": "البحري قامولا",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 42,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.722345500000074,
+                    26.15534290000005
+                ]
+            },
+            "properties": {
+                "FID": 42,
+                "Name": "حي المصالح",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 43,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.80152520000007,
+                    25.898189200000047
+                ]
+            },
+            "properties": {
+                "FID": 43,
+                "Name": "المسيد",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 44,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.228277700000035,
+                    26.062910300000055
+                ]
+            },
+            "properties": {
+                "FID": 44,
+                "Name": "نجع حمادي الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 45,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.724464700000055,
+                    25.90768840000004
+                ]
+            },
+            "properties": {
+                "FID": 45,
+                "Name": "نقادة الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 46,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.46813010000005,
+                    26.12530410000005
+                ]
+            },
+            "properties": {
+                "FID": 46,
+                "Name": "دشنا الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 47,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.808316400000024,
+                    25.996353700000043
+                ]
+            },
+            "properties": {
+                "FID": 47,
+                "Name": "قفط الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 48,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.720823600000074,
+                    26.158763400000055
+                ]
+            },
+            "properties": {
+                "FID": 48,
+                "Name": "قنا الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 49,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.425451000000066,
+                    26.092879700000026
+                ]
+            },
+            "properties": {
+                "FID": 49,
+                "Name": "الوقف الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 50,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.09664010000006,
+                    26.116451700000027
+                ]
+            },
+            "properties": {
+                "FID": 50,
+                "Name": "ابو تشت الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 51,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.79992240000007,
+                    26.01614120000005
+                ]
+            },
+            "properties": {
+                "FID": 51,
+                "Name": "البراهمة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 52,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16563590000004,
+                    26.052723300000025
+                ]
+            },
+            "properties": {
+                "FID": 52,
+                "Name": "فرشوط الرئيسي",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 53,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.203701000000024,
+                    25.989949000000024
+                ]
+            },
+            "properties": {
+                "FID": 53,
+                "Name": "البطحة",
+                "Name_1": "إسعاف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 54,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.32976800000006,
+                    25.957044000000053
+                ]
+            },
+            "properties": {
+                "FID": 54,
+                "Name": "بركة",
+                "Name_1": "إسعاف"
+            }
+        }
+    ]
+}

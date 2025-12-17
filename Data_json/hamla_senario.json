@@ -1,0 +1,53 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72245759200007,
+                    26.155975528000056
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "OID_": 0,
+                "Name": "حملة ميكانيكية ديوان",
+                "FolderPath": "Hamalat_Cenario/Hamalat_Cenario",
+                "SymbolID": 0,
+                "AltMode": -1,
+                "Base": 0,
+                "Snippet": " ",
+                "PopupInfo": "\u003chtml xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\"\u003e\n\u003chead\u003e\n\u003cMETA http-equiv=\"Content-Type\" content=\"text/html\"\u003e\n\u003cmeta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"\u003e\n\u003c/head\u003e\n\u003cbody style=\"margin:0",
+                "HasLabel": 0,
+                "LabelID": -1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.69552749300004,
+                    26.162032915000054
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "OID_": 0,
+                "Name": "حملة ميكانيكية وحدة محلية",
+                "FolderPath": "Hamalat_Cenario/Hamalat_Cenario",
+                "SymbolID": 0,
+                "AltMode": -1,
+                "Base": 0,
+                "Snippet": " ",
+                "PopupInfo": "\u003chtml xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\"\u003e\n\u003chead\u003e\n\u003cMETA http-equiv=\"Content-Type\" content=\"text/html\"\u003e\n\u003cmeta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"\u003e\n\u003c/head\u003e\n\u003cbody style=\"margin:0",
+                "HasLabel": 0,
+                "LabelID": -1
+            }
+        }
+    ]
+}

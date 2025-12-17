@@ -1,0 +1,125 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.060329000000024,
+                    26.07697600000006
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.167268000000035,
+                    26.05502450000006
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23870700000003,
+                    26.049007000000074
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.770647000000054,
+                    25.780212000000063
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72037300000005,
+                    25.894967000000065
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16705010000004,
+                    26.052000100000043
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73621300000008,
+                    26.15681600000005
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "الشون"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75214200000005,
+                    25.91863200000006
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "الشون"
+            }
+        }
+    ]
+}

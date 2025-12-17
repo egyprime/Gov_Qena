@@ -1,0 +1,185 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70708333300007,
+                    26.158888889000025
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23052777800007,
+                    26.057555556000068
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.17116666700008,
+                    26.21573055600004
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75188888900004,
+                    25.921666667000068
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.40988888900006,
+                    26.93862777800007
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.157861111000045,
+                    26.059944444000052
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.425694444000044,
+                    26.09311111100004
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72683333300006,
+                    25.902111111000067
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70994444400003,
+                    26.15730555600004
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71116666700004,
+                    26.157111111000063
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23447222200008,
+                    26.055250000000058
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "مستشفيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81027777800006,
+                    25.99593611100005
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "مستشفيات"
+            }
+        }
+    ]
+}

@@ -1,0 +1,275 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74824400000006,
+                    26.048482000000035
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    31.965899000000036,
+                    26.07083700000004
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.52028400000006,
+                    26.04586500000005
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.307277000000056,
+                    25.973352000000034
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78217500000005,
+                    26.11818900000003
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73890200000005,
+                    25.992679000000066
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.129207000000065,
+                    25.890998000000025
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.86683500000004,
+                    26.082858000000044
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.16294000000005,
+                    26.457321000000036
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.80764400000004,
+                    26.284355000000062
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.755201000000056,
+                    26.231381000000056
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.710500000000025,
+                    26.166754000000026
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.800838000000056,
+                    25.89193400000005
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76647200000008,
+                    25.784002000000044
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.21719600000006,
+                    26.091108000000077
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.94846600000005,
+                    25.950725000000034
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.57400300000006,
+                    26.146096000000057
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Procedure_": "نقاط_سوداء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73639500000007,
+                    26.66142300000007
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Procedure_": "نقاط_سوداء"
+            }
+        }
+    ]
+}

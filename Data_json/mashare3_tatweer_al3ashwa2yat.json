@@ -1,0 +1,85 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23374300000006,
+                    26.05974200000003
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "الترعة الضمرانية",
+                "Name_1": "مشرعات_تطوير_العشوائيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.748932000000025,
+                    25.918228000000056
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "جنوب مصنع السكر",
+                "Name_1": "مشرعات_تطوير_العشوائيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.753761000000054,
+                    25.920758000000035
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "شرق محطة المياه",
+                "Name_1": "مشرعات_تطوير_العشوائيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75529800000004,
+                    25.92275200000006
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "نجع فيران",
+                "Name_1": "مشرعات_تطوير_العشوائيات"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75155600000005,
+                    25.91957000000008
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "التوهة",
+                "Name_1": "مشرعات_تطوير_العشوائيات"
+            }
+        }
+    ]
+}

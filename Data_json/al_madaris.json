@@ -1,0 +1,1717 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71963600000004,
+                    25.894120000000044
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "نقادة الثانوية بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72662600000007,
+                    25.92248100000006
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "الشهيد خالد عبد العاطى الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    31.201794000000064,
+                    30.355256000000054
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "طوخ الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    31.20267400000006,
+                    30.354626000000053
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "عمر بن الخطاب الابتدائية بالخطارة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72259200000008,
+                    25.920822000000044
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "صعايدة الخطارة الابتدائية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.722005000000024,
+                    25.907133000000044
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "نقادة الرسمية لغات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72534600000006,
+                    25.901820000000043
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "حاجر دنفيق الإعدادية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72258100000005,
+                    25.92086000000006
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "الشيخ عبد المقصود ت س",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74049000000008,
+                    25.952945000000057
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "كوم بلال الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71706800000004,
+                    26.163693000000023
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "الشهيد عبدالمنعم رياض  ث",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71580800000004,
+                    26.15511900000007
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "قنا الثانوية بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71735800000005,
+                    26.163857000000064
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "قنا الثانوية الجديدة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71028600000005,
+                    26.159839000000034
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "قنا الاعدادية الحديثة بنين",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.736887000000024,
+                    26.152351000000067
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Name": "جنوب قنا الاعدادى بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71483800000004,
+                    26.162580000000048
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Name": "التحرير الاعدادىة  بنين",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72617400000007,
+                    26.16465800000003
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Name": "عبدالله القرشى الاعدادى المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71613000000008,
+                    26.155177000000037
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Name": "كلاحين ابنود الاعدادى المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.717693000000054,
+                    26.152859000000035
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Name": "دندرة الاعداية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 18,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71619400000003,
+                    26.15524400000004
+                ]
+            },
+            "properties": {
+                "FID": 18,
+                "Name": "الحميدات الابتدائية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 19,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73634500000003,
+                    26.182274000000064
+                ]
+            },
+            "properties": {
+                "FID": 19,
+                "Name": "الشهيد مصطفى عباس",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 20,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.719903000000045,
+                    26.157992000000036
+                ]
+            },
+            "properties": {
+                "FID": 20,
+                "Name": "ابوبكر الصديق الابتدائية النحال",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 21,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71556900000007,
+                    26.16247800000008
+                ]
+            },
+            "properties": {
+                "FID": 21,
+                "Name": "قنا الابتدائية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 22,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71569800000003,
+                    26.16298800000004
+                ]
+            },
+            "properties": {
+                "FID": 22,
+                "Name": "المنشية الابتدائية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 23,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73058100000003,
+                    26.189573000000053
+                ]
+            },
+            "properties": {
+                "FID": 23,
+                "Name": "حسان بن ثابت المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 24,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.41788800000006,
+                    26.085399000000052
+                ]
+            },
+            "properties": {
+                "FID": 24,
+                "Name": "النهضة الحديثة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 25,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42752500000006,
+                    26.087163000000032
+                ]
+            },
+            "properties": {
+                "FID": 25,
+                "Name": "السلام الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 26,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.432525000000055,
+                    26.082239000000072
+                ]
+            },
+            "properties": {
+                "FID": 26,
+                "Name": "الجيل الصاعد ب",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 27,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42429800000008,
+                    26.08167000000003
+                ]
+            },
+            "properties": {
+                "FID": 27,
+                "Name": "الشعراوى الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 28,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42638900000003,
+                    26.09138900000005
+                ]
+            },
+            "properties": {
+                "FID": 28,
+                "Name": "الوقف المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 29,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.48654300000004,
+                    26.10775700000005
+                ]
+            },
+            "properties": {
+                "FID": 29,
+                "Name": "نجع مكى الابدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 30,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.441482000000065,
+                    26.102978000000064
+                ]
+            },
+            "properties": {
+                "FID": 30,
+                "Name": "الشيخ جاد ب بالقلمينا",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 31,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42489900000004,
+                    26.081053000000054
+                ]
+            },
+            "properties": {
+                "FID": 31,
+                "Name": "الوقف الرسمية لغات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 32,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.480765000000076,
+                    26.097074000000077
+                ]
+            },
+            "properties": {
+                "FID": 32,
+                "Name": "على حسن ت أ",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 33,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.426379000000054,
+                    26.091457000000048
+                ]
+            },
+            "properties": {
+                "FID": 33,
+                "Name": "الوقف الاعدادية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 34,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.432578000000035,
+                    26.082200000000057
+                ]
+            },
+            "properties": {
+                "FID": 34,
+                "Name": "السلام الاعدادية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 35,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.441138000000024,
+                    26.103536000000076
+                ]
+            },
+            "properties": {
+                "FID": 35,
+                "Name": "الشهيد هشام محمود ابراهيم يونس",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 36,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42276000000004,
+                    26.084781000000078
+                ]
+            },
+            "properties": {
+                "FID": 36,
+                "Name": "الشهيد حسنى عبادى ث",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 37,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.48145200000005,
+                    26.096842000000038
+                ]
+            },
+            "properties": {
+                "FID": 37,
+                "Name": "المراشدة الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 38,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.44243200000005,
+                    26.093702000000064
+                ]
+            },
+            "properties": {
+                "FID": 38,
+                "Name": "القلمينا الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 39,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.458983000000046,
+                    26.12477700000005
+                ]
+            },
+            "properties": {
+                "FID": 39,
+                "Name": "الشهيد منتصر حسن رشوان",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 40,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.437378000000024,
+                    26.149469000000067
+                ]
+            },
+            "properties": {
+                "FID": 40,
+                "Name": "أبو بكر الصديق ع بدشنا",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 41,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42390300000005,
+                    26.154023000000052
+                ]
+            },
+            "properties": {
+                "FID": 41,
+                "Name": "أبو مناع بحري ع بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 42,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.51832900000005,
+                    26.13911500000006
+                ]
+            },
+            "properties": {
+                "FID": 42,
+                "Name": "السمطا بحري  ع",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 43,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.40426000000008,
+                    26.111647000000062
+                ]
+            },
+            "properties": {
+                "FID": 43,
+                "Name": "فاو قبلي المشتركة ع",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 44,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.47271200000006,
+                    26.12229300000007
+                ]
+            },
+            "properties": {
+                "FID": 44,
+                "Name": "أبو دياب غرب ع",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 45,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.48338700000005,
+                    26.11674400000004
+                ]
+            },
+            "properties": {
+                "FID": 45,
+                "Name": "دشنا الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 46,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.418844000000036,
+                    26.16913100000005
+                ]
+            },
+            "properties": {
+                "FID": 46,
+                "Name": "ابو مناع بحرى الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 47,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.47161700000004,
+                    26.122832000000074
+                ]
+            },
+            "properties": {
+                "FID": 47,
+                "Name": "الشيخ على شرق الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 48,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.45862900000003,
+                    26.119598000000053
+                ]
+            },
+            "properties": {
+                "FID": 48,
+                "Name": "نجع السايح الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 49,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.45494700000006,
+                    26.14365900000007
+                ]
+            },
+            "properties": {
+                "FID": 49,
+                "Name": "دشنا بنات الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 50,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.472218000000055,
+                    26.12275500000004
+                ]
+            },
+            "properties": {
+                "FID": 50,
+                "Name": "الرملة الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 51,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.56478500000003,
+                    26.20330400000006
+                ]
+            },
+            "properties": {
+                "FID": 51,
+                "Name": "ابو دياب شرق الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 52,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.53086100000007,
+                    26.172704000000067
+                ]
+            },
+            "properties": {
+                "FID": 52,
+                "Name": "حراجية العزب الابتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 53,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73627800000003,
+                    25.81005700000003
+                ]
+            },
+            "properties": {
+                "FID": 53,
+                "Name": "عمر بن الخطاب الابتدائية بدشنا",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 54,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.09358000000003,
+                    26.12049600000006
+                ]
+            },
+            "properties": {
+                "FID": 54,
+                "Name": "ابو تشت الابتدائية المشتركه",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 55,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.046980000000076,
+                    26.129800000000046
+                ]
+            },
+            "properties": {
+                "FID": 55,
+                "Name": "الرواتب الابتدائيه المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 56,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.09358000000003,
+                    26.12049600000006
+                ]
+            },
+            "properties": {
+                "FID": 56,
+                "Name": "نجع البهنساوى تعليم اساس",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 57,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.046980000000076,
+                    26.129800000000046
+                ]
+            },
+            "properties": {
+                "FID": 57,
+                "Name": "الشقيقى الابتدائية الجديدة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 58,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.02020200000004,
+                    26.156927000000053
+                ]
+            },
+            "properties": {
+                "FID": 58,
+                "Name": "النجمة الاعدادية مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 59,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    31.986893000000066,
+                    26.129992000000072
+                ]
+            },
+            "properties": {
+                "FID": 59,
+                "Name": "العليمات الاعدادية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 60,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.63620700000007,
+                    26.20034400000003
+                ]
+            },
+            "properties": {
+                "FID": 60,
+                "Name": "الاميرية الاعدادية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 61,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.02557600000006,
+                    26.170802000000037
+                ]
+            },
+            "properties": {
+                "FID": 61,
+                "Name": "ابو شوشة الثانوية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 62,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.00804500000004,
+                    26.108081000000027
+                ]
+            },
+            "properties": {
+                "FID": 62,
+                "Name": "النواهض الثانوية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 63,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.024771000000044,
+                    26.171062000000063
+                ]
+            },
+            "properties": {
+                "FID": 63,
+                "Name": "ابو تشت الثانوية بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 64,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.101913000000025,
+                    26.119319000000075
+                ]
+            },
+            "properties": {
+                "FID": 64,
+                "Name": "سمهود الابتدائية الحديثة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 65,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.09345200000007,
+                    26.12062100000003
+                ]
+            },
+            "properties": {
+                "FID": 65,
+                "Name": "قفط الإبتدائية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 66,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.03668000000005,
+                    26.139927000000057
+                ]
+            },
+            "properties": {
+                "FID": 66,
+                "Name": "النصر الإبتدائية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 67,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81783800000005,
+                    25.998767000000043
+                ]
+            },
+            "properties": {
+                "FID": 67,
+                "Name": "العويضات االإبتدائية الجديدة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 68,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81766600000003,
+                    25.998680000000036
+                ]
+            },
+            "properties": {
+                "FID": 68,
+                "Name": "الوحدة الإبتدائية المجمعة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 69,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81774100000007,
+                    25.99887300000006
+                ]
+            },
+            "properties": {
+                "FID": 69,
+                "Name": "ناصر الإبتدائية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 70,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81780500000008,
+                    25.99886300000003
+                ]
+            },
+            "properties": {
+                "FID": 70,
+                "Name": "الزهراء ع بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 71,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81736500000005,
+                    25.99916200000007
+                ]
+            },
+            "properties": {
+                "FID": 71,
+                "Name": "البارود ع مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 72,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81741900000003,
+                    25.999442000000045
+                ]
+            },
+            "properties": {
+                "FID": 72,
+                "Name": "البراهمة ع بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 73,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.817548000000045,
+                    25.99961600000006
+                ]
+            },
+            "properties": {
+                "FID": 73,
+                "Name": "بئر عنبر ع مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 74,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.817623000000026,
+                    25.99975100000006
+                ]
+            },
+            "properties": {
+                "FID": 74,
+                "Name": "الحجيري ع مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 75,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.817720000000065,
+                    25.99975100000006
+                ]
+            },
+            "properties": {
+                "FID": 75,
+                "Name": "هدلاب ع مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 76,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.818993000000034,
+                    25.994985000000042
+                ]
+            },
+            "properties": {
+                "FID": 76,
+                "Name": "الظافرية ع مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 77,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.817570000000046,
+                    25.999780000000044
+                ]
+            },
+            "properties": {
+                "FID": 77,
+                "Name": "الشيخية ع مشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 78,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81771500000008,
+                    25.999813000000074
+                ]
+            },
+            "properties": {
+                "FID": 78,
+                "Name": "قفط الثانوية بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 79,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81728100000004,
+                    25.99950000000007
+                ]
+            },
+            "properties": {
+                "FID": 79,
+                "Name": "قفط الثانوية المشتركة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 80,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.17534200000006,
+                    26.089257000000032
+                ]
+            },
+            "properties": {
+                "FID": 80,
+                "Name": "حسين ابو الحاج",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 81,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16135600000007,
+                    26.058232000000032
+                ]
+            },
+            "properties": {
+                "FID": 81,
+                "Name": "الشهيداسماعيل بالعسرات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 82,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.162041000000045,
+                    26.006631000000027
+                ]
+            },
+            "properties": {
+                "FID": 82,
+                "Name": "الشباب",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 83,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.15048000000007,
+                    26.042132000000038
+                ]
+            },
+            "properties": {
+                "FID": 83,
+                "Name": "ناصر بالدهسة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 84,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.15048000000007,
+                    26.042132000000038
+                ]
+            },
+            "properties": {
+                "FID": 84,
+                "Name": "محمد محمود ابو عليو",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 85,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.18785900000006,
+                    26.05846800000006
+                ]
+            },
+            "properties": {
+                "FID": 85,
+                "Name": "القبيبة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 86,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16591000000005,
+                    26.05261100000007
+                ]
+            },
+            "properties": {
+                "FID": 86,
+                "Name": "البنات ع",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 87,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.18239200000005,
+                    26.050411000000054
+                ]
+            },
+            "properties": {
+                "FID": 87,
+                "Name": "الشهيد وليد",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 88,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.163672000000076,
+                    26.015502000000026
+                ]
+            },
+            "properties": {
+                "FID": 88,
+                "Name": "صبري جاد الله",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 89,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24460200000004,
+                    26.04660300000006
+                ]
+            },
+            "properties": {
+                "FID": 89,
+                "Name": "الشطبية ابتدائى",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 90,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24804500000005,
+                    26.040684000000056
+                ]
+            },
+            "properties": {
+                "FID": 90,
+                "Name": "نجع الست ابتدائى",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 91,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.248410000000035,
+                    26.038717000000076
+                ]
+            },
+            "properties": {
+                "FID": 91,
+                "Name": "الاعدادية الجديدة نجع حمادى",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 92,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24013400000007,
+                    26.04832200000004
+                ]
+            },
+            "properties": {
+                "FID": 92,
+                "Name": "الاعدادية الجديدة بهجورة",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 93,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24088500000005,
+                    26.047136000000023
+                ]
+            },
+            "properties": {
+                "FID": 93,
+                "Name": "شركة السكر الاعدادية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 94,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.244286000000045,
+                    26.045970000000068
+                ]
+            },
+            "properties": {
+                "FID": 94,
+                "Name": "الشهيد خيرت القاضى الثانوية",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 95,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24160000000006,
+                    26.053472000000056
+                ]
+            },
+            "properties": {
+                "FID": 95,
+                "Name": "الثانوية بنات نجع حمادى",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 96,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24158900000003,
+                    26.05241200000006
+                ]
+            },
+            "properties": {
+                "FID": 96,
+                "Name": "الثانوية للادارة والخدمات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 97,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24333800000005,
+                    26.052200000000028
+                ]
+            },
+            "properties": {
+                "FID": 97,
+                "Name": "الثانوية الزراعية نجع حمادى",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 98,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76262800000006,
+                    25.91173500000008
+                ]
+            },
+            "properties": {
+                "FID": 98,
+                "Name": "وحده الحراجيه الابتدائيه الجديده",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 99,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76259600000003,
+                    25.91205300000007
+                ]
+            },
+            "properties": {
+                "FID": 99,
+                "Name": "حجازه قبلي الابتدائيه",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 100,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76440900000006,
+                    25.912844000000064
+                ]
+            },
+            "properties": {
+                "FID": 100,
+                "Name": "السادات الابتدائيه",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 101,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.756714000000045,
+                    25.866268000000048
+                ]
+            },
+            "properties": {
+                "FID": 101,
+                "Name": "السلام بجرا جوس الابتدائيه",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 102,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76610400000004,
+                    25.91972400000003
+                ]
+            },
+            "properties": {
+                "FID": 102,
+                "Name": "النصر الاعداديه بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 103,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75861900000007,
+                    25.91933300000005
+                ]
+            },
+            "properties": {
+                "FID": 103,
+                "Name": "عمر بن عبدالعزيز الاعداديه",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 104,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75446500000004,
+                    25.869777000000056
+                ]
+            },
+            "properties": {
+                "FID": 104,
+                "Name": "جراجوس الاعداديه بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 105,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76273500000008,
+                    25.911793000000046
+                ]
+            },
+            "properties": {
+                "FID": 105,
+                "Name": "الشهداء الثانويه بنات",
+                "المدا": "المدارس"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 106,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.82961500000005,
+                    25.84705400000007
+                ]
+            },
+            "properties": {
+                "FID": 106,
+                "Name": "حجازه قبلي الثانويه المشتركه",
+                "المدا": "المدارس"
+            }
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.725430000000074,
+                    26.16312800000003
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "م.ش سيدى عبد الرحيم"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.424810000000036,
+                    26.080750000000023
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "م.ش الوقف"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.711970000000065,
+                    26.168890000000033
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "م.ش المعنى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.475010000000054,
+                    26.122716000000025
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "م.ش مدينة دشنا"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.153760000000034,
+                    26.07200000000006
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "م.ش مدينة فرشوط"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.153760000000034,
+                    26.065130000000067
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "م.ش نجع حمادى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24045000000007,
+                    26.044030000000078
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "م.ش بركة"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.101090000000056,
+                    26.12185000000005
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "م.ش ابو تشت"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.67322000000007,
+                    26.180250000000058
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "م.ش الجزيرية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.728710000000035,
+                    26.158908000000054
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "م.ش العمال"
+            }
+        }
+    ]
+}

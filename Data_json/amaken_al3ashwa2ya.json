@@ -1,0 +1,517 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.09460000000007,
+                    26.120201000000066
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "قلب المدينة",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.43001900000007,
+                    26.091957000000036
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "الشامة",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.41792200000003,
+                    26.079721000000063
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "المسلمات",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42060200000003,
+                    26.085045000000036
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "مداكير",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.272800000000075,
+                    26.740000000000066
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "نجع طلحا",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.28490000000005,
+                    26.748000000000047
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "نجع الخطيب",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16144900000006,
+                    26.052838000000065
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "ابوفدان",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72046300000005,
+                    26.160430000000076
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "النقيب",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.731794000000036,
+                    26.16422300000005
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "الحصواية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71873700000003,
+                    26.160974000000067
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "غرب المدينة القديمة",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72448200000008,
+                    26.167460000000062
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "النحال",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.717640000000074,
+                    26.160998000000063
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "الحمام",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76578000000006,
+                    25.91503700000004
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "دقيق العيد",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.755776000000026,
+                    25.91693300000003
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Name": "الحسامية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75578800000005,
+                    25.92450800000006
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Name": "الحساسنة الغربية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.762999000000036,
+                    25.91759200000007
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Name": "المنشية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76643900000005,
+                    25.912119000000075
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Name": "قلب البلد القديم",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.728755000000035,
+                    25.906625000000076
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Name": "السرايرية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 18,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16003400000005,
+                    26.05198500000006
+                ]
+            },
+            "properties": {
+                "FID": 18,
+                "Name": "السهراية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 19,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16366400000004,
+                    26.059465000000046
+                ]
+            },
+            "properties": {
+                "FID": 19,
+                "Name": "عشش السكة الحديد",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 20,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16756400000003,
+                    26.057510000000036
+                ]
+            },
+            "properties": {
+                "FID": 20,
+                "Name": "الدريسة بحرى",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 21,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.738744000000054,
+                    26.181261000000063
+                ]
+            },
+            "properties": {
+                "FID": 21,
+                "Name": "بين الكنوز و مساكن عثمان",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 22,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23374300000006,
+                    26.05974200000003
+                ]
+            },
+            "properties": {
+                "FID": 22,
+                "Name": "الترعة الضمرانية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 23,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.748932000000025,
+                    25.918228000000056
+                ]
+            },
+            "properties": {
+                "FID": 23,
+                "Name": "جنوب مصنع السكر",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 24,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.753761000000054,
+                    25.920758000000035
+                ]
+            },
+            "properties": {
+                "FID": 24,
+                "Name": "شرق محطة المياه",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 25,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75529800000004,
+                    25.92275200000006
+                ]
+            },
+            "properties": {
+                "FID": 25,
+                "Name": "نجع فيران",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 26,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75155600000005,
+                    25.91957000000008
+                ]
+            },
+            "properties": {
+                "FID": 26,
+                "Name": "التوهة",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 27,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71640600000006,
+                    26.165843000000052
+                ]
+            },
+            "properties": {
+                "FID": 27,
+                "Name": "عزبة سعيد  وأرض الدقينى",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 28,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72230700000006,
+                    26.170863000000054
+                ]
+            },
+            "properties": {
+                "FID": 28,
+                "Name": "نواحى الحاكم العسكرى",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 29,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73664000000008,
+                    26.16800900000004
+                ]
+            },
+            "properties": {
+                "FID": 29,
+                "Name": "نواحى الزبيدى والحصواية",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 30,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.710056000000066,
+                    26.16228700000005
+                ]
+            },
+            "properties": {
+                "FID": 30,
+                "Name": "نواحى المنشبة وعزبة خليفة",
+                "Name_1": "الأماكن العشوائية"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 31,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73758000000004,
+                    26.178993000000048
+                ]
+            },
+            "properties": {
+                "FID": 31,
+                "Name": "نواحى مركز شباب الكنوز",
+                "Name_1": "الأماكن العشوائية"
+            }
+        }
+    ]
+}

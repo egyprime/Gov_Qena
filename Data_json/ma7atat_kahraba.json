@@ -1,0 +1,549 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75125000000003,
+                    25.923194444000046
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "لوحة البحر",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.76502777800005,
+                    25.918388889000028
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "لوحة دقيق العيد",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.765444444000025,
+                    25.910666667000044
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "لوحة الارتوازي",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81141666700006,
+                    26.000583333000066
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "لوحة قفط",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.88700000000006,
+                    25.980500000000063
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "لوحة المنطقة الصناعية",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72691666700007,
+                    25.908472222000057
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "لوحة نقادة",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70544444400008,
+                    26.157777778000025
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "لوحة المستشفي",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71441666700008,
+                    26.148083333000045
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "لوحة حتحور",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.71833333300003,
+                    26.16344444400005
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "لوحة توزيع الشنهورية",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73055555600007,
+                    26.15611111100003
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "لوحة توزيع المخبز الآلي",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74305555600006,
+                    26.134027778000075
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "لوحة توزيع الشيخ حسين",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72866666700003,
+                    26.171277778000047
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "لوحة توزيع سيدي عبد الرحيم",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.742944444000045,
+                    26.17997222200006
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "لوحة توزيع المساكن",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73166666700007,
+                    26.177722222000057
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Name": "لوحة توزيع شرق السكة",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Name": "لوحة توزيع كهربة الريف",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Name": "لوحة توزيع قنا الجديدة الرئيسية",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Name": "لوحة توزيع الاسكان",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Name": "لوحة توزيع الحضري",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 18,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42227777800008,
+                    26.091416667000033
+                ]
+            },
+            "properties": {
+                "FID": 18,
+                "Name": "لوحة توزيع الوقف",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 19,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 19,
+                "Name": "لوحة توزيع الوقف",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 20,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 20,
+                "Name": "لوحة توزيع الوقف الجديدة",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 21,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.37919444400006,
+                    26.033083333000036
+                ]
+            },
+            "properties": {
+                "FID": 21,
+                "Name": "لوحة وادي كوم امبو",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 22,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 22,
+                "Name": "لوحة وادي كوم امبو الجديدة",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 23,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.684341886080802e-14,
+                    5.684341886080802e-14
+                ]
+            },
+            "properties": {
+                "FID": 23,
+                "Name": "لوحة توزيع هو",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 24,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23908333300005,
+                    26.056833333000043
+                ]
+            },
+            "properties": {
+                "FID": 24,
+                "Name": "لوحة توزيع نجع حمادي 1",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 25,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.24133333300006,
+                    26.049750000000074
+                ]
+            },
+            "properties": {
+                "FID": 25,
+                "Name": "لوحة توزيع نجع حمادي 2",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 26,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.245333333000076,
+                    26.043527778000055
+                ]
+            },
+            "properties": {
+                "FID": 26,
+                "Name": "لوحة توزيع نجع حمادي 3",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 27,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.21094444400006,
+                    26.05652777800003
+                ]
+            },
+            "properties": {
+                "FID": 27,
+                "Name": "لوحة توزيع بهجورة",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 28,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.47158333300007,
+                    26.12405555600003
+                ]
+            },
+            "properties": {
+                "FID": 28,
+                "Name": "لوحة توزيع دشنا 1",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 29,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.45897222200006,
+                    26.116722222000078
+                ]
+            },
+            "properties": {
+                "FID": 29,
+                "Name": "لوحة توزيع دشنا 2",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 30,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.43383333300005,
+                    26.15019444400008
+                ]
+            },
+            "properties": {
+                "FID": 30,
+                "Name": "لوحة توزيع أبو مناع بحري",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 31,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.166138889000024,
+                    26.052472222000063
+                ]
+            },
+            "properties": {
+                "FID": 31,
+                "Name": "لوحة توزيع فرشوط 1\u00A0",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 32,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16069444400006,
+                    26.051305556000045
+                ]
+            },
+            "properties": {
+                "FID": 32,
+                "Name": "لوحة توزيع فرشوط 2",
+                "Name_1": "محطات _كهرباء"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 33,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.097194444000024,
+                    26.117194444000063
+                ]
+            },
+            "properties": {
+                "FID": 33,
+                "Name": "\u00A0لوحة توزيع أبو تشت",
+                "Name_1": "محطات _كهرباء"
+            }
+        }
+    ]
+}

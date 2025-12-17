@@ -1,0 +1,140 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78851156400003,
+                    26.142275419000043
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.87520500000005,
+                    25.972361000000035
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.88291000000004,
+                    25.907936000000063
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.00605911700006,
+                    26.071367335000048
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.07875709900003,
+                    26.017090193000058
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.310225065000054,
+                    25.95309282000005
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.455713710000055,
+                    26.182663502000025
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77864315200003,
+                    26.157203579000054
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "الصرف_الصحى"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.49184255100005,
+                    26.18971173500006
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "الصرف_الصحى"
+            }
+        }
+    ]
+}

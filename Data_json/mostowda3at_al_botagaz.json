@@ -1,0 +1,1895 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.065067000000056,
+                    26.08161700000005
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.06787700000007,
+                    26.076952000000063
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.051724000000036,
+                    26.07909600000005
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.05086400000005,
+                    26.085446000000047
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.06665200000003,
+                    26.124113000000023
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.040793000000065,
+                    26.08455200000003
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.11345700000004,
+                    26.139034000000038
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 7,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.119061000000045,
+                    26.170651000000078
+                ]
+            },
+            "properties": {
+                "FID": 7,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.12591400000008,
+                    26.143730000000062
+                ]
+            },
+            "properties": {
+                "FID": 8,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.13640300000003,
+                    26.159241000000065
+                ]
+            },
+            "properties": {
+                "FID": 9,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.10023000000007,
+                    26.161625000000072
+                ]
+            },
+            "properties": {
+                "FID": 10,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.035090000000025,
+                    26.137470000000064
+                ]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.036114000000055,
+                    26.133812000000034
+                ]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 13,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.02832900000004,
+                    26.129904000000067
+                ]
+            },
+            "properties": {
+                "FID": 13,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 14,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.03919900000005,
+                    26.116182000000038
+                ]
+            },
+            "properties": {
+                "FID": 14,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 15,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.03455500000007,
+                    26.12541900000008
+                ]
+            },
+            "properties": {
+                "FID": 15,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 16,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.05995600000006,
+                    26.131249000000025
+                ]
+            },
+            "properties": {
+                "FID": 16,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 17,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.01384900000005,
+                    26.10767000000004
+                ]
+            },
+            "properties": {
+                "FID": 17,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 18,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.67853000000002,
+                    26.178239000000076
+                ]
+            },
+            "properties": {
+                "FID": 18,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 19,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.66161000000005,
+                    26.17736400000007
+                ]
+            },
+            "properties": {
+                "FID": 19,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 20,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.02902400000005,
+                    26.159155000000055
+                ]
+            },
+            "properties": {
+                "FID": 20,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 21,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.98400200000003,
+                    26.132086000000072
+                ]
+            },
+            "properties": {
+                "FID": 21,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 22,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.98397600000004,
+                    26.136719000000028
+                ]
+            },
+            "properties": {
+                "FID": 22,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 23,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.010646000000065,
+                    26.162302000000068
+                ]
+            },
+            "properties": {
+                "FID": 23,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 24,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.096362000000056,
+                    26.123638000000028
+                ]
+            },
+            "properties": {
+                "FID": 24,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 25,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.093158000000074,
+                    26.119740000000036
+                ]
+            },
+            "properties": {
+                "FID": 25,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 26,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.08624400000008,
+                    26.124906000000067
+                ]
+            },
+            "properties": {
+                "FID": 26,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 27,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.163898000000074,
+                    26.10764000000006
+                ]
+            },
+            "properties": {
+                "FID": 27,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 28,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.11678900000004,
+                    26.107934000000057
+                ]
+            },
+            "properties": {
+                "FID": 28,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 29,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.158036200000026,
+                    26.047593600000027
+                ]
+            },
+            "properties": {
+                "FID": 29,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 30,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.17036230000008,
+                    26.04447650000003
+                ]
+            },
+            "properties": {
+                "FID": 30,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 31,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.151969000000065,
+                    26.075755000000072
+                ]
+            },
+            "properties": {
+                "FID": 31,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 32,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.104505000000074,
+                    26.044077000000073
+                ]
+            },
+            "properties": {
+                "FID": 32,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 33,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.146776000000045,
+                    26.086576000000036
+                ]
+            },
+            "properties": {
+                "FID": 33,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 34,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.01455200000004,
+                    26.014152000000024
+                ]
+            },
+            "properties": {
+                "FID": 34,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 35,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.01238500000005,
+                    26.03262200000006
+                ]
+            },
+            "properties": {
+                "FID": 35,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 36,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.01815540000007,
+                    26.025532000000055
+                ]
+            },
+            "properties": {
+                "FID": 36,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 37,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.12656100000004,
+                    26.03166200000004
+                ]
+            },
+            "properties": {
+                "FID": 37,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 38,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23530800000003,
+                    26.058478000000036
+                ]
+            },
+            "properties": {
+                "FID": 38,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 39,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23986800000006,
+                    26.064535000000035
+                ]
+            },
+            "properties": {
+                "FID": 39,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 40,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.31606800000003,
+                    26.03925300000003
+                ]
+            },
+            "properties": {
+                "FID": 40,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 41,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.29053600000003,
+                    26.041017000000068
+                ]
+            },
+            "properties": {
+                "FID": 41,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 42,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.326654000000076,
+                    26.088911000000053
+                ]
+            },
+            "properties": {
+                "FID": 42,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 43,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.32333300000005,
+                    26.110606000000075
+                ]
+            },
+            "properties": {
+                "FID": 43,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 44,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.29622200000006,
+                    26.023333000000036
+                ]
+            },
+            "properties": {
+                "FID": 44,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 45,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.285874000000035,
+                    26.00811200000004
+                ]
+            },
+            "properties": {
+                "FID": 45,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 46,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23300000000006,
+                    26.04258500000003
+                ]
+            },
+            "properties": {
+                "FID": 46,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 47,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.32461100000006,
+                    26.007917000000077
+                ]
+            },
+            "properties": {
+                "FID": 47,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 48,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.25461100000007,
+                    26.021944000000076
+                ]
+            },
+            "properties": {
+                "FID": 48,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 49,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.399646000000075,
+                    26.020406000000037
+                ]
+            },
+            "properties": {
+                "FID": 49,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 50,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.36631900000003,
+                    26.021199000000024
+                ]
+            },
+            "properties": {
+                "FID": 50,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 51,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.20327600000007,
+                    26.081263000000035
+                ]
+            },
+            "properties": {
+                "FID": 51,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 52,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.25041300000004,
+                    26.052000000000078
+                ]
+            },
+            "properties": {
+                "FID": 52,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 53,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.250576000000024,
+                    26.08630100000005
+                ]
+            },
+            "properties": {
+                "FID": 53,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 54,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.269269000000065,
+                    26.05880600000006
+                ]
+            },
+            "properties": {
+                "FID": 54,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 55,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.47189700000007,
+                    26.12019300000003
+                ]
+            },
+            "properties": {
+                "FID": 55,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 56,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.46121800000003,
+                    26.117282000000046
+                ]
+            },
+            "properties": {
+                "FID": 56,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 57,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.45718800000003,
+                    26.118624000000068
+                ]
+            },
+            "properties": {
+                "FID": 57,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 58,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.456061000000034,
+                    26.126078000000064
+                ]
+            },
+            "properties": {
+                "FID": 58,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 59,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.41186800000003,
+                    26.16877100000005
+                ]
+            },
+            "properties": {
+                "FID": 59,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 60,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.384581000000026,
+                    26.15663200000006
+                ]
+            },
+            "properties": {
+                "FID": 60,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 61,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.37257200000005,
+                    26.14068700000007
+                ]
+            },
+            "properties": {
+                "FID": 61,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 62,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.35398500000008,
+                    26.134888000000046
+                ]
+            },
+            "properties": {
+                "FID": 62,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 63,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.468995000000064,
+                    26.184615000000065
+                ]
+            },
+            "properties": {
+                "FID": 63,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 64,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.475438000000054,
+                    26.14814000000007
+                ]
+            },
+            "properties": {
+                "FID": 64,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 65,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.503457000000026,
+                    26.15866900000003
+                ]
+            },
+            "properties": {
+                "FID": 65,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 66,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.56399200000004,
+                    26.174360000000036
+                ]
+            },
+            "properties": {
+                "FID": 66,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 67,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.428135000000054,
+                    26.11710000000005
+                ]
+            },
+            "properties": {
+                "FID": 67,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 68,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.43720200000007,
+                    26.123511000000065
+                ]
+            },
+            "properties": {
+                "FID": 68,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 69,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.542815000000076,
+                    26.148992000000078
+                ]
+            },
+            "properties": {
+                "FID": 69,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 70,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42512300000004,
+                    26.060992000000056
+                ]
+            },
+            "properties": {
+                "FID": 70,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 71,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.42629000000005,
+                    26.09142600000007
+                ]
+            },
+            "properties": {
+                "FID": 71,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 72,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.49739100000005,
+                    26.099481000000026
+                ]
+            },
+            "properties": {
+                "FID": 72,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 73,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.51855200000006,
+                    26.089222000000063
+                ]
+            },
+            "properties": {
+                "FID": 73,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 74,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.43868500000008,
+                    26.099987000000056
+                ]
+            },
+            "properties": {
+                "FID": 74,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 75,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.43089900000007,
+                    26.062920000000076
+                ]
+            },
+            "properties": {
+                "FID": 75,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 76,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.07438950000005,
+                    26.01760980000006
+                ]
+            },
+            "properties": {
+                "FID": 76,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 77,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.07438950000005,
+                    26.01760980000006
+                ]
+            },
+            "properties": {
+                "FID": 77,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 78,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.07438950000005,
+                    26.01760980000006
+                ]
+            },
+            "properties": {
+                "FID": 78,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 79,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.07438950000005,
+                    26.01760980000006
+                ]
+            },
+            "properties": {
+                "FID": 79,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 80,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.075028400000065,
+                    26.017915900000048
+                ]
+            },
+            "properties": {
+                "FID": 80,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 81,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.81511800000004,
+                    26.084574000000032
+                ]
+            },
+            "properties": {
+                "FID": 81,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 82,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.596640000000036,
+                    26.14552100000003
+                ]
+            },
+            "properties": {
+                "FID": 82,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 83,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.54482900000005,
+                    26.158070000000066
+                ]
+            },
+            "properties": {
+                "FID": 83,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 84,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73596800000007,
+                    26.10621100000003
+                ]
+            },
+            "properties": {
+                "FID": 84,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 85,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74599500000005,
+                    26.01099300000004
+                ]
+            },
+            "properties": {
+                "FID": 85,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 86,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.747596000000044,
+                    26.019417000000033
+                ]
+            },
+            "properties": {
+                "FID": 86,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 87,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74591600000008,
+                    26.011914000000047
+                ]
+            },
+            "properties": {
+                "FID": 87,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 88,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.59151000000003,
+                    26.184933000000058
+                ]
+            },
+            "properties": {
+                "FID": 88,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 89,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.58435900000006,
+                    26.13684100000006
+                ]
+            },
+            "properties": {
+                "FID": 89,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 90,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.841477000000054,
+                    26.040922000000023
+                ]
+            },
+            "properties": {
+                "FID": 90,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 91,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.85875500000003,
+                    26.010010000000023
+                ]
+            },
+            "properties": {
+                "FID": 91,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 92,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78240000000005,
+                    25.993315000000052
+                ]
+            },
+            "properties": {
+                "FID": 92,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 93,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.87077000000005,
+                    25.979615000000024
+                ]
+            },
+            "properties": {
+                "FID": 93,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 94,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.92579200000006,
+                    25.966770000000054
+                ]
+            },
+            "properties": {
+                "FID": 94,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 95,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.86589300000003,
+                    25.979535000000055
+                ]
+            },
+            "properties": {
+                "FID": 95,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 96,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.83571200000006,
+                    25.83555300000006
+                ]
+            },
+            "properties": {
+                "FID": 96,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 97,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.88775100000004,
+                    25.877108000000078
+                ]
+            },
+            "properties": {
+                "FID": 97,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 98,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74844600000006,
+                    25.889715000000024
+                ]
+            },
+            "properties": {
+                "FID": 98,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 99,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75367700000004,
+                    25.868461000000025
+                ]
+            },
+            "properties": {
+                "FID": 99,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 100,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75799600000005,
+                    25.89009500000003
+                ]
+            },
+            "properties": {
+                "FID": 100,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 101,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73937200000006,
+                    25.904761000000065
+                ]
+            },
+            "properties": {
+                "FID": 101,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 102,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75482400000004,
+                    25.91982900000005
+                ]
+            },
+            "properties": {
+                "FID": 102,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 103,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.778336000000024,
+                    25.87545700000004
+                ]
+            },
+            "properties": {
+                "FID": 103,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 104,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.774779000000024,
+                    25.944117000000062
+                ]
+            },
+            "properties": {
+                "FID": 104,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 105,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.781934000000035,
+                    25.936199000000045
+                ]
+            },
+            "properties": {
+                "FID": 105,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 106,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.771424000000025,
+                    25.77559700000006
+                ]
+            },
+            "properties": {
+                "FID": 106,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 107,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.767194000000075,
+                    25.769115000000056
+                ]
+            },
+            "properties": {
+                "FID": 107,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 108,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.764999000000046,
+                    25.769250000000056
+                ]
+            },
+            "properties": {
+                "FID": 108,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 109,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75976200000002,
+                    25.751723000000027
+                ]
+            },
+            "properties": {
+                "FID": 109,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 110,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77988400000004,
+                    25.825890000000072
+                ]
+            },
+            "properties": {
+                "FID": 110,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 111,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.797101000000055,
+                    25.80295200000006
+                ]
+            },
+            "properties": {
+                "FID": 111,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 112,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.80071200000003,
+                    25.89855300000005
+                ]
+            },
+            "properties": {
+                "FID": 112,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 113,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.78531600000008,
+                    25.86537100000004
+                ]
+            },
+            "properties": {
+                "FID": 113,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 114,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.57488700000005,
+                    25.919008000000076
+                ]
+            },
+            "properties": {
+                "FID": 114,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 115,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.82197000000008,
+                    25.820689000000073
+                ]
+            },
+            "properties": {
+                "FID": 115,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 116,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.718904000000066,
+                    25.893634000000077
+                ]
+            },
+            "properties": {
+                "FID": 116,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 117,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.69827900000007,
+                    25.850693000000035
+                ]
+            },
+            "properties": {
+                "FID": 117,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 118,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.702428000000054,
+                    25.851221000000066
+                ]
+            },
+            "properties": {
+                "FID": 118,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 119,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73544700000008,
+                    25.986035000000072
+                ]
+            },
+            "properties": {
+                "FID": 119,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 120,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.74026800000007,
+                    25.85107400000004
+                ]
+            },
+            "properties": {
+                "FID": 120,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 121,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.763134000000036,
+                    25.94910600000003
+                ]
+            },
+            "properties": {
+                "FID": 121,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 122,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.77284700000007,
+                    25.96917200000007
+                ]
+            },
+            "properties": {
+                "FID": 122,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 123,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70774400000005,
+                    25.920182000000068
+                ]
+            },
+            "properties": {
+                "FID": 123,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 124,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.72510300000005,
+                    25.953914000000054
+                ]
+            },
+            "properties": {
+                "FID": 124,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 125,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.70478300000008,
+                    25.90667600000006
+                ]
+            },
+            "properties": {
+                "FID": 125,
+                "Name": "مستودعات_البوتوجاز"
+            }
+        }
+    ]
+}

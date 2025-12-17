@@ -1,0 +1,110 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 0,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.16689590000004,
+                    26.056238300000075
+                ]
+            },
+            "properties": {
+                "FID": 0,
+                "Name": "المطاحن"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.23622800000004,
+                    26.05416500000007
+                ]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "المطاحن"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 2,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.236424000000056,
+                    26.150247000000036
+                ]
+            },
+            "properties": {
+                "FID": 2,
+                "Name": "المطاحن"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 3,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73578200000003,
+                    26.157957000000067
+                ]
+            },
+            "properties": {
+                "FID": 3,
+                "Name": "المطاحن"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 4,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.73689900000005,
+                    26.157980000000066
+                ]
+            },
+            "properties": {
+                "FID": 4,
+                "Name": "المطاحن"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 5,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.75059500000003,
+                    25.920440000000042
+                ]
+            },
+            "properties": {
+                "FID": 5,
+                "Name": "المطاحن"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 6,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.749401000000034,
+                    25.920359000000076
+                ]
+            },
+            "properties": {
+                "FID": 6,
+                "Name": "المطاحن"
+            }
+        }
+    ]
+}
