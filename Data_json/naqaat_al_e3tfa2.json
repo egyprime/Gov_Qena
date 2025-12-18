@@ -1,18 +1,125 @@
 {
     "type": "FeatureCollection",
+    "name": "نقاط الإطفاء - محافظة قنا",
+    "description": "قائمة نقاط الإطفاء والدفاع المدني",
     "features": [
         {
             "type": "Feature",
             "id": 0,
             "geometry": {
                 "type": "Point",
-                "coordinates": [32.7267, 26.1644]  // هكذا في ملفك
+                "coordinates": [32.41009200000008, 26.104542000000038]
             },
             "properties": {
                 "FID": 0,
-                "Name": "اختبار نقطة واحدة",
-                "Name_1": "اختبار",
-                "test": "هل تظهر؟"
+                "Name": "نقطة إطفاء فاو قبلى",
+                "Name_1": "نقاط الإطفاء",
+                "type": "نقطة إطفاء ثابتة",
+                "category": "دفاع مدني",
+                "address": "مركز فاو - قنا",
+                "phone": "096 521 1234",
+                "emergency_phone": "180",
+                "fire_trucks_count": 3,
+                "firefighters_count": 15,
+                "water_capacity": "10000 لتر",
+                "equipment": "خراطيم, طفايات, سلالم",
+                "response_time": "5 دقائق",
+                "operational_hours": "24 ساعة",
+                "status": "نشط",
+                "last_inspection": "2024-03-15",
+                "notes": "مجهزة بوحدة إنقاذ متكاملة",
+                "test_field_1": "قيمة تجريبية 1",
+                "test_field_2": "قيمة تجريبية 2",
+                "ملاحظة_تجريبية": "هذا حقل عربي جديد",
+                "رقم_تجريبي": "12345"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [32.46518800000007, 26.119506000000058]
+            },
+            "properties": {
+                "FID": 1,
+                "Name": "نقطة إطفاء دشنا",
+                "Name_1": "نقاط الإطفاء",
+                "type": "نقطة إطفاء نقالي",
+                "category": "استجابة سريعة",
+                "address": "مركز دشنا - أمام المستشفى",
+                "phone": "096 532 5678",
+                "emergency_phone": "123",
+                "fire_trucks_count": 2,
+                "firefighters_count": 8,
+                "water_capacity": "5000 لتر",
+                "equipment": "طفايات متحركة",
+                "response_time": "7 دقائق",
+                "operational_hours": "24 ساعة",
+                "status": "تحت الصيانة",
+                "last_inspection": "2024-02-20",
+                "notes": "يحتاج لتجديد المعدات",
+                "test_number": 999,
+                "test_boolean": true
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 11,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [32.72295800000006, 26.15942700000005]
+            },
+            "properties": {
+                "FID": 11,
+                "Name": "نقطة إطفاء مدينة قنا",
+                "Name_1": "نقاط الإطفاء",
+                "type": "مركز إطفاء رئيسي",
+                "category": "قيادة",
+                "address": "وسط مدينة قنا",
+                "phone": "096 533 9999",
+                "emergency_phone": "180",
+                "fire_trucks_count": 5,
+                "firefighters_count": 25,
+                "water_capacity": "20000 لتر",
+                "equipment": "جميع المعدات",
+                "response_time": "3 دقائق",
+                "operational_hours": "24 ساعة",
+                "status": "نشط",
+                "last_inspection": "2024-03-01",
+                "notes": "المركز الرئيسي للمحافظة",
+                "manager": "عقيد/ أحمد محمد",
+                "email": "fire.qena@gov.eg",
+                "area_coverage": "قنا وضواحيها"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 12,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [32.23975000000007, 26.044417000000067]
+            },
+            "properties": {
+                "FID": 12,
+                "Name": "نقطة إطفاء نجع حمادى",
+                "Name_1": "نقاط الإطفاء",
+                "type": "نقطة إطفاء صناعية",
+                "category": "منطقة صناعية",
+                "address": "المنطقة الصناعية - نجع حمادي",
+                "phone": "096 534 8888",
+                "emergency_phone": "125",
+                "fire_trucks_count": 4,
+                "firefighters_count": 20,
+                "water_capacity": "15000 لتر",
+                "equipment": "مواد كيميائية خاصة",
+                "response_time": "6 دقائق",
+                "operational_hours": "24 ساعة",
+                "status": "نشط",
+                "last_inspection": "2024-02-28",
+                "notes": "متخصصة في حرائق المواد الكيميائية",
+                "specialization": "حرائق صناعية",
+                "hazard_level": "عالية"
             }
         }
     ]
