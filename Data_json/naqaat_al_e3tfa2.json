@@ -1,89 +1,18 @@
 {
     "type": "FeatureCollection",
-    "name": "نقاط الإطفاء - محافظة قنا",
-    "description": "قائمة نقاط الإطفاء والدفاع المدني في المحافظة",
     "features": [
         {
             "type": "Feature",
             "id": 0,
             "geometry": {
                 "type": "Point",
-                "coordinates": [32.7267, 26.1644]
+                "coordinates": [32.7267, 26.1644]  // هكذا في ملفك
             },
             "properties": {
                 "FID": 0,
-                "Name": "نقطة إطفاء فاو قبلى",
-                "Name_1": "نقاط الإطفاء",
-                // ⬇️ السمات الجديدة التي أضفتها
-                "type": "نقطة إطفاء ثابتة",
-                "category": "دفاع مدني",
-                "address": "مركز فاو - قنا",
-                "phone": "096 521 1234",
-                "emergency_phone": "180",
-                "fire_trucks_count": 3,
-                "firefighters_count": 15,
-                "water_capacity": "10000 لتر",
-                "equipment": "خراطيم, طفايات, سلالم",
-                "response_time": "5 دقائق",
-                "operational_hours": "24 ساعة",
-                "status": "نشط",
-                "last_inspection": "2024-03-15",
-                "notes": "مجهزة بوحدة إنقاذ متكاملة",
-                "custom_field_1": "قيمة تجريبية 1",
-                "custom_field_2": "قيمة تجريبية 2",
-                "رقم_تجريبي": "12345",
-                "ملاحظة_تجريبية": "هذا حقل عربي جديد"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 1,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [32.7312, 26.1623]
-            },
-            "properties": {
-                "FID": 1,
-                "Name": "نقطة إطفاء دشنا",
-                "Name_1": "نقاط الإطفاء",
-                // ⬇️ سمات مختلفة للتجربة
-                "type": "نقطة إطفاء نقالي",
-                "category": "استجابة سريعة",
-                "address": "مركز دشنا - أمام المستشفى",
-                "phone": "096 532 5678",
-                "emergency_phone": "123",
-                "fire_trucks_count": 2,
-                "firefighters_count": 8,
-                "water_capacity": "5000 لتر",
-                "equipment": "طفايات متحركة",
-                "response_time": "7 دقائق",
-                "operational_hours": "24 ساعة",
-                "status": "تحت الصيانة",
-                "last_inspection": "2024-02-20",
-                "notes": "يحتاج لتجديد المعدات",
-                "test_number": 999,
-                "test_boolean": true,
-                "test_array": ["معدات", "تدريب", "صيانة"]
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 2,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [32.7167, 26.1544]
-            },
-            "properties": {
-                "FID": 2,
-                "Name": "نقطة إطفاء أبوشوشة",
-                "Name_1": "نقاط الإطفاء",
-                // ⬇️ سمات بسيطة للتجربة
-                "type": "مركز إطفاء",
-                "address": "قرية أبوشوشة",
-                "phone": "01001234567",
-                "status": "نشط",
-                "simple_test": "هذا حقل بسيط",
-                "another_test": "حقل آخر"
+                "Name": "اختبار نقطة واحدة",
+                "Name_1": "اختبار",
+                "test": "هل تظهر؟"
             }
         }
     ]
