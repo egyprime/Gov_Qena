@@ -335,7 +335,7 @@
         
         .files-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             gap: 10px;
             margin-top: 15px;
         }
@@ -354,6 +354,7 @@
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
+            position: relative;
         }
         
         .file-btn:hover {
@@ -365,6 +366,20 @@
             background: #4299e1;
             color: white;
             border-color: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .file-btn.active::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 12px;
+            height: 12px;
+            background: #38a169;
+            border-radius: 50%;
+            border: 2px solid white;
         }
         
         .show-all-btn {
@@ -399,6 +414,12 @@
             border-radius: 10px;
             margin-top: 15px;
             border: 1px solid #c6f6d5;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .stat-item {
@@ -1348,6 +1369,62 @@
             border-left: 5px solid #2b6cb0;
         }
         
+        /* ============ أنماط الحدود والتسميات ============ */
+        .boundary-label {
+            pointer-events: none !important;
+        }
+        
+        .boundary-label-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            border: 1px solid rgba(0,0,0,0.1);
+            text-align: center;
+            backdrop-filter: blur(2px);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+        
+        .boundary-label-gov .boundary-label-content {
+            color: #2b6cb0;
+            border-left: 4px solid #3182ce;
+            background: linear-gradient(135deg, rgba(49, 130, 206, 0.15) 0%, rgba(66, 153, 225, 0.1) 100%);
+        }
+        
+        .boundary-label-marakez .boundary-label-content {
+            color: #2f855a;
+            border-left: 4px solid #38a169;
+            background: linear-gradient(135deg, rgba(56, 161, 105, 0.15) 0%, rgba(72, 187, 120, 0.1) 100%);
+        }
+        
+        .boundary-label-vilag .boundary-label-content {
+            color: #553c9a;
+            border-left: 4px solid #805ad5;
+            background: linear-gradient(135deg, rgba(128, 90, 213, 0.15) 0%, rgba(154, 119, 235, 0.1) 100%);
+        }
+        
+        /* تحسين عرض العلامات على الخريطة */
+        .custom-marker {
+            transition: all 0.3s ease;
+        }
+        
+        .custom-marker:hover {
+            transform: scale(1.2);
+            z-index: 1000 !important;
+        }
+        
+        /* تحسين عرض حدود المحافظة */
+        .leaflet-interactive {
+            transition: stroke-width 0.3s ease;
+        }
+        
+        .leaflet-interactive:hover {
+            stroke-width: 4px !important;
+        }
+        
         /* ============ RESPONSIVE ============ */
         @media (max-width: 1200px) {
             .container {
@@ -1357,6 +1434,10 @@
             
             .sidebar {
                 width: 350px;
+            }
+            
+            .files-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
         
@@ -1379,7 +1460,7 @@
             }
             
             .files-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
             
             .periodic-notification {
@@ -1447,6 +1528,10 @@
                 left: 15px;
                 bottom: 15px;
             }
+            
+            .files-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
         }
         
         @media (max-width: 480px) {
@@ -1482,6 +1567,10 @@
             
             .notification-content {
                 padding: 20px;
+            }
+            
+            .files-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1859,6 +1948,16 @@
         let timerCountdown = 10;
         let currentPopup = null;
         
+        // متغيرات جديدة للحدود
+        let boundariesLayers = {
+            gov: null,
+            marakez: null,
+            vilag: null
+        };
+        let boundaryLabels = {};
+        let activeBoundaryFiles = new Set(); // لتتبع الملفات الحدودية النشطة
+        let activeFeatureFiles = new Set(); // لتتبع الملفات العادية النشطة
+        
         // إحداثيات مركز قنا
         const center = [26.1644, 32.7267];
         
@@ -1868,115 +1967,156 @@
                 id: 'black_point', 
                 name: 'النقاط السوداء', 
                 icon: 'fa-exclamation-triangle',
-                color: '#000000'
+                color: '#000000',
+                type: 'feature'
             },
             { 
                 id: 'mzlkan_ska_7aded', 
                 name: 'مزلقان سكة حديد', 
                 icon: 'fa-train',
-                color: '#8B4513'
+                color: '#8B4513',
+                type: 'feature'
             },
             { 
                 id: 'hamla_senario', 
                 name: 'حملة ميكانيكية', 
                 icon: 'fa-flag',
-                color: '#e53e3e'
+                color: '#e53e3e',
+                type: 'feature'
             },
             { 
                 id: 'es3af', 
                 name: 'الإسعاف', 
                 icon: 'fa-ambulance',
-                color: '#e53e3e'
+                color: '#e53e3e',
+                type: 'feature'
             },
             { 
                 id: 'al_amaken_al3ashwa2ya', 
                 name: 'الأماكن العشوائية', 
                 icon: 'fa-map-marked-alt',
-                color: '#805ad5'
+                color: '#805ad5',
+                type: 'feature'
             },
             { 
                 id: 'al_tamween', 
                 name: 'التموين', 
                 icon: 'fa-utensils',
-                color: '#3182ce'
+                color: '#3182ce',
+                type: 'feature'
             },
             { 
                 id: 'al_shu2on', 
                 name: 'الشؤون', 
                 icon: 'fa-users',
-                color: '#38a169'
+                color: '#38a169',
+                type: 'feature'
             },
             { 
                 id: 'al_sarf_al_se7i', 
                 name: 'الصرف الصحي', 
                 icon: 'fa-toilet',
-                color: '#4a5568'
+                color: '#4a5568',
+                type: 'feature'
             },
             { 
                 id: 'al_makhabaz', 
                 name: 'المخابز', 
                 icon: 'fa-bread-slice',
-                color: '#d69e2e'
+                color: '#d69e2e',
+                type: 'feature'
             },
             { 
                 id: 'al_madaris', 
                 name: 'المدارس', 
                 icon: 'fa-school',
-                color: '#4299e1'
+                color: '#4299e1',
+                type: 'feature'
             },
             { 
                 id: 'al_matahin', 
                 name: 'المطاحن', 
                 icon: 'fa-industry',
-                color: '#a0aec0'
+                color: '#a0aec0',
+                type: 'feature'
             },
             { 
                 id: 'ma7atat_al_woqood', 
                 name: 'محطات الوقود', 
                 icon: 'fa-gas-pump',
-                color: '#c05621'
+                color: '#c05621',
+                type: 'feature'
             },
             { 
                 id: 'ma7atat_kahraba', 
                 name: 'محطات الكهرباء', 
                 icon: 'fa-bolt',
-                color: '#f6e05e'
+                color: '#f6e05e',
+                type: 'feature'
             },
             { 
                 id: 'markaz_al_shabab', 
                 name: 'مركز الشباب', 
                 icon: 'fa-running',
-                color: '#68d391'
+                color: '#68d391',
+                type: 'feature'
             },
             { 
                 id: 'mostashfayat', 
                 name: 'المستشفيات', 
                 icon: 'fa-hospital',
-                color: '#fc8181'
+                color: '#fc8181',
+                type: 'feature'
             },
             { 
                 id: 'mostowda3at_al_botagaz', 
                 name: 'مستودعات البوتاجاز', 
                 icon: 'fa-fire',
-                color: '#ed8936'
+                color: '#ed8936',
+                type: 'feature'
             },
             { 
                 id: 'mashare3_tatweer_al3ashwa2yat', 
                 name: 'مشاريع تطوير العشوائيات', 
                 icon: 'fa-hammer',
-                color: '#667eea'
+                color: '#667eea',
+                type: 'feature'
             },
             { 
                 id: 'miyah_al_shorb', 
                 name: 'مياه الشرب', 
                 icon: 'fa-tint',
-                color: '#4299e1'
+                color: '#4299e1',
+                type: 'feature'
             },
             { 
                 id: 'naqaat_al_e3tfa2', 
                 name: 'نقاط الإطفاء', 
                 icon: 'fa-fire-extinguisher',
-                color: '#DC2626'
+                color: '#DC2626',
+                type: 'feature'
+            },
+            // إضافة ملفات الحدود
+            { 
+                id: 'gov', 
+                name: 'حدود المحافظة', 
+                icon: 'fa-map',
+                color: '#3182ce',
+                type: 'boundary'
+            },
+            { 
+                id: 'marakez', 
+                name: 'حدود المراكز', 
+                icon: 'fa-draw-polygon',
+                color: '#38a169',
+                type: 'boundary'
+            },
+            { 
+                id: 'vilag', 
+                name: 'حدود القرى والشياخات', 
+                icon: 'fa-map-pin',
+                color: '#805ad5',
+                type: 'boundary'
             }
         ];
         
@@ -2070,7 +2210,14 @@
                 const fileBtn = document.createElement('button');
                 fileBtn.className = 'file-btn';
                 fileBtn.dataset.fileId = file.id;
-                fileBtn.onclick = () => loadDataFile(file.id);
+                fileBtn.dataset.fileType = file.type;
+                fileBtn.onclick = () => toggleDataFile(file.id, file.type);
+                
+                // التحقق مما إذا كان الملف نشطاً
+                if ((file.type === 'boundary' && activeBoundaryFiles.has(file.id)) || 
+                    (file.type === 'feature' && activeFeatureFiles.has(file.id))) {
+                    fileBtn.classList.add('active');
+                }
                 
                 fileBtn.innerHTML = `
                     <i class="fas ${file.icon} file-icon"></i>
@@ -2081,30 +2228,254 @@
             });
         }
         
-        async function loadDataFile(fileId) {
+        // دالة جديدة للتحكم في عرض/إخفاء الملفات
+        async function toggleDataFile(fileId, fileType) {
+            const fileInfo = dataFiles.find(f => f.id === fileId);
+            if (!fileInfo) return;
+            
+            if (fileType === 'boundary') {
+                // للملفات الحدودية: تبديل الحالة
+                if (activeBoundaryFiles.has(fileId)) {
+                    // إخفاء الملف
+                    hideBoundaryFile(fileId);
+                    activeBoundaryFiles.delete(fileId);
+                } else {
+                    // عرض الملف
+                    await loadBoundaryFile(fileId);
+                    activeBoundaryFiles.add(fileId);
+                }
+                
+            } else {
+                // للملفات العادية: تبديل الحالة
+                if (activeFeatureFiles.has(fileId)) {
+                    // إخفاء الملف
+                    await hideFeatureFile(fileId);
+                    activeFeatureFiles.delete(fileId);
+                } else {
+                    // عرض الملف
+                    await loadFeatureFile(fileId);
+                    activeFeatureFiles.add(fileId);
+                }
+            }
+            
+            // تحديث واجهة الأزرار
+            updateFileButtons();
+            
+            // تحديث الإحصائيات
+            updateStatistics();
+            
+            // تفعيل/تعطيل زر المنطقة المحيطة
+            document.getElementById('buffer-button').disabled = uploadedFeatures.length === 0;
+        }
+        
+        // دالة لتحديث حالة الأزرار
+        function updateFileButtons() {
+            document.querySelectorAll('.file-btn').forEach(btn => {
+                const fileId = btn.dataset.fileId;
+                const fileType = btn.dataset.fileType;
+                
+                if ((fileType === 'boundary' && activeBoundaryFiles.has(fileId)) || 
+                    (fileType === 'feature' && activeFeatureFiles.has(fileId))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        
+        // دالة لتحميل ملف حدودي
+        async function loadBoundaryFile(fileId) {
+            try {
+                const fileInfo = dataFiles.find(f => f.id === fileId);
+                if (!fileInfo) return;
+                
+                // إظهار شاشة التحميل
+                document.getElementById('loading-overlay').style.display = 'flex';
+                document.getElementById('loading-text').textContent = `جاري تحميل ${fileInfo.name}...`;
+                
+                // تحميل بيانات الحدود
+                const response = await fetch(`Data_json/${fileId}.json`);
+                if (!response.ok) throw new Error('ملف غير موجود');
+                const data = await response.json();
+                
+                // معالجة وعرض البيانات
+                displayBoundaryData(data, fileId, fileInfo);
+                
+                showToast(`تم تحميل ${fileInfo.name}`, 'success');
+                
+            } catch (error) {
+                console.error(`❌ خطأ في تحميل ${fileId}:`, error);
+                showToast(`خطأ في تحميل ملف ${getFileName(fileId)}`, 'error');
+            } finally {
+                document.getElementById('loading-overlay').style.display = 'none';
+            }
+        }
+        
+        // دالة لعرض بيانات الحدود على الخريطة
+        function displayBoundaryData(data, fileId, fileInfo) {
+            // إزالة الطبقة السابقة إذا كانت موجودة
+            if (boundariesLayers[fileId]) {
+                map.removeLayer(boundariesLayers[fileId]);
+                removeBoundaryLabels(fileId);
+            }
+            
+            // إنشاء طبقة جديدة
+            const boundaryLayer = L.geoJSON(data, {
+                style: getBoundaryStyle(fileId),
+                onEachFeature: function(feature, layer) {
+                    // إضافة التسميات
+                    addBoundaryLabel(feature, layer, fileId);
+                    
+                    // إضافة معلومات عند النقر
+                    if (feature.properties) {
+                        layer.bindPopup(createBoundaryPopup(feature, fileInfo));
+                    }
+                }
+            }).addTo(map);
+            
+            // حفظ المرجع للطبقة
+            boundariesLayers[fileId] = boundaryLayer;
+            
+            // تكبير الخريطة لتتناسب مع الحدود
+            map.fitBounds(boundaryLayer.getBounds().pad(0.05));
+        }
+        
+        // دالة للحصول على نمط الحدود
+        function getBoundaryStyle(fileId) {
+            const styles = {
+                'gov': {
+                    color: '#3182ce',
+                    weight: 4,
+                    opacity: 0.8,
+                    fillColor: '#3182ce',
+                    fillOpacity: 0.1
+                },
+                'marakez': {
+                    color: '#38a169',
+                    weight: 3,
+                    opacity: 0.7,
+                    fillColor: '#38a169',
+                    fillOpacity: 0.1,
+                    dashArray: '5, 5'
+                },
+                'vilag': {
+                    color: '#805ad5',
+                    weight: 2,
+                    opacity: 0.6,
+                    fillColor: '#805ad5',
+                    fillOpacity: 0.05,
+                    dashArray: '3, 3'
+                }
+            };
+            
+            return styles[fileId] || {
+                color: '#4a5568',
+                weight: 2,
+                opacity: 0.5,
+                fillOpacity: 0.1
+            };
+        }
+        
+        // دالة لإضافة التسميات
+        function addBoundaryLabel(feature, layer, fileId) {
+            if (!feature.properties) return;
+            
+            // تحديد اسم العرض حسب نوع الملف
+            let displayName = '';
+            const props = feature.properties;
+            
+            if (fileId === 'gov' && (props.name || props.NAME || props.Name || props.gov_name)) {
+                displayName = props.name || props.NAME || props.Name || props.gov_name;
+            } else if (fileId === 'marakez' && (props.name || props.NAME || props.Name || props.center_name || props.mrkz_name)) {
+                displayName = props.name || props.NAME || props.Name || props.center_name || props.mrkz_name;
+            } else if (fileId === 'vilag' && (props.name || props.NAME || props.Name || props.village_name || props.vlg_name || props.sheakha_name)) {
+                displayName = props.name || props.NAME || props.Name || props.village_name || props.vlg_name || props.sheakha_name;
+            }
+            
+            if (!displayName || displayName === 'null' || displayName === 'undefined') return;
+            
+            // الحصول على مركز المضلع
+            const center = layer.getBounds().getCenter();
+            
+            // إنشاء تسمية
+            const label = L.marker(center, {
+                icon: L.divIcon({
+                    className: `boundary-label boundary-label-${fileId}`,
+                    html: `<div class="boundary-label-content">${displayName}</div>`,
+                    iconSize: [100, 20],
+                    iconAnchor: [50, 10]
+                }),
+                zIndexOffset: 1000,
+                interactive: false
+            }).addTo(map);
+            
+            // حفظ التسمية
+            if (!boundaryLabels[fileId]) {
+                boundaryLabels[fileId] = [];
+            }
+            boundaryLabels[fileId].push(label);
+        }
+        
+        // دالة لإنشاء نافذة منبثقة للحدود
+        function createBoundaryPopup(feature, fileInfo) {
+            let content = `<div style="font-weight: 600; color: ${fileInfo.color}; margin-bottom: 10px;">
+                <i class="fas ${fileInfo.icon}"></i> ${fileInfo.name}
+            </div>`;
+            
+            if (feature.properties) {
+                Object.entries(feature.properties).forEach(([key, value]) => {
+                    if (value && typeof value === 'string' && value !== 'null' && value !== 'undefined') {
+                        // ترجمة مفاتيح شائعة
+                        let displayKey = key;
+                        if (key === 'name' || key === 'NAME' || key === 'Name') displayKey = 'الاسم';
+                        else if (key === 'gov_name') displayKey = 'اسم المحافظة';
+                        else if (key === 'center_name' || key === 'mrkz_name') displayKey = 'اسم المركز';
+                        else if (key === 'village_name' || key === 'vlg_name') displayKey = 'اسم القرية';
+                        else if (key === 'sheakha_name') displayKey = 'اسم الشياخة';
+                        else if (key === 'code' || key === 'CODE') displayKey = 'الكود';
+                        else if (key === 'population') displayKey = 'التعداد';
+                        else if (key === 'area') displayKey = 'المساحة';
+                        
+                        content += `<div><strong>${displayKey}:</strong> ${value}</div>`;
+                    }
+                });
+            }
+            
+            return content;
+        }
+        
+        // دالة لإخفاء ملف الحدود
+        function hideBoundaryFile(fileId) {
+            if (boundariesLayers[fileId]) {
+                map.removeLayer(boundariesLayers[fileId]);
+                boundariesLayers[fileId] = null;
+            }
+            
+            if (boundaryLabels[fileId]) {
+                boundaryLabels[fileId].forEach(label => map.removeLayer(label));
+                boundaryLabels[fileId] = [];
+            }
+            
+            showToast(`تم إخفاء ${getFileName(fileId)}`, 'info');
+        }
+        
+        // دالة لإزالة جميع التسميات لملف معين
+        function removeBoundaryLabels(fileId) {
+            if (boundaryLabels[fileId]) {
+                boundaryLabels[fileId].forEach(label => map.removeLayer(label));
+                boundaryLabels[fileId] = [];
+            }
+        }
+        
+        // دالة لتحميل ملف عادي (النقاط)
+        async function loadFeatureFile(fileId) {
             try {
                 // تحديث واجهة الأزرار
-                document.querySelectorAll('.file-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelector(`.file-btn[data-file-id="${fileId}"]`).classList.add('active');
                 document.getElementById('show-all-btn').classList.remove('active');
                 
                 // إظهار شاشة التحميل
                 document.getElementById('loading-overlay').style.display = 'flex';
                 document.getElementById('loading-text').textContent = `جاري تحميل ${getFileName(fileId)}...`;
-                
-                // مسح البيانات السابقة
-                uploadedFeatures = [];
-                selectedPoint = null;
-                markersLayer.clearLayers();
-                allFilesLoaded = false;
-                
-                // مسح القائمة
-                document.getElementById('points-container').innerHTML = `
-                    <div style="text-align: center; padding: 30px 20px; color: #a0aec0;">
-                        <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
-                        <p>جاري تحميل البيانات...</p>
-                    </div>
-                `;
                 
                 // تحميل ملف البيانات
                 const fileData = await loadFile(`Data_json/${fileId}.json`);
@@ -2125,11 +2496,95 @@
             }
         }
         
+        // دالة لإخفاء ملف عادي
+        async function hideFeatureFile(fileId) {
+            try {
+                // إزالة الميزات الخاصة بهذا الملف من uploadedFeatures
+                const featuresToRemove = uploadedFeatures.filter(f => f.fileId === fileId);
+                
+                // إزالة العلامات من الخريطة
+                featuresToRemove.forEach(feature => {
+                    if (feature.marker) {
+                        markersLayer.removeLayer(feature.marker);
+                    }
+                });
+                
+                // تحديث المصفوفة
+                uploadedFeatures = uploadedFeatures.filter(f => f.fileId !== fileId);
+                
+                // تحديث القائمة
+                updatePointsList();
+                
+                // تحديث الخريطة
+                updateVisibleFeatures();
+                
+                showToast(`تم إخفاء ${getFileName(fileId)}`, 'info');
+                
+            } catch (error) {
+                console.error('❌ خطأ في إخفاء الملف:', error);
+                showToast(`خطأ في إخفاء ملف ${getFileName(fileId)}`, 'error');
+            }
+        }
+        
+        // دالة لتحديث قائمة النقاط
+        function updatePointsList() {
+            const container = document.getElementById('points-container');
+            container.innerHTML = '';
+            
+            if (uploadedFeatures.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: #a0aec0;">
+                        <i class="fas fa-database" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p style="margin-bottom: 10px;">لم يتم تحميل البيانات بعد</p>
+                        <p style="font-size: 0.9rem;">اختر ملف البيانات لبدء التحميل</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            uploadedFeatures.forEach(feature => {
+                const pointItem = document.createElement('div');
+                pointItem.className = 'point-item';
+                pointItem.dataset.id = feature.id;
+                pointItem.onclick = (e) => {
+                    e.stopPropagation();
+                    selectPoint(feature);
+                };
+                
+                const [lat, lng] = feature.center;
+                
+                pointItem.innerHTML = `
+                    <div class="point-icon" style="background: ${getFileColor(feature.fileId)};">
+                        <i class="fas ${getFileIcon(feature.fileId)}"></i>
+                    </div>
+                    <div class="point-info">
+                        <div class="point-name">${feature.name}</div>
+                        <div class="point-details">
+                            <span class="point-type">${feature.type}</span>
+                            <span class="point-coords">${lat.toFixed(4)}°, ${lng.toFixed(4)}°</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(pointItem);
+            });
+        }
+        
         async function loadAllDataFiles() {
             try {
                 // تحديث واجهة الأزرار
-                document.querySelectorAll('.file-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.file-btn').forEach(btn => {
+                    if (btn.dataset.fileType === 'feature') {
+                        btn.classList.remove('active');
+                    }
+                });
                 document.getElementById('show-all-btn').classList.add('active');
+                
+                // إخفاء جميع الملفات العادية النشطة أولاً
+                for (const fileId of activeFeatureFiles) {
+                    await hideFeatureFile(fileId);
+                }
+                activeFeatureFiles.clear();
                 
                 // إظهار شاشة التحميل
                 document.getElementById('loading-overlay').style.display = 'flex';
@@ -2151,10 +2606,12 @@
                 
                 let totalFeatures = 0;
                 
-                // تحميل جميع الملفات بالتسلسل
+                // تحميل جميع الملفات العادية فقط (ليس الحدودية)
                 for (let i = 0; i < dataFiles.length; i++) {
                     const file = dataFiles[i];
-                    document.getElementById('loading-text').textContent = `جاري تحميل ${file.name}... (${i+1}/${dataFiles.length})`;
+                    if (file.type !== 'feature') continue;
+                    
+                    document.getElementById('loading-text').textContent = `جاري تحميل ${file.name}... (${i+1}/${dataFiles.filter(f => f.type === 'feature').length})`;
                     
                     const fileData = await loadFile(`Data_json/${file.id}.json`);
                     
@@ -2162,16 +2619,20 @@
                         const features = processDataBatch(fileData, file.id);
                         totalFeatures += features.length;
                         
-                        // إضافة إلى القائمة
+                        // إضافة إلى المصفوفة
                         features.forEach(element => {
                             uploadedFeatures.push(element);
-                            addPointToList(element);
                         });
+                        
+                        // إضافة إلى الملفات النشطة
+                        activeFeatureFiles.add(file.id);
                     }
                     
-                    // إعطاء وقت للواجهة للتحديث
                     await new Promise(resolve => setTimeout(resolve, 100));
                 }
+                
+                // تحديث القائمة
+                updatePointsList();
                 
                 // عرض الميزات على الخريطة
                 updateVisibleFeatures();
@@ -2187,6 +2648,9 @@
                     const bounds = L.latLngBounds(uploadedFeatures.map(f => f.center));
                     map.fitBounds(bounds.pad(0.1));
                 }
+                
+                // تحديث واجهة الأزرار
+                updateFileButtons();
                 
                 // إخفاء شاشة التحميل
                 document.getElementById('loading-overlay').style.display = 'none';
@@ -2276,9 +2740,11 @@
                     const element = extractFeature(feature, index, fileId);
                     if (element) {
                         uploadedFeatures.push(element);
-                        addPointToList(element);
                     }
                 });
+                
+                // تحديث القائمة
+                updatePointsList();
                 
                 // عرض الميزات على الخريطة بناءً على مستوى التقريب
                 updateVisibleFeatures();
@@ -2311,12 +2777,14 @@
                           properties.NAME || 
                           properties.Name ||
                           properties.title ||
+                          properties.اسم ||
                           `عنصر ${index + 1}`;
                 
                 // استخراج النوع
                 let type = properties.type || 
                           properties.Type ||
                           properties.category ||
+                          properties.نوع ||
                           getFileName(fileId);
                 
                 // استخراج الإحداثيات
@@ -2483,7 +2951,7 @@
             
             document.getElementById('stat-total').textContent = `${visibleFeatures} / ${uploadedFeatures.length}`;
             document.getElementById('stat-zoom').textContent = zoom;
-            document.getElementById('data-stats').style.display = 'block';
+            document.getElementById('data-stats').style.display = uploadedFeatures.length > 0 ? 'block' : 'none';
         }
         
         // ============================================
@@ -3235,7 +3703,8 @@
                 
                 // تحميل أول ملف بيانات تلقائياً
                 setTimeout(() => {
-                    loadDataFile('mostashfayat');
+                    // تحميل ملف المستشفيات تلقائياً
+                    toggleDataFile('mostashfayat', 'feature');
                 }, 1000);
                 
                 // تهيئة إدارة شريط التمرير
