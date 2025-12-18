@@ -1,20 +1,38 @@
 {
     "type": "FeatureCollection",
+    "name": "نقاط الإطفاء - محافظة قنا",
+    "description": "قائمة نقاط الإطفاء والدفاع المدني في المحافظة",
     "features": [
         {
             "type": "Feature",
             "id": 0,
             "geometry": {
                 "type": "Point",
-                "coordinates": [
-                    32.41009200000008,
-                    26.104542000000038
-                ]
+                "coordinates": [32.7267, 26.1644]
             },
             "properties": {
                 "FID": 0,
                 "Name": "نقطة إطفاء فاو قبلى",
-                "Name_1": "نقاط الإطفاء"
+                "Name_1": "نقاط الإطفاء",
+                // ⬇️ السمات الجديدة التي أضفتها
+                "type": "نقطة إطفاء ثابتة",
+                "category": "دفاع مدني",
+                "address": "مركز فاو - قنا",
+                "phone": "096 521 1234",
+                "emergency_phone": "180",
+                "fire_trucks_count": 3,
+                "firefighters_count": 15,
+                "water_capacity": "10000 لتر",
+                "equipment": "خراطيم, طفايات, سلالم",
+                "response_time": "5 دقائق",
+                "operational_hours": "24 ساعة",
+                "status": "نشط",
+                "last_inspection": "2024-03-15",
+                "notes": "مجهزة بوحدة إنقاذ متكاملة",
+                "custom_field_1": "قيمة تجريبية 1",
+                "custom_field_2": "قيمة تجريبية 2",
+                "رقم_تجريبي": "12345",
+                "ملاحظة_تجريبية": "هذا حقل عربي جديد"
             }
         },
         {
@@ -22,15 +40,30 @@
             "id": 1,
             "geometry": {
                 "type": "Point",
-                "coordinates": [
-                    32.46518800000007,
-                    26.119506000000058
-                ]
+                "coordinates": [32.7312, 26.1623]
             },
             "properties": {
                 "FID": 1,
                 "Name": "نقطة إطفاء دشنا",
-                "Name_1": "نقاط الإطفاء"
+                "Name_1": "نقاط الإطفاء",
+                // ⬇️ سمات مختلفة للتجربة
+                "type": "نقطة إطفاء نقالي",
+                "category": "استجابة سريعة",
+                "address": "مركز دشنا - أمام المستشفى",
+                "phone": "096 532 5678",
+                "emergency_phone": "123",
+                "fire_trucks_count": 2,
+                "firefighters_count": 8,
+                "water_capacity": "5000 لتر",
+                "equipment": "طفايات متحركة",
+                "response_time": "7 دقائق",
+                "operational_hours": "24 ساعة",
+                "status": "تحت الصيانة",
+                "last_inspection": "2024-02-20",
+                "notes": "يحتاج لتجديد المعدات",
+                "test_number": 999,
+                "test_boolean": true,
+                "test_array": ["معدات", "تدريب", "صيانة"]
             }
         },
         {
@@ -38,319 +71,19 @@
             "id": 2,
             "geometry": {
                 "type": "Point",
-                "coordinates": [
-                    32.024167000000034,
-                    26.168889000000036
-                ]
+                "coordinates": [32.7167, 26.1544]
             },
             "properties": {
                 "FID": 2,
                 "Name": "نقطة إطفاء أبوشوشة",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 3,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.103176000000076,
-                    26.11066100000005
-                ]
-            },
-            "properties": {
-                "FID": 3,
-                "Name": "نقطة إطفاء أبوتشت",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 4,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.791337000000055,
-                    26.048944000000063
-                ]
-            },
-            "properties": {
-                "FID": 4,
-                "Name": "نقطة إطفاء أبنود",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 5,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.58632800000004,
-                    26.157542000000035
-                ]
-            },
-            "properties": {
-                "FID": 5,
-                "Name": "نقطة إطفاء أولاد عمرو",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 6,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.56422200000003,
-                    26.174547000000075
-                ]
-            },
-            "properties": {
-                "FID": 6,
-                "Name": "نقطة إطفاء أبو دياب غرب",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 7,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.76242700000006,
-                    26.02821300000005
-                ]
-            },
-            "properties": {
-                "FID": 7,
-                "Name": "نقطة إطفاء المحروسة",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 8,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.76135500000004,
-                    25.920600000000036
-                ]
-            },
-            "properties": {
-                "FID": 8,
-                "Name": "نقطة إطفاء قوص",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 9,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.72508000000005,
-                    25.89782500000007
-                ]
-            },
-            "properties": {
-                "FID": 9,
-                "Name": "نقطة إطفاء نقادة",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 10,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.732679000000076,
-                    26.19304100000005
-                ]
-            },
-            "properties": {
-                "FID": 10,
-                "Name": "نقطة إطفاء إدارة الحماية المدنية",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 11,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.72295800000006,
-                    26.15942700000005
-                ]
-            },
-            "properties": {
-                "FID": 11,
-                "Name": "نقطة إطفاء مدينة قنا",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 12,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.23975000000007,
-                    26.044417000000067
-                ]
-            },
-            "properties": {
-                "FID": 12,
-                "Name": "نقطة إطفاء نجع حمادى",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 13,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.427692000000036,
-                    26.090171000000055
-                ]
-            },
-            "properties": {
-                "FID": 13,
-                "Name": "نقطة إطفاء الوقف",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 14,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.166000000000054,
-                    26.052722000000074
-                ]
-            },
-            "properties": {
-                "FID": 14,
-                "Name": "نقطة إطفاء فرشوط",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 15,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.42260300000004,
-                    26.153714000000036
-                ]
-            },
-            "properties": {
-                "FID": 15,
-                "Name": "نقطة إطفاء أبو مناع بحرى",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 16,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.30172200000004,
-                    26.065417000000025
-                ]
-            },
-            "properties": {
-                "FID": 16,
-                "Name": "نقطة إطفاء الرحمانية",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 17,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.36708100000004,
-                    26.034236000000078
-                ]
-            },
-            "properties": {
-                "FID": 17,
-                "Name": "نقطة إطفاء الحلفاية بحرى",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 18,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.322939000000076,
-                    25.915699000000075
-                ]
-            },
-            "properties": {
-                "FID": 18,
-                "Name": "نقطة إطفاء المنطقة الصناعية بهو",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 19,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.88078400000006,
-                    25.98085100000003
-                ]
-            },
-            "properties": {
-                "FID": 19,
-                "Name": "نقطة إطفاء المنطقة الصناعية بالكلاحين",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 20,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.83526800000004,
-                    25.85110000000003
-                ]
-            },
-            "properties": {
-                "FID": 20,
-                "Name": "نقطة إطفاء حجازة قبلى",
-                "Name_1": "نقاط الإطفاء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 21,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.806816000000026,
-                    25.99513900000005
-                ]
-            },
-            "properties": {
-                "FID": 21,
-                "Name": "نقطة إطفاء قفط",
-                "Name_1": "نقاط الإطفاء"
+                "Name_1": "نقاط الإطفاء",
+                // ⬇️ سمات بسيطة للتجربة
+                "type": "مركز إطفاء",
+                "address": "قرية أبوشوشة",
+                "phone": "01001234567",
+                "status": "نشط",
+                "simple_test": "هذا حقل بسيط",
+                "another_test": "حقل آخر"
             }
         }
     ]
