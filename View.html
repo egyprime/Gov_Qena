@@ -2836,16 +2836,14 @@
             `;
             
             // إضافة الخصائص الإضافية
-            let propertyCount = 0;
             Object.entries(feature.properties).forEach(([key, value]) => {
-                if (!['name', 'type', 'NAME', 'Type', 'lat', 'lng', 'latitude', 'longitude', 'x', 'y'].includes(key) && value && propertyCount < 5) {
+                if (!['name', 'type', 'NAME', 'Type', 'lat', 'lng', 'latitude', 'longitude', 'x', 'y'].includes(key) && value) {
                     detailsHTML += `
                         <div class="point-details-popup-item">
                             <div class="point-details-popup-label">${key}</div>
                             <div class="point-details-popup-value">${value}</div>
                         </div>
                     `;
-                    propertyCount++;
                 }
             });
             
