@@ -355,22 +355,6 @@
         },
         {
             "type": "Feature",
-            "id": 22,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 22,
-                "Name": "لوحة وادي كوم امبو الجديدة",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
             "id": 24,
             "geometry": {
                 "type": "Point",
