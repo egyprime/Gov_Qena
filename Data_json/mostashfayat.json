@@ -95,29 +95,6 @@
         },
         {
             "type": "Feature",
-            "id": 5,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.40988888900006,
-                    26.93862777800007
-                ]
-            },
-            "properties": {
-                "OBJECTID": 5,
-                "Name": "دشنا",
-                "FolderPath": "'مستشفى $' Events/'مستشفى $' Events",
-                "SymbolID": 0,
-                "AltMode": -1,
-                "Base": 0,
-                "Snippet": "",
-                "PopupInfo": "\u003chtml xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\"\u003e\n\u003chead\u003e\n\u003cMETA http-equiv=\"Content-Type\" content=\"text/html\"\u003e\n\u003cmeta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"\u003e\n\u003c/head\u003e\n\u003cbody style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\"\u003e\n\u003ctable style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\"\u003e\n\u003ctr style=\"text-align:center;font-weight:bold;background:#9CBCE2\"\u003e\n\u003ctd\u003eدشنا\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\n\u003ctable style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\"\u003e\n\u003ctr\u003e\n\u003ctd\u003eم\u003c/td\u003e\n\u003ctd\u003e5\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eالاسم\u003c/td\u003e\n\u003ctd\u003eدشنا\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eالعنوان\u003c/td\u003e\n\u003ctd\u003eش توراد النيل\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eتليفون\u003c/td\u003e\n\u003ctd\u003e9205242\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eنوع\u003c/td\u003e\n\u003ctd\u003eالمركزى\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eمركز\u003c/td\u003e\n\u003ctd\u003eدشنا\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eمدينة\u003c/td\u003e\n\u003ctd\u003eدشنا\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eالحي\u003c/td\u003e\n\u003ctd\u003eدشنا\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eعدد  الأطباء\u003c/td\u003e\n\u003ctd\u003e61\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد الغرف\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eعدد الغرف_ المكيفة\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد الغرف_ الزودة بمراوح\u003c/td\u003e\n\u003ctd\u003e\u003cNull\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eعدد الاسرة\u003c/td\u003e\n\u003ctd\u003e22\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد اسرة _الرعاية\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eعدد اسرة _الاستقبال\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد أجهزة_ التنفس الصناعى\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eرصيد احطياطى للأدوية_ لمواجهة الازمات\u003c/td\u003e\n\u003ctd\u003eكافى\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد سيارات الاسعاف\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eعدد أكياس الموتى\u003c/td\u003e\n\u003ctd\u003e20\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد ثلاجات الموتى\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eX\u003c/td\u003e\n\u003ctd\u003e32.409889\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eY\u003c/td\u003e\n\u003ctd\u003e26.938628\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/body\u003e\n\u003c/html\u003e\n",
-                "HasLabel": 0,
-                "LabelID": -1
-            }
-        },
-        {
-            "type": "Feature",
             "id": 6,
             "geometry": {
                 "type": "Point",
