@@ -51,22 +51,6 @@
         },
         {
             "type": "Feature",
-            "id": 3,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    31.20267400000006,
-                    30.354626000000053
-                ]
-            },
-            "properties": {
-                "FID": 3,
-                "Name": "عمر بن الخطاب الابتدائية بالخطارة",
-                "المدا": "المدارس"
-            }
-        },
-        {
-            "type": "Feature",
             "id": 4,
             "geometry": {
                 "type": "Point",
