@@ -371,22 +371,6 @@
         },
         {
             "type": "Feature",
-            "id": 23,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 23,
-                "Name": "لوحة توزيع هو",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
             "id": 24,
             "geometry": {
                 "type": "Point",
