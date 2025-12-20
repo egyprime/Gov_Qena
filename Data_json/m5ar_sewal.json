@@ -1,0 +1,20 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": 1,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.479607474000034,
+                    26.21965876300004
+                ]
+            },
+            "properties": {
+                "OBJECTID": 1,
+                "Name": "سد اعاقة 2 نجع عبدالقادر دشنا"
+            }
+        }
+    ]
+}
