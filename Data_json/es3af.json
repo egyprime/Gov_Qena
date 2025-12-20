@@ -164,29 +164,6 @@
         },
         {
             "type": "Feature",
-            "id": 8,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.313256100000046,
-                    26.927609000000075
-                ]
-            },
-            "properties": {
-                "OBJECTID": 8,
-                "Name": "الشعانية",
-                "FolderPath": "Esaaf_Points/Esaaf_Points",
-                "SymbolID": 0,
-                "AltMode": -1,
-                "Base": 0,
-                "Snippet": "",
-                "PopupInfo": "\u003chtml xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\"\u003e\n\u003chead\u003e\n\u003cMETA http-equiv=\"Content-Type\" content=\"text/html\"\u003e\n\u003cmeta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"\u003e\n\u003c/head\u003e\n\u003cbody style=\"margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;\"\u003e\n\u003ctable style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px\"\u003e\n\u003ctr style=\"text-align:center;font-weight:bold;background:#9CBCE2\"\u003e\n\u003ctd\u003e \u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\n\u003ctable style=\"font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px\"\u003e\n\u003ctr\u003e\n\u003ctd\u003eFID\u003c/td\u003e\n\u003ctd\u003e7\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eم\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eاسم النقطة\u003c/td\u003e\n\u003ctd\u003eالشعانية\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eالعنوان\u003c/td\u003e\n\u003ctd\u003eالشعانية الطريق الزراعي الشرقي\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eتليفون نقطة الإسعاف\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eتليفون المسعف\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eمركز\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eمدينة\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eالحي\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eعدد المسعفين\u003c/td\u003e\n\u003ctd\u003e4\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eعدد السائقين\u003c/td\u003e\n\u003ctd\u003e4\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003e\"عدد سيارات الإسعاف\n عادية \"\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\"عدد سيارات الإسعاف \nذاتية التعقيم \"\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003e\"مدى توافر الادوية\nو المستلزمات الطبية\"\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eX\u003c/td\u003e\n\u003ctd\u003e32.313256\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr bgcolor=\"#D4E4F3\"\u003e\n\u003ctd\u003eY\u003c/td\u003e\n\u003ctd\u003e26.927609\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/body\u003e\n\u003c/html\u003e\n",
-                "HasLabel": -1,
-                "LabelID": 0
-            }
-        },
-        {
-            "type": "Feature",
             "id": 9,
             "geometry": {
                 "type": "Point",
