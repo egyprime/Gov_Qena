@@ -1,152 +1,252 @@
 {
-    "displayFieldName": "",
-    "fieldAliases": {
-        "OBJECTID": "OBJECTID",
-        "Name": "Name",
-        "FolderPath": "FolderPath",
-        "SymbolID": "SymbolID",
-        "AltMode": "AltMode",
-        "Base": "Base",
-        "Snippet": "Snippet",
-        "PopupInfo": "PopupInfo",
-        "HasLabel": "HasLabel",
-        "LabelID": "LabelID"
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 1,
+        "Name": "برابخ بالطريق الصحراوي الشرقي",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 0,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.78488781800007, 26.344911702000047]
+      }
     },
-    "geometryType": "esriGeometryPoint",
-    "spatialReference": {
-        "wkid": 4326,
-        "latestWkid": 4326,
-        "vcsWkid": 5773,
-        "latestVcsWkid": 5773
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 2,
+        "Name": "بحيرة صناعية",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 1,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "<img style=\"max-width:500px;\" src=\"files/WhatsApp Image 2024-08-25 at 9.01.04 AM.jpeg\">",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [31.930291246000024, 25.95787597900005]
+      }
     },
-    "fields": [
-        {
-            "name": "OBJECTID",
-            "type": "esriFieldTypeOID",
-            "alias": "OBJECTID"
-        },
-        {
-            "name": "Name",
-            "type": "esriFieldTypeString",
-            "alias": "Name",
-            "length": 320
-        },
-        {
-            "name": "FolderPath",
-            "type": "esriFieldTypeString",
-            "alias": "FolderPath",
-            "length": 320
-        },
-        {
-            "name": "SymbolID",
-            "type": "esriFieldTypeInteger",
-            "alias": "SymbolID"
-        },
-        {
-            "name": "AltMode",
-            "type": "esriFieldTypeSmallInteger",
-            "alias": "AltMode"
-        },
-        {
-            "name": "Base",
-            "type": "esriFieldTypeDouble",
-            "alias": "Base"
-        },
-        {
-            "name": "Snippet",
-            "type": "esriFieldTypeString",
-            "alias": "Snippet",
-            "length": 268435455
-        },
-        {
-            "name": "PopupInfo",
-            "type": "esriFieldTypeString",
-            "alias": "PopupInfo",
-            "length": 268435455
-        },
-        {
-            "name": "HasLabel",
-            "type": "esriFieldTypeSmallInteger",
-            "alias": "HasLabel"
-        },
-        {
-            "name": "LabelID",
-            "type": "esriFieldTypeInteger",
-            "alias": "LabelID"
-        }
-    ],
-    "features": [
-        {
-            "attributes": {
-                "OBJECTID": 1,
-                "Name": "برابخ بالطريق الصحراوي الشرقي",
-                "FolderPath": "مخرات سيول.kmz/مخرات سيول",
-                "SymbolID": 0,
-                "AltMode": -1,
-                "Base": 0,
-                "Snippet": "",
-                "PopupInfo": "",
-                "HasLabel": -1,
-                "LabelID": 0
-            },
-            "geometry": {
-                "x": 32.78488781800007,
-                "y": 26.344911702000047
-            }
-        },
-        {
-            "attributes": {
-                "OBJECTID": 2,
-                "Name": "بحيرة صناعية",
-                "FolderPath": "مخرات سيول.kmz/مخرات سيول",
-                "SymbolID": 1,
-                "AltMode": -1,
-                "Base": 0,
-                "Snippet": "",
-                "PopupInfo": "<img style=\"max-width:500px;\" src=\"files/WhatsApp Image 2024-08-25 at 9.01.04 AM.jpeg\">",
-                "HasLabel": -1,
-                "LabelID": 1
-            },
-            "geometry": {
-                "x": 31.930291246000024,
-                "y": 25.95787597900005
-            }
-        },
-        {
-            "attributes": {
-                "OBJECTID": 3,
-                "Name": "سدود إعاقة بطريق قنا طيبة",
-                "FolderPath": "مخرات سيول.kmz/مخرات سيول",
-                "SymbolID": 2,
-                "AltMode": -1,
-                "Base": 0,
-                "Snippet": "",
-                "PopupInfo": "",
-                "HasLabel": -1,
-                "LabelID": 1
-            },
-            "geometry": {
-                "x": 32.83280185000007,
-                "y": 26.21147942300007
-            }
-        },
-        {
-            "attributes": {
-                "OBJECTID": 4,
-                "Name": "سد إعاقة نجع عبد القادر دشنا",
-                "FolderPath": "مخرات سيول.kmz/مخرات سيول",
-                "SymbolID": 2,
-                "AltMode": -1,
-                "Base": 0,
-                "Snippet": "",
-                "PopupInfo": "",
-                "HasLabel": -1,
-                "LabelID": 1
-            },
-            "geometry": {
-                "x": 32.479607474000034,
-                "y": 26.21965876300004
-            }
-        }
-    ]
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 3,
+        "Name": "سدود إعاقة بطريق قنا طيبة",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 2,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.83280185000007, 26.21147942300007]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 4,
+        "Name": "سد إعاقة نجع عبد القادر دشنا",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 2,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.479607474000034, 26.21965876300004]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 5,
+        "Name": "سد إعاقة نجع عبد القادر دشنا",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 2,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.46697936100003, 26.215434712000047]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 6,
+        "Name": "سد إعاقة",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 2,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [31.81753332200003, 26.07103564700003]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 7,
+        "Name": "سد إعاقة",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 2,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [31.815226118000055, 26.097486598000046]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 8,
+        "Name": "بحيرة صناعية بحجازة قوص",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 1,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.882454127000074, 25.84214316200007]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 9,
+        "Name": "بحيرة صناعية العقب قوص",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول/بحيرة صناعية / العقب",
+        "SymbolID": 1,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.81903135600004, 25.789284018000046]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 10,
+        "Name": "بحيرة صناعية البطحة نجع حمادي",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 1,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.20720164700003, 25.82859529800004]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 11,
+        "Name": "بحيرة صناعية نجع حمادي",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 1,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.27852834500004, 25.82166923500006]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 12,
+        "Name": "سد إعاقة أبو دياب شرق",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 2,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.58444635600006, 26.25253708500003]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 13,
+        "Name": "مصنع سكر نجع حمادي",
+        "FolderPath": "مخرات سيول.kmz/مخرات سيول",
+        "SymbolID": 3,
+        "AltMode": -1,
+        "Base": 0,
+        "Snippet": "",
+        "PopupInfo": "",
+        "HasLabel": -1,
+        "LabelID": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.25867901400005, 26.027247935000048]
+      }
+    }
+  ]
 }
