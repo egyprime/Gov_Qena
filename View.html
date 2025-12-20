@@ -5,6 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام تحليل المنطقة المحيطة للحدث - محافظة قنا</title>
     <style>
+        /* ============ أنماط نظام الحماية ============ */
+        .password-protection {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .password-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            border: 3px solid #4299e1;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .password-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 10px 30px rgba(66, 153, 225, 0.4);
+        }
+        
+        .password-title {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .password-subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .password-input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s;
+            text-align: right;
+        }
+        
+        .password-input:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+        
+        .password-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+            font-size: 1.2rem;
+        }
+        
+        .password-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .password-btn:hover {
+            background: linear-gradient(135deg, #2f855a 0%, #276749 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(56, 161, 105, 0.3);
+        }
+        
+        .password-error {
+            color: #e53e3e;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .password-attempts {
+            color: #718096;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+        
+        .password-footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+        
+        /* إخفاء المحتوى الأصلي أثناء الحماية */
+        body.protected .header,
+        body.protected .container,
+        body.protected .team-modal,
+        body.protected .periodic-notification,
+        body.protected .results-panel,
+        body.protected #toast-container {
+            display: none !important;
+        }
+        
         /* ============ RESET & BASE STYLES ============ */
         * {
             margin: 0;
@@ -1532,6 +1687,15 @@
             .files-grid {
                 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
+            
+            .password-box {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .password-title {
+                font-size: 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1572,6 +1736,20 @@
             .files-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .password-logo {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+            
+            .password-title {
+                font-size: 1.3rem;
+            }
+            
+            .password-subtitle {
+                font-size: 0.9rem;
+            }
         }
     </style>
     
@@ -1581,7 +1759,44 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="protected">
+    <!-- نافذة حماية كلمة المرور -->
+    <div id="password-protection" class="password-protection">
+        <div class="password-box">
+            <div class="password-logo">
+                <i class="fas fa-lock"></i>
+            </div>
+            
+            <h1 class="password-title">نظام تحليل المنطقة المحيطة للحدث</h1>
+            <p class="password-subtitle">محافظة قنا - نظام متكامل للتحليل الجغرافي</p>
+            
+            <div class="password-input-container">
+                <input type="password" id="password-input" class="password-input" placeholder="أدخل كلمة المرور">
+                <div class="password-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+            </div>
+            
+            <div id="password-error" class="password-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="error-message">كلمة المرور غير صحيحة</span>
+            </div>
+            
+            <button id="password-btn" class="password-btn">
+                <i class="fas fa-unlock"></i>
+                دخول إلى النظام
+            </button>
+            
+            <div id="password-attempts" class="password-attempts">
+                المحاولات المتبقية: <span id="attempts-count">5</span>
+            </div>
+            
+            <div class="password-footer">
+                <i class="fas fa-shield-alt"></i> نظام محمي - الوصول مقيد
+            </div>
+        </div>
+    </div>
+    
     <!-- الهيدر -->
     <div class="header">
         <div class="header-top">
@@ -1929,6 +2144,236 @@
 
     <!-- جميع الأكواد الجافاسكريبت -->
     <script>
+        // ============================================
+        // نظام الحماية بكلمة المرور (بدون حفظ الحالة)
+        // ============================================
+        const CORRECT_PASSWORD = "NAS"; // كلمة المرور الصحيحة
+        let attemptsLeft = 5; // عدد المحاولات المتبقية
+        let isAuthenticated = false;
+
+        function initPasswordProtection() {
+            // إزالة أي حالة مصادقة سابقة
+            clearAuthentication();
+            
+            // إعداد أحداث كلمة المرور
+            const passwordInput = document.getElementById('password-input');
+            const passwordBtn = document.getElementById('password-btn');
+            const passwordError = document.getElementById('password-error');
+            const attemptsCount = document.getElementById('attempts-count');
+            
+            // تحديث عدد المحاولات
+            attemptsLeft = 5; // إعادة تعيين المحاولات
+            attemptsCount.textContent = attemptsLeft;
+            
+            // حدث زر الدخول
+            passwordBtn.addEventListener('click', checkPassword);
+            
+            // حدث الضغط على Enter في حقل كلمة المرور
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
+            // التركيز التلقائي على حقل كلمة المرور
+            passwordInput.focus();
+            
+            // تحديث عدد المحاولات عند التغيير
+            function updateAttemptsDisplay() {
+                attemptsCount.textContent = attemptsLeft;
+                
+                if (attemptsLeft <= 2) {
+                    attemptsCount.style.color = '#e53e3e';
+                    attemptsCount.style.fontWeight = 'bold';
+                } else {
+                    attemptsCount.style.color = '#718096';
+                    attemptsCount.style.fontWeight = 'normal';
+                }
+            }
+            
+            // دالة التحقق من كلمة المرور
+            function checkPassword() {
+                const enteredPassword = passwordInput.value.trim().toUpperCase();
+                
+                if (!enteredPassword) {
+                    showPasswordError('الرجاء إدخال كلمة المرور');
+                    return;
+                }
+                
+                if (enteredPassword === CORRECT_PASSWORD) {
+                    // كلمة المرور صحيحة
+                    passwordError.style.display = 'none';
+                    unlockSite();
+                    
+                    // لا نحفظ أي شيء في localStorage
+                    // سيتم طلب كلمة المرور مرة أخرى عند refresh
+                    
+                    // إظهار رسالة نجاح
+                    showToast('تم الدخول بنجاح إلى النظام', 'success');
+                    
+                } else {
+                    // كلمة المرور خاطئة
+                    attemptsLeft--;
+                    updateAttemptsDisplay();
+                    
+                    if (attemptsLeft <= 0) {
+                        // تم استنفاذ جميع المحاولات
+                        showPasswordError('تم استنفاذ جميع المحاولات. سيتم إغلاق الصفحة.');
+                        passwordInput.disabled = true;
+                        passwordBtn.disabled = true;
+                        
+                        // إغلاق الصفحة بعد 3 ثواني
+                        setTimeout(() => {
+                            document.body.innerHTML = `
+                                <div style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; background: #1a202c; color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+                                    <div>
+                                        <h1 style="color: #e53e3e; margin-bottom: 20px;">
+                                            <i class="fas fa-ban"></i> الوصول مرفوض
+                                        </h1>
+                                        <p>تم استنفاذ جميع محاولات الدخول.</p>
+                                        <p style="margin-top: 20px; color: #a0aec0;">يجب إعادة فتح الصفحة للبدء من جديد.</p>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            // لا نغلق الصفحة تلقائياً، نتركها للزبون ليقرر
+                        }, 3000);
+                        
+                    } else {
+                        // إظهار رسالة الخطأ
+                        let errorMsg = 'كلمة المرور غير صحيحة';
+                        if (attemptsLeft === 1) {
+                            errorMsg += ' - لديك محاولة واحدة فقط';
+                        } else {
+                            errorMsg += ` - لديك ${attemptsLeft} محاولات متبقية`;
+                        }
+                        showPasswordError(errorMsg);
+                        
+                        // اهتزاز حقل الإدخال
+                        passwordInput.style.animation = 'shake 0.5s';
+                        setTimeout(() => {
+                            passwordInput.style.animation = '';
+                        }, 500);
+                        
+                        // مسح حقل الإدخال
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    }
+                }
+            }
+            
+            // دالة لعرض خطأ كلمة المرور
+            function showPasswordError(message) {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = message;
+                passwordError.style.display = 'flex';
+            }
+            
+            // تحديث العرض أولاً
+            updateAttemptsDisplay();
+        }
+
+        // دالة لمسح أي مصادقة سابقة
+        function clearAuthentication() {
+            // لا نقوم بحفظ أي شيء، ولكن يمكننا مسح أي بيانات قديمة
+            localStorage.removeItem('site_authenticated');
+            localStorage.removeItem('site_password');
+            
+            // إضافة حدث لحفظ حالة المحاولات قبل إغلاق الصفحة (اختياري)
+            window.addEventListener('beforeunload', function() {
+                // يمكننا مسح البيانات عند إغلاق الصفحة
+                localStorage.removeItem('site_authenticated');
+                localStorage.removeItem('site_password');
+            });
+        }
+
+        // دالة فتح الموقع بعد المصادقة
+        function unlockSite() {
+            isAuthenticated = true;
+            
+            // إخفاء نافذة كلمة المرور
+            document.getElementById('password-protection').style.display = 'none';
+            
+            // إزالة فئة الحماية من body
+            document.body.classList.remove('protected');
+            
+            // تهيئة الموقع
+            initSite();
+        }
+
+        // ============================================
+        // تهيئة الموقع (بعد المصادقة)
+        // ============================================
+        function initSite() {
+            // تهيئة الخريطة
+            initMap();
+            
+            // تحميل ملفات البيانات
+            loadDataFiles();
+            
+            // تهيئة البحث
+            initSearch();
+            
+            // تهيئة إضافة النقاط اليدوية
+            initManualPoint();
+            
+            // تهيئة زر عرض جميع البيانات
+            document.getElementById('show-all-btn').onclick = loadAllDataFiles;
+            
+            // تحميل أول ملف بيانات تلقائياً
+            setTimeout(() => {
+                // تحميل ملف المستشفيات تلقائياً
+                toggleDataFile('mostashfayat', 'feature');
+            }, 1000);
+            
+            // تهيئة إدارة شريط التمرير
+            initSidebarScroll();
+            
+            // بدء الإشعارات الدورية
+            initPeriodicNotification();
+            
+            console.log('🚀 النظام جاهز');
+        }
+
+        // ============================================
+        // تهيئة الموقع عند التحميل
+        // ============================================
+        window.onload = function() {
+            // بدء نظام الحماية في كل مرة
+            initPasswordProtection();
+            
+            // إضافة زر logout يدوي (اختياري)
+            setTimeout(() => {
+                // يمكن إضافة زر logout في الهيدر إذا أردت
+                addLogoutButton();
+            }, 100);
+        };
+
+        // دالة إضافة زر logout (اختيارية)
+        function addLogoutButton() {
+            // البحث عن مكان مناسب في الهيدر
+            const headerButtons = document.querySelector('.header-buttons');
+            if (headerButtons) {
+                const logoutBtn = document.createElement('button');
+                logoutBtn.className = 'team-btn';
+                logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> تسجيل الخروج';
+                logoutBtn.onclick = function() {
+                    if (confirm('هل تريد تسجيل الخروج؟ سيتم طلب كلمة المرور مرة أخرى.')) {
+                        // إعادة تحميل الصفحة للعودة لنافذة كلمة المرور
+                        location.reload();
+                    }
+                };
+                
+                // إضافة الزر بعد زر فريق العمل
+                const teamBtn = document.querySelector('.team-btn');
+                if (teamBtn) {
+                    teamBtn.parentNode.insertBefore(logoutBtn, teamBtn.nextSibling);
+                } else {
+                    headerButtons.appendChild(logoutBtn);
+                }
+            }
+        }
+
         // ============================================
         // المتغيرات الأساسية
         // ============================================
@@ -3687,46 +4132,6 @@
                 }
             }, 4000);
         }
-        
-        // ============================================
-        // تهيئة النظام
-        // ============================================
-        window.onload = function() {
-            try {
-                // تهيئة الخريطة
-                initMap();
-                
-                // تحميل ملفات البيانات
-                loadDataFiles();
-                
-                // تهيئة البحث
-                initSearch();
-                
-                // تهيئة إضافة النقاط اليدوية
-                initManualPoint();
-                
-                // تهيئة زر عرض جميع البيانات
-                document.getElementById('show-all-btn').onclick = loadAllDataFiles;
-                
-                // تحميل أول ملف بيانات تلقائياً
-                setTimeout(() => {
-                    // تحميل ملف المستشفيات تلقائياً
-                    toggleDataFile('mostashfayat', 'feature');
-                }, 1000);
-                
-                // تهيئة إدارة شريط التمرير
-                initSidebarScroll();
-                
-                // بدء الإشعارات الدورية
-                initPeriodicNotification();
-                
-                console.log('🚀 النظام جاهز');
-                
-            } catch (error) {
-                console.error('❌ خطأ في التحميل:', error);
-            }
-        };
     </script>
 </body>
 </html>
-
