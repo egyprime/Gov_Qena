@@ -35,22 +35,6 @@
         },
         {
             "type": "Feature",
-            "id": 2,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    31.201794000000064,
-                    30.355256000000054
-                ]
-            },
-            "properties": {
-                "FID": 2,
-                "Name": "طوخ الثانوية",
-                "المدا": "المدارس"
-            }
-        },
-        {
-            "type": "Feature",
             "id": 4,
             "geometry": {
                 "type": "Point",
