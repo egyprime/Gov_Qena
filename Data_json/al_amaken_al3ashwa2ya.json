@@ -67,38 +67,6 @@
         },
         {
             "type": "Feature",
-            "id": 4,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.272800000000075,
-                    26.740000000000066
-                ]
-            },
-            "properties": {
-                "FID": 4,
-                "Name": "نجع طلحا",
-                "Name_1": "الأماكن العشوائية"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 5,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    32.28490000000005,
-                    26.748000000000047
-                ]
-            },
-            "properties": {
-                "FID": 5,
-                "Name": "نجع الخطيب",
-                "Name_1": "الأماكن العشوائية"
-            }
-        },
-        {
-            "type": "Feature",
             "id": 6,
             "geometry": {
                 "type": "Point",
