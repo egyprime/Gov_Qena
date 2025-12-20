@@ -227,70 +227,6 @@
         },
         {
             "type": "Feature",
-            "id": 14,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 14,
-                "Name": "لوحة توزيع كهربة الريف",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 15,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 15,
-                "Name": "لوحة توزيع قنا الجديدة الرئيسية",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 16,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 16,
-                "Name": "لوحة توزيع الاسكان",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 17,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 17,
-                "Name": "لوحة توزيع الحضري",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
             "id": 18,
             "geometry": {
                 "type": "Point",
@@ -302,38 +238,6 @@
             "properties": {
                 "FID": 18,
                 "Name": "لوحة توزيع الوقف",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 19,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 19,
-                "Name": "لوحة توزيع الوقف",
-                "Name_1": "محطات _كهرباء"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 20,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    5.684341886080802e-14,
-                    5.684341886080802e-14
-                ]
-            },
-            "properties": {
-                "FID": 20,
-                "Name": "لوحة توزيع الوقف الجديدة",
                 "Name_1": "محطات _كهرباء"
             }
         },
