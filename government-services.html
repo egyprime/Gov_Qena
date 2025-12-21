@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الخدمات والمرافق العامة بمحافظة قنا</title>
+    <title>بوابة الخدمات المكانية - محافظة قنا</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary-color: #2E7D32;
+            --secondary-color: #004D40;
+            --accent-color: #FFD700;
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --card-hover: rgba(255, 255, 255, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -17,13 +28,21 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a3a1f, #2c5f2b);
-            color: #fff;
+            background: linear-gradient(-45deg, #1b5e20, #004d40, #2e7d32, #00695c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
             min-height: 100vh;
-            position: relative;
             overflow-x: hidden;
         }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         
+        /* تأثير الشبكة الخلفية */
         body::before {
             content: "";
             position: absolute;
@@ -31,9 +50,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
             z-index: -1;
+            pointer-events: none;
         }
         
         .container {
@@ -42,14 +64,18 @@
             padding: 20px;
         }
         
-        /* الترويسة */
+        /* --- الهيدر --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 30px;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         
         .logo {
@@ -59,448 +85,885 @@
         }
         
         .logo-icon {
-            background: #4CAF50;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            background: linear-gradient(135deg, #66BB6A, #43A047);
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transform: rotate(-5deg);
+            transition: 0.3s;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(0deg) scale(1.1);
         }
         
         .logo-text {
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.2;
         }
         
         .logo-text span {
-            color: #FFD700;
+            color: var(--accent-color);
+            display: block;
+            font-size: 0.8em;
+            font-weight: 600;
         }
         
-        /* زر الصفحة الرئيسية */
         .home-btn {
-            background: linear-gradient(to right, #FFD700, #FFA000);
-            color: #333;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
             text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 18px;
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            transition: all 0.3s ease;
+            gap: 10px;
         }
         
         .home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+            background: var(--accent-color);
+            color: #000;
+            transform: translateY(-2px);
         }
         
-        /* المحتوى الرئيسي */
-        .main-content {
-            margin-bottom: 40px;
-        }
-        
-        /* قسم الخدمات */
-        .services-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        .section-title {
-            font-size: 26px;
-            margin-bottom: 25px;
-            color: #FFD700;
+        /* --- قسم العنوان الرئيسي --- */
+        .hero-section {
             text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
             position: relative;
+            display: inline-block;
         }
         
         .section-title::after {
             content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: #4CAF50;
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
         }
-        
+
+        .instructions {
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- شبكة الخدمات --- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
         
+        /* تنسيق البطاقة الموحد */
         .service-card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            padding: 25px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px 20px;
             text-align: center;
-            transition: all 0.3s ease;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             color: #fff;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        /* تأثير اللمعان */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
         }
         
         .service-card:hover {
-            background: rgba(76, 175, 80, 0.3);
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .service-card:hover .service-icon {
-            transform: scale(1.2);
-            color: #fff;
-        }
-        
-        .service-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 0;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .service-card:hover::before {
-            opacity: 1;
+            background: var(--card-hover);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-color);
         }
         
         .service-icon {
-            font-size: 40px;
-            color: #FFD700;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
+            font-size: 45px;
+            margin-bottom: 20px;
+            background: -webkit-linear-gradient(#fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            transition: 0.3s;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(5deg);
+            background: -webkit-linear-gradient(var(--accent-color), #FFA000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .service-title {
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #FFD700;
-            position: relative;
-            z-index: 1;
+            color: #fff;
         }
         
         .service-card p {
-            position: relative;
-            z-index: 1;
-            font-size: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.5;
         }
-        
-        /* التذييل */
+
+        /* --- خريطة الأساس المميزة --- */
+        .base-map-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(46, 125, 50, 0.4));
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            flex-direction: row;
+            text-align: right;
+            justify-content: flex-start;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .base-map-card .service-icon {
+            font-size: 60px;
+            margin-bottom: 0;
+            background: -webkit-linear-gradient(#FFD700, #FFA000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .base-map-info {
+            flex: 1;
+        }
+
+        /* --- الفوتر وقسم فريق العمل --- */
         footer {
-            background: rgba(0, 0, 0, 0.3);
+            margin-top: 60px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px 20px;
+            border-radius: 30px 30px 0 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* كارت فريق العمل */
+        .team-credits {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 30px;
-            text-align: center;
-            margin-top: 40px;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .footer-logo {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #FFD700;
-        }
-        
-        .contact-info {
+            max-width: 800px;
+            margin: 0 auto 30px;
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 25px 0;
             flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        .contact-item {
+
+        /* قسم صورتك */
+        .creator-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
+            text-align: right;
+        }
+
+        .creator-img-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--accent-color), transparent);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .creator-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #2c3e50;
+        }
+
+        .creator-info h4 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
             font-size: 18px;
         }
+
+        .creator-info span {
+            font-size: 14px;
+            opacity: 0.8;
+            display: block;
+        }
         
+        .creator-info .unit-name {
+            font-size: 12px;
+            background: rgba(255,255,255,0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* قسم الإشراف */
+        .supervisor-section {
+            border-right: 2px solid rgba(255,255,255,0.1);
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .supervisor-label {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+
+        .supervisor-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
         .copyright {
             margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            opacity: 0.6;
         }
-        
-        /* التأثيرات المتحركة */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animated {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        
-        /* التجاوب مع الشاشات الصغيرة */
-        @media (max-width: 900px) {
-            header {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .logo-text {
-                font-size: 22px;
-            }
-            
-            .home-btn {
-                padding: 10px 20px;
-                font-size: 16px;
-            }
-        }
-        
-        .instructions {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            font-size: 16px;
-            color: #FFD700;
-        }
-        
-        /* إضافة خريطة الأساس */
-        .base-map-card {
-            grid-column: 1 / -1; /* تأخذ العرض الكامل */
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(76, 175, 80, 0.3));
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding: 30px;
-        }
-        
-        .base-map-card::before {
-            content: "";
-            position: absolute;
+
+        /* --- نافذة كلمة المرور --- */
+        .password-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,215,0,0.2)" stroke-width="1"/></svg>');
-            background-size: 20px 20px;
-            z-index: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
-        
-        .base-map-icon {
-            font-size: 48px;
-            color: #FFD700;
-            margin-bottom: 15px;
-            z-index: 1;
+
+        .password-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-        
-        .base-map-title {
+
+        .password-modal {
+            background: linear-gradient(135deg, #1b5e20, #004d40);
+            border-radius: 25px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            transform: translateY(-30px);
+            transition: transform 0.4s ease;
+        }
+
+        .password-overlay.active .password-modal {
+            transform: translateY(0);
+        }
+
+        .password-icon {
+            font-size: 60px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .password-title {
             font-size: 26px;
             font-weight: 700;
-            color: #FFD700;
             margin-bottom: 10px;
-            z-index: 1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
         }
-        
-        .base-map-description {
+
+        .password-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .password-input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 18px 50px 18px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
             font-size: 18px;
-            max-width: 700px;
-            text-align: center;
-            z-index: 1;
-            line-height: 1.6;
+            font-family: 'Cairo', sans-serif;
+            text-align: right;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+
+        .password-input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+        }
+
+        .password-btn {
+            background: linear-gradient(to right, var(--accent-color), #FFA000);
+            color: #000;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .password-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .password-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .password-cancel {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .password-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .password-error {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        /* شريط التحميل */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 215, 0, 0.3);
+            border-top: 8px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 60%;
+            color: var(--accent-color);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* --- التجاوب مع الموبايل --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .base-map-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .team-credits {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .creator-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .supervisor-section {
+                border-right: none;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                padding-right: 0;
+                padding-top: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .password-modal {
+                padding: 30px 20px;
+                width: 95%;
+            }
+
+            .password-title {
+                font-size: 22px;
+            }
+        }
+
+        /* أنيميشن بسيط */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        /* تعديل رسالة التعليمات */
-        .instructions i {
-            margin-left: 8px;
-        }
+        .animated { animation: fadeInDown 0.8s ease forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
+
+    <!-- نافذة التحميل -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+        <div class="loading-text">جاري إرسال الإشعارات...</div>
+    </div>
+
+    <!-- نافذة كلمة المرور -->
+    <div class="password-overlay" id="passwordOverlay">
+        <div class="password-modal">
+            <div class="password-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3 class="password-title">الوصول المقيد</h3>
+            <p class="password-subtitle" id="passwordSubtitle">هذه الخدمة محمية بكلمة مرور. الرجاء إدخال كلمة المرور للمتابعة.</p>
+            
+            <div class="password-input-container">
+                <input type="password" id="passwordInput" class="password-input" placeholder="أدخل كلمة المرور">
+                <div class="password-input-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+            </div>
+            
+            <div class="password-error" id="passwordError">
+                كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.
+            </div>
+            
+            <button class="password-btn" id="passwordSubmit">الدخول</button>
+            <button class="password-cancel" id="passwordCancel">إلغاء</button>
+        </div>
+    </div>
+
     <div class="container">
-        <!-- الترويسة -->
-        <header>
+        <header class="animated">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-map-marked-alt"></i>
+                    <i class="fas fa-map-location-dot"></i>
                 </div>
-                <div class="logo-text">الخدمات والمرافق العامة <span>بمحافظة قنا</span></div>
+                <div class="logo-text">الخدمات والمرافق <span>محافظة قنا</span></div>
             </div>
-            <a href="index.html" class="home-btn animated">
-                <i class="fas fa-home"></i> الصفحة الرئيسية
+            <a href="index.html" class="home-btn">
+                <i class="fas fa-home"></i> الرئيسية
             </a>
         </header>
-        
-        <!-- المحتوى الرئيسي -->
+
         <div class="main-content">
-            <!-- قسم الخدمات -->
-            <div class="services-section animated delay-1">
-                <h2 class="section-title">خدمات المحافظة</h2>
-                
+            
+            <div class="hero-section animated delay-1">
+                <h2 class="section-title">دليل الخدمات المكانية</h2>
+                <br>
                 <div class="instructions">
-                    <i class="fas fa-info-circle"></i> اضغط على أي خدمة أدناه للانتقال إلى الخريطة التفاعلية
-                </div>
-                
-                <div class="services-grid">
-                    <!-- خريطة الأساس -->
-                    <a href="basemap.html" class="service-card base-map-card">
-                        <div class="service-icon base-map-icon">
-                            <i class="fas fa-map"></i>
-                        </div>
-                        <h3 class="service-title base-map-title">خريطة الأساس</h3>
-                        <p class="base-map-description">
-                            الخريطة الأساسية لمحافظة قنا تشمل الحدود الإدارية للمحافظة والمراكز والقري والشياخات
-                        </p>
-                    </a>
-                    
-                    <!-- الصرف الصحي -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1m70wN3F3ScVUaXxIXrwAcNu9fPUT6Qo&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-faucet"></i>
-                        </div>
-                        <h3 class="service-title">الصرف الصحي</h3>
-                        <p>شبكات الصرف الصحي ومعالجة المياه</p>
-                    </a>
-                    
-                    <!-- المدارس -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=14P7FguT8F1asd4QVkB97wIkaGB6AehU&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <h3 class="service-title">المدارس</h3>
-                        <p>المدارس الحكومية والخاصة بجميع المراحل</p>
-                    </a>
-                    
-                    
-                    <!-- المطاحن -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=11Pnx5fd6Fc5Yg2yBiSEwCi3rySeTCKE&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-wind"></i>
-                        </div>
-                        <h3 class="service-title">المطاحن</h3>
-                        <p>مطاحن الحبوب ومراكز توزيع الدقيق</p>
-                    </a>
-                    
-                    <!-- قوات الحماية المدنية -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1jFznyNNPkFujve1gWYuRT1nFBkw4bKk&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-hard-hat"></i>
-                        </div>
-                        <h3 class="service-title">قوات الحماية المدنية</h3>
-                        <p>الإسعافات الأولية والطوارئ والإنقاذ</p>
-                    </a>
-                    
-                    <!-- محطات مياه الشرب -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1pLAXyfwaALj6guMYS9_b1qEIT-nw-uk&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <h3 class="service-title">محطات مياه الشرب</h3>
-                        <p>محطات تنقية وتوزيع مياه الشرب</p>
-                    </a>
-                    
-                    <!-- مخابز -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1aHjGO_Zdl8chujRA3hJfUyPL197J4Y4&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-bread-slice"></i>
-                        </div>
-                        <h3 class="service-title">مخابز</h3>
-                        <p>المخابز الآلية والعائلية بالمحافظة</p>
-                    </a>
-                    
-                    <!-- مستشفيات -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=110d2GK8G3xFNBdES03an8pUL6tVoFW8&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-hospital"></i>
-                        </div>
-                        <h3 class="service-title">مستشفيات</h3>
-                        <p>المستشفيات العامة والمتخصصة</p>
-                    </a>
-                    
-                    <!-- مستودعات بوتجاز -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1ucWKktFJ_DkhfxzooKrVFl8D2yleZc4&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h3 class="service-title">مستودعات بوتجاز</h3>
-                        <p>مراكز توزيع أسطوانات الغاز المنزلي</p>
-                    </a>
-                    
-                    <!-- نقاط الإسعاف -->
-                    <a href="https://www.google.com/maps/d/u/0/edit?mid=1xiGvRcy5BVMx8z-67LvkRpIDbK7zqPU&usp=sharing" target="_blank" class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-ambulance"></i>
-                        </div>
-                        <h3 class="service-title">نقاط الإسعاف</h3>
-                        <p>نقاط الإسعاف والطوارئ بالمحافظة</p>
-                    </a>
+                    <i class="fas fa-info-circle"></i> اختر الخدمة من القائمة أدناه لعرضها على الخريطة التفاعلية
                 </div>
             </div>
+
+            <div class="services-grid animated delay-2">
+                <a href="basemap.html" class="service-card base-map-card">
+                    <div class="service-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="base-map-info">
+                        <h3 class="service-title" style="font-size: 24px; color: var(--accent-color);">خريطة الأساس الشاملة</h3>
+                        <p style="font-size: 16px; color: #fff;">الحدود الإدارية للمحافظة، المراكز، القرى، والشياخات</p>
+                    </div>
+                </a>
+
+                <!-- خدمة محطات مياه الشرب المضافة -->
+                <a href="https://www.google.com/maps/d/embed?mid=1pLAXyfwaALj6guMYS9_b1qEIT-nw-uk&ehbc=2E312F" target="_blank" class="service-card" data-service="محطات مياه الشرب">
+                    <div class="service-icon"><i class="fas fa-tint"></i></div>
+                    <h3 class="service-title">محطات مياه الشرب</h3>
+                    <p>مواقع محطات المياه الرئيسية</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=1m70wN3F3ScVUaXxIXrwAcNu9fPUT6Qo&usp=sharing" target="_blank" class="service-card" data-service="مياه الشرب والصرف">
+                    <div class="service-icon"><i class="fas fa-faucet-drip"></i></div>
+                    <h3 class="service-title">مياه الشرب والصرف</h3>
+                    <p>المحطات والشبكات</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=14P7FguT8F1asd4QVkB97wIkaGB6AehU&usp=sharing" target="_blank" class="service-card" data-service="التعليم والمدارس">
+                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="service-title">التعليم والمدارس</h3>
+                    <p>المدارس الحكومية والخاصة</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=11Pnx5fd6Fc5Yg2yBiSEwCi3rySeTCKE&usp=sharing" target="_blank" class="service-card" data-service="المطاحن والتموين">
+                    <div class="service-icon"><i class="fas fa-wheat-awn"></i></div>
+                    <h3 class="service-title">المطاحن والتموين</h3>
+                    <p>مراكز التوزيع والمطاحن</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=1jFznyNNPkFujve1gWYuRT1nFBkw4bKk&usp=sharing" target="_blank" class="service-card" data-service="الحماية المدنية">
+                    <div class="service-icon"><i class="fas fa-helmet-safety"></i></div>
+                    <h3 class="service-title">الحماية المدنية</h3>
+                    <p>الطوارئ والإنقاذ</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=1aHjGO_Zdl8chujRA3hJfUyPL197J4Y4&usp=sharing" target="_blank" class="service-card" data-service="المخابز البلدية">
+                    <div class="service-icon"><i class="fas fa-bread-slice"></i></div>
+                    <h3 class="service-title">المخابز البلدية</h3>
+                    <p>أماكن المخابز وتوزيع الخبز</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=110d2GK8G3xFNBdES03an8pUL6tVoFW8&usp=sharing" target="_blank" class="service-card" data-service="الخدمات الصحية">
+                    <div class="service-icon"><i class="fas fa-heart-pulse"></i></div>
+                    <h3 class="service-title">الخدمات الصحية</h3>
+                    <p>المستشفيات والوحدات الصحية</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=1ucWKktFJ_DkhfxzooKrVFl8D2yleZc4&usp=sharing" target="_blank" class="service-card" data-service="مستودعات الغاز">
+                    <div class="service-icon"><i class="fas fa-fire-burner"></i></div>
+                    <h3 class="service-title">مستودعات الغاز</h3>
+                    <p>توزيع أسطوانات البوتاجاز</p>
+                </a>
+
+                <a href="https://www.google.com/maps/d/u/0/edit?mid=1xiGvRcy5BVMx8z-67LvkRpIDbK7zqPU&usp=sharing" target="_blank" class="service-card" data-service="نقاط الإسعاف">
+                    <div class="service-icon"><i class="fas fa-truck-medical"></i></div>
+                    <h3 class="service-title">نقاط الإسعاف</h3>
+                    <p>تمركزات سيارات الإسعاف</p>
+                </a>
+            </div>
         </div>
-        
-        <!-- التذييل -->
+
         <footer class="animated delay-2">
-            <div class="footer-logo">محافظة قنا</div>
-            <p>بوابة الخدمات والمرافق العامة للمواطنين</p>
-            
-            <div class="developer-credit">
-              <div class="credit-title">إعداد</div>
-              <div class="credit-info">
-               <span><i class="fas fa-cogs"></i> وحدة نظم المعلومات الجغرافية بديوان عام محافظة قنا</span>
-               </div>
+            <div class="team-credits">
+                <div class="creator-section">
+                    <div class="creator-img-container">
+                        <img src="https://i.ibb.co/LDqsRwkv/me.jpg" alt="علي علام" class="creator-img">
+                    </div>
+                    <div class="creator-info">
+                        <span>إعداد وتصميم</span>
+                        <h4>علي علام</h4>
+                        <div class="unit-name"><i class="fas fa-globe"></i> وحدة نظم المعلومات الجغرافية</div>
+                    </div>
+                </div>
+
+                <div class="supervisor-section">
+                    <div class="supervisor-label">تحت إشراف</div>
+                    <div class="supervisor-name">م. حسام الدين طه</div>
+                </div>
+            </div>
+
             <div class="copyright">
-                © 2025 جميع الحقوق محفوظة - محافظة قنا
+                &copy; 2025 محافظة قنا - جميع الحقوق محفوظة
             </div>
         </footer>
     </div>
+
+    <script>
+        // متغيرات النظام
+        let currentServiceUrl = '';
+        let currentServiceName = '';
+        const correctPassword = 'ali_allam_gis';
+        
+        // عناصر DOM
+        const passwordOverlay = document.getElementById('passwordOverlay');
+        const passwordSubtitle = document.getElementById('passwordSubtitle');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordSubmit = document.getElementById('passwordSubmit');
+        const passwordCancel = document.getElementById('passwordCancel');
+        const passwordError = document.getElementById('passwordError');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const serviceCards = document.querySelectorAll('.service-card:not(.base-map-card)');
+        
+        // إضافة حدث النقر لجميع بطاقات الخدمات (عدا خريطة الأساس)
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // منع الانتقال المباشر
+                e.preventDefault();
+                
+                // تخزين الرابط واسم الخدمة
+                currentServiceUrl = this.getAttribute('href');
+                currentServiceName = this.getAttribute('data-service') || 'خدمة غير معروفة';
+                
+                // تحديث النص في النافذة
+                passwordSubtitle.textContent = `خدمة "${currentServiceName}" محمية بكلمة مرور. الرجاء إدخال كلمة المرور للمتابعة.`;
+                
+                // إظهار نافذة كلمة المرور
+                showPasswordOverlay();
+            });
+        });
+        
+        // إظهار نافذة كلمة المرور
+        function showPasswordOverlay() {
+            passwordOverlay.classList.add('active');
+            passwordInput.value = '';
+            passwordError.classList.remove('show');
+            passwordInput.focus();
+        }
+        
+        // إخفاء نافذة كلمة المرور
+        function hidePasswordOverlay() {
+            passwordOverlay.classList.remove('active');
+        }
+        
+        // إظهار شريط التحميل
+        function showLoading() {
+            loadingOverlay.classList.add('active');
+        }
+        
+        // إخفاء شريط التحميل
+        function hideLoading() {
+            loadingOverlay.classList.remove('active');
+        }
+        
+        // التحقق من كلمة المرور
+        function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+            
+            if (enteredPassword === correctPassword) {
+                // كلمة المرور صحيحة
+                passwordError.classList.remove('show');
+                
+                // إخفاء نافذة كلمة المرور
+                hidePasswordOverlay();
+                
+                // إظهار شريط التحميل
+                showLoading();
+                
+                // إرسال الإشعارات والوصول إلى الخدمة
+                setTimeout(() => {
+                    sendNotifications();
+                }, 500);
+                
+            } else {
+                // كلمة المرور خاطئة
+                passwordError.classList.add('show');
+                passwordInput.focus();
+            }
+        }
+        
+        // إرسال إشعارات WhatsApp و Gmail
+        function sendNotifications() {
+            const message = "احاول الدخول علي البيانات الجغرافية المعروضة علي الموقع الخاص بك";
+            const serviceInfo = `\n\nالخدمة: ${currentServiceName}`;
+            const fullMessage = message + serviceInfo;
+            
+            // 1. إرسال WhatsApp مباشرة - هذا يعمل 100%
+            sendWhatsAppNotification(fullMessage);
+            
+            // 2. محاولة إرسال Gmail عبر Formspree
+            sendEmailNotification(fullMessage);
+            
+            // بعد إرسال الإشعارات، افتح الخدمة
+            setTimeout(() => {
+                hideLoading();
+                window.open(currentServiceUrl, '_blank');
+            }, 2000);
+        }
+        
+        // إرسال إشعار WhatsApp
+        function sendWhatsAppNotification(message) {
+            const whatsappNumber = '01025300992';
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            // إنشاء iframe خفي لإرسال طلب WhatsApp
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = whatsappUrl;
+            document.body.appendChild(iframe);
+            
+            // إزالة iframe بعد ثانية
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 1000);
+            
+            console.log('تم إرسال إشعار WhatsApp');
+        }
+        
+        // إرسال إشعار Gmail عبر Formspree
+        function sendEmailNotification(message) {
+            // Formspree هو خدمة مجانية لإرسال البريد الإلكتروني
+            const formspreeEndpoint = 'https://formspree.io/f/xleqnykv';
+            
+            const emailData = {
+                _replyto: 'notification@qena-gis.com',
+                _subject: 'طلب وصول إلى بيانات الخدمات المكانية',
+                message: message,
+                service: currentServiceName,
+                timestamp: new Date().toLocaleString('ar-EG')
+            };
+            
+            // استخدام fetch لإرسال البيانات إلى Formspree
+            fetch(formspreeEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(emailData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('تم إرسال البريد الإلكتروني بنجاح!');
+                } else {
+                    console.log('تم إرسال طلب البريد، قد يحتاج إلى تأكيد');
+                }
+            })
+            .catch(error => {
+                console.log('خطأ في إرسال البريد:', error);
+                // بديل: استخدام mailto link
+                sendEmailViaMailto(message);
+            });
+        }
+        
+        // بديل: إرسال بريد عبر mailto
+        function sendEmailViaMailto(message) {
+            const mailtoLink = `mailto:aliallamsaid@gmail.com?subject=طلب وصول إلى بيانات الخدمات المكانية&body=${encodeURIComponent(message)}`;
+            
+            // إنشاء رابط مؤقت
+            const tempLink = document.createElement('a');
+            tempLink.href = mailtoLink;
+            tempLink.style.display = 'none';
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+            
+            console.log('تم فتح عميل البريد الإلكتروني');
+        }
+        
+        // أحداث الأزرار
+        passwordSubmit.addEventListener('click', checkPassword);
+        passwordCancel.addEventListener('click', hidePasswordOverlay);
+        
+        // السماح بالدخول بالضغط على Enter
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // إغلاق النافذة عند النقر خارجها
+        passwordOverlay.addEventListener('click', function(e) {
+            if (e.target === passwordOverlay) {
+                hidePasswordOverlay();
+            }
+        });
+        
+        // نصائح للمستخدم
+        console.log('نظام حماية الخدمات المكانية جاهز للتشغيل');
+        console.log('كلمة المرور: ali_allam_gis');
+        
+        // إظهار رسالة ترحيبية
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                console.log('مرحباً بك في بوابة الخدمات المكانية - محافظة قنا');
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
