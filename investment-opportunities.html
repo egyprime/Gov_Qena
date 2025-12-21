@@ -220,117 +220,672 @@
             height: calc(100vh - 70px);
             width: 100%;
         }
+        
+        /* إزالة map-controls القديمة */
         .map-controls {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
+            display: none;
+        }
+        
+        /* أدوات القياس الجديدة - شريط جانبي صغير */
+        .measurement-tools-sidebar {
+            position: fixed;
+            top: 120px;
+            left: 15px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
             padding: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             gap: 10px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            min-width: 220px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            width: 60px;
+            transition: width 0.3s ease;
+            overflow: hidden;
         }
-        .map-controls h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.1rem;
-            color: var(--primary);
+        
+        .measurement-tools-sidebar.expanded {
+            width: 250px;
+        }
+        
+        .tools-toggle-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
         }
-        .map-controls .btn {
+        
+        .tools-toggle-btn:hover {
+            transform: rotate(90deg);
+            background: var(--secondary);
+        }
+        
+        .measurement-tool-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             justify-content: flex-start;
-            padding: 10px 15px;
-            border-radius: 10px;
+            padding: 12px 15px;
+            border-radius: 12px;
             border: none;
             background: white;
             color: var(--primary);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             text-align: right;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9rem;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
         }
-        .map-controls .btn:hover {
-            background: #e3f2fd;
+        
+        .measurement-tool-btn i {
+            font-size: 1.3rem;
+            color: var(--primary);
+            min-width: 24px;
+        }
+        
+        .measurement-tool-btn:hover {
+            background: #f0f8ff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
-        .map-controls .btn i {
+        
+        .measurement-tool-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .measurement-tool-btn.active i {
+            color: white;
+        }
+        
+        .tool-text {
+            display: none;
+        }
+        
+        .measurement-tools-sidebar.expanded .tool-text {
+            display: inline;
+        }
+        
+        /* النوافذ المنبثقة الصغيرة */
+        .small-measurement-panel {
+            position: fixed;
+            top: 200px;
+            left: 85px;
+            z-index: 1002;
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            width: 300px;
+            max-height: 400px;
+            overflow: hidden;
+            display: none;
+            animation: slideInLeft 0.3s ease-out;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .small-panel-header {
+            background: var(--blue-gradient);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .small-panel-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .small-close-panel {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
-        .filter-group {
+        
+        .small-close-panel:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .small-panel-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        
+        .small-measurement-result {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 2px dashed var(--primary);
+        }
+        
+        .small-measurement-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 8px 0;
+        }
+        
+        .small-measurement-unit {
+            font-size: 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .small-coordinates-input {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-bottom: 15px;
         }
-        .filter-group-title {
+        
+        .small-coord-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .small-coord-input-group label {
             font-weight: 600;
-            margin-bottom: 8px;
             color: var(--primary);
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 5px;
         }
-        .filter-checkbox {
+        
+        .small-coord-input {
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .small-coord-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 42, 108, 0.1);
+        }
+        
+        .small-search-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .small-search-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 42, 108, 0.3);
+        }
+        
+        /* حقوق الملكية الصغيرة */
+        .small-copyright-modal {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2000;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            width: 280px;
+            display: none;
+            animation: slideUpSmall 0.4s ease-out;
+            border: 2px solid var(--primary);
+        }
+        
+        @keyframes slideUpSmall {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .small-copyright-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .small-copyright-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        .small-copyright-info h5 {
+            margin: 0 0 3px 0;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        
+        .small-copyright-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .small-copyright-body {
+            text-align: center;
+        }
+        
+        .small-copyright-body h6 {
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .small-supervisor {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+        
+        .small-close-copyright {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .small-close-copyright:hover {
+            transform: scale(1.1);
+            background: #c82333;
+        }
+        
+        /* تحسينات لقائمة التصفية */
+        .small-filter-panel {
+            position: fixed;
+            top: 200px;
+            left: 85px;
+            z-index: 1002;
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            width: 300px;
+            max-height: 450px;
+            overflow: hidden;
+            display: none;
+            animation: slideInLeft 0.3s ease-out;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .small-filter-body {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 350px;
+        }
+        
+        .small-filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .small-filter-group-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1rem;
+        }
+        
+        .small-filter-checkbox {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 8px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .filter-checkbox input {
+        
+        .small-filter-checkbox:hover {
+            background: #f0f8ff;
+        }
+        
+        .small-filter-checkbox input {
             transform: scale(1.2);
+            cursor: pointer;
         }
-        .filter-actions {
+        
+        .small-color-indicator {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .small-type-filters {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+        
+        .small-filter-actions {
             display: flex;
             gap: 10px;
             margin-top: 15px;
         }
-        .btn-filter, .btn-reset {
+        
+        .small-btn-filter, .small-btn-reset {
             flex: 1;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 10px;
             font-weight: 600;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
-        .btn-filter {
+        
+        .small-btn-filter {
             background: var(--primary);
             color: white;
         }
-        .btn-reset {
-            background: #e0e0e0;
+        
+        .small-btn-reset {
+            background: #f8f9fa;
             color: var(--dark);
+            border: 1px solid #e0e0e0;
         }
-        .btn-filter:hover {
+        
+        .small-btn-filter:hover {
             background: #152258;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
         }
-        .btn-reset:hover {
-            background: #d0d0d0;
+        
+        .small-btn-reset:hover {
+            background: #e9ecef;
             transform: translateY(-2px);
         }
-        .color-indicator {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
+        
+        /* تسميات القياسات على الخريطة */
+        .polygon-area-label {
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid white;
+            z-index: 1000;
+        }
+        
+        .distance-label {
+            background: rgba(25, 118, 210, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid white;
+            z-index: 1000;
+        }
+        
+        .coordinate-point-label {
+            background: rgba(26, 42, 108, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            text-align: center;
+            white-space: nowrap;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid white;
+            z-index: 1000;
+        }
+        
+        /* أنماط البحث الجديدة */
+        .search-container {
+            position: fixed;
+            top: 120px;
+            left: 85px;
+            z-index: 1002;
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            width: 350px;
+            max-height: 450px;
+            overflow: hidden;
+            display: none;
+            animation: slideInLeft 0.3s ease-out;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-header {
+            background: linear-gradient(135deg, #1a2a6c, #2c5282);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-header h5 {
+            margin: 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .search-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
-        .type-filters {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
+        
+        .search-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
         }
+        
+        .search-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 350px;
+        }
+        
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 42, 108, 0.1);
+        }
+        
+        .search-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .search-results {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        
+        .search-result-item {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-result-item:hover {
+            background: #f5f7fa;
+            transform: translateX(5px);
+        }
+        
+        .search-result-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        
+        .search-result-details {
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .search-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .search-no-results {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* بقية الأنماط الموجودة سابقًا - محفوظة كما هي */
         .polygon-label {
             background: rgba(0, 0, 0, 0.7);
             color: white;
@@ -665,86 +1220,10 @@
             border-radius: 20px;
             font-size: 0.9rem;
         }
-        .distance-label {
-            background: rgba(25, 118, 210, 0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-            pointer-events: none;
-            transform: translateY(-50%);
-        }
-        .coordinate-marker {
-            background: rgba(26, 42, 108, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            text-align: center;
-            white-space: nowrap;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        }
-        .coordinate-display {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 18px;
-            border-radius: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            display: none;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .coordinate-display i {
-            color: var(--primary);
-            margin-left: 5px;
-        }
-        #distanceDisplay {
-            position: absolute;
-            left: 15px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 18px;
-            border-radius: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            display: none;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        #distanceDisplay i {
-            color: var(--primary);
-            margin-left: 5px;
-        }
         .controls-toggle {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            z-index: 1000;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: none; /* تم إخفاء هذا الزر */
         }
-        .controls-toggle:hover {
-            transform: scale(1.1);
-            background: #e3f2fd;
-        }
-        .map-controls.fade-in {
-            animation: fadeIn 0.3s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(26, 42, 108, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(26, 42, 108, 0); }
@@ -763,23 +1242,258 @@
             .menu-toggle {
                 display: flex;
             }
+            .measurement-tools-sidebar {
+                top: 80px;
+                left: 10px;
+            }
+            .small-measurement-panel,
+            .small-filter-panel,
+            .search-container {
+                left: 75px;
+                width: 280px;
+            }
         }
         @media (max-width: 768px) {
-            .map-controls {
-                bottom: 80px;
-                min-width: 200px;
+            .measurement-tools-sidebar {
+                top: 70px;
             }
-            .type-filters {
-                grid-template-columns: 1fr;
-            }
-            .popup-actions {
-                flex-direction: column;
+            .small-copyright-modal {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                max-width: 280px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container-fluid">
+        <!-- شريط أدوات القياس الجانبي الصغير -->
+        <div class="measurement-tools-sidebar" id="measurementToolsSidebar">
+            <button class="tools-toggle-btn" id="toolsToggleBtn">
+                <i class="bi bi-tools"></i>
+            </button>
+            
+            <button class="measurement-tool-btn" id="distanceSidebarBtn">
+                <i class="bi bi-rulers"></i>
+                <span class="tool-text">قياس المسافة</span>
+            </button>
+            
+            <button class="measurement-tool-btn" id="areaSidebarBtn">
+                <i class="bi bi-bounding-box"></i>
+                <span class="tool-text">قياس المساحة</span>
+            </button>
+            
+            <button class="measurement-tool-btn" id="coordinateSidebarBtn">
+                <i class="bi bi-geo-alt"></i>
+                <span class="tool-text">إضافة نقطة</span>
+            </button>
+            
+            <button class="measurement-tool-btn" id="searchSidebarBtn">
+                <i class="bi bi-search"></i>
+                <span class="tool-text">بحث بالإحداثيات</span>
+            </button>
+            
+            <button class="measurement-tool-btn" id="filterSidebarBtn">
+                <i class="bi bi-funnel"></i>
+                <span class="tool-text">تصفية الفرص</span>
+            </button>
+            
+            <button class="measurement-tool-btn" id="searchBarBtn">
+                <i class="bi bi-search"></i>
+                <span class="tool-text">بحث عن فرص</span>
+            </button>
+            
+            <button class="measurement-tool-btn" id="clearSidebarBtn">
+                <i class="bi bi-trash"></i>
+                <span class="tool-text">مسح القياسات</span>
+            </button>
+        </div>
+
+        <!-- نافذة البحث عن الفرص -->
+        <div class="search-container" id="searchContainer">
+            <div class="search-header">
+                <h5><i class="bi bi-search"></i> بحث في الفرص الاستثمارية</h5>
+                <button class="search-close-btn" onclick="closeSearch()">&times;</button>
+            </div>
+            <div class="search-body">
+                <div class="search-input-group">
+                    <input type="text" id="searchInput" placeholder="ابحث باسم الفرصة، النوع، المركز، أو المساحة..." class="search-input">
+                    <button onclick="performSearch()" class="search-button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <!-- تظهر النتائج هنا -->
+                </div>
+                <div class="search-info">
+                    <p><i class="bi bi-info-circle"></i> <strong>ملاحظة:</strong> البحث يشمل جميع بيانات الفرص المتاحة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- لوحة قياس المسافة الصغيرة -->
+        <div class="small-measurement-panel" id="smallDistancePanel">
+            <div class="small-panel-header">
+                <h4><i class="bi bi-rulers"></i> قياس المسافة</h4>
+                <button class="small-close-panel" onclick="closeSmallPanel('distance')">&times;</button>
+            </div>
+            <div class="small-panel-body">
+                <div class="small-measurement-result">
+                    <i class="bi bi-rulers" style="font-size: 1.5rem; color: var(--primary);"></i>
+                    <div class="small-measurement-value" id="smallTotalDistance">0</div>
+                    <div class="small-measurement-unit" id="smallDistanceUnit">متر</div>
+                    <p style="margin-top: 8px; color: #666; font-size: 0.85rem;">انقر على الخريطة لرسم خط القياس</p>
+                </div>
+                <div style="font-size: 0.85rem; color: #555;">
+                    <p><i class="bi bi-info-circle"></i> <strong>التعليمات:</strong></p>
+                    <ul style="padding-right: 15px; margin-top: 5px;">
+                        <li>انقر على الخريطة لوضع نقاط الخط</li>
+                        <li>انقر نقراً مزدوجاً لإنهاء القياس</li>
+                        <li>المسافة تظهر على الخط مباشرة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- لوحة قياس المساحة الصغيرة -->
+        <div class="small-measurement-panel" id="smallAreaPanel">
+            <div class="small-panel-header">
+                <h4><i class="bi bi-bounding-box"></i> قياس المساحة</h4>
+                <button class="small-close-panel" onclick="closeSmallPanel('area')">&times;</button>
+            </div>
+            <div class="small-panel-body">
+                <div class="small-measurement-result">
+                    <i class="bi bi-bounding-box" style="font-size: 1.5rem; color: #4caf50;"></i>
+                    <div class="small-measurement-value" id="smallTotalArea">0</div>
+                    <div class="small-measurement-unit" id="smallAreaUnit">متر مربع</div>
+                    <p style="margin-top: 8px; color: #666; font-size: 0.85rem;">انقر على الخريطة لرسم المضلع</p>
+                </div>
+                <div style="font-size: 0.85rem; color: #555;">
+                    <p><i class="bi bi-info-circle"></i> <strong>التعليمات:</strong></p>
+                    <ul style="padding-right: 15px; margin-top: 5px;">
+                        <li>انقر على الخريطة لوضع نقاط المضلع</li>
+                        <li>انقر نقراً مزدوجاً لإغلاق المضلع</li>
+                        <li>المساحة تظهر في وسط المضلع</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- لوحة إضافة نقطة إحداثيات صغيرة -->
+        <div class="small-measurement-panel" id="smallCoordinatePanel">
+            <div class="small-panel-header">
+                <h4><i class="bi bi-geo-alt"></i> إضافة نقطة إحداثيات</h4>
+                <button class="small-close-panel" onclick="closeSmallPanel('coordinate')">&times;</button>
+            </div>
+            <div class="small-panel-body">
+                <div class="small-measurement-result">
+                    <i class="bi bi-geo-alt" style="font-size: 1.5rem; color: #ff9800;"></i>
+                    <div class="small-measurement-value" id="smallPointCoordinates">0, 0</div>
+                    <div class="small-measurement-unit">إحداثيات النقطة</div>
+                    <p style="margin-top: 8px; color: #666; font-size: 0.85rem;">انقر على الخريطة لوضع النقطة</p>
+                </div>
+                <div style="font-size: 0.85rem; color: #555;">
+                    <p><i class="bi bi-info-circle"></i> <strong>التعليمات:</strong></p>
+                    <ul style="padding-right: 15px; margin-top: 5px;">
+                        <li>انقر على أي مكان في الخريطة</li>
+                        <li>ستظهر إحداثيات النقطة مباشرة</li>
+                        <li>يمكنك إضافة نقاط متعددة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- لوحة البحث بالإحداثيات الصغيرة -->
+        <div class="small-measurement-panel" id="smallSearchPanel">
+            <div class="small-panel-header">
+                <h4><i class="bi bi-search"></i> بحث بالإحداثيات</h4>
+                <button class="small-close-panel" onclick="closeSmallPanel('search')">&times;</button>
+            </div>
+            <div class="small-panel-body">
+                <div class="small-coordinates-input">
+                    <div class="small-coord-input-group">
+                        <label><i class="bi bi-x-circle"></i> الإحداثي X</label>
+                        <input type="number" step="any" class="small-coord-input" id="smallCoordX" placeholder="خط الطول">
+                    </div>
+                    <div class="small-coord-input-group">
+                        <label><i class="bi bi-y-circle"></i> الإحداثي Y</label>
+                        <input type="number" step="any" class="small-coord-input" id="smallCoordY" placeholder="خط العرض">
+                    </div>
+                </div>
+                <button class="small-search-btn" onclick="smallSearchByCoordinates()">
+                    <i class="bi bi-search"></i> البحث والانتقال
+                </button>
+                <div style="margin-top: 15px; font-size: 0.85rem; color: #666;">
+                    <p><i class="bi bi-info-circle"></i> <strong>ملاحظة:</strong></p>
+                    <p>أدخل إحداثيات خط الطول (X) وخط العرض (Y) ثم اضغط زر البحث للانتقال إلى الموقع على الخريطة.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- لوحة التصفية الصغيرة -->
+        <div class="small-filter-panel" id="smallFilterPanel">
+            <div class="small-panel-header">
+                <h4><i class="bi bi-funnel"></i> تصفية الفرص</h4>
+                <button class="small-close-panel" onclick="closeSmallPanel('filter')">&times;</button>
+            </div>
+            <div class="small-filter-body">
+                <div class="small-filter-group">
+                    <div class="small-filter-group-title"><i class="bi bi-tags"></i> نوع الفرصة:</div>
+                    <div class="small-type-filters">
+                        <label class="small-filter-checkbox type-filter">
+                            <span class="small-color-indicator" style="background-color: var(--service-color);"></span>
+                            <input type="checkbox" name="smallType" value="خدمي" checked> خدمي
+                        </label>
+                        <label class="small-filter-checkbox type-filter">
+                            <span class="small-color-indicator" style="background-color: var(--tourism-color);"></span>
+                            <input type="checkbox" name="smallType" value="سياحي" checked> سياحي
+                        </label>
+                        <label class="small-filter-checkbox type-filter">
+                            <span class="small-color-indicator" style="background-color: var(--agricultural-color);"></span>
+                            <input type="checkbox" name="smallType" value="زراعي" checked> زراعي
+                        </label>
+                        <label class="small-filter-checkbox type-filter">
+                            <span class="small-color-indicator" style="background-color: var(--industrial-color);"></span>
+                            <input type="checkbox" name="smallType" value="صناعي" checked> صناعي
+                        </label>
+                    </div>
+                </div>
+                <div class="small-filter-group">
+                    <div class="small-filter-group-title"><i class="bi bi-geo-alt"></i> المراكز:</div>
+                    <div id="smallCentersFilter">
+                        <!-- سيتم تعبئتها ديناميكيًا -->
+                    </div>
+                </div>
+                <div class="small-filter-actions">
+                    <button onclick="smallApplyFilters()" class="small-btn-filter">تطبيق</button>
+                    <button onclick="smallResetFilters()" class="small-btn-reset">إعادة تعيين</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- شاشة حقوق الملكية الصغيرة -->
+        <div class="small-copyright-modal" id="smallCopyrightModal">
+            <button class="small-close-copyright" onclick="closeSmallCopyrightModal()">&times;</button>
+            <div class="small-copyright-header">
+                <img src="https://i.ibb.co/LDqsRwkv/me.jpg" alt="علي علام" class="small-copyright-photo">
+                <div class="small-copyright-info">
+                    <h5>علي علام سيد علام</h5>
+                    <p>وحدة نظم المعلومات الجغرافية</p>
+                </div>
+            </div>
+            <div class="small-copyright-body">
+                <h6>حقوق الملكية</h6>
+                <p style="font-size: 0.85rem;">تم تطوير هذا الموقع بواسطة وحدة نظم المعلومات الجغرافية</p>
+                <div class="small-supervisor">
+                    <i class="bi bi-award"></i> تحت إشراف:
+                    <br>
+                    <strong>م. حسام الدين طه</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة الجانبية الأصلية -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-title">
@@ -792,7 +1506,7 @@
             </div>
             <ul class="sidebar-menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class="sidebar-link">
+                    <a href="index.html" class="sidebar-link active">
                         <i class="bi bi-house"></i> الصفحة الرئيسية
                     </a>
                 </li>
@@ -813,75 +1527,31 @@
                         <i class="bi bi-heart"></i> المفضلة
                     </a>
                 </li>
+                <!-- زر أدوات القياس في القائمة الجانبية -->
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link" onclick="toggleMeasurementSidebar()">
+                        <i class="bi bi-tools"></i> أدوات القياس
+                    </a>
+                </li>
             </ul>
             <div class="sidebar-footer">
                 © 2025 محافظة قنا<br>جميع الحقوق محفوظة
             </div>
         </div>
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- زر إظهار/إخفاء القائمة الجانبية -->
         <div class="menu-toggle" id="menuToggle">
             <i class="bi bi-list"></i>
         </div>
+
+        <!-- الهيدر الرئيسي -->
         <header class="text-white">
             <img src="https://i.ibb.co/fYrDg2P1/gov-logo.jpg" alt="شعار المحافظة">
             <h1>الفرص الاستثمارية في محافظة قنا</h1>
             <img src="https://i.ibb.co/fd3Kgbsj/gis-logo.png" alt="شعار الموقع">
         </header>
-        <!-- زر إخفاء/إظهار قائمة التحكم -->
-        <div class="controls-toggle" id="toggleControlsBtn">
-            <i class="bi bi-chevron-up"></i>
-        </div>
-        <!-- زر تصفية البحث -->
-        <div class="filter-toggle" id="filterToggle">
-            <i class="bi bi-funnel"></i>
-        </div>
-        <!-- قائمة تحكم الخريطة -->
-        <div class="map-controls fade-in" id="mapControls">
-            <h3><i class="bi bi-sliders"></i> تصفية الفرص</h3>
-            <div id="filterControls" style="display: none;">
-                <div class="filter-group">
-                    <div class="filter-group-title"><i class="bi bi-tags"></i> نوع الفرصة:</div>
-                    <div class="type-filters">
-                        <label class="filter-checkbox type-filter">
-                            <span class="color-indicator" style="background-color: var(--service-color);"></span>
-                            <input type="checkbox" name="type" value="خدمي" checked> خدمي
-                        </label>
-                        <label class="filter-checkbox type-filter">
-                            <span class="color-indicator" style="background-color: var(--tourism-color);"></span>
-                            <input type="checkbox" name="type" value="سياحي" checked> سياحي
-                        </label>
-                        <label class="filter-checkbox type-filter">
-                            <span class="color-indicator" style="background-color: var(--agricultural-color);"></span>
-                            <input type="checkbox" name="type" value="زراعي" checked> زراعي
-                        </label>
-                        <label class="filter-checkbox type-filter">
-                            <span class="color-indicator" style="background-color: var(--industrial-color);"></span>
-                            <input type="checkbox" name="type" value="صناعي" checked> صناعي
-                        </label>
-                    </div>
-                </div>
-                <div class="filter-group">
-                    <div class="filter-group-title"><i class="bi bi-geo-alt"></i> المراكز:</div>
-                    <div id="centersFilter">
-                        <!-- سيتم تعبئتها ديناميكيًا -->
-                    </div>
-                </div>
-                <div class="filter-actions">
-                    <button onclick="applyFilters()" class="btn-filter">تطبيق التصفية</button>
-                    <button onclick="resetFilters()" class="btn-reset">إعادة تعيين</button>
-                </div>
-            </div>
-            <h3><i class="bi bi-map"></i> تحكم في الخريطة</h3>
-            <button id="distanceBtn" class="btn"><i class="bi bi-rulers"></i> قياس المسافة</button>
-            <button id="coordinateBtn" class="btn"><i class="bi bi-geo-alt"></i> عرض الإحداثيات</button>
-            <button id="clearBtn" class="btn"><i class="bi bi-trash"></i> مسح الكل</button>
-            <div id="distanceDisplay" style="display: none;">
-                <i class="bi bi-rulers"></i> المسافة الكلية: 0 متر
-            </div>
-            <div class="coordinate-display">
-                <i class="bi bi-geo-alt"></i> الإحداثيات:
-            </div>
-        </div>
+
         <!-- Modal للفرص المفضلة -->
         <div id="favoritesModal" class="modal">
             <div class="modal-content">
@@ -905,6 +1575,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Modal للفرص الاستثمارية -->
         <div id="opportunitiesModal" class="modal">
             <div class="modal-content">
@@ -923,1237 +1594,1187 @@
                 </div>
             </div>
         </div>
+
+        <!-- الخريطة الرئيسية -->
         <div id="map"></div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script>
-        // المتغيرات الأساسية
+        // ==================== المتغيرات الأساسية ====================
         let map;
         let polygons = [];
         let points = [];
         let distancePoints = [];
         let distanceLine = null;
         let distanceLabels = [];
-        let coordinateMode = false;
-        let coordinateMarker = null;
-        let currentLayer = null;
+        let areaPolygon = null;
+        let areaLabels = [];
+        let coordinatePoints = [];
+        let coordinateMarkers = [];
+        let activeTool = null;
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        // المتغيرات للتصفية
         let selectedTypes = ['خدمي', 'سياحي', 'زراعي', 'صناعي'];
         let selectedCenters = [];
         let allCenters = [];
-  // بيانات المضلعات الجديدة
-  const polygonsData = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "id": 0,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.238692508000042, 26.052069169000053],
-              [32.238695533000055, 26.051355349000062],
-              [32.239186989000075, 26.051674722000033],
-              [32.238750416000073, 26.052110284000026],
-              [32.238692508000042, 26.052069169000053]
+        let allOpportunities = [];
+        let searchResults = [];
+        
+        // البيانات الأصلية (محفوظة كما هي)
+        const polygonsData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "id": 0,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.238692508000042, 26.052069169000053],
+                            [32.238695533000055, 26.051355349000062],
+                            [32.239186989000075, 26.051674722000033],
+                            [32.238750416000073, 26.052110284000026],
+                            [32.238692508000042, 26.052069169000053]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 0,
+                        "اسم__12": "اقامة مول تجاري",
+                        "مساحة": 2188,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مول تجاري",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 1,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.238000837000101, 26.057456129000027],
+                            [32.23781622894461, 26.057549315911352],
+                            [32.237926061000074, 26.057725635000089],
+                            [32.237385339000049, 26.058069936000088],
+                            [32.237223332000049, 26.057848599000121],
+                            [32.237044766000089, 26.057649368000099],
+                            [32.237805107000064, 26.057259082000012],
+                            [32.238000837000101, 26.057456129000027]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 1,
+                        "اسم__12": "ارض فضاء بالترعة الضمرانية",
+                        "مساحة": 4134.5,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مدارس خاصة",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 2,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.73934286322482, 26.205153146158008],
+                            [32.738757233000086, 26.20421757400004],
+                            [32.738920247000095, 26.204151098000079],
+                            [32.739488643224746, 26.205093679991876],
+                            [32.73934286322482, 26.205153146158008]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 2,
+                        "اسم__12": "اقامة محطة وقود سيارات وخدم",
+                        "مساحة": 1975,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "محطة تموين سيارات",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 3,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.721003645000053, 26.158707134000039],
+                            [32.721026879000078, 26.158231417000021],
+                            [32.721686878000071, 26.15834973800003],
+                            [32.721699795000063, 26.158719291000079],
+                            [32.721003645000053, 26.158707134000039]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 3,
+                        "اسم__12": "مول تجاري او مجمع طبي",
+                        "مساحة": 3500,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مول تجاري او مجمع طبي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 4,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.239644603000045, 26.056746897000021],
+                            [32.239537047000056, 26.056608302000033],
+                            [32.239580725000053, 26.056578883000043],
+                            [32.239526264000062, 26.05650936100005],
+                            [32.239663402000076, 26.056435713000038],
+                            [32.239818057000036, 26.056651837000047],
+                            [32.239644603000045, 26.056746897000021]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 4,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 831.89999999999998,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 5,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.240337047253895, 26.056040057336876],
+                            [32.240969469000071, 26.055633211000035],
+                            [32.241169093000053, 26.055891293000045],
+                            [32.240810935172235, 26.056155823531121],
+                            [32.240777719702024, 26.056105698845062],
+                            [32.240511456702336, 26.056258741167284],
+                            [32.240337047253895, 26.056040057336876]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 5,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1995,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 6,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.23953429900007, 26.056608213000061],
+                            [32.239442720000056, 26.056661288000026],
+                            [32.239316487000053, 26.056501805000018],
+                            [32.239466823000043, 26.056414815000039],
+                            [32.239527193000072, 26.056505224000034],
+                            [32.239478517000066, 26.056538320000065],
+                            [32.23953429900007, 26.056608213000061]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 6,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 340,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 7,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.240131622000035, 26.056247051000067],
+                            [32.239902063000045, 26.056409239000065],
+                            [32.239733127000079, 26.056217584000002],
+                            [32.239972084000044, 26.056066458000039],
+                            [32.240131622000035, 26.056247051000067]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 7,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 575.5,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 8,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.24132529600007, 26.055370661000044],
+                            [32.241547282000056, 26.055595833000037],
+                            [32.241169093000053, 26.055891293000069],
+                            [32.240969469000049, 26.055633211000035],
+                            [32.24132529600007, 26.055370661000044]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 8,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1602,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 9,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.240795567000063, 26.055509017000137],
+                            [32.240942441040836, 26.055650676034489],
+                            [32.240338001859421, 26.056041254273108],
+                            [32.240226594710911, 26.055916215095408],
+                            [32.240795567000063, 26.055509017000137]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 9,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1970,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 10,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.755786017000048, 26.186773794000018],
+                            [32.756328420000045, 26.186955852000036],
+                            [32.756542847000048, 26.187321654000058],
+                            [32.756137465000052, 26.188605704000047],
+                            [32.75521664300004, 26.188339983000049],
+                            [32.755786017000048, 26.186773794000018]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 10,
+                        "اسم__12": "حديقة المساكن",
+                        "مساحة": 16304,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مدينة ترفيهية",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 11,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.24155838300004, 26.055598553000031],
+                            [32.241338717000076, 26.055367956000055],
+                            [32.241505543000073, 26.05524042700004],
+                            [32.241458840000064, 26.055183782000007],
+                            [32.241601092000053, 26.055082050000049],
+                            [32.241839837000043, 26.055336165000014],
+                            [32.241761302000043, 26.055398195000066],
+                            [32.241682475000061, 26.055510633000036],
+                            [32.24155838300004, 26.055598553000031]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 11,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1768,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 12,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.240007540000079, 26.056570774000051],
+                            [32.239903580000032, 26.056414171000029],
+                            [32.240136249000045, 26.056253949000062],
+                            [32.240256877000036, 26.05641384200003],
+                            [32.240007540000079, 26.056570774000051]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 12,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 609.10000000000002,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 13,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.702084185000032, 26.158495057000046],
+                            [32.700847575772706, 26.158656178625463],
+                            [32.70077484577272, 26.158299054036931],
+                            [32.701948783000077, 26.158143898000073],
+                            [32.702583695000094, 26.158075863000064],
+                            [32.702597238000067, 26.158438283000116],
+                            [32.702389687000085, 26.158461805000091],
+                            [32.702219949000032, 26.158532351000108],
+                            [32.702210533000049, 26.158511696000073],
+                            [32.702109753000052, 26.15855368300004],
+                            [32.70208902200006, 26.1585076020001],
+                            [32.702084185000032, 26.158495057000046]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 13,
+                        "اسم__12": "اقامة محطة وقود وخدمات",
+                        "مساحة": 7494,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "موقع مقترح شل اوت",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 14,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.446952000000000, 25.944656000000000],
+                            [32.529977000000000, 25.975884000000000],
+                            [32.550638000000000, 25.948674000000000],
+                            [32.454288000000000, 25.911441000000000],
+                            [32.446952000000000, 25.944656000000000]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 14,
+                        "اسم__12": "مشروعات انتاج داجني",
+                        "مساحة": 35352240,
+                        "عنوان": "محافظة قنا - مركز الوقف ",
+                        "فرصة": "مشروعات انتاج داجني",
+                        "نوع": "زراعي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 15,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.529975000000000, 25.975883330000000],
+                            [32.446950000000000, 25.944655560000000],
+                            [32.452761110000000, 25.952269440000000],
+                            [32.442406170000000, 25.964426110000000],
+                            [32.498548730000000, 25.995445920000000],
+                            [32.498857320000000, 26.005009310000000],
+                            [32.511362620000000, 26.020442180000000],
+                            [32.530438930000000, 26.002522570000000],
+                            [32.529443970000000, 25.994438480000000],
+                            [32.516633800000000, 25.992075440000000],
+                            [32.513773280000000, 25.987349360000000],
+                            [32.529975000000000, 25.975883330000000]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 15,
+                        "اسم__12": "مشروعات انتاج داجني",
+                        "مساحة": 27723780,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "مشروعات انتاج داجني",
+                        "نوع": "زراعي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 16,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.248578269000063, 26.039487559000058],
+                            [32.248694257000068, 26.038790519000031],
+                            [32.248808343000064, 26.038809312000069],
+                            [32.248686651000071, 26.039511477000072],
+                            [32.248578269000063, 26.039487559000058]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 16,
+                        "اسم__12": "مرسي نجع حمادي السياحي",
+                        "مساحة": 972,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مرسي سياحي",
+                        "نوع": "سياحي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 17,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.240012368000066, 26.044118165000032],
+                            [32.24025922900006, 26.044201506000032],
+                            [32.240078198000049, 26.044603422000019],
+                            [32.23985078700008, 26.044528147000047],
+                            [32.240012368000066, 26.044118165000032]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 17,
+                        "اسم__12": "اقامة فندق سياحي - 2",
+                        "مساحة": 1200,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "فندق سياحي",
+                        "نوع": "سياحي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 18,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.716651429000024, 26.156010593000069],
+                            [32.716211730000055, 26.156114847000023],
+                            [32.716054953000025, 26.155264023000029],
+                            [32.716658789000064, 26.155155314000062],
+                            [32.717207722000069, 26.155858785000078],
+                            [32.716682977000062, 26.156101440000036],
+                            [32.716651429000024, 26.156010593000069]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 18,
+                        "اسم__12": "النادي الاجتماعي ومسرح",
+                        "مساحة": 8099.8000000000002,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "فندق سياحي ملحق به مول تجاري",
+                        "نوع": "سياحي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 19,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.699318776000041, 26.155335410000077],
+                            [32.698669524000024, 26.154528234000054],
+                            [32.699197137000056, 26.15418082900003],
+                            [32.699833905000048, 26.154991190000029],
+                            [32.699318776000041, 26.155335410000077]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 19,
+                        "اسم__12": "فندق سياحي",
+                        "مساحة": 7012,
+                        "عنوان": "محافظة قنا - مركز  قنا",
+                        "فرصة": "فندق سياحي ملحق به مول تجار",
+                        "نوع": "سياحي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 20,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.52083854, 26.1055778],
+                            [32.52052589, 26.10554881],
+                            [32.52043866, 26.10552774],
+                            [32.52037305, 26.10549416],
+                            [32.51958974, 26.10470579],
+                            [32.51966842, 26.10373556],
+                            [32.52124195, 26.10409911],
+                            [32.52127709, 26.10424258],
+                            [32.5209351, 26.1044027]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 20,
+                        "اسم__12": "محطة تربية دواجن",
+                        "مساحة": 21000,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "محطة تربية دواجن",
+                        "نوع": "زراعي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 21,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.52325519, 26.10588806],
+                            [32.52190679, 26.10565872],
+                            [32.52183092, 26.10604588],
+                            [32.52081909, 26.10596916],
+                            [32.52092308, 26.10439129],
+                            [32.52129291, 26.10421763],
+                            [32.52357145, 26.10460758]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 21,
+                        "اسم__12": "محطة تسمين العجول",
+                        "مساحة": 42000,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "محطة تسمين عجول",
+                        "نوع": "زراعي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 22,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.662412040000049, 26.121917630000024],
+                            [32.664135100000067, 26.120289746000029],
+                            [32.666572149000046, 26.122399387000019],
+                            [32.664832333000049, 26.124047906000047],
+                            [32.662412040000049, 26.121917630000024]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 22,
+                        "اسم__12": "المنطقة الحرفية بالترامسة",
+                        "مساحة": 84000,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "المنطقة الحرفية بالترامسة",
+                        "نوع": "صناعي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 23,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.39323517400004, 25.977370832000073],
+                            [32.396613197000079, 25.981661440000025],
+                            [32.393940678000035, 25.985017859000038],
+                            [32.393942817000038, 25.98505503500007],
+                            [32.406444153000052, 26.002986914000054],
+                            [32.403372499000056, 26.005933013000043],
+                            [32.403358238000067, 26.005933013000043],
+                            [32.403338273000031, 26.005930450000051],
+                            [32.40331688200007, 26.005922759000018],
+                            [32.403296917000034, 26.005903534000023],
+                            [32.392432909000036, 25.990118165000059],
+                            [32.390807180000024, 25.987823616000064],
+                            [32.39013514100003, 25.986959302000052],
+                            [32.389464884000063, 25.986305535000028],
+                            [32.388480890000039, 25.985497935000069],
+                            [32.387454113000047, 25.984792883000072],
+                            [32.388804134000054, 25.982831534000066],
+                            [32.389517173000058, 25.981844438000039],
+                            [32.39323517400004, 25.977370832000073]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 23,
+                        "اسم__12": "مزرعة 390 فدان شيخ علي",
+                        "مساحة": 1638000,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "استصلاح زراعي 390 فدان",
+                        "نوع": "زراعي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 24,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.692391417255884, 26.159728309004709],
+                            [32.693137731600558, 26.160338442161809],
+                            [32.692495996336028, 26.160876039361696],
+                            [32.691540523831002, 26.161437100463679],
+                            [32.690841745431761, 26.160784306681471],
+                            [32.692391417255884, 26.159728309004709]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 24,
+                        "اسم__12": "منتجع سياحي",
+                        "مساحة": 18000,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "منتجع سياحي",
+                        "نوع": "سياحي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 25,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.73934286322482, 26.205153146158008],
+                            [32.739488643224746, 26.205093679991876],
+                            [32.739757405295094, 26.205514446029241],
+                            [32.739595783080318, 26.205582686016978],
+                            [32.73934286322482, 26.205153146158008]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 25,
+                        "اسم__12": "مشروع خدمات طرق",
+                        "مساحة": 723.5,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مشروع خدمات طرق",
+                        "نوع": "خدمي"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 26,
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [32.8521881, 25.83353313],
+                            [32.8530088, 25.83849248],
+                            [32.85631749, 25.83741432],
+                            [32.85554702, 25.8352224],
+                            [32.85706115, 25.83475574],
+                            [32.85694162, 25.83147788],
+                            [32.8521881, 25.83353313]
+                        ]]
+                    },
+                    "properties": {
+                        "FID": 26,
+                        "اسم__12": "مجمع زراعي",
+                        "مساحة": 240315.24,
+                        "عنوان": "محافظة قنا - مركز قوص",
+                        "فرصة": "مجمع زراعي",
+                        "نوع": "زراعي"
+                    }
+                }
             ]
-          ]
-        },
-        "properties": {
-          "FID": 0,
-          "اسم__12": "اقامة مول تجاري",
-          "مساحة": 2188,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "مول تجاري",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 1,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.238000837000101, 26.057456129000027],
-              [32.23781622894461, 26.057549315911352],
-              [32.237926061000074, 26.057725635000089],
-              [32.237385339000049, 26.058069936000088],
-              [32.237223332000049, 26.057848599000121],
-              [32.237044766000089, 26.057649368000099],
-              [32.237805107000064, 26.057259082000012],
-              [32.238000837000101, 26.057456129000027]
+        };
+
+        const pointsData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "id": 0,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.238860343100818, 26.051727254172164]
+                    },
+                    "properties": {
+                        "FID": 0,
+                        "اسم__12": "اقامة مول تجاري",
+                        "مساحة": 2188,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مول تجاري",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 0
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 1,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.237542502462361, 26.05765616808976]
+                    },
+                    "properties": {
+                        "FID": 1,
+                        "اسم__12": "ارض فضاء بالترعة الضمرانية",
+                        "مساحة": 4134.5,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مدارس خاصة",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 1
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 2,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.739121882074187, 26.204645144288097]
+                    },
+                    "properties": {
+                        "FID": 2,
+                        "اسم__12": "اقامة محطة وقود سيارات وخدم",
+                        "مساحة": 1975,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "محطة تموين سيارات",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 2
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 3,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.72133963523958, 26.15850229454394]
+                    },
+                    "properties": {
+                        "FID": 3,
+                        "اسم__12": "مول تجاري او مجمع طبي",
+                        "مساحة": 3500,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مول تجاري او مجمع طبي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 3
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 4,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.239662296675931, 26.056594583069902]
+                    },
+                    "properties": {
+                        "FID": 4,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 831.89999999999998,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 4
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 5,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240763872790339, 26.05595552372279]
+                    },
+                    "properties": {
+                        "FID": 5,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1995,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 5
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 6,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.239436221495673, 26.05653540367264]
+                    },
+                    "properties": {
+                        "FID": 6,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 340,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 6
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 7,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.23993359313328, 26.056235863298799]
+                    },
+                    "properties": {
+                        "FID": 7,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 575.5,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 7
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 8,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.241253044054019, 26.055625354694691]
+                    },
+                    "properties": {
+                        "FID": 8,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1602,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 8
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 9,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240584870760735, 26.055773389299194]
+                    },
+                    "properties": {
+                        "FID": 9,
+                        "اسم__12": "نشاط ادار وتجاري",
+                        "مساحة": 1970,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 9
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 10,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.755919834179849, 26.187720862979507]
+                    },
+                    "properties": {
+                        "FID": 10,
+                        "اسم__12": "حديقة المساكن",
+                        "مساحة": 16304,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مدينة ترفيهية",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 10
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 11,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.241589558844254, 26.055344663667718]
+                    },
+                    "properties": {
+                        "FID": 11,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 1768,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 11
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 12,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240077674394094, 26.056412907037934]
+                    },
+                    "properties": {
+                        "FID": 12,
+                        "اسم__12": "نشاط اداري وتجاري",
+                        "مساحة": 609.10000000000002,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "نشاط تجاري خدمي",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 12
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 13,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.701707462650091, 26.158364321573114]
+                    },
+                    "properties": {
+                        "FID": 13,
+                        "اسم__12": "اقامة محطة وقود وخدمات",
+                        "مساحة": 7494,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "موقع مقترح شل اوت",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 13
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 14,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.248692376548014, 26.039147278774486]
+                    },
+                    "properties": {
+                        "FID": 14,
+                        "اسم__12": "مرسي نجع حمادي السياحي",
+                        "مساحة": 972,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "مرسي سياحي",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 16
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 15,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.240051284540513, 26.044359930695183]
+                    },
+                    "properties": {
+                        "FID": 15,
+                        "اسم__12": "اقامة فندق سياحي - 2",
+                        "مساحة": 1200,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "فندق سياحي",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 17
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 16,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.716556662575982, 26.155648920263435]
+                    },
+                    "properties": {
+                        "FID": 16,
+                        "اسم__12": "النادي الاجتماعي ومسرح",
+                        "مساحة": 8099.8000000000002,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "فندق سياحي ملحق به مول تجار",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 18
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 17,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.699253645830531, 26.154757763687861]
+                    },
+                    "properties": {
+                        "FID": 17,
+                        "اسم__12": "فندق سياحي",
+                        "مساحة": 7012,
+                        "عنوان": "محافظة قنا - مركز  قنا",
+                        "فرصة": "فندق سياحي ملحق به مول تجار",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 19
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 18,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.52034145216049, 26.10463454462809]
+                    },
+                    "properties": {
+                        "FID": 18,
+                        "اسم__12": "محطة تربية دواجن",
+                        "مساحة": 21000,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "محطة تربية دواجن",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 20
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 19,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.522232473567385, 26.105241742658226]
+                    },
+                    "properties": {
+                        "FID": 19,
+                        "اسم__12": "محطة تسمين العجول",
+                        "مساحة": 42000,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "محطة تسمين عجول",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 21
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 20,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.664490015210852, 26.122165792847078]
+                    },
+                    "properties": {
+                        "FID": 20,
+                        "اسم__12": "المنطقة الحرافية بالترامسة",
+                        "مساحة": 84000,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "المنطقة الحرفية بالترامسة",
+                        "نوع": "صناعي",
+                        "ORIG_FID": 22
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 21,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.396492739729851, 25.99126143142502]
+                    },
+                    "properties": {
+                        "FID": 21,
+                        "اسم__12": "مزرعة 390 فدان شيخ علي",
+                        "مساحة": 1638000,
+                        "عنوان": "محافظة قنا - مركز نجع حمادي",
+                        "فرصة": "استصلاح زراعي 390 فدان",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 23
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 22,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.69199588791917, 26.160587497798275]
+                    },
+                    "properties": {
+                        "FID": 22,
+                        "اسم__12": "منتجع سياحي",
+                        "مساحة": 18000,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "منتجع سياحي",
+                        "نوع": "سياحي",
+                        "ORIG_FID": 24
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 23,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.73954851310036, 26.205339910257212]
+                    },
+                    "properties": {
+                        "FID": 23,
+                        "اسم__12": "مشروع خدمات طرق",
+                        "مساحة": 723.5,
+                        "عنوان": "محافظة قنا - مركز قنا",
+                        "فرصة": "مشروع خدمات طرق",
+                        "نوع": "خدمي",
+                        "ORIG_FID": 25
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 24,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.490044648070281, 25.978859909191726]
+                    },
+                    "properties": {
+                        "FID": 24,
+                        "اسم__12": "مشروعات انتاج داجني",
+                        "مساحة": 27723780,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "مشروعات انتاج داجني",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 15
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 25,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.493519000000000, 25.944520000000000]
+                    },
+                    "properties": {
+                        "FID": 25,
+                        "اسم__12": "مشروعات انتاج داجني",
+                        "مساحة": 35352240,
+                        "عنوان": "محافظة قنا - مركز الوقف",
+                        "فرصة": "مشروعات انتاج داجني",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 14
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "id": 26,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [32.85463043715838, 25.834960787229086]
+                    },
+                    "properties": {
+                        "FID": 26,
+                        "اسم__12": "مجمع زراعي",
+                        "مساحة": 240315.24,
+                        "عنوان": "محافظة قنا - مركز قوص",
+                        "فرصة": "مجمع زراعي",
+                        "نوع": "زراعي",
+                        "ORIG_FID": 26
+                    }
+                }
             ]
-          ]
-        },
-        "properties": {
-          "FID": 1,
-          "اسم__12": "ارض فضاء بالترعة الضمرانية",
-          "مساحة": 4134.5,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "مدارس خاصة",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 2,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.73934286322482, 26.205153146158008],
-              [32.738757233000086, 26.20421757400004],
-              [32.738920247000095, 26.204151098000079],
-              [32.739488643224746, 26.205093679991876],
-              [32.73934286322482, 26.205153146158008]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 2,
-          "اسم__12": "اقامة محطة وقود سيارات وخدم",
-          "مساحة": 1975,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "محطة تموين سيارات",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 3,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.721003645000053, 26.158707134000039],
-              [32.721026879000078, 26.158231417000021],
-              [32.721686878000071, 26.15834973800003],
-              [32.721699795000063, 26.158719291000079],
-              [32.721003645000053, 26.158707134000039]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 3,
-          "اسم__12": "مول تجاري او مجمع طبي",
-          "مساحة": 3500,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "مول تجاري او مجمع طبي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 4,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.239644603000045, 26.056746897000021],
-              [32.239537047000056, 26.056608302000033],
-              [32.239580725000053, 26.056578883000043],
-              [32.239526264000062, 26.05650936100005],
-              [32.239663402000076, 26.056435713000038],
-              [32.239818057000036, 26.056651837000047],
-              [32.239644603000045, 26.056746897000021]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 4,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 831.89999999999998,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 5,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.240337047253895, 26.056040057336876],
-              [32.240969469000071, 26.055633211000035],
-              [32.241169093000053, 26.055891293000045],
-              [32.240810935172235, 26.056155823531121],
-              [32.240777719702024, 26.056105698845062],
-              [32.240511456702336, 26.056258741167284],
-              [32.240337047253895, 26.056040057336876]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 5,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1995,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 6,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.23953429900007, 26.056608213000061],
-              [32.239442720000056, 26.056661288000026],
-              [32.239316487000053, 26.056501805000018],
-              [32.239466823000043, 26.056414815000039],
-              [32.239527193000072, 26.056505224000034],
-              [32.239478517000066, 26.056538320000065],
-              [32.23953429900007, 26.056608213000061]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 6,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 340,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 7,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.240131622000035, 26.056247051000067],
-              [32.239902063000045, 26.056409239000065],
-              [32.239733127000079, 26.056217584000002],
-              [32.239972084000044, 26.056066458000039],
-              [32.240131622000035, 26.056247051000067]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 7,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 575.5,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 8,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.24132529600007, 26.055370661000044],
-              [32.241547282000056, 26.055595833000037],
-              [32.241169093000053, 26.055891293000069],
-              [32.240969469000049, 26.055633211000035],
-              [32.24132529600007, 26.055370661000044]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 8,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1602,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 9,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.240795567000063, 26.055509017000137],
-              [32.240942441040836, 26.055650676034489],
-              [32.240338001859421, 26.056041254273108],
-              [32.240226594710911, 26.055916215095408],
-              [32.240795567000063, 26.055509017000137]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 9,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1970,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 10,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.755786017000048, 26.186773794000018],
-              [32.756328420000045, 26.186955852000036],
-              [32.756542847000048, 26.187321654000058],
-              [32.756137465000052, 26.188605704000047],
-              [32.75521664300004, 26.188339983000049],
-              [32.755786017000048, 26.186773794000018]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 10,
-          "اسم__12": "حديقة المساكن",
-          "مساحة": 16304,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "مدينة ترفيهية",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 11,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.24155838300004, 26.055598553000031],
-              [32.241338717000076, 26.055367956000055],
-              [32.241505543000073, 26.05524042700004],
-              [32.241458840000064, 26.055183782000007],
-              [32.241601092000053, 26.055082050000049],
-              [32.241839837000043, 26.055336165000014],
-              [32.241761302000043, 26.055398195000066],
-              [32.241682475000061, 26.055510633000036],
-              [32.24155838300004, 26.055598553000031]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 11,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1768,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 12,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.240007540000079, 26.056570774000051],
-              [32.239903580000032, 26.056414171000029],
-              [32.240136249000045, 26.056253949000062],
-              [32.240256877000036, 26.05641384200003],
-              [32.240007540000079, 26.056570774000051]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 12,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 609.10000000000002,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 13,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.702084185000032, 26.158495057000046],
-              [32.700847575772706, 26.158656178625463],
-              [32.70077484577272, 26.158299054036931],
-              [32.701948783000077, 26.158143898000073],
-              [32.702583695000094, 26.158075863000064],
-              [32.702597238000067, 26.158438283000116],
-              [32.702389687000085, 26.158461805000091],
-              [32.702219949000032, 26.158532351000108],
-              [32.702210533000049, 26.158511696000073],
-              [32.702109753000052, 26.15855368300004],
-              [32.70208902200006, 26.1585076020001],
-              [32.702084185000032, 26.158495057000046]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 13,
-          "اسم__12": "اقامة محطة وقود وخدمات",
-          "مساحة": 7494,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "موقع مقترح شل اوت",
-          "نوع": "خدمي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 14,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.446952000000000, 25.944656000000000],
-              [32.529977000000000, 25.975884000000000],
-              [32.550638000000000, 25.948674000000000],
-              [32.454288000000000, 25.911441000000000],
-              [32.446952000000000, 25.944656000000000]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 14,
-          "اسم__12": "مشروعات انتاج داجني",
-          "مساحة": 35352240,
-          "عنوان": "محافظة قنا - مركز الوقف ",
-          "فرصة": "مشروعات انتاج داجني",
-          "نوع": "زراعي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 15,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.529975000000000, 25.975883330000000],
-              [32.446950000000000, 25.944655560000000],
-              [32.452761110000000, 25.952269440000000],
-              [32.442406170000000, 25.964426110000000],
-              [32.498548730000000, 25.995445920000000],
-              [32.498857320000000, 26.005009310000000],
-              [32.511362620000000, 26.020442180000000],
-              [32.530438930000000, 26.002522570000000],
-              [32.529443970000000, 25.994438480000000],
-              [32.516633800000000, 25.992075440000000],
-              [32.513773280000000, 25.987349360000000],
-              [32.529975000000000, 25.975883330000000]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 15,
-          "اسم__12": "مشروعات انتاج داجني",
-          "مساحة": 27723780,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "مشروعات انتاج داجني",
-          "نوع": "زراعي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 16,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.248578269000063, 26.039487559000058],
-              [32.248694257000068, 26.038790519000031],
-              [32.248808343000064, 26.038809312000069],
-              [32.248686651000071, 26.039511477000072],
-              [32.248578269000063, 26.039487559000058]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 16,
-          "اسم__12": "مرسي نجع حمادي السياحي",
-          "مساحة": 972,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "مرسي سياحي",
-          "نوع": "سياحي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 17,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.240012368000066, 26.044118165000032],
-              [32.24025922900006, 26.044201506000032],
-              [32.240078198000049, 26.044603422000019],
-              [32.23985078700008, 26.044528147000047],
-              [32.240012368000066, 26.044118165000032]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 17,
-          "اسم__12": "اقامة فندق سياحي - 2",
-          "مساحة": 1200,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "فندق سياحي",
-          "نوع": "سياحي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 18,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.716651429000024, 26.156010593000069],
-              [32.716211730000055, 26.156114847000023],
-              [32.716054953000025, 26.155264023000029],
-              [32.716658789000064, 26.155155314000062],
-              [32.717207722000069, 26.155858785000078],
-              [32.716682977000062, 26.156101440000036],
-              [32.716651429000024, 26.156010593000069]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 18,
-          "اسم__12": "النادي الاجتماعي ومسرح",
-          "مساحة": 8099.8000000000002,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "فندق سياحي ملحق به مول تجاري",
-          "نوع": "سياحي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 19,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.699318776000041, 26.155335410000077],
-              [32.698669524000024, 26.154528234000054],
-              [32.699197137000056, 26.15418082900003],
-              [32.699833905000048, 26.154991190000029],
-              [32.699318776000041, 26.155335410000077]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 19,
-          "اسم__12": "فندق سياحي",
-          "مساحة": 7012,
-          "عنوان": "محافظة قنا - مركز  قنا",
-          "فرصة": "فندق سياحi ملحق به مول تجار",
-          "نوع": "سياحي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 20,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.52083854, 26.1055778],
-              [32.52052589, 26.10554881],
-              [32.52043866, 26.10552774],
-              [32.52037305, 26.10549416],
-              [32.51958974, 26.10470579],
-              [32.51966842, 26.10373556],
-              [32.52124195, 26.10409911],
-              [32.52127709, 26.10424258],
-              [32.5209351, 26.1044027]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 20,
-          "اسم__12": "محطة تربية دواجن",
-          "مساحة": 21000,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "محطة تربية دواجن",
-          "نوع": "زراعي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 21,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.52325519, 26.10588806],
-              [32.52190679, 26.10565872],
-              [32.52183092, 26.10604588],
-              [32.52081909, 26.10596916],
-              [32.52092308, 26.10439129],
-              [32.52129291, 26.10421763],
-              [32.52357145, 26.10460758]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 21,
-          "اسم__12": "محطة تسمين العجول",
-          "مساحة": 42000,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "محطة تسمين عجول",
-          "نوع": "زراعي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 22,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.662412040000049, 26.121917630000024],
-              [32.664135100000067, 26.120289746000029],
-              [32.666572149000046, 26.122399387000019],
-              [32.664832333000049, 26.124047906000047],
-              [32.662412040000049, 26.121917630000024]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 22,
-          "اسم__12": "المنطقة الحرفية بالترامسة",
-          "مساحة": 84000,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "المنطقة الحرفية بالترامسة",
-          "نوع": "صناعي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 23,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.39323517400004, 25.977370832000073],
-              [32.396613197000079, 25.981661440000025],
-              [32.393940678000035, 25.985017859000038],
-              [32.393942817000038, 25.98505503500007],
-              [32.406444153000052, 26.002986914000054],
-              [32.403372499000056, 26.005933013000043],
-              [32.403358238000067, 26.005933013000043],
-              [32.403338273000031, 26.005930450000051],
-              [32.40331688200007, 26.005922759000018],
-              [32.403296917000034, 26.005903534000023],
-              [32.392432909000036, 25.990118165000059],
-              [32.390807180000024, 25.987823616000064],
-              [32.39013514100003, 25.986959302000052],
-              [32.389464884000063, 25.986305535000028],
-              [32.388480890000039, 25.985497935000069],
-              [32.387454113000047, 25.984792883000072],
-              [32.388804134000054, 25.982831534000066],
-              [32.389517173000058, 25.981844438000039],
-              [32.39323517400004, 25.977370832000073]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 23,
-          "اسم__12": "مزرعة 390 فدان شيخ علي",
-          "مساحة": 1638000,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "استصلاح زراعي 390 فدان",
-          "نوع": "زراعي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 24,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.692391417255884, 26.159728309004709],
-              [32.693137731600558, 26.160338442161809],
-              [32.692495996336028, 26.160876039361696],
-              [32.691540523831002, 26.161437100463679],
-              [32.690841745431761, 26.160784306681471],
-              [32.692391417255884, 26.159728309004709]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 24,
-          "اسم__12": "منتجع سياحي",
-          "مساحة": 18000,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "منتجع سياحي",
-          "نوع": "سياحي"
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 25,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.73934286322482, 26.205153146158008],
-              [32.739488643224746, 26.205093679991876],
-              [32.739757405295094, 26.205514446029241],
-              [32.739595783080318, 26.205582686016978],
-              [32.73934286322482, 26.205153146158008]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 25,
-          "اسم__12": "مشروع خدمات طرق",
-          "مساحة": 723.5,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "مشروع خدمات طرق",
-          "نوع": "خدمي"
-        }
-      },
-      // تمت إضافة العنصر الجديد هنا (مجمع زراعي في مركز قوص)
-      {
-        "type": "Feature",
-        "id": 26,
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [32.8521881, 25.83353313],
-              [32.8530088, 25.83849248],
-              [32.85631749, 25.83741432],
-              [32.85554702, 25.8352224],
-              [32.85706115, 25.83475574],
-              [32.85694162, 25.83147788],
-              [32.8521881, 25.83353313]
-            ]
-          ]
-        },
-        "properties": {
-          "FID": 26,
-          "اسم__12": "مجمع زراعي",
-          "مساحة": 240315.24,
-          "عنوان": "محافظة قنا - مركز قوص",
-          "فرصة": "مجمع زراعي",
-          "نوع": "زراعي"
-        }
-      }
-    ]
-  };
-  // بيانات النقاط الجديدة
-  const pointsData = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "id": 0,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.238860343100818, 26.051727254172164]
-        },
-        "properties": {
-          "FID": 0,
-          "اسم__12": "اقامة مول تجاري",
-          "مساحة": 2188,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "مول تجاري",
-          "نوع": "خدمي",
-          "ORIG_FID": 0
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 1,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.237542502462361, 26.05765616808976]
-        },
-        "properties": {
-          "FID": 1,
-          "اسم__12": "ارض فضاء بالترعة الضمرانية",
-          "مساحة": 4134.5,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "مدارس خاصة",
-          "نوع": "خدمi",
-          "ORIG_FID": 1
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 2,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.739121882074187, 26.204645144288097]
-        },
-        "properties": {
-          "FID": 2,
-          "اسم__12": "اقامة محطة وقود سيارات وخدم",
-          "مساحة": 1975,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "محطة تموين سيارات",
-          "نوع": "خدمي",
-          "ORIG_FID": 2
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 3,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.72133963523958, 26.15850229454394]
-        },
-        "properties": {
-          "FID": 3,
-          "اسم__12": "مول تجاري او مجمع طبي",
-          "مساحة": 3500,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "مول تجاري او مجمع طبي",
-          "نوع": "خدمي",
-          "ORIG_FID": 3
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 4,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.239662296675931, 26.056594583069902]
-        },
-        "properties": {
-          "FID": 4,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 831.89999999999998,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 4
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 5,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.240763872790339, 26.05595552372279]
-        },
-        "properties": {
-          "FID": 5,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1995,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 5
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 6,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.239436221495673, 26.05653540367264]
-        },
-        "properties": {
-          "FID": 6,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 340,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 6
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 7,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.23993359313328, 26.056235863298799]
-        },
-        "properties": {
-          "FID": 7,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 575.5,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 7
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 8,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.241253044054019, 26.055625354694691]
-        },
-        "properties": {
-          "FID": 8,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1602,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 8
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 9,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.240584870760735, 26.055773389299194]
-        },
-        "properties": {
-          "FID": 9,
-          "اسم__12": "نشاط ادار وتجاري",
-          "مساحة": 1970,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 9
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 10,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.755919834179849, 26.187720862979507]
-        },
-        "properties": {
-          "FID": 10,
-          "اسم__12": "حديقة المساكن",
-          "مساحة": 16304,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "مدينة ترفيهية",
-          "نوع": "خدمي",
-          "ORIG_FID": 10
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 11,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.241589558844254, 26.055344663667718]
-        },
-        "properties": {
-          "FID": 11,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 1768,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 11
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 12,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.240077674394094, 26.056412907037934]
-        },
-        "properties": {
-          "FID": 12,
-          "اسم__12": "نشاط اداري وتجاري",
-          "مساحة": 609.10000000000002,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "نشاط تجاري خدمي",
-          "نوع": "خدمي",
-          "ORIG_FID": 12
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 13,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.701707462650091, 26.158364321573114]
-        },
-        "properties": {
-          "FID": 13,
-          "اسم__12": "اقامة محطة وقود وخدمات",
-          "مساحة": 7494,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "موقع مقترح شل اوت",
-          "نوع": "خدمي",
-          "ORIG_FID": 13
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 14,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.248692376548014, 26.039147278774486]
-        },
-        "properties": {
-          "FID": 14,
-          "اسم__12": "مرسي نجع حمادي السياحي",
-          "مساحة": 972,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "مرسي سياحي",
-          "نوع": "سياحي",
-          "ORIG_FID": 16
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 15,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.240051284540513, 26.044359930695183]
-        },
-        "properties": {
-          "FID": 15,
-          "اسم__12": "اقامة فندق سياحي - 2",
-          "مساحة": 1200,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "فندق سياحي",
-          "نوع": "سياحي",
-          "ORIG_FID": 17
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 16,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.716556662575982, 26.155648920263435]
-        },
-        "properties": {
-          "FID": 16,
-          "اسم__12": "النادي الاجتماعي ومسرح",
-          "مساحة": 8099.8000000000002,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "فندق سياحي ملحق به مول تجار",
-          "نوع": "سياحي",
-          "ORIG_FID": 18
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 17,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.699253645830531, 26.154757763687861]
-        },
-        "properties": {
-          "FID": 17,
-          "اسم__12": "فندق سياحي",
-          "مساحة": 7012,
-          "عنوان": "محافظة قنا - مركز  قنا",
-          "فرصة": "فندق سياحي ملحق به مول تجار",
-          "نوع": "سياحي",
-          "ORIG_FID": 19
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 18,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.52034145216049, 26.10463454462809]
-        },
-        "properties": {
-          "FID": 18,
-          "اسم__12": "محطة تربية دواجن",
-          "مساحة": 21000,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "محطة تربية دواجن",
-          "نوع": "زراعي",
-          "ORIG_FID": 20
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 19,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.522232473567385, 26.105241742658226]
-        },
-        "properties": {
-          "FID": 19,
-          "اسم__12": "محطة تسمين العجول",
-          "مساحة": 42000,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "محطة تسمين عجول",
-          "نوع": "زراعي",
-          "ORIG_FID": 21
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 20,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.664490015210852, 26.122165792847078]
-        },
-        "properties": {
-          "FID": 20,
-          "اسم__12": "المنطقة الحرافية بالترامسة",
-          "مساحة": 84000,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "المنطقة الحرفية بالترامسة",
-          "نوع": "صناعي",
-          "ORIG_FID": 22
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 21,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.396492739729851, 25.99126143142502]
-        },
-        "properties": {
-          "FID": 21,
-          "اسم__12": "مزرعة 390 فدان شيخ علي",
-          "مساحة": 1638000,
-          "عنوان": "محافظة قنا - مركز نجع حمادي",
-          "فرصة": "استصلاح زراعي 390 فدان",
-          "نوع": "زراعي",
-          "ORIG_FID": 23
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 22,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.69199588791917, 26.160587497798275]
-        },
-        "properties": {
-          "FID": 22,
-          "اسم__12": "منتجع سياحي",
-          "مساحة": 18000,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "منتجع سياحي",
-          "نوع": "سياحي",
-          "ORIG_FID": 24
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 23,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.73954851310036, 26.205339910257212]
-        },
-        "properties": {
-          "FID": 23,
-          "اسم__12": "مشروع خدمات طرق",
-          "مساحة": 723.5,
-          "عنوان": "محافظة قنا - مركز قنا",
-          "فرصة": "مشروع خدمات طرق",
-          "نوع": "خدمي",
-          "ORIG_FID": 25
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 24,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.490044648070281, 25.978859909191726]
-        },
-        "properties": {
-          "FID": 24,
-          "اسم__12": "مشروعات انتاج داجني",
-          "مساحة": 27723780,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "مشروعات انتاج داجني",
-          "نوع": "زراعي",
-          "ORIG_FID": 15
-        }
-      },
-      {
-        "type": "Feature",
-        "id": 25,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.493519000000000, 25.944520000000000]
-        },
-        "properties": {
-          "FID": 25,
-          "اسم__12": "مشروعات انتاج داجني",
-          "مساحة": 35352240,
-          "عنوان": "محافظة قنا - مركز الوقف",
-          "فرصة": "مشروعات انتاج داجني",
-          "نوع": "زراعي",
-          "ORIG_FID": 14
-        }
-      },
-      
-      
-      // تمت إضافة النقطة الجديدة هنا (مجمع زراعي في مركز قوص)
-      {
-        "type": "Feature",
-        "id": 26,
-        "geometry": {
-          "type": "Point",
-          "coordinates": [32.85463043715838, 25.834960787229086]
-        },
-        "properties": {
-          "FID": 26,
-          "اسم__12": "مجمع زراعي",
-          "مساحة": 240315.24,
-          "عنوان": "محافظة قنا - مركز قوص",
-          "فرصة": "مجمع زراعي",
-          "نوع": "زراعي",
-          "ORIG_FID": 26
-        }
-      }
-    ]
-  };
-        // الفرص الاستثمارية الجديدة (مجمعة من المضلعات والنقاط)
-        let investmentOpportunities = [];
-        // تهيئة الخريطة
+        };
+
+        // ==================== تهيئة الخريطة ====================
         function initMap() {
             // إنشاء الخريطة
             map = L.map('map').setView([26.155, 32.716], 9);
-            // إنشاء طبقات خرائط Google
+            
+            // إنشاء طبقات الخريطة
             const googleSat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                 maxZoom: 20,
                 attribution: 'Google Satellite'
             });
+            
             const googleTerrain = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
                 maxZoom: 20,
                 attribution: 'Google Terrain'
             });
+            
             const googleHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
                 maxZoom: 20,
                 attribution: 'Google Hybrid'
             });
-            // إضافة الطبقة الافتراضية
+            
             googleSat.addTo(map);
-            currentLayer = googleSat;
-            // إضافة المضلعات من بيانات JSON
+            
+            // إضافة المضلعات والنقاط
             addPolygonsToMap();
-            // إضافة النقاط من بيانات JSON
             addPointsToMap();
-            // إنشاء قائمة الفرص الاستثمارية
             renderOpportunitiesList();
-            // تحديث قائمة المفضلة
             updateFavoritesList();
-            // إضافة حدث لاستدعاء التصفية عند التكبير/التصغير
-            map.on('zoomend', function() {
-                applyFilters();
-                updateLabelsVisibility();
-            });
+            extractCenters();
+            applyFilters();
+            
+            // تهيئة بيانات البحث
+            initializeSearchData();
+            updatePolygonAreaDisplay();
+            
             // إضافة التحكم في الطبقات
             const baseMaps = {
                 "الخريطة الجوية": googleSat,
@@ -2161,6 +2782,7 @@
                 "الخريطة الهجينة": googleHybrid
             };
             L.control.layers(baseMaps).addTo(map);
+            
             // إضافة شعار الخريطة
             const mapLogo = L.control({position: 'bottomleft'});
             mapLogo.onAdd = function() {
@@ -2174,112 +2796,87 @@
                 return div;
             };
             mapLogo.addTo(map);
-            // إضافة وظائف القياس
-            document.getElementById('distanceBtn').addEventListener('click', toggleDistance);
-            document.getElementById('coordinateBtn').addEventListener('click', toggleCoordinate);
-            document.getElementById('clearBtn').addEventListener('click', clearAll);
-            // إضافة وظائف التحكم في العناصر
-            document.getElementById('toggleControlsBtn').addEventListener('click', toggleControls);
-            document.getElementById('filterToggle').addEventListener('click', toggleFilter);
-            // استخراج المراكز من البيانات
-            extractCenters();
-            // تطبيق التصفية الافتراضية
-            applyFilters();
-        }
-        // استخراج المراكز من البيانات
-        function extractCenters() {
-            const centersSet = new Set();
-            const centers = ['ابوتشت', 'نجع حمادي', 'فرشوط', 'دشنا', 'الوقف', 'قنا', 'نقادة', 'قوص', 'قفط']; // تمت إضافة "قوص" هنا
-            // استخراج المراكز من مضلعات البيانات
-            polygonsData.features.forEach(feature => {
-                const address = feature.properties.عنوان;
-                if (address) {
-                    for (const center of centers) {
-                        if (address.includes(center)) {
-                            centersSet.add(center);
-                            break;
-                        }
+            
+            // تفعيل الأدوات الجديدة
+            document.getElementById('toolsToggleBtn').addEventListener('click', toggleToolsSidebar);
+            document.getElementById('distanceSidebarBtn').addEventListener('click', () => activateSmallTool('distance'));
+            document.getElementById('areaSidebarBtn').addEventListener('click', () => activateSmallTool('area'));
+            document.getElementById('coordinateSidebarBtn').addEventListener('click', () => activateSmallTool('coordinate'));
+            document.getElementById('searchSidebarBtn').addEventListener('click', () => activateSmallTool('search'));
+            document.getElementById('filterSidebarBtn').addEventListener('click', () => activateSmallTool('filter'));
+            document.getElementById('searchBarBtn').addEventListener('click', openSearch);
+            document.getElementById('clearSidebarBtn').addEventListener('click', clearAllSmallMeasurements);
+            
+            // تفعيل البحث عند الضغط على Enter
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // تفعيل قائمة التصفح
+            document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
+            document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
+            document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
+            
+            // تفعيل الروابط الجانبية
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const linkType = this.getAttribute('data-link');
+                    if (linkType === 'favorites') {
+                        e.preventDefault();
+                        openFavoritesModal();
                     }
-                }
-            });
-            // استخراج المراكز من نقاط البيانات
-            pointsData.features.forEach(feature => {
-                const address = feature.properties.عنوان;
-                if (address) {
-                    for (const center of centers) {
-                        if (address.includes(center)) {
-                            centersSet.add(center);
-                            break;
-                        }
+                    if (linkType === 'opportunities') {
+                        e.preventDefault();
+                        openOpportunitiesModal();
                     }
-                }
+                    if (window.innerWidth <= 992) {
+                        toggleSidebar();
+                    }
+                });
             });
-            // حفظ المراكز
-            allCenters = Array.from(centersSet);
-            // عرض المراكز في واجهة التصفية
-            const centersFilter = document.getElementById('centersFilter');
-            centersFilter.innerHTML = '';
-            allCenters.forEach(center => {
-                const label = document.createElement('label');
-                label.className = 'filter-checkbox';
-                label.innerHTML = `
-                    <input type="checkbox" name="center" value="${center}" checked> ${center}
-                `;
-                centersFilter.appendChild(label);
-            });
+            
+            // بدء عرض حقوق الملكية
+            setTimeout(showSmallCopyrightModal, 1000);
+            setInterval(showSmallCopyrightModal, 3 * 60 * 1000); // كل 3 دقائق
         }
-        // استخراج اسم المركز من العنوان
-        function extractCenterFromAddress(address) {
-            if (!address) return 'غير محدد';
-            const centers = ['ابوتشت', 'نجع حمادي', 'فرشوط', 'دشنا', 'الوقف', 'قنا', 'نقادة', 'قوص', 'قفط'];
-            for (const center of centers) {
-                if (address.includes(center)) {
-                    return center;
-                }
-            }
-            return 'غير محدد';
-        }
-        // إضافة المضلعات إلى الخريطة
+
+        // ==================== الوظائف الأصلية (محفوظة كما هي) ====================
         function addPolygonsToMap() {
             polygonsData.features.forEach(feature => {
                 try {
-                    // تحويل الإحداثيات إلى تنسيق Leaflet [lat, lng]
-                    const coordinates = feature.geometry.coordinates[0].map(coord => {
-                        // تحقق من صحة الإحداثيات
-                        if (typeof coord[0] !== 'number' || typeof coord[1] !== 'number') {
-                            throw new Error('Invalid coordinates format');
-                        }
-                        return [coord[1], coord[0]];
-                    });
-                    // تحقق من وجود إحداثيات كافية لرسم مضلع
+                    const coordinates = feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]);
+                    
                     if (coordinates.length < 3) {
                         console.error('Not enough coordinates to form a polygon', feature);
                         return;
                     }
-                    // تحديد لون المضلع بناءً على نوعه
+                    
                     const color = getColorByType(feature.properties.نوع);
-                    // إنشاء المضلع
                     const polygon = L.polygon(coordinates, {
                         color: color,
-                        weight: 4,        // زيادة سماكة الحدود
-                        opacity: 1.5,     // زيادة وضوح الحدود
-                        fillOpacity: 0.4  // زيادة الشفافية
+                        weight: 4,
+                        opacity: 1.5,
+                        fillOpacity: 0.4
                     }).addTo(map);
-                    // إضافة تسمية داخل المضلع
+                    
                     const centroid = getPolygonCentroid(coordinates);
+                    const area = feature.properties.مساحة;
+                    const feddanData = convertToFeddans(area);
+                    const areaText = `${area} م²<br>${feddanData.feddans} فدان`;
+                    
                     const label = L.marker(centroid, {
                         icon: L.divIcon({
                             className: 'polygon-label',
-                            html: feature.properties.اسم__12,
+                            html: areaText,
                             iconSize: [null, null],
                             iconAnchor: [0, 0]
                         })
                     }).addTo(map);
-                    // تخزين التسمية كخاصية للمضلع
+                    
                     polygon.label = label;
-                    // ربط المعلومات مع المضلع (باستخدام البوب أب الجديد)
                     polygon.bindPopup(createPopupContent(feature.properties, 'polygon'));
-                    // تخزين المضلع للإشارة إليه لاحقًا
                     polygon.feature = feature;
                     polygon.type = 'polygon';
                     polygons.push(polygon);
@@ -2288,19 +2885,13 @@
                 }
             });
         }
-        // إضافة النقاط إلى الخريطة
+
         function addPointsToMap() {
             pointsData.features.forEach(feature => {
                 try {
-                    // تحويل الإحداثيات إلى تنسيق Leaflet [lat, lng]
                     const coordinates = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-                    // تحقق من صحة الإحداثيات
-                    if (typeof coordinates[0] !== 'number' || typeof coordinates[1] !== 'number') {
-                        throw new Error('Invalid coordinates format');
-                    }
-                    // تحديد لون النقطة بناءً على نوعها
                     const color = getColorByType(feature.properties.نوع);
-                    // إنشاء النقطة
+                    
                     const point = L.circleMarker(coordinates, {
                         radius: 8,
                         fillColor: color,
@@ -2309,9 +2900,8 @@
                         opacity: 1,
                         fillOpacity: 0.8
                     }).addTo(map);
-                    // ربط المعلومات مع النقطة
+                    
                     point.bindPopup(createPopupContent(feature.properties, 'point'));
-                    // تخزين النقطة للإشارة إليها لاحقًا
                     point.feature = feature;
                     point.type = 'point';
                     points.push(point);
@@ -2320,7 +2910,7 @@
                 }
             });
         }
-        // تحديد لون العنصر بناءً على نوعه
+
         function getColorByType(type) {
             switch(type) {
                 case 'خدمي': return '#1976d2';
@@ -2330,7 +2920,7 @@
                 default: return '#9e9e9e';
             }
         }
-        // حساب المركز الهندسي للمضلع
+
         function getPolygonCentroid(coords) {
             let x = 0, y = 0;
             for (let i = 0; i < coords.length; i++) {
@@ -2339,20 +2929,18 @@
             }
             return [x / coords.length, y / coords.length];
         }
-        // إنشاء محتوى البوب أب الجديد مع زر التوجه الآن
+
         function createPopupContent(properties, type) {
             const isFavorite = favorites.some(fav => fav.name === properties.اسم__12);
-            // الحصول على إحداثيات النقطة
             let lat, lng;
+            
             if (type === 'point') {
-                // للنقاط: استخدم إحداثيات النقطة مباشرة
                 const pointFeature = pointsData.features.find(f => f.properties.اسم__12 === properties.اسم__12);
                 if (pointFeature) {
                     lat = pointFeature.geometry.coordinates[1];
                     lng = pointFeature.geometry.coordinates[0];
                 }
             } else {
-                // للمضلعات: استخدم المركز الهندسي
                 const polygonFeature = polygonsData.features.find(f => f.properties.اسم__12 === properties.اسم__12);
                 if (polygonFeature) {
                     const centroid = getPolygonCentroid(polygonFeature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]));
@@ -2360,6 +2948,9 @@
                     lng = centroid[1];
                 }
             }
+            
+            const feddanData = convertToFeddans(properties.مساحة);
+            
             return `
                 <div class="popup-container">
                     <div class="popup-header">
@@ -2368,7 +2959,7 @@
                     <div class="popup-body">
                         <div class="popup-info">
                             <i class="bi bi-rulers"></i>
-                            <span>${properties.مساحة} متر مربع</span>
+                            <span>${properties.مساحة} متر مربع (${feddanData.feddans} فدان)</span>
                         </div>
                         <div class="popup-info">
                             <i class="bi bi-geo-alt"></i>
@@ -2394,68 +2985,105 @@
                 </div>
             `;
         }
-        // وظيفة التوجه إلى الموقع في خرائط جوجل
+
         function navigateToLocation(lat, lng) {
             if (lat && lng) {
-                // فتح خرائط جوجل في نافذة جديدة مع الإحداثيات
                 const url = `https://www.google.com/maps?q=${lat},${lng}`;
                 window.open(url, '_blank');
             } else {
                 alert('لا تتوفر إحداثيات لهذا الموقع');
             }
         }
-        // تكبير الخريطة إلى العنصر
+
         function zoomToFeature(name) {
-            let feature;
-            // البحث عن المضلع
-            feature = polygons.find(p => p.feature.properties.اسم__12 === name);
+            let feature = polygons.find(p => p.feature.properties.اسم__12 === name);
             if (feature) {
                 map.fitBounds(feature.getBounds(), {padding: [50, 50]});
                 return;
             }
-            // البحث عن النقطة
             feature = points.find(p => p.feature.properties.اسم__12 === name);
             if (feature) {
                 map.setView(feature.getLatLng(), 15);
             }
         }
-        // إظهار/إخفاء قائمة التحكم
-        function toggleControls() {
-            const controls = document.getElementById('mapControls');
-            const btn = document.getElementById('toggleControlsBtn');
-            if (controls.style.display === 'none' || controls.style.display === '') {
-                controls.style.display = 'flex';
-                btn.innerHTML = '<i class="bi bi-chevron-down"></i>';
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (sidebar.classList.contains('sidebar-hidden')) {
+                sidebar.classList.remove('sidebar-hidden');
+                overlay.style.display = 'block';
             } else {
-                controls.style.display = 'none';
-                btn.innerHTML = '<i class="bi bi-chevron-up"></i>';
+                sidebar.classList.add('sidebar-hidden');
+                overlay.style.display = 'none';
             }
         }
-        // إظهار/إخفاء قائمة التصفية
-        function toggleFilter() {
-            const filterControls = document.getElementById('filterControls');
-            const filterToggle = document.getElementById('filterToggle');
-            if (filterControls.style.display === 'none' || filterControls.style.display === '') {
-                filterControls.style.display = 'block';
-                filterToggle.classList.add('pulse');
-            } else {
-                filterControls.style.display = 'none';
-                filterToggle.classList.remove('pulse');
-            }
+
+        function extractCenters() {
+            const centersSet = new Set();
+            const centers = ['ابوتشت', 'نجع حمادي', 'فرشوط', 'دشنا', 'الوقف', 'قنا', 'نقادة', 'قوص', 'قفط'];
+            
+            polygonsData.features.forEach(feature => {
+                const address = feature.properties.عنوان;
+                if (address) {
+                    for (const center of centers) {
+                        if (address.includes(center)) {
+                            centersSet.add(center);
+                            break;
+                        }
+                    }
+                }
+            });
+            
+            pointsData.features.forEach(feature => {
+                const address = feature.properties.عنوان;
+                if (address) {
+                    for (const center of centers) {
+                        if (address.includes(center)) {
+                            centersSet.add(center);
+                            break;
+                        }
+                    }
+                }
+            });
+            
+            allCenters = Array.from(centersSet);
+            // تحديث مراكز التصفية الصغيرة
+            const smallCentersFilter = document.getElementById('smallCentersFilter');
+            smallCentersFilter.innerHTML = '';
+            
+            allCenters.forEach(center => {
+                const label = document.createElement('label');
+                label.className = 'small-filter-checkbox';
+                label.innerHTML = `
+                    <input type="checkbox" name="smallCenter" value="${center}" checked> ${center}
+                `;
+                smallCentersFilter.appendChild(label);
+            });
         }
-        // تطبيق التصفية
+
+        function extractCenterFromAddress(address) {
+            if (!address) return 'غير محدد';
+            const centers = ['ابوتشت', 'نجع حمادي', 'فرشوط', 'دشنا', 'الوقف', 'قنا', 'نقادة', 'قوص', 'قفط'];
+            for (const center of centers) {
+                if (address.includes(center)) {
+                    return center;
+                }
+            }
+            return 'غير محدد';
+        }
+
         function applyFilters() {
-            // الحصول على أنواع الفرص المحددة
             selectedTypes = [];
             document.querySelectorAll('input[name="type"]:checked').forEach(checkbox => {
                 selectedTypes.push(checkbox.value);
             });
-            // الحصول على المراكز المحددة
+            
             selectedCenters = [];
             document.querySelectorAll('input[name="center"]:checked').forEach(checkbox => {
                 selectedCenters.push(checkbox.value);
             });
-            // تصفية المضلعات
+            
             polygons.forEach(polygon => {
                 const type = polygon.feature.properties.نوع || 'غير محدد';
                 const center = extractCenterFromAddress(polygon.feature.properties.عنوان);
@@ -2470,7 +3098,7 @@
                     }
                 }
             });
-            // تصفية النقاط
+            
             points.forEach(point => {
                 const type = point.feature.properties.نوع || 'غير محدد';
                 const center = extractCenterFromAddress(point.feature.properties.عنوان);
@@ -2485,40 +3113,64 @@
                     }
                 }
             });
-            // تحديث قائمة الفرص الاستثمارية
+            
             renderOpportunitiesList();
         }
-        // إعادة تعيين التصفية
+
+        function smallApplyFilters() {
+            selectedTypes = [];
+            document.querySelectorAll('input[name="smallType"]:checked').forEach(checkbox => {
+                selectedTypes.push(checkbox.value);
+            });
+            
+            selectedCenters = [];
+            document.querySelectorAll('input[name="smallCenter"]:checked').forEach(checkbox => {
+                selectedCenters.push(checkbox.value);
+            });
+            
+            applyFilters(); // استدعاء نفس الدالة الأصلية
+        }
+
+        function smallResetFilters() {
+            document.querySelectorAll('input[name="smallType"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            
+            document.querySelectorAll('input[name="smallCenter"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            
+            smallApplyFilters();
+        }
+
         function resetFilters() {
-            // إعادة تعيين أنواع الفرص
             document.querySelectorAll('input[name="type"]').forEach(checkbox => {
                 checkbox.checked = true;
             });
-            // إعادة تعيين المراكز
+            
             document.querySelectorAll('input[name="center"]').forEach(checkbox => {
                 checkbox.checked = true;
             });
-            // تطبيق التصفية
+            
             applyFilters();
         }
-        // عرض قائمة الفرص الاستثمارية مع زر التوجه الآن
+
         function renderOpportunitiesList() {
             const container = document.getElementById('opportunitiesList');
             const countElement = document.getElementById('opportunitiesCount');
             container.innerHTML = '';
-            // إنشاء خريطة لتجنب التكرار باستخدام ORIG_FID
+            
             const uniqueOpportunities = new Map();
-            // إضافة الفرص من المضلعات
+            
             polygonsData.features.forEach(feature => {
                 const id = feature.properties.FID || feature.id;
-                // استخدام ORIG_FID إذا كان موجوداً، وإلا نستخدم FID
                 const uniqueId = feature.properties.ORIG_FID !== undefined ? 
                                  feature.properties.ORIG_FID : id;
                 if (!uniqueOpportunities.has(uniqueId)) {
                     uniqueOpportunities.set(uniqueId, feature);
                 }
             });
-            // إضافة الفرص من النقاط
+            
             pointsData.features.forEach(feature => {
                 const id = feature.properties.FID || feature.id;
                 const uniqueId = feature.properties.ORIG_FID !== undefined ? 
@@ -2527,21 +3179,21 @@
                     uniqueOpportunities.set(uniqueId, feature);
                 }
             });
-            // عرض الفرص الفريدة فقط
+            
             const investmentOpportunities = Array.from(uniqueOpportunities.values());
             investmentOpportunities.forEach((opportunity, index) => {
                 const isFavorite = favorites.some(fav => fav.name === opportunity.properties.اسم__12);
-                // الحصول على إحداثيات النقطة
                 let lat, lng;
+                
                 if (opportunity.geometry.type === 'Point') {
                     lat = opportunity.geometry.coordinates[1];
                     lng = opportunity.geometry.coordinates[0];
                 } else {
-                    // للمضلعات: استخدام المركز الهندسي
                     const centroid = getPolygonCentroid(opportunity.geometry.coordinates[0].map(coord => [coord[1], coord[0]]));
                     lat = centroid[0];
                     lng = centroid[1];
                 }
+                
                 const item = document.createElement('div');
                 item.className = 'opportunity-item';
                 item.innerHTML = `
@@ -2571,28 +3223,23 @@
                 `;
                 container.appendChild(item);
             });
-            // تحديث العداد ليظهر العدد الفعلي للفرص (بدون تكرار)
+            
             countElement.textContent = `${investmentOpportunities.length} فرص`;
         }
-        // إضافة/إزالة من المفضلة
+
         function toggleFavorite(name, area, type, address) {
             const index = favorites.findIndex(fav => fav.name === name);
             if (index !== -1) {
-                // إزالة من المفضلة
                 favorites = favorites.filter(fav => fav.name !== name);
             } else {
-                // إضافة إلى المفضلة
                 favorites.push({name: name, area: area, type: type, address: address});
             }
-            // حفظ في localStorage
+            
             localStorage.setItem('favorites', JSON.stringify(favorites));
-            // تحديث القائمة
             updateFavoritesList();
-            // إغلاق البوب أب الحالي وفتحه مرة أخرى لتحديث حالة الزر
+            
             map.closePopup();
-            // البحث عن العنصر وفتح البوب أب مرة أخرى
-            let feature;
-            feature = polygons.find(p => p.feature.properties.اسم__12 === name);
+            let feature = polygons.find(p => p.feature.properties.اسم__12 === name);
             if (!feature) {
                 feature = points.find(p => p.feature.properties.اسم__12 === name);
             }
@@ -2600,11 +3247,12 @@
                 feature.openPopup();
             }
         }
-        // تحديث قائمة المفضلة
+
         function updateFavoritesList() {
             const container = document.getElementById('favoritesList');
             const countElement = document.getElementById('favoritesCount');
             container.innerHTML = '';
+            
             if (favorites.length === 0) {
                 container.innerHTML = `
                     <div class="no-favorites">
@@ -2614,7 +3262,6 @@
                 `;
             } else {
                 favorites.forEach(fav => {
-                    // البحث عن الإحداثيات للفرصة المفضلة
                     let lat, lng;
                     const pointFeature = pointsData.features.find(f => f.properties.اسم__12 === fav.name);
                     if (pointFeature) {
@@ -2628,6 +3275,7 @@
                             lng = centroid[1];
                         }
                     }
+                    
                     const item = document.createElement('div');
                     item.className = 'favorite-item';
                     item.innerHTML = `
@@ -2657,10 +3305,10 @@
                     container.appendChild(item);
                 });
             }
-            // تحديث العداد
+            
             countElement.textContent = `${favorites.length} عنصر`;
         }
-        // حذف كل العناصر من المفضلة
+
         function clearAllFavorites() {
             if (confirm('هل أنت متأكد من أنك تريد حذف كل العناصر من المفضلة؟')) {
                 favorites = [];
@@ -2668,84 +3316,534 @@
                 updateFavoritesList();
             }
         }
-        // فتح نافذة المفضلة
+
         function openFavoritesModal() {
             updateFavoritesList();
             document.getElementById('favoritesModal').classList.add('show');
         }
-        // إغلاق نافذة المفضلة
+
         function closeFavoritesModal() {
             document.getElementById('favoritesModal').classList.remove('show');
         }
-        // فتح نافذة الفرص الاستثمارية
+
         function openOpportunitiesModal() {
             renderOpportunitiesList();
             document.getElementById('opportunitiesModal').classList.add('show');
         }
-        // إغلاق نافذة الفرص الاستثمارية
+
         function closeOpportunitiesModal() {
             document.getElementById('opportunitiesModal').classList.remove('show');
         }
-        // تبديل الوضعية لقياس المسافة
-        function toggleDistance() {
-            coordinateMode = false;
-            if (coordinateMarker) {
-                map.removeLayer(coordinateMarker);
-                coordinateMarker = null;
-            }
-            if (distancePoints.length > 0) {
-                clearDistance();
+
+        // ==================== وظائف التحويل للبحث ====================
+        function convertToFeddans(squareMeters) {
+            // التحويل من متر مربع إلى فدان (1 فدان = 4200 متر مربع تقريباً)
+            const feddans = squareMeters / 4200;
+            const totalKirats = feddans * 24;
+            const totalKiratsRounded = Math.floor(totalKirats * 100) / 100;
+            const kirats = Math.floor(totalKiratsRounded);
+            const sahms = Math.round((totalKiratsRounded - kirats) * 24);
+            
+            return {
+                feddans: feddans.toFixed(2),
+                kirats: kirats,
+                sahms: sahms
+            };
+        }
+
+        // ==================== وظائف البحث ====================
+        function initializeSearchData() {
+            allOpportunities = [];
+            
+            // جمع بيانات من المضلعات
+            polygonsData.features.forEach(feature => {
+                const opportunity = {
+                    name: feature.properties.اسم__12,
+                    area: feature.properties.مساحة,
+                    type: feature.properties.نوع,
+                    subtype: feature.properties.فرصة,
+                    address: feature.properties.عنوان,
+                    center: extractCenterFromAddress(feature.properties.عنوان),
+                    geometry: feature.geometry,
+                    source: 'polygon'
+                };
+                allOpportunities.push(opportunity);
+            });
+            
+            // جمع بيانات من النقاط
+            pointsData.features.forEach(feature => {
+                const opportunity = {
+                    name: feature.properties.اسم__12,
+                    area: feature.properties.مساحة,
+                    type: feature.properties.نوع,
+                    subtype: feature.properties.فرصة,
+                    address: feature.properties.عنوان,
+                    center: extractCenterFromAddress(feature.properties.عنوان),
+                    geometry: feature.geometry,
+                    source: 'point'
+                };
+                allOpportunities.push(opportunity);
+            });
+        }
+
+        function openSearch() {
+            closeAllSmallPanels();
+            deactivateAllSmallTools();
+            document.getElementById('searchContainer').style.display = 'block';
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearch() {
+            document.getElementById('searchContainer').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        }
+
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+            
+            if (searchTerm === '') {
+                resultsContainer.innerHTML = `
+                    <div class="search-no-results">
+                        <i class="bi bi-search" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i>
+                        <p>الرجاء إدخال مصطلح للبحث</p>
+                    </div>
+                `;
                 return;
             }
-            distancePoints = [];
-            if (!distanceLine) {
-                distanceLine = L.polyline([], {color: '#1976d2', weight: 3}).addTo(map);
+            
+            // تصفية الفرص بناءً على مصطلح البحث
+            searchResults = allOpportunities.filter(opportunity => {
+                // البحث في جميع الحقول النصية
+                const searchInName = opportunity.name && opportunity.name.toLowerCase().includes(searchTerm);
+                const searchInType = opportunity.type && opportunity.type.toLowerCase().includes(searchTerm);
+                const searchInSubtype = opportunity.subtype && opportunity.subtype.toLowerCase().includes(searchTerm);
+                const searchInCenter = opportunity.center && opportunity.center.toLowerCase().includes(searchTerm);
+                const searchInAddress = opportunity.address && opportunity.address.toLowerCase().includes(searchTerm);
+                
+                // البحث في المساحة (رقمياً ونصياً)
+                const areaAsString = opportunity.area ? opportunity.area.toString() : '';
+                const searchInArea = areaAsString.includes(searchTerm);
+                
+                // تحقق إذا كان مصطلح البحث رقم (للبحث بالمساحة)
+                const isNumericSearch = !isNaN(searchTerm) && searchTerm.trim() !== '';
+                const searchByAreaNumber = isNumericSearch && opportunity.area && 
+                                          opportunity.area.toString().includes(searchTerm);
+                
+                return searchInName || searchInType || searchInSubtype || 
+                       searchInCenter || searchInAddress || searchInArea || searchByAreaNumber;
+            });
+            
+            if (searchResults.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="search-no-results">
+                        <i class="bi bi-emoji-frown" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i>
+                        <p>لا توجد نتائج تطابق "${searchTerm}"</p>
+                        <p style="font-size: 0.85rem; margin-top: 5px;">جرب البحث باسم آخر، النوع، أو المساحة</p>
+                    </div>
+                `;
+            } else {
+                searchResults.forEach((result, index) => {
+                    const feddanData = convertToFeddans(result.area);
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `
+                        <div>
+                            <div class="search-result-name">${result.name}</div>
+                            <div class="search-result-details">
+                                <span><i class="bi bi-rulers"></i> ${result.area} م²</span>
+                                <span><i class="bi bi-tags"></i> ${result.type}</span>
+                                <span><i class="bi bi-geo-alt"></i> ${result.center}</span>
+                                <span><i class="bi bi-calculator"></i> ${feddanData.feddans} فدان</span>
+                            </div>
+                        </div>
+                        <i class="bi bi-arrow-left" style="color: var(--primary);"></i>
+                    `;
+                    item.onclick = () => goToSearchResult(result);
+                    resultsContainer.appendChild(item);
+                });
             }
-            map.on('click', addDistancePoint);
-            document.getElementById('distanceDisplay').style.display = 'block';
-            document.getElementById('distanceBtn').classList.add('pulse');
         }
-        // إضافة نقطة لقياس المسافة
-        function addDistancePoint(e) {
+
+        function goToSearchResult(result) {
+            closeSearch();
+            
+            if (result.source === 'point') {
+                const latlng = [result.geometry.coordinates[1], result.geometry.coordinates[0]];
+                map.setView(latlng, 15);
+                // البحث عن النقطة وفتح البوب أب الخاص بها
+                const point = points.find(p => p.feature.properties.اسم__12 === result.name);
+                if (point) {
+                    point.openPopup();
+                }
+            } else {
+                // البحث عن المضلع والانتقال إليه
+                const polygon = polygons.find(p => p.feature.properties.اسم__12 === result.name);
+                if (polygon) {
+                    map.fitBounds(polygon.getBounds(), {padding: [50, 50]});
+                    polygon.openPopup();
+                }
+            }
+        }
+
+        // ==================== تحديث عرض المساحة في المضلعات ====================
+        function updatePolygonAreaDisplay() {
+            polygons.forEach(polygon => {
+                const area = polygon.feature.properties.مساحة;
+                const feddanData = convertToFeddans(area);
+                const areaText = `${area} م²<br>${feddanData.feddans} فدان`;
+                
+                // تحديث نص التسمية
+                if (polygon.label) {
+                    polygon.label.setIcon(L.divIcon({
+                        className: 'polygon-label',
+                        html: areaText,
+                        iconSize: [null, null],
+                        iconAnchor: [0, 0]
+                    }));
+                }
+            });
+        }
+
+        // ==================== الأدوات الصغيرة الجديدة ====================
+        function toggleToolsSidebar() {
+            const sidebar = document.getElementById('measurementToolsSidebar');
+            sidebar.classList.toggle('expanded');
+        }
+
+        function toggleMeasurementSidebar() {
+            const sidebar = document.getElementById('measurementToolsSidebar');
+            sidebar.classList.add('expanded');
+        }
+
+        function activateSmallTool(toolType) {
+            // إلغاء تنشيط جميع الأدوات
+            deactivateAllSmallTools();
+            
+            // إغلاق جميع اللوحات
+            closeAllSmallPanels();
+            
+            // إزالة جميع الأحداث السابقة
+            map.off('click');
+            map.off('dblclick');
+            
+            // تنشيط الأداة المختارة
+            activeTool = toolType;
+            
+            // إضافة النشاط للزر
+            document.getElementById(toolType + 'SidebarBtn').classList.add('active');
+            
+            switch(toolType) {
+                case 'distance':
+                    openSmallPanel('distance');
+                    startSmallDistanceMeasurement();
+                    break;
+                case 'area':
+                    openSmallPanel('area');
+                    startSmallAreaMeasurement();
+                    break;
+                case 'coordinate':
+                    openSmallPanel('coordinate');
+                    startSmallCoordinateMeasurement();
+                    break;
+                case 'search':
+                    openSmallPanel('search');
+                    break;
+                case 'filter':
+                    openSmallPanel('filter');
+                    break;
+            }
+        }
+
+        function deactivateAllSmallTools() {
+            // إلغاء تنشيط جميع أزرار الأدوات
+            document.querySelectorAll('.measurement-tool-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // إزالة جميع الأحداث
+            map.off('click');
+            map.off('dblclick');
+            activeTool = null;
+        }
+
+        function closeAllSmallPanels() {
+            ['distance', 'area', 'coordinate', 'search', 'filter'].forEach(panel => {
+                document.getElementById('small' + panel.charAt(0).toUpperCase() + panel.slice(1) + 'Panel').style.display = 'none';
+            });
+        }
+
+        function openSmallPanel(panelType) {
+            closeAllSmallPanels();
+            const panelId = 'small' + panelType.charAt(0).toUpperCase() + panelType.slice(1) + 'Panel';
+            document.getElementById(panelId).style.display = 'block';
+        }
+
+        function closeSmallPanel(panelType) {
+            const panelId = 'small' + panelType.charAt(0).toUpperCase() + panelType.slice(1) + 'Panel';
+            document.getElementById(panelId).style.display = 'none';
+            deactivateAllSmallTools();
+        }
+
+        // قياس المسافة الصغيرة
+        function startSmallDistanceMeasurement() {
+            clearSmallDistanceMeasurement();
+            distancePoints = [];
+            
+            if (!distanceLine) {
+                distanceLine = L.polyline([], {
+                    color: '#1976d2',
+                    weight: 3,
+                    opacity: 0.8
+                }).addTo(map);
+            }
+            
+            map.on('click', addSmallDistancePoint);
+            map.on('dblclick', finishSmallDistanceMeasurement);
+        }
+
+        function addSmallDistancePoint(e) {
             distancePoints.push(e.latlng);
             distanceLine.setLatLngs(distancePoints);
+            
+            // تحديث التسميات
+            updateSmallDistanceLabels();
+            
+            // تحديث العرض في اللوحة
+            updateSmallDistanceDisplay();
+        }
+
+        function updateSmallDistanceLabels() {
             // إزالة التسميات القديمة
             distanceLabels.forEach(label => map.removeLayer(label));
             distanceLabels = [];
-            // حساب المسافة الإجمالية
-            let totalDistance = 0;
+            
+            // إضافة تسميات جديدة للمقاطع
             for (let i = 0; i < distancePoints.length - 1; i++) {
                 const segmentDistance = distancePoints[i].distanceTo(distancePoints[i + 1]);
-                totalDistance += segmentDistance;
-                // إضافة تسمية للمسافة
                 const midpoint = L.latLng(
                     (distancePoints[i].lat + distancePoints[i + 1].lat) / 2,
                     (distancePoints[i].lng + distancePoints[i + 1].lng) / 2
                 );
+                
                 const label = L.marker(midpoint, {
                     icon: L.divIcon({
                         className: 'distance-label',
-                        html: formatDistance(segmentDistance),
+                        html: formatSmallDistance(segmentDistance),
                         iconSize: [null, null]
                     })
                 }).addTo(map);
                 distanceLabels.push(label);
             }
-            // تحديث عرض المسافة
-            document.getElementById('distanceDisplay').innerHTML = `
-                <i class="bi bi-rulers"></i> المسافة الكلية: ${formatDistance(totalDistance)}
-            `;
         }
-        // تنسيق عرض المسافة
-        function formatDistance(meters) {
+
+        function updateSmallDistanceDisplay() {
+            let totalDistance = 0;
+            for (let i = 0; i < distancePoints.length - 1; i++) {
+                totalDistance += distancePoints[i].distanceTo(distancePoints[i + 1]);
+            }
+            
+            document.getElementById('smallTotalDistance').textContent = formatSmallDistanceValue(totalDistance);
+            document.getElementById('smallDistanceUnit').textContent = getSmallDistanceUnit(totalDistance);
+        }
+
+        function finishSmallDistanceMeasurement() {
+            map.off('click', addSmallDistancePoint);
+            map.off('dblclick', finishSmallDistanceMeasurement);
+        }
+
+        function formatSmallDistance(meters) {
             if (meters < 1000) {
                 return `${Math.round(meters)} م`;
             } else {
                 return `${(meters / 1000).toFixed(2)} كم`;
             }
         }
-        // مسح قياسات المسافة
-        function clearDistance() {
+
+        function formatSmallDistanceValue(meters) {
+            if (meters < 1000) {
+                return Math.round(meters);
+            } else {
+                return (meters / 1000).toFixed(2);
+            }
+        }
+
+        function getSmallDistanceUnit(meters) {
+            return meters < 1000 ? 'متر' : 'كيلومتر';
+        }
+
+        // قياس المساحة الصغيرة
+        function startSmallAreaMeasurement() {
+            clearSmallAreaMeasurement();
+            let areaPoints = [];
+            
+            const areaPolyline = L.polyline([], {
+                color: '#4caf50',
+                weight: 2,
+                opacity: 0.7
+            }).addTo(map);
+            
+            map.on('click', function(e) {
+                areaPoints.push(e.latlng);
+                areaPolyline.setLatLngs(areaPoints);
+                
+                if (areaPoints.length > 2) {
+                    // حساب المساحة المؤقتة
+                    const tempArea = calculateSmallPolygonArea(areaPoints);
+                    updateSmallAreaDisplay(tempArea);
+                }
+            });
+            
+            map.on('dblclick', function() {
+                if (areaPoints.length > 2) {
+                    // إنشاء المضلع النهائي
+                    areaPolygon = L.polygon(areaPoints, {
+                        color: '#4caf50',
+                        weight: 2,
+                        fillColor: '#4caf50',
+                        fillOpacity: 0.2
+                    }).addTo(map);
+                    
+                    // إضافة تسمية المساحة مع وحدات القياس المزدوجة
+                    const centroid = getPolygonCentroid(areaPoints);
+                    const area = calculateSmallPolygonArea(areaPoints);
+                    const feddanData = convertToFeddans(area);
+                    const areaText = `المساحة:<br>${formatSmallArea(area)}<br>${feddanData.feddans} فدان`;
+                    
+                    const areaLabel = L.marker(centroid, {
+                        icon: L.divIcon({
+                            className: 'polygon-area-label',
+                            html: areaText,
+                            iconSize: [null, null]
+                        })
+                    }).addTo(map);
+                    
+                    areaLabels.push(areaLabel);
+                    
+                    // إزالة الخط المؤقت
+                    map.removeLayer(areaPolyline);
+                    
+                    // إزالة الأحداث
+                    map.off('click');
+                    map.off('dblclick');
+                    
+                    // تحديث العرض في اللوحة
+                    updateSmallAreaDisplay(area);
+                }
+            });
+        }
+
+        function calculateSmallPolygonArea(points) {
+            let area = 0;
+            for (let i = 0; i < points.length; i++) {
+                const j = (i + 1) % points.length;
+                area += points[i].lng * points[j].lat;
+                area -= points[j].lng * points[i].lat;
+            }
+            return Math.abs(area * 0.5 * 111319.9 * 111319.9 * Math.cos(points[0].lat * Math.PI / 180));
+        }
+
+        function formatSmallArea(squareMeters) {
+            if (squareMeters < 10000) {
+                return `${Math.round(squareMeters)} م²`;
+            } else if (squareMeters < 1000000) {
+                return `${(squareMeters / 10000).toFixed(2)} هكتار`;
+            } else {
+                return `${(squareMeters / 1000000).toFixed(2)} كم²`;
+            }
+        }
+
+        function updateSmallAreaDisplay(area) {
+            document.getElementById('smallTotalArea').textContent = formatSmallAreaValue(area);
+            document.getElementById('smallAreaUnit').textContent = getSmallAreaUnit(area);
+        }
+
+        function formatSmallAreaValue(area) {
+            if (area < 10000) {
+                return Math.round(area);
+            } else if (area < 1000000) {
+                return (area / 10000).toFixed(2);
+            } else {
+                return (area / 1000000).toFixed(2);
+            }
+        }
+
+        function getSmallAreaUnit(area) {
+            if (area < 10000) {
+                return 'متر مربع';
+            } else if (area < 1000000) {
+                return 'هكتار';
+            } else {
+                return 'كيلومتر مربع';
+            }
+        }
+
+        // إضافة نقاط الإحداثيات الصغيرة
+        function startSmallCoordinateMeasurement() {
+            map.on('click', addSmallCoordinatePoint);
+        }
+
+        function addSmallCoordinatePoint(e) {
+            const { lat, lng } = e.latlng;
+            coordinatePoints.push(e.latlng);
+            
+            // تحديث العرض في اللوحة
+            document.getElementById('smallPointCoordinates').textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            
+            // إضافة علامة على الخريطة
+            const marker = L.marker(e.latlng, {
+                icon: L.divIcon({
+                    className: 'coordinate-point-label',
+                    html: `${lat.toFixed(6)}<br>${lng.toFixed(6)}`,
+                    iconSize: [null, null]
+                })
+            }).addTo(map);
+            
+            coordinateMarkers.push(marker);
+        }
+
+        // البحث بالإحداثيات الصغيرة
+        function smallSearchByCoordinates() {
+            const x = parseFloat(document.getElementById('smallCoordX').value);
+            const y = parseFloat(document.getElementById('smallCoordY').value);
+            
+            if (isNaN(x) || isNaN(y)) {
+                alert('الرجاء إدخال إحداثيات صحيحة');
+                return;
+            }
+            
+            // التحقق من نطاق الإحداثيات (تقريبي لمصر)
+            if (x < 24 || x > 32 || y < 22 || y > 32) {
+                if (!confirm('الإحداثيات خارج النطاق المعتاد لمصر. هل تريد المتابعة؟')) {
+                    return;
+                }
+            }
+            
+            const latlng = L.latLng(y, x);
+            map.setView(latlng, 15);
+            
+            // إضافة علامة
+            L.marker(latlng, {
+                icon: L.divIcon({
+                    className: 'coordinate-point-label',
+                    html: `${y.toFixed(6)}<br>${x.toFixed(6)}`,
+                    iconSize: [null, null]
+                })
+            }).addTo(map).bindPopup(`إحداثيات البحث:<br>X: ${x}<br>Y: ${y}`).openPopup();
+        }
+
+        // مسح جميع القياسات الصغيرة
+        function clearAllSmallMeasurements() {
+            clearSmallDistanceMeasurement();
+            clearSmallAreaMeasurement();
+            clearSmallCoordinateMeasurement();
+            deactivateAllSmallTools();
+            closeAllSmallPanels();
+        }
+
+        function clearSmallDistanceMeasurement() {
             if (distanceLine) {
                 map.removeLayer(distanceLine);
                 distanceLine = null;
@@ -2753,137 +3851,41 @@
             distancePoints = [];
             distanceLabels.forEach(label => map.removeLayer(label));
             distanceLabels = [];
-            document.getElementById('distanceDisplay').style.display = 'none';
-            document.getElementById('distanceBtn').classList.remove('pulse');
-            map.off('click', addDistancePoint);
         }
-        // تبديل وضعية الإحداثيات
-        function toggleCoordinate() {
-            if (distancePoints.length > 0) {
-                clearDistance();
+
+        function clearSmallAreaMeasurement() {
+            if (areaPolygon) {
+                map.removeLayer(areaPolygon);
+                areaPolygon = null;
             }
-            coordinateMode = !coordinateMode;
-            const coordinateDisplay = document.querySelector('.coordinate-display');
-            if (coordinateMode) {
-                coordinateDisplay.style.display = 'block';
-                map.on('mousemove', showCoordinate);
-                document.getElementById('coordinateBtn').classList.add('pulse');
-            } else {
-                coordinateDisplay.style.display = 'none';
-                if (coordinateMarker) {
-                    map.removeLayer(coordinateMarker);
-                    coordinateMarker = null;
-                }
-                map.off('mousemove', showCoordinate);
-                document.getElementById('coordinateBtn').classList.remove('pulse');
-            }
+            areaLabels.forEach(label => map.removeLayer(label));
+            areaLabels = [];
         }
-        // عرض الإحداثيات
-        function showCoordinate(e) {
-            const { lat, lng } = e.latlng;
-            const coordinateDisplay = document.querySelector('.coordinate-display');
-            // تحديث عرض الإحداثيات
-            coordinateDisplay.innerHTML = `
-                <i class="bi bi-geo-alt"></i> الإحداثيات: ${lat.toFixed(6)}, ${lng.toFixed(6)}
-            `;
-            // إزالة العلامة القديمة إذا كانت موجودة
-            if (coordinateMarker) {
-                map.removeLayer(coordinateMarker);
-            }
-            // إنشاء علامة جديدة
-            coordinateMarker = L.marker(e.latlng, {
-                icon: L.divIcon({
-                    className: 'coordinate-marker',
-                    html: `<div>${lat.toFixed(6)}, ${lng.toFixed(6)}</div>`,
-                    iconSize: [null, null]
-                })
-            }).addTo(map);
+
+        function clearSmallCoordinateMeasurement() {
+            coordinateMarkers.forEach(marker => map.removeLayer(marker));
+            coordinateMarkers = [];
+            coordinatePoints = [];
         }
-        // مسح جميع العناصر
-        function clearAll() {
-            clearDistance();
-            toggleCoordinate();
+
+        // حقوق الملكية الصغيرة
+        function showSmallCopyrightModal() {
+            const modal = document.getElementById('smallCopyrightModal');
+            modal.style.display = 'block';
+            
+            // إخفاء الشاشة بعد 10 ثواني
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 10000);
         }
-        // تحديث رؤية تسميات المضلعات حسب مستوى التقريب
-        function updateLabelsVisibility() {
-            const zoom = map.getZoom();
-            const minZoomForLabels = 14; // الحد الأدنى للتقريب لظهور التسميات
-            polygons.forEach(polygon => {
-                if (zoom >= minZoomForLabels) {
-                    if (!map.hasLayer(polygon.label)) {
-                        polygon.label.addTo(map);
-                    }
-                } else {
-                    if (map.hasLayer(polygon.label)) {
-                        map.removeLayer(polygon.label);
-                    }
-                }
-            });
+
+        function closeSmallCopyrightModal() {
+            document.getElementById('smallCopyrightModal').style.display = 'none';
         }
-        // تبديل قائمة التصفح
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            if (sidebar.classList.contains('sidebar-hidden')) {
-                sidebar.classList.remove('sidebar-hidden');
-                overlay.style.display = 'block';
-                // تأجيل تحديث موضع قائمة التحكم حتى يتم الانتهاء من التحريك
-                setTimeout(() => {
-                    updateControlsPosition();
-                }, 400);
-            } else {
-                sidebar.classList.add('sidebar-hidden');
-                overlay.style.display = 'none';
-                // تحديث موضع قائمة التحكم فورًا
-                updateControlsPosition();
-            }
-        }
-        // تحديث موضع عناصر التحكم بناءً على حالة القائمة الجانبية
-        function updateControlsPosition() {
-            const sidebar = document.getElementById('sidebar');
-            const mapControls = document.getElementById('mapControls');
-            const filterToggle = document.getElementById('filterToggle');
-            if (sidebar.classList.contains('sidebar-hidden')) {
-                // القائمة الجانبية مخفية - عناصر التحكم تتحرك إلى اليمين
-                mapControls.style.right = '15px';
-                filterToggle.style.right = '15px';
-            } else {
-                // القائمة الجانبية ظاهرة - عناصر التحكم تتحرك بعيدًا عن القائمة
-                const sidebarWidth = document.getElementById('sidebar').offsetWidth;
-                mapControls.style.right = (sidebarWidth + 15) + 'px';
-                filterToggle.style.right = (sidebarWidth + 15) + 'px';
-            }
-        }
-        // تهيئة الخريطة عند تحميل الصفحة
+
+        // ==================== تهيئة الصفحة ====================
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
-            // أزرار التحكم في القائمة
-            document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
-            document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
-            document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
-            // أزرار الانتقال بين الأقسام
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const linkType = this.getAttribute('data-link');
-                    if (linkType === 'favorites') {
-                        e.preventDefault();
-                        openFavoritesModal();
-                    }
-                    if (linkType === 'opportunities') {
-                        e.preventDefault();
-                        openOpportunitiesModal();
-                    }
-                    if (window.innerWidth <= 992) {
-                        toggleSidebar();
-                    }
-                });
-            });
-            // تفعيل الزر النشط
-            document.querySelector('.sidebar-link.active').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // إضافة معالج لحدث تغيير حجم النافذة لتحديث موضع عناصر التحكم
-            window.addEventListener('resize', updateControlsPosition);
-            // التأكد من أن عناصر التحكم في الموضع الصحيح عند التحميل
-            setTimeout(updateControlsPosition, 500);
         });
     </script>
 </body>
